@@ -1,0 +1,297 @@
+\documentclass[12pt]{beamer}            % Latex-Beamer Klasse. Um ein Handout zu produzieren reicht es aus, die Option von [12pt] zu [12pt, handout] zu ändern.
+\usepackage{etex}
+
+\usepackage{tikz-cd} 
+
+\usefonttheme[onlymath]{serif}          % "Normale" Mathemathik-Schriftart in Latexbeamer verwenden.
+\setbeamertemplate{footline}[frame number]    % Seitenzahl unten anzeigen.
+\setbeamertemplate{navigation symbols}{}      % Die komische Navigationsleiste ausschalten.
+
+% Pakete
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}    % Algorithmen setzen.
+\usepackage{amsmath,amssymb,amsthm,amsfonts,amsbsy,latexsym}    % "Notwendige" AMS-Math Pakete.
+\usepackage{array}                      % Bessere Tabellen.
+\renewcommand{\arraystretch}{1.15}      % Tabellen bekommen ein wenig mehr Platz.
+\usepackage{bbm}                        % Dicke 1.
+\usepackage[hypcap]{caption}            % Damit Hyperrefs bei der figure-Umgebung auf die Figure zeigt statt auf die Caption.
+\usepackage{diagbox}                    % Diagonale in Tabellen.
+\usepackage{enumitem}                   % Zum Ändern der Nummerierungsumgenung 'enumerate'
+\setlist[enumerate,1]{label=(\roman*)}  % Aufzählungen sind vom Typ 'Klammer auf; kleine römische Zahl; Klammer zu'
+\usepackage[T1]{fontenc}                % Bessere Schrift
+\usepackage{ifthen}                     % Zum checken ob Parameter leer sind.
+\usepackage[utf8]{inputenc}             % utf8 als Eingabeformat.
+\usepackage{lmodern}                    % Bessere Schrift
+\usepackage{mathtools}                  % Subscript unter Summen behandeln. Der Befehl lautet \mathclap.
+\usepackage{multirow}                   % In Tabellen mehrere Zeilen zu einer machen.
+
+\graphicspath{{pictures/}}              % Pfad in dem die mit Inkscape erstellen Bilder liegen (relativ zum Hauptverzeichnis).
+
+
+\newcommand{\todo}[1]{{\bf\color{red}-- #1 --}}
+\newcommand{\incgfx}[1]{ \IfFileExists{#1}{ \includegraphics{#1} }{ \parbox{5cm}{Could not include your picture. You might want to run 'make pictures'} } }
+\def\cpp{{C\nolinebreak[4]\hspace{-.05em}\raisebox{.4ex}{\tiny\bf ++}}}
+\def\cppeleven{{C\nolinebreak[4]\hspace{-.05em}\raisebox{.4ex}{\tiny\bf ++}11}}
+
+\newcommand{\blanc}{\mbox{\hspace{3pt}\underline{\ \ }\hspace{3pt}}}    % Blank
+\newcommand{\mspc}[2]{ \hspace{#2pt}\text{#1}\hspace{#2pt} }            % Setze Wort in Mathe-Umgebung und lasse dabei Platz.
+\newcommand{\xr}[1]{ \xrightarrow{\hspace{6pt}{#1}\hspace{6pt}} }       % Abbildungspfeil nach rechts mit Formel drüber.
+\newcommand{\xhr}[1]{ \xhookrightarrow{\hspace{6pt}{#1}\hspace{6pt}} }  % Abbildungspfeil mit Bogen nach rechts mit Formel drüber.
+\newcommand{\xdr}[1]{ \xtwoheadrightarrow{\hspace{6pt}{#1}\hspace{6pt}} }       % Abbildungspfeil mit zwei Köpfen nach rechts mit Formel drüber.
+\newcommand{\xl}[1]{ \xleftarrow {\hspace{6pt}{#1}\hspace{6pt}} }       % Abbildungspfeil nach links mit Formel drüber.
+\renewcommand{\to}{\xr{}}                                               % Abbildungspfeil nach rechts im selben Format wie oben.
+\newcommand{\xmr}[1]{ \xmapsto{\hspace{6pt}{#1}\hspace{6pt}} }          % Elementpfeil nach rechts mit Formel drüber.
+\renewcommand{\mapsto}{\xmr{}}                                          % Elementpfeil nach rechts im selben Format wie oben.
+
+\newcommand{\B}{\mathbb B}
+\newcommand{\bldots}{\raisebox{.5ex}{\fbox{$\ldots$}}}
+\DeclareMathOperator{\cl}{cl}
+\DeclareMathOperator{\cof}{cf}
+\newcommand{\cspc}[1]{{\tilde C^{#1}}}
+\DeclareMathOperator{\cyc}{cyc}
+\newcommand{\del}{\partial}
+\newcommand{\dE}{\hat \partial}
+\DeclareMathOperator{\Diff}{Diff}
+\newcommand{\dimx}[4]{\dim_{#4}H_{#3-p}(\mathfrak M_{#1,1}^{#2};{#4})}
+\newcommand{\dimr}[3]{\dimx{#1}{#2}{#3}{R}}
+\newcommand{\dimf}[3]{\dimx{#1}{#2}{#3}{\mathbb F_2}}
+\newcommand{\dimq}[3]{\dimx{#1}{#2}{#3}{\mathbb Q}}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Eins}{\mathbbm{1}}
+%\newcommand{\Ehr}[1][n]{\mathbb{E}^m_{g,{#1}}}
+\newcommand{\Ehrr}[1][r_1, \ldots, r_n]{\mathbb E(h,m;{#1})}
+\newcommand{\equicl}{\sim_{\mathrm{CL}}}
+\DeclareMathOperator{\grad}{grad}
+\newcommand{\Harm}{\mathfrak{H}^m_{g,n}}
+\newcommand{\Harmr}{{\Harm}[(r_1, \ldots, r_n)]}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\mf}[1]{\mathfrak{#1}}
+\DeclareMathOperator{\hgt}{ht}
+\DeclareMathOperator{\ind}{ind}
+\DeclareMathOperator{\img}{im}
+\newcommand{\KK}{\mathbb K}
+\newcommand{\MM}{\mathfrak M}
+\newcommand{\Modspc}[1][n]{\mathfrak{M}^m_{g,#1}}
+\DeclareMathOperator{\ncyc}{ncyc}
+\newcommand{\Ncplx}{\mathcal N}
+\newcommand{\nth}{\ensuremath{n^{\text{th}}}}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\Par}[1][]{\mathfrak{Par}#1}
+\newcommand{\Parr}[1][n]{\mathfrak{Par}^m_{g,#1}[(r_1, \ldots, r_n)]}
+\DeclareMathOperator{\punc}{punc}
+\DeclareMathOperator{\supp}{supp}
+\newcommand{\SymGr}{\mathfrak S}
+\newcommand{\Symgrp}{\mathfrak S}
+\newcommand{\SymD}{\SymGr^\Delta}
+\newcommand{\Thin}{Thin_{g,n}^m[(r_1, \ldots, r_n)]}
+\newcommand{\tildeModspc}{\widetilde{\mathfrak M}_{g,n}^m}
+\newcommand{\ov}{\overline}
+\newcommand{\ul}[1]{\underline{\smash{#1}}}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\A}{\mathbb A}
+\newcommand{\C}{\mathbb C}
+\newcommand{\F}{\mathbb F}
+\newcommand{\M}{\mathfrak M}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\V}{\mathbb V}
+\newcommand{\dimrx}[4]{\dim_{#4}H_{#3-p}(\mathfrak M_{#1}(#2, 1);{#4})}
+\newcommand{\dimrr}[3]{\dimrx{#1}{#2}{#3}{R}}
+\newcommand{\dimrf}[3]{\dimrx{#1}{#2}{#3}{\mathbb F_2}}
+\newcommand{\dimrq}[3]{\dimrx{#1}{#2}{#3}{\mathbb Q}}
+%\newcommand{\Ehrprog}{\mathbb{E}^m_{g,1}}
+\newcommand{\Ehrprog}{\E}
+\newcommand{\Modspcpunc}[1][n]{\mathfrak{M}^{m, n}_{g,#1}}
+\newcommand{\ModspcRad}[1][n]{\mathfrak{M}^\bullet_g(m, #1)}
+\newcommand{\ModspcRadm}[1][m]{\mathfrak{M}^\bullet_g(#1, n)}
+\newcommand{\Rcomplex}[1][m]{R^\bullet_g({#1}, n)}
+\newcommand{\Pcomplex}[1][m]{P^{#1}_{g,n}}
+\newcommand{\Rad}[1][n]{{\mathfrak{Rad}_g(m,#1)}}
+\newcommand{\Radt}{\mathfrak{Rad}}
+\newcommand{\Part}{\mathfrak{Par}}
+\newcommand{\HarmRad}[1][n]{\mathfrak{H}^{\bullet}_g(m, #1)}
+\newcommand{\Har}{\mathfrak H}
+\DeclareMathOperator{\height}{ht}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\parmap}{par}
+\DeclareMathOperator{\radmap}{rad}
+\DeclareMathOperator{\rot}{rot}
+\newcommand{\Th}{\ensuremath{^{\text{th}}}}
+\newcommand{\nd}{\ensuremath{^{\text{nd}}}}
+\newcommand{\complex}{{\bf\color{green} which complex? }}
+
+\newtheorem*{thm*}{Theorem}
+
+% Titel
+\author{Felix Boes}
+\title{Abschlussvortrag - Teil 2}
+\subtitle{}
+\date{12.09.2015}
+
+\begin{document}
+
+\begin{frame}
+    \only<1>
+    {
+        \begin{thm*}
+        \[
+            H_\ast( \mathfrak{M}_{3,1}^0; \mathbb Z ) \cong
+            \begin{cases}
+                \mathbb Z           & \ast = 0\\
+                                   & \ast = 1\\
+                \phantom{\mathbb Z \oplus \mathbb Z/2 \oplus \mathbb Z/3 \oplus \mathbb Z/4 \oplus \mathbb Z/7 \oplus \bldots }                                 & \ast = 2\\
+                & \ast = 3\\
+                & \ast = 4\\
+                & \ast = 5\\
+                & \ast = 6\\
+                & \ast = 7\\
+                & \ast = 8\\
+                & \ast = 9\\
+                0 & \ast \ge 10\\
+            \end{cases}
+        \]
+        \end{thm*}
+    }
+    \pause
+    \only<2>
+    {
+        \begin{thm*}
+        \[
+            H_\ast( \mathfrak{M}_{3,1}^0; \mathbb Z ) \cong
+            \begin{cases}
+                \mathbb Z           & \ast = 0\\
+                0                   & \ast = 1\\
+                & \ast = 2\\
+                \phantom{\mathbb Z \oplus \mathbb Z/2 \oplus \mathbb Z/3 \oplus \mathbb Z/4 \oplus \mathbb Z/7 \oplus \bldots} & \ast = 3\\
+                & \ast = 4\\
+                & \ast = 5\\
+                & \ast = 6\\
+                & \ast = 7\\
+                & \ast = 8\\
+                & \ast = 9\\
+                0 & \ast \ge 10\\
+            \end{cases}
+        \]
+        \end{thm*}
+    }
+    \only<3>
+    {
+        \begin{thm*}
+        \[
+            H_\ast( \mathfrak{M}_{3,1}^0; \mathbb Z ) \cong
+            \begin{cases}
+                \mathbb Z           & \ast = 0\\
+                0                   & \ast = 1\\
+                \mathbb Z^? \oplus \mathbb Z / 2                                  & \ast = 2\\
+                \mathbb Z^? \oplus \mathbb Z/2 \oplus \mathbb Z/3 \oplus \mathbb Z/4 \oplus \mathbb Z/7 \oplus \bldots & \ast = 3\\
+                \mathbb Z^? \oplus (\mathbb Z/2)^2 \oplus (\mathbb Z/3)^2  \oplus \bldots          & \ast = 4\\
+                \mathbb Z^? \oplus \mathbb Z/2 \oplus \mathbb Z/3  \oplus \bldots & \ast = 5\\
+                \mathbb Z^? \oplus (\mathbb Z/2)^3  \oplus \bldots                & \ast = 6\\
+                \mathbb Z^? \oplus \mathbb Z/ 2\mathbb Z  \oplus \bldots   & \ast = 7\\
+                \mathbb Z^? \oplus \bldots               & \ast = 8\\
+                \mathbb Z^?  \oplus \bldots       & \ast = 9\\
+                0                               & \ast \ge 10\\
+            \end{cases}
+        \]
+        \end{thm*}
+    }
+    \only<4>
+    {
+        \begin{thm*}
+        \[
+            H_\ast( \mathfrak{M}_{3,1}^0; \mathbb Z ) \cong
+            \begin{cases}
+                \mathbb Z           & \ast = 0\\
+                0                   & \ast = 1\\
+                \mathbb Z \oplus \mathbb Z / 2                                  & \ast = 2\\
+                \mathbb Z \oplus \mathbb Z/2 \oplus \mathbb Z/3 \oplus \mathbb Z/4 \oplus \mathbb Z/7 \oplus \bldots & \ast = 3\\
+                (\mathbb Z/2)^2 \oplus (\mathbb Z/3)^2  \oplus \bldots          & \ast = 4\\
+                \mathbb Z \oplus \mathbb Z/2 \oplus \mathbb Z/3  \oplus \bldots & \ast = 5\\
+                \mathbb Z \oplus (\mathbb Z/2)^3  \oplus \bldots                & \ast = 6\\
+                \mathbb Z / 2  \oplus \bldots   & \ast = 7\\
+                0  \oplus \bldots               & \ast = 8\\
+                \mathbb Z  \oplus \bldots       & \ast = 9\\
+                0                               & \ast \ge 10\\
+            \end{cases}
+        \]
+        \end{thm*}
+    }
+\end{frame}
+
+\begin{frame}
+    \begin{thm*}
+        \[
+            H_\ast( \mathfrak{M}_{2,1}^2; \mathbb Z ) \cong 
+            \begin{cases}
+                \mathbb Z           & \ast = 0\\
+                (\mathbb Z/2)^2 \oplus \mathbb Z/5 \oplus \bldots    & \ast = 1\\
+                \mathbb Z \oplus (\mathbb Z/2)^2 \oplus \bldots      & \ast = 2\\
+                \mathbb Z^3 \oplus (\mathbb Z/2)^4 \oplus \bldots    & \ast = 3\\
+                \mathbb Z \oplus (\mathbb Z/2)^5 \oplus (\mathbb Z/3)^3 \oplus \bldots       & \ast = 4\\
+                \mathbb Z^2 \oplus (\mathbb Z/2)^4 \oplus \mathbb Z/3 \oplus \bldots         & \ast = 5\\
+                \mathbb Z^2 \oplus (\mathbb Z/2)^3 \oplus \bldots    & \ast = 6\\
+                \mathbb Z/2 \oplus \bldots                           & \ast = 7\\
+                0                   & \ast \ge 8\\
+            \end{cases}
+        \]  
+    \end{thm*}
+\end{frame}
+
+\begin{frame}
+    \begin{thm*}
+        \[
+            H_\ast( \mathfrak{M}_{1,1}^4; \mathbb Z ) \cong 
+            \begin{cases}
+                \mathbb Z           & \ast = 0\\
+                \mathbb Z \oplus \mathbb Z/2 \oplus \bldots          & \ast = 1\\
+                (\mathbb Z/2)^3 \oplus \bldots                       & \ast = 2\\
+                \mathbb Z^2 \oplus (\mathbb Z/2)^3 \oplus \bldots    & \ast = 3\\
+                \mathbb Z^3 \oplus (\mathbb Z/2)^2 \oplus \bldots    & \ast = 4\\
+                \mathbb Z^2 \oplus \mathbb Z/2 \oplus \bldots        & \ast = 5\\
+                \mathbb Z \oplus \bldots     & \ast = 6\\
+                0                           & \ast \ge 7\\
+            \end{cases}
+        \]
+    \end{thm*}
+\end{frame}
+
+\begin{frame}
+    \pause
+    \def\svgwidth{\columnwidth}
+    \input{pictures/gluing_caps.pdf_tex}
+\end{frame}
+
+\begin{frame}
+    \pause
+    \incgfx{pictures/radial_threading}
+    \pause
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+        \tilde C^k(n\A) \times \mathfrak{Par}_{g_1, 1}^{m_1} \times \dotsb \times \mathfrak{Par}_{g_k, 1}^{m_k} \arrow{r}{\tilde \vartheta} \& \Radt_{\tilde g}(\tilde m + n, 1) \\
+        \tilde C^k(n\C) \times \mathfrak{Par}_{g_1, 1}^{m_1} \times \dotsb \times \mathfrak{Par}_{g_k, 1}^{m_k} \arrow{r}{\tilde \vartheta} \arrow[hookrightarrow]{u}{\iota \times id} \& \mathfrak{Par}_{\tilde g, n}^{\tilde m} \arrow[hookrightarrow]{u}{map}
+        \end{tikzcd}
+   \]
+   $\tilde g = \sum_{i = 1}^{k} g_i$ und $\tilde m = \sum_{i = 1}^k m_i$. 
+\end{frame}
+
+\begin{frame}
+    \pause
+    \incgfx{pictures/par_operates_on_rad}
+    \pause
+    \[
+      \radmap(L_1 \cdot L_2) \simeq \radmap(L_1).L_2
+    \]
+\end{frame}
+
+\begin{frame}
+    \incgfx{pictures/rad_compatible}
+    \[
+      \radmap(L_1 \cdot L_2) \simeq \radmap(L_1).L_2
+   \]
+\end{frame}
+
+
+\end{document}

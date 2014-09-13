@@ -1,0 +1,51 @@
+\section{The Parallel Slit Complex [B,H]}
+\label{cellular_models:parallel}
+
+[B] In this section, we review the parallel slit complex $(P,P')$ associated with the moduli space $\Modspc$ and a given ordered partition $(r_1, \ldots, r_n)$.
+It is a semi-multisimplicial complex and the complement of the (realization of) the subcomplex of degenerate configurations $P'$ is the space of parallel slit domains $\Parr$.
+This will serve as a good model for the moduli space $\Modspc$ in the sense of Theorem \ref{cellular_models:parallel:parallel_slit_complex_serves_as_model}.
+
+If not stated otherwise, the genus $g$, the number of punctures $m$, the number of boundary curves $n$ and
+the ordered partition $(r_1, \ldots, r_n)$ of $r = r_1 + \ldots + r_n$ are meant to be fixed.
+As before, we denote $h = 2g - 2 + m + n + r$.
+
+The following definitions express the rigidity of the geometric insights we presented in Section \ref{cellular_models:from_moduli_spaces_to_parallel_slit_domains}.
+Using a potential function $u$ and harmonic conjugates $v_1, \ldots ,v_r$, 
+we obtain $r$ copies of the complex plane $\mathbb C_k$ with finitely many slits removed,
+each slit running from some point horizontally to the left all the way to infinity.
+Introducing equipotential lines that are defined near the poles or run through the critical points of $u$, 
+the relevant clipping of every $\mathbb C_k$ looks like Figure \ref{cellular_models:from_moduli_spaces_to_parallel_slit_domains:flow_with_one_puncture_with_equipotential_lines}
+with possibly more slits.
+
+Let us for a moment concentrate only on one slit picture $\mathbb C_k$.
+Here the heights of the slits are denoted by the symbols $\ul 1_k, \ldots, \ul p_k$.
+Equivalently, we number the banks using the symbols $\ul 0_k, \ldots, \ul p_k$.
+The equipotential lines subdivide each bank into $q+1$ pieces and we encode the glueing information as indicated by Figure \ref{cellular_models:parallel:introduce_symbols}.
+\begin{figure}[ht]
+\centering
+\incgfx{pictures/cellular_para_introduce_symbols}
+\caption{\label{cellular_models:parallel:introduce_symbols}
+    The combinatorial description of the slit picture in Figure \ref{cellular_models:from_moduli_spaces_to_parallel_slit_domains:flow_with_one_puncture_with_equipotential_lines}.
+    We have $g=0$, $m=1$ and $n=1$.}
+\end{figure}
+
+For $\ul i_k \neq \ul p_k$ and $q \ge j \ge 0$,
+the upper edge of the $j\Th$ piece of the $\ul i_k\Th$ bank is glued to the lower edge of the $j\Th$ piece of the bank with the prediscribed symbol $\sigma_j(\ul i_k)$.
+
+The $\ul 0_k\Th$ bank does not have a lower edge and the $\ul p_k\Th$ bank does not have an upper edge but if we define $\sigma_j(\ul p_k) = \ul 0_k$
+we end up with $q+1$ permutations $\sigma_q, \ldots, \sigma_0$ of the symbols $\ul 0_k, \ldots, \ul p_k$.
+These permutations are clearly not arbitrary, e.g.\ 
+$\sigma_0$ is fixed to be cycle $\sigma_0 = (\ul 0_k\ \ul 1_k\ \ldots\ \ul p_k)$.
+The $(q+1)$-tuple $\homog$ defines the homogenous notation of a combinatorial cell (see Definition \ref{cellular_models:parallel:homogeneous_notation})
+whereas the inhomogeneous notation (see Definition \ref{cellular_models:parallel:inhomogeneous_notation})
+encodes the (counter-clockwise) tours around the stagnation points.
+
+The positioning of the slits define an inner point in the multisimplex $(\Delta^{p_1} \times \ldots \times \Delta^{p_r}) \times \Delta^q$.
+Collapsing vertical respectively horizontal stripes defines the vertical respectively horizontal face operator
+(see Definition \ref{cellular_models:parallel:dv} respectively Definition \ref{cellular_models:parallel:dh}).
+Allowing degenerate slit configurations,
+we end up with a semi-multisimplicial complex called the parallel slit complex (see Definition \ref{cellular_models:parallel:parallel_slit_complex}).
+
+\input{chapter_cellular_models/subsection_para_cells}
+\input{chapter_cellular_models/subsection_para_faces}
+\input{chapter_cellular_models/subsection_para_bicomplex}

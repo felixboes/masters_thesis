@@ -1,0 +1,92 @@
+\section{Runtime and Memory Improvements [H]}
+\label{program:runtime}
+
+Recall that the enormous size of the Ehrenfried complex forces us to take care of the runtime and memory consumption of our computer program (compare Section \ref{complexity:number_of_mono_cells}).
+Via some example calculations, we show how we have improved the performance of our computer program step by step.
+
+Consider the moduli spaces $\mathfrak M_{3, 1}^1$ and $\mathfrak M_3(m, n)$. 
+The $E^0$ term of the corresponding cluster spectral sequence on the parallel Ehrenfried complex looks as follows:
+
+\begin{center}
+  \begin{tabular}{r||r|r|r|r|r|r|r|}
+      \cline{2-8}
+      \multicolumn{1}{r|}{} & \multicolumn{7}{c|}{$g = 3$, $m = 1$: Parallel $E^0_{p,l}$ for $\mathbb F_2$} \\ \hline
+      \tl{\diagbox[height=1.7em, width=3em]{$p$}{$l$}} & 1 & 2 & 3 & 4 & 5 & 6 & 7\\ \hline\hline
+      \tl 2   & 1     &       &       &       &       &       & \\ \hline
+      \tl 3   & 252   &       &       &       &       &       & \\ \hline
+      \tl 4   & 7563  & 18    &       &       &       &       & \\ \hline
+      \tl 5   & 81360 & 2010  &       &       &       &       & \\ \hline
+      \tl 6   & 424920& 48855 & 195   &       &       &       & \\ \hline
+      \tl 7   &1141056& 469938& 13230 &       &       &       & \\ \hline
+      \tl 8   &1305876&2069844& 247898& 1540  &       &       & \\ \hline
+      \tl 9   &       &3593880&1810368& 70476 &       &       & \\ \hline
+      \tl{10} &       &       &4737360& 915390& 8715  &       & \\ \hline
+      \tl{11} &       &       &       &3702820& 258720&       & \\ \hline
+      \tl{12} &       &       &       &       &1765335& 31878 & \\ \hline
+      \tl{13} &       &       &       &       &       & 477906& \\ \hline
+      \tl{14} &       &       &       &       &       &       & 56628 \\ \hline
+  \end{tabular}
+\end{center}
+
+We were not able to calculate the entire homology of $\mathfrak M_{3, 1}^1$ via this spectral sequence since there are a lot of modules with several million of basis elements,
+exeeding our possibilities concerning runtime and memory.
+But we can use the radial Ehrenfried complex cluster spectral sequence for our calculations instead due to Proposition \ref{cellular_models:comparision_of_the_models:bundles_are_h_equiv}.
+This reduces the dimensions of the modules of the $E^0$ page enourmously:
+
+\begin{center}
+  \begin{tabular}{r||r|r|r|r|r|r|r|}
+      \cline{2-8}
+      \multicolumn{1}{r|}{} & \multicolumn{7}{c|}{$g = 3$, $m = 1$: Radial $E^0_{p,l}$ for $\mathbb F_2$} \\ \hline
+      \tl{\diagbox[height=1.7em, width=3em]{$p$}{$l$}} & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\ \hline \hline
+      \tl 1   & 1     &       &        &       &       &       &      \\  \hline
+      \tl 2   & 82    & 1     &        &       &       &       &      \\  \hline
+      \tl 3   & 1212  & 91    &        &       &       &       &      \\  \hline
+      \tl 4   & 7200  & 1652  & 9      &       &       &       &      \\  \hline
+      \tl 5   & 20400 & 12890 & 500    &       &       &       &      \\  \hline
+      \tl 6   & 23760 & 49380 & 7706   & 60    &       &       &      \\  \hline
+      \tl 7   &       & 77924 & 48104  & 2310  &       &       &      \\  \hline
+      \tl 8   &       &       & 111588 & 25676 & 294   &       &      \\  \hline
+      \tl 9   &       &       &        & 91384 & 7497  &       &      \\  \hline
+      \tl{10} &       &       &        &       & 44850 & 945   &      \\  \hline
+      \tl{11} &       &       &        &       &       & 12375 &      \\  \hline
+      \tl{12} &       &       &        &       &       &       & 1485 \\  \hline
+  \end{tabular}
+\end{center}
+
+The biggest module on the first page for the radial case has dimension $111588$, and not dimension $4737360$ as in the parallel case.
+Using all our strategies to improve the performance of our program,
+we can now determine the homology of $\mathfrak M_{3, 1}^1$ and $\mathfrak M_3(m, n)$ within less than half an hour.
+In each row of the following table, we see running time and maximum memory consumption of one run of our computer program with different improvement techniques. 
+
+\begin{center}
+  \begin{tabular}{|c|c|c|l||r|r|}
+      \cline{1-6}
+      \multicolumn{6}{|c|}{Runtime and Memory Results for $g = 3$, $m = 1$} \\ \hline \hline
+      Radial & CSS & Bool & \# Threads            & Runtime [h:min:sec] & Max. Memory Used [MB] \\ \hline\hline
+      x      & x   & x    & $t_w = 8$, $t_r = 4$  & $0:27:43$           & $7056$  \\ \hline
+      x      & x   & x    & $t_w = 11$, $t_r = 1$ & $0:39:03$           & $7071$  \\ \hline
+      x      & x   & x    & $t = 1$               & $1:37:49$           & $7031$  \\ \hline
+      x      &     & x    & $t_w = 8$, $t_r = 4$  & $1:25:39$           & $10819$ \\ \hline
+      x      & x   &      & $t_w = 8$, $t_r = 4$  & $18:36:22$          & $92857$ \\ \hline
+             & x   & x    & $t_w = 8$, $t_r = 4$  & /                   & /       \\ \hline
+  \end{tabular}
+\end{center}
+
+Thereby, a cross marks whether 
+\begin{itemize}
+\item we use the radial Ehrenfried complex or the parallel one, 
+\item we filter this by cluster sizes,
+\item we use our special implementation of boolean coefficients (compare Subsubsection \ref{program:libhomology:MatrixT:MatrixField_for_F_2_and_css}),
+\end{itemize}
+and we specify whether we run the program single threaded ($t = 1$) or parallel, and if parallel, 
+how many threads we use as working threads ($t_w$) and as remaining threads ($t_r$).
+For an explanation of the meaning of these threads, see Subsubsection \ref{program:libhomology:DiagonalizerT:DiagonalizerField}.
+
+We see that the most significant effect on both runtime and memory consumption arises by implementing boolean coefficients in a clever way
+-- the runtime decreases by a factor $40$ and memory by a factor $13$.
+Using this implementation of boolean coefficients, another important step to improve performance is to filter the Ehrenfried complex by cluster sizes,
+which yields another factor $3$ of runtime and a factor $1.5$ of memory consumption improvement.
+Unfortunately, parallelizing the program with $12$ threads does not gain another factor $12$ concerning runtime 
+since diagonalizing is not smoothly parallelizable.
+Still, another factor $2.5$ of runtime improvement, when only the jobs of the so-called working threads are distributed,
+and even a factor of $3.6$, when also the so-called remaining work is distributed, results in valuable reduction of running time.

@@ -1,0 +1,440 @@
+\subsection{The Class Tuple [H]}
+\label{chapter_program:kappa:tuple}
+
+Recall that we aim to compute the cohomology of the parallel or radial Ehrenfried complex $\Ehrprog$.
+A basis for the Ehrenfried complex is given by monotonous cells $\Sigma = (\tau_h \mid \ldots \mid \tau_1)$ satisfiying certain conditions,
+and the differential for $\Ehrprog$ can be described by the map $\del_\E$ making the diagram
+\[
+    \begin{tikzcd}
+	\E_p \arrow{r}{\del_\E} \arrow{d}{\kappa}[swap]{\cong}      & \E_{p-1} \\
+	\KK_p \arrow{r}{\del_\KK}                                     & \KK_{p-1} \arrow{u}{\cong}[swap]{\pi}
+    \end{tikzcd}
+\]
+commute, compare Definition \ref{cellular_models:Ehrenfried:defi}.
+Hence, the core of the program \textbf{kappa} is the class \progclass{Tuple}, 
+which represents a tuple of $h$ transpositions $\Sigma = (\tau_h \mid \ldots \mid \tau_1)$
+and thus especially the basis elements of $\Ehrprog$.
+This class additionally provides several methods which are applied to a basis element during the computation of the differential $\del_\E$.
+
+We are going to give an overview on its data members (Subsubsection \ref{program:kappa:tuple:members}),
+the member functions needed to start working with a \progclass{Tuple} (Subsubsection \ref{program:kappa:tuple:get_started}) and 
+the functions that represent basic properties of a tuple (Subsubsection \ref{program:kappa:tuple:basics}). 
+Afterwards, we explain the class methods computing the orientation sign (Subsubsection \ref{program:kappa:tuple:orientation_sign}), 
+the horizontal differential (Subsubsection \ref{program:kappa:tuple:d_hor}) and the implementation of the maps $f$ and $\Phi$ used to compute the isomorphism $\kappa$ (Subsubsection \ref{program:kappa:tuple:prep_for_kappa}) in detail. 
+
+\subsubsection{Data Members [H]}
+\label{program:kappa:tuple:members}
+Since the class \progclass{Tuple} is supposed to represent cells $\Sigma = (\tau_h \mid \ldots \mid \tau_1)$ of the Ehrenfried complex $\Ehrprog$, 
+let us briefly recall what this means. 
+If $\Sigma$ is a cell of the parallel Ehrenfried complex 
+(compare Definitions \ref{cellular_models:parallel:inhomogeneous_notation}, \ref{cellular_models:ehrenfried}), 
+it satisfies the following properties:
+\begin{enumerate}
+ \item[(i$_P$)] The transpositions $\tau_i$ act on the symbols $1, \dotsc, p$.
+ \item[(ii$_P$)] The permutation $\sigma_h$ has exactly $m+1$ cycles.
+ \setcounter{enumi}{2}
+ \item Each symbol $1, \dotsc, p$ is contained in at least one $\tau_i$.
+ \item $\Sigma$ is monotonous, i.e. $\height(\tau_h) \geq \dotsc \geq \height(\tau_1)$.
+\end{enumerate}
+On the other hand, if $\Sigma$ is a radial cell, it fulfills the same conditions, 
+except for the first two, which are replaced by
+\begin{enumerate}
+ \item[(i$_R$)] The transpositions $\tau_i$ act on the symbols $0, \dotsc, p$,
+ \item[(ii$_R$)] The permutation $\sigma_h$ has exactly $m$ cycles.
+\end{enumerate}
+see also Definitions \ref{cellular_models:radial:cells_in_inhomogenous_notation} and \ref{cellular_models:Ehrenfried:defi}.
+
+Let us now see how the cell $\Sigma$ is represented by a \progclass{Tuple}.
+The transpositions $\tau_h, \dotsc, \tau_1$ belonging to $\Sigma$ are stored as the data member
+\begin{lstlisting}
+std::vector< Transposition > rep;
+\end{lstlisting}
+where a \progclass{Transposition} is defined as a pair of unsigned integers.
+The unsigned integer \progname{p} is stored as another data member of the class \progclass{Tuple},
+and there is also a boolean \progname{radial} indicating whether $\Sigma$ is a radial cell or not (and thus a parallel cell).
+Depending on this flag, there are other technical parameters to be set, 
+e.g. the minimum symbol that may occur in a transposition, see conditions (i$_P$) and (i$_R$).
+
+Our convention for writing a cell $\Sigma = (\tau_h \mid \ldots \mid \tau_1)$ is 
+to store $\tau_i$ as \progname{rep[i-1]} for $1 \leq i \leq h$, since by default, a vector starts with the index $0$. 
+To make the handling of \progclass{Tuples} more intuitive, 
+we offer methods to access the \progclass{Transpositions} in a more canonical way, see Subsubsection \ref{program:kappa:tuple:get_started}. 
+Another convention is that we always write \progclass{Transpositions} like $\tau_i = (a\ b)$ with $a > b$ in order to simplify the source code.
+
+Since it is useful for the computation of the differential, 
+another data member of the class \progclass{Tuple} is an unsigned integer \progname{id} indicating the index of a \progclass{Tuple} in its basis of the Ehrenfried complex.
+
+\subsubsection{Class Methods To Get Started [H]}
+\label{program:kappa:tuple:get_started}
+
+We define two constructors for the class \progclass{Tuple}. 
+Firstly, there is a constructor
+\begin{lstlisting}
+Tuple( size_t h );
+\end{lstlisting}
+which initializes \progname{p} with $0$ and allocates memory for a \progclass{Tuple} of $h$ \progclass{Transpositions} 
+that are supposed to be filled later. 
+Secondly, the constructor
+\begin{lstlisting}
+Tuple( uint32_t symbols, size_t h );
+\end{lstlisting}
+sets the data member \progmember{p} to be $symbols$ and also allocates memory for the $h$ many \progclass{Transpositions}. 
+
+To create a \progclass{Tuple} $\Sigma = (\tau_h \mid \ldots \mid \tau_1)$, one can call one of these constructors, 
+and afterwards initialize for each $i = 1, \dotsc, h$ the $i\Th$ \progclass{Transposition} $\tau_i$ using the non-const operator 
+\begin{lstlisting}
+Transposition& operator[]( size_t i );
+\end{lstlisting}
+It is also possible to use the const respectively non-const version of the method
+\begin{lstlisting}
+Transposition& at( size_t i );
+\end{lstlisting}
+to access the \progclass{Transposition} $\tau_i$ of the tuple $\Sigma$ for reading respectively writing. 
+
+During the generation of the differential $\del_\E$, we use to mark \progclass{Tuples} as degenerate by
+erasing its data member \progname{rep}.
+To test whether a \progclass{Tuple} is non-degenerate, we hence define  
+\begin{lstlisting}
+operator bool();
+\end{lstlisting}
+which returns true if and only if this \progclass{Tuple} is non-empty.
+
+Using the methods
+\begin{lstlisting}
+static void parallel_cell(); 
+\end{lstlisting}
+respectively
+\begin{lstlisting}
+static void radial_cell();
+\end{lstlisting}
+one can mark whether a \progclass{Tuple} represents a parallel respectively radial cell.
+
+Furthermore, we define canonical compare operators, 
+overload the \progname{operator<<} to print \progname{Tuples} to screen
+and offer the possibility to save and load \progclass{Tuples}.
+
+\subsubsection{Basic Properties of a Tuple [H]}\label{program:kappa:tuple:basics}
+
+We provide various class methods for basic calculations with a \progclass{Tuple},
+e.g. to verify whether a \progclass{Tuple} represents an element of the Ehrenfried complex. 
+
+Since basis elements of $\Ehrprog$ are required to be monotonous, we provide a method
+\begin{lstlisting}
+bool monotonous();
+\end{lstlisting}
+to test whether a \progclass{Tuple} is monotonous, i.\,e. whether, for all $1 \leq i < h$, we have $a_i < a_{i+1}$, 
+writing $\tau_i = (a_i, b_i)$ and $\tau_{i+1} = (a_{i+1}, b_{i+1})$ with $a_i > b_i$ and $a_{i+1} > b_{i+1}$.
+
+The class method
+\begin{lstlisting}
+int32_t norm();
+\end{lstlisting}
+returns the norm of the given \progclass{Tuple} $\Sigma = (\tau_h \mid \ldots \mid \tau_1)$, 
+i.\,e. the sum of the norms of all $\tau_i$, $i = 1, \dotsc, h$. 
+But since each $\tau_n$ is a \progclass{Transposition}, the norm of the \progclass{Tuple} is simply the number of its transpositions $h$. 
+
+For the computation of the differential, we sometimes want to switch to the homogeneous notation of \progclass{Tuples}. 
+Therefore, we need methods
+\begin{lstlisting}
+Permutation long_cycle(); 
+\end{lstlisting}
+respectively
+\begin{lstlisting}
+Permutation long_cycle_inv();
+\end{lstlisting}
+returning the \progclass{Permutation} $\sigma_0 = (1\ 2\ \dotsb p-1\ p)$ respectively its inverse, and
+\begin{lstlisting}
+Permutation sigma_h();
+\end{lstlisting}
+returning the \progclass{Permutation} $\sigma_h = \tau_h \tau_{h-1} \dotsc \tau_1 \sigma_0$.
+Thereby, a \progclass{Permutation} is another class, representing a permutation as a vector
+storing for each element its image under the permutation.
+
+Since all $\tau_i$ are \progclass{Transpositions}, 
+we can simplify the computation of $\sigma_h$ using the following
+
+\begin{algorithm}[H]
+\label{sigma_q}
+\DontPrintSemicolon
+
+\KwIn{A tuple $\Sigma = (\tau_h, \dotsc, \tau_1)$ in inhomogeneous notation}
+\KwOut{The permutation $\sigma_h$}
+
+\progclass{Permutation} $\sigma_{\text{inv}} := \text{long\_cycle\_inv()}$\;
+\For{$i = 1$ \KwTo $h$}
+{
+	Write $\tau_i = (a, b)$\;
+	Swap the elements $\sigma_{\text{inv}}(a)$ and $\sigma_{\text{inv}}(b)$\;
+}
+
+\For{$j = 1$ \KwTo $p$}
+{
+	Write $k = \sigma_{\text{inv}}(j)$\;
+	$\sigma_h(k) := j$\;
+}
+
+\KwRet{$\sigma_h$}\;
+
+\caption{Computing $\sigma_h$}
+
+\end{algorithm}
+
+\begin{prop}
+The given algorithm computes $\sigma_q$ correctly.
+\begin{proof}
+In line 1, we initialize the \progclass{Permutation} $\sigma_{\text{inv}}$ with $\sigma_0^{-1}$. 
+Note that, by definition of $\sigma_i$, we have
+\[ \sigma_i^{-1} = \sigma_{i-1}^{-1} \tau_i = \sigma_{i-1}^{-1}  (a, b) \]
+for $0 < i \leq h$. 
+Thus, the \progclass{Permutation} $\sigma_i^{-1}$ maps $a$ to $\sigma_{i-1}^{-1}(b)$, $b$ to $\sigma_{i-1}^{-1}(a)$ 
+and behaves like $\sigma_{i-1}^{-1}$ on all other elements. 
+Hence, for each $i = 1, \dotsc, h$, we have $\sigma_{\text{inv}} = \sigma_i^{-1}$ 
+after the $i\Th$ iteration of the first for loop. 
+
+The second for loop computes the inverse of $\sigma_{\text{inv}} = \sigma_h^{-1}$, which is $\sigma_h$.
+\end{proof}
+\end{prop}
+
+The algorithm for the computation of $\sigma_h$ is also used with small adaptions in different parts of the program.
+
+The basis elements of $\Ehrprog$ are supposed to have a distinguished number of punctures, 
+i.e. number of cycles of $\sigma_h$ is $m+1$ for parallel and $m$ for radial cells.
+Therefore, we give an algorithm to determine the cycle decomposition of a \progclass{Permutation}.
+
+\begin{algorithm}[H]
+\label{Cycle Decomp}
+\DontPrintSemicolon
+\SetKw{KwGoTo}{go to}
+
+\KwIn{A permutation $\pi$ on a subset of $\{0, \dotsc, p\}$}
+\KwOut{A decomposition of $\pi$ into disjoint cycles}
+
+$i := \min\{j \in \{0, \dotsc, p\} \colon j \text{ belongs to $\pi$, but not visited yet}\}$ \label{next cycle}\;
+cur := $i$\; 
+Initialize a new cycle\;
+\Repeat(\tcp*[f]{Find the cycle containing $i$}){ cur equals $i$}
+{	
+  Mark cur as visited\;
+	prev := cur\;
+	cur := $\pi$(prev)\;
+	cycle (prev) := cur\;
+}
+Store the cycle\;
+\If{all symbols in $\{0, \dotsc, p\}$ visited or not belonging to $\pi$}
+{
+  \KwRet the cycle decomposition\; 
+}
+\KwGoTo \ref{next cycle}\;
+
+\caption{Cycle Decomposition}
+
+\end{algorithm}
+
+Since each element in $\{0, \dotsc, p\}$ belonging to the permutation $\pi$ is considered as $prev$ exactly once, we can state
+
+\begin{prop}
+The algorithm to determine the cycle decomposition of a permutation works correctly.
+\end{prop}
+
+Combining this with the previous Algorithm \ref{sigma_q}, we can now define the methods
+\begin{lstlisting}
+uint32_t num_cycles() const;
+\end{lstlisting}
+yielding the number of cycles of $\sigma_h$, and
+\begin{lstlisting}
+bool has_correct_num_cycles(size_t m) const;
+\end{lstlisting}
+checking whether the number of cycles fits the requirement of the parallel respectively radial Ehrenfried complex.
+
+Since we need to subdivide the cells of $\Ehrprog$ according to their numbers of clusters, 
+we introduce the method
+\begin{lstlisting}
+int32_t Tuple::num_clusters() const;
+\end{lstlisting}
+This is another part of our computer program where we use the comfortability of the \textbf{boost} library:
+Let $\Sigma = (\tau_h \mid \dotsc \mid \tau_1)$ be a cell represented by a \progclass{Tuple}.
+We construct a graph on the vertices $0, \dotsc, p$,
+where an edge between $a$ and $b$ indicates that there is an $i$ such that $\tau_i = (a, b)$.
+Then, the number of connected components of this graph equals the number of clusters of $\Sigma$,
+and \textbf{boost} offers a graph data structure and an algorithm to compute this directly.
+
+\subsubsection{The Horizontal Face Operator [H]}
+\label{program:kappa:tuple:d_hor}
+
+In order to construct the Ehrenfried complex $\Ehrprog$, 
+the computer program has to be able to apply the horizontal differential $\del'' = \del_\KK$ to \progclass{Tuples}, 
+compare Definition \ref{cellular_models:Ehrenfried:defi} and Section \ref{cellular_models:orientation}.
+So recall that, for a cell $\Sigma$, this differential is given by the alternating sum
+\[
+ \del''_j(\Sigma) = \sum_{j = 0}^p (-1)^j \eps_j(\Sigma) d_j''(\Sigma)\,,
+\]
+where $d_j''(\Sigma)$ is the $j\Th$ horizontal face of $\Sigma$, 
+i.e. the cell resulting from $\Sigma$ by collapsing the $j\Th$ stripe of the slit domain,
+and $\eps_j(\Sigma) = \eps_j''(\Sigma)$ is the additional sign introduced by the orientation system.
+Note that, for parallel cells -- but not for radial cells --, the $0\Th$ and $p\Th$ horizontal face is always degenerate.
+
+Here, we will explain our implementation of the face operator $d''$, 
+and in Subsubsection \ref{program:kappa:tuple:orientation_sign}, we will present the orientation sign.
+
+In Proposition \ref{cellular_models:parallel:prop_dh}, 
+we saw how to express the formula for the $j\Th$ horizontal face in the inhomogeneous notation,
+and in Corollary \ref{cellular_models:ehrenfried:cor_d_hor_deg}, we saw how to detect the cases when the resulting face is degenerate.
+These statements result in the following
+
+\begin{algorithm}[H]
+\label{d_hor}
+\DontPrintSemicolon
+\SetKw{KwGoTo}{go to}
+
+\KwIn{A tuple $\Sigma = (\tau_h, \dotsc, \tau_1)$ in inhomogeneous notation, a symbol $j \in \{0, \dotsc, p\}$}
+\KwOut{The horizontal face $d''_j(\Sigma)$ or the assertion that $d''_j(\Sigma)$ is degenerate}
+\For{$i = 1$ \KwTo $h$}
+{
+	Write $\tau_i = (a, b)$\;
+	Write $k = \sigma_{i-1}(j)$\;
+	\If{The transpositions $\tau_i$ and $(j, k)$ are disjoint}
+	{
+	  $\tau'_i := \tau_i$\;
+	}
+	\ElseIf{$\tau_q = (j, k)$ or $j = k$}
+	{
+	  \KwRet{$d''_j(\tau)$ is degenerate}\;
+	}
+	\Else
+	{
+	  \If{$k = a$ or $k = b$}
+	  {
+	    $\tau'_i := \tau_i$\;
+	  }
+	  \Else
+	  {
+	    \If{$a \neq k$}
+	    {
+	      $\tau_i' := (a, k)$\; 
+	    }
+	    \Else
+	    {
+	      $\tau_i' := (b, k)$\;
+	    }
+	  }
+	}
+}
+Renormalize $\Sigma' = (\tau_h' \mid \ldots \mid \tau_1')$\;
+\KwRet{$\Sigma'$}\;
+
+\caption{Computing the Horizontal Face}
+
+\end{algorithm}
+
+Using the above mentioned theoretical foundations, we obtain
+
+\begin{prop}
+The above algorithm computes the $j\Th$ horizontal face of $\Sigma$.
+\end{prop}
+
+Note that we can apply Algorithm \ref{sigma_q} to compute $\sigma_i$ for $i = 0, \dotsc, h$.
+We choose to handle the case that $\tau_i$ and $(j, k)$ are disjoint before the degenerate case at first
+because this is the case that will occure most likely.
+
+The algorithm enables us to define the method
+\begin{lstlisting}
+Tuple d_hor( uint8_t j );
+\end{lstlisting}
+computing the $j\Th$ horizontal face of this \progclass{Tuple}.
+
+\subsubsection{The Orientation Sign [H]}\label{program:kappa:tuple:orientation_sign}
+
+Recalling the definition of the orientation sign $\eps_j(\Sigma) = \eps_j''(\Sigma)$ introduced by Mehner (see Section \ref{cellular_models:orientation}), 
+we immediately obtain the following
+
+\begin{algorithm}[H]
+\label{orientation_sign}
+\DontPrintSemicolon
+\SetKw{KwGoTo}{go to}
+
+\KwIn{A tuple $\Sigma = (\tau_h, \dotsc, \tau_1)$ in inhomogeneous notation}
+\KwOut{Orientation signs $\eps_j(\Sigma)$ for all $j \in \{0, \dotsc, p\}$}
+
+Decompose $\sigma_h$ into $m$ resp. $m+1$ disjoint cycles $(\alpha_0) \alpha_1 \dotsc \alpha_m$ \;
+Let $a_i$ be the minimum symbol of the cycle $\alpha_i$\;
+Sort the cycles $\alpha_i$ such that $a_i < a_{i+1}$ for all $i$\;
+\ForEach{cycle $\alpha_i$}
+{
+  \If{$\alpha_i = a_i$ is a fixed point}
+  {
+    Set $\eps_{a_i} = 0$\;
+  }
+  Let $b$ be the second minimum cycle of $\alpha_i$\;
+  Let $k \geq i$ be the minimum integer with $b < a_{k+1}$, or $k = m$, if this does not exist\;
+  Set $\eps_{a_i} = (-1)^{k - i}$\;
+  \ForEach{$c \in \alpha_i$, $c \neq a_i$}
+  {
+    Set $\eps_c = 1$\;
+  }
+}
+
+\caption{Computing the Orientation Sign}
+
+\end{algorithm}
+
+Hereby, we again use Algorithm \ref{sigma_q} to determine $\sigma_h$, 
+and Algorithm \ref{Cycle Decomp} to decompose $\sigma_h$ into disjoint cycles.
+Note that, in the parallel case, a cell of $\Ehrprog$ has $m+1$ cycles, while in the radial case, it has $m$ cycles.
+
+Storing the cycle decomposition of $\sigma_h$ as a map of cycles stored with their smallest element as a key,
+this algorithm is easily implemented.
+We obtain the method
+\begin{lstlisting}
+std::map< uint8_t, int8_t > orientation_sign();
+\end{lstlisting}
+returning a map of all orientation signs $\eps_j(\sigma_h)$, stored with $j \in \{1, \dotsc, p\}$ as a key.
+
+\subsubsection{Preparations for the Map \texorpdfstring{$\kappa$}{kappa} [H]}
+\label{program:kappa:tuple:prep_for_kappa}
+
+Having seen how the differential $\del_\KK$ is implemented, 
+recall once more that the differential $\del_\E$ of the Ehrenfried complex is given by the diagram
+\[
+    \begin{tikzcd}
+	\E_p \arrow{r}{\del_\E} \arrow{d}{\kappa}[swap]{\cong}      & \E_{p-1} \\
+	\KK_p \arrow{r}{\del_\KK}                                     & \KK_{p-1} \arrow{u}{\cong}[swap]{\pi}
+    \end{tikzcd}\,.
+\]
+Note that the projection $\pi$ onto the monotonous cells can be performed by 
+simply checking whether the \progclass{Tuple} is monotonous (see Subsection \ref{program:kappa:tuple:basics})
+and marking the \progclass{Tuple} as non-valid, if not.
+It remains to define the isomorphism $\kappa$, which is given by
+\[
+    \kappa = K_h \circ \ldots \circ K_1
+\]
+with
+\[
+    K_q = \sum_{j=1}^q (-1)^{q-j} \Phi_{j}^q
+\]
+and
+\[
+    \Phi_j^q = f_j \circ \ldots f_{q-1} \,.
+\]
+
+Therefore, the class \progclass{Tuple} provides maps
+\begin{lstlisting}
+bool f( uint32_t j );
+\end{lstlisting}
+and 
+\begin{lstlisting}
+bool phi( uint32_t q, uint32_t j );
+\end{lstlisting}
+which apply the maps $f_j$ respectively $\Phi_j^q$ to this \progclass{Tuple} 
+and return true if and only if the resulting \progclass{Tuple} is non-degenerate. 
+
+The method $f$ is implemented as a huge case distinction 
+concerning the symbols contained in the transpositions $\tau_j$,
+which is similar to the one in the computation of the horizontal boundary. 
+This provides the opportunity to handle each of the cases in constant time.
+
+The function $\phi(q, j)$ iteratively calls the function $f$ for $j = 1, \dotsc, q-1$
+according to the definition of $\Phi_j^q$.
+In each step, we test whether the norm of the \progclass{Tuple} decreases, and if so, 
+we abort the computation of $\Phi$ to avoid unneccassary computations.
+
+The map $\kappa$ itself is defined in the class \progclass{ClusterSpectralSequence}, compare Subsection \ref{chapter_program:kappa:css}.

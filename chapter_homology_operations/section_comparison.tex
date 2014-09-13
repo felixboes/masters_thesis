@@ -1,0 +1,362 @@
+\section{Correlation of Parallel and Radial Homology Operations [H]}
+\label{homology_operations:comparision_of_par_and_rad}
+
+In this section, we will use the radialization and parallelization maps to compare parallel and radial homology operations,
+or obtain operations of the space of parallel slit domains on the space of radial slit domains.
+Thereby, let always $r = n = 1 + \dotsb + 1$ be the trivial partition, and denote $\mathfrak{Par}_{g, 1}^{m_1} = \mathfrak{Par}_{g, 1}^{m_1}[(1, \dotsc, 1)]$.
+Thus, the two multiplications $\mu^{\upuparrows}$ and $\mu^{\updownarrows}$ on parallel slit domains coincide 
+and will be denoted by a simple dot during this chapter.
+In our case, the parallel multiplication is hence a map
+\[
+   \_\cdot\_ \colon \mathfrak{Par}_{g_1, n}^{m_1} \times \mathfrak{Par}_{g_2, n}^{m_2} \to \mathfrak{Par}_{\tilde g, n}^{m_1} 
+\]
+with $\tilde g = g_1 + g_2 + n - 1$.
+
+\subsection{Placing Parallel Slit Pictures into Annuli via Operads [H]}
+\label{par_into_annulus}
+\symbolindex[r]{$\Radt(n)$}{A shorthand for $\Radt(n) = \coprod_{g, m} \Rad$.}{Page \pageref{par_into_annulus}}
+
+First, we would like to let $\Par_1 = \coprod{g, m} \Par_{g, 1}^m$ act on $\Radt(n) = \coprod_{g, m} \Rad$ via little cubes operads, for fixed $n > 0$.
+
+Therefore, let $\A \subset \C$ be an annulus in the complex plane, 
+and let
+\label{conf_space_annuli}
+\symbolindex[c]{$\tilde C^k(\A)$}{The ordered configuration space of the annulus $\A \subset \C$.}{Page \pageref{conf_space_annuli}}
+\[
+   \tilde C^k(\A) = \{(z_1, \dotsc, z_n) \in \A \mid z_i \neq z_j \text{ for } i \neq j\}
+\]
+denote the $k\Th$ ordered configuration space of $\A$. 
+We want to use this configuration space to emplace $k$ parallel slit pictures into $\A$,
+resulting in a radial slit picture.
+
+Assume we are given a configuration $(z_1, \dotsc, z_k) \in \tilde C^k(\A)$ and $k$ parallel slit pictures $L_1, \dotsc, L_k$,
+where slit picture $L_i$ fulfills $m(L_i) = m_i$, $h(L_i) = h_i$ and $n(L_i) = 1$.
+Since the points $z_1, \dotsc, z_k$ are pairwise distinct, we can choose pairwise disjoint regions around them.
+Here, a region is the intersection of a radial segment and a concentrical stripe of the annulus, see also Figure \ref{radial_threading}.
+Into the $i\Th$ such region, we insert the radialization of the parallel slit picture $L_i$.
+
+Similar as in Figures \ref{homology_operations:parallel_patching_slit_pics:action_of_the_little_cube_operad_naive} and \ref{homology_operations:parallel_patching_slit_pics:action_of_the_little_cube_operad},
+we thereby have to be careful that we insert the slits in the right order and way:
+We have to put the slit pictures $L_i$ into the annulus $\A$ by increasing distance of the point $z_i$ from the center of the annulus. 
+Whenever, during the insertion of some slit picture $L_i$, there are already some slits in the region we chose for $L_i$ to reside in,
+we have to thread in the new slit picture through the old slits.
+For a better understanding of this process, compare Figure \ref{radial_threading} and the exact definition of threading in Section \ref{radial_composition}.
+
+\begin{figure}[ht]
+  \centering
+  \incgfx{pictures/radial_threading}
+  \caption{\label{radial_threading} The operation $\rho$ on slit pictures At first, a blue parallel slit domain is inserted into the inner ring of the annulus via radialization. 
+                                    Afterwards, the green radial slit picture is threaded in into the outer ring.}
+\end{figure}
+
+Note that, when the first slit picture, say this is $L_1$, is inserted into $\A$, the number of punctures of the resulting radial slit picture is $m_1 + 1$
+since this process is simply the radialization map, compare Subsection \ref{cellular_parallelization}.
+Each further inserted slit picture $L_i$ causes the number of punctures to increase by $m_i$ since it is threaded in into one of the cycles of the slit picture, which has been built up so far.
+Since the number $h$ of slit pairs of the final slit picture is the sum of the slit pairs of $L_1, \dotsc, L_k$, 
+we can compute that the genus of the resulting slit picture will be the sum of all the genuses.
+Thus, this process results in
+
+\begin{prop}
+\label{little_cubes_radial}
+   There is a map 
+   \[
+      \tilde \vartheta \colon \tilde C^k(\A) \times \mathfrak{Par}_{g_1, 1}^{m_1} \times \dotsb \times \mathfrak{Par}_{g_k, 1}^{m_k} \to \Radt_{\tilde g}(\tilde m + 1, 1) 
+   \]
+   defined by an action of the little cubes operade.
+   The map is given by choosing $k$ distinct points on the annulus $\A$ and emplacing each of the $k$ parallel slit pictures into disjoint regions as described above.
+   Hereby, we have $\tilde g = \sum_{i = 1}^k g_i$ and $\tilde m = \sum_{i = 1}^k m_i$.
+\end{prop}
+
+Note that the map $\tilde \vartheta$ defined here restricts to the map $\tilde \vartheta$ defined in Theorem \ref{homology_operations:thm_action_of_the_little_cube_operad}.
+To give the precise statement, let $\tilde C^k(\C) \xhr{\iota} \tilde C^k(\A)$ denote the inclusion, where the complex plane is wrapped around the annulus $\A$.
+Now, the definitions of the maps $\tilde \vartheta$ and $\radmap$ immediately yield
+
+\begin{prop}
+\label{rad_par_operad}
+    The map $\tilde \vartheta$ restricts to the action of the little cubes operad on parallel slit domains (compare Theorem \ref{homology_operations:thm_action_of_the_little_cube_operad}).
+    To be precise, the diagram
+    \[
+    \begin{tikzcd}
+       \tilde C^k(\A) \times \mathfrak{Par}_{g_1, 1}^{m_1} \times \dotsb \times \mathfrak{Par}_{g_k, 1}^{m_k} \arrow{r}{\tilde \vartheta} & \Radt_{\tilde g}(\tilde m + 1, 1) \\
+       \tilde C^k(\C) \times \mathfrak{Par}_{g_1, 1}^{m_1} \times \dotsb \times \mathfrak{Par}_{g_k, 1}^{m_k} \arrow{r}{\tilde \vartheta} \arrow[hookrightarrow]{u}{\iota \times \text{id}} & \mathfrak{Par}_{\tilde g, 1}^{\tilde m} \arrow[hookrightarrow]{u}{\radmap}
+    \end{tikzcd}
+   \]
+   commutes, where, as above, $\tilde g = \sum_{i = 1}^{k} g_i$ and $\tilde m = \sum_{i = 1}^k m_i$.
+\end{prop}
+   
+With the homology cross product, we obtain
+
+\begin{prop}
+   The map $\tilde \vartheta$ yields a family of homology operations
+   \[\begin{tikzcd}
+      \tilde \vartheta_* \colon H_s(\tilde C^k(\A)) \otimes H_{t_1}(\mathfrak{Par}_{g_1, 1}^{m_1}) \otimes \dotsb \otimes H_{t_k}(\mathfrak{Par}_{g_k, 1}^{m_k}) \to H_{s+\tilde t}(\Radt_{\tilde g}(\tilde m + 1, 1))\,, 
+   \end{tikzcd}\]
+   where $\tilde g = \sum_{i = 1}^{k} g_i$, $\tilde m = \sum_{i = 1}^k m_i$ and $\tilde t = \sum_{i = 1}^k t_i$.
+\end{prop}
+
+For later uses, it is a good idea to imagine what the map $\tilde \vartheta$ looks like on surfaces, compare Figure \ref{rad_par_operad_on_surfaces}.
+\begin{figure}[ht]
+\centering
+\def\svgwidth{.9\columnwidth}
+\input{pictures/rad_par_operad_on_surfaces.pdf_tex}
+\caption{\label{rad_par_operad_on_surfaces} An excerpt of the map $\tilde \vartheta$ applied to three surfaces.}
+\end{figure}
+At the bottom of the picture, we see the boundary curves of three surfaces with punctures and each one boundary curve.
+Since the map $\tilde \vartheta$ at first applies the radialization map to each of these surfaces, 
+there are pairs of pants glued to each boundary curve, with one leg an outgoing and one leg an incoming boundary curve.
+Secondly, we need to carry over the meaning of the configuration space for the surfaces.
+Recalling the definition of $\tilde \vartheta$ on slit pictures, we see that a configuration in $\tilde C^k(\A)$ determines an order in which to insert the $k$ parallel slit pictures into the annulus.
+During the insertion of a new parallel slit picture $L$ , it also determines an already placed slit domain $L'$ and inserts the new picture into one of its outgoing boundary curves.
+On the corresponding surfaces $F$ and $F'$, this outgoing boundary curve of $F'$ is hence glued to the incoming boundary curve of $F$. 
+So Figure \ref{rad_par_operad_on_surfaces} shows an excerpt of one possibility how $\tilde \vartheta$ acts with the surfaces. 
+It is not neccessarily the new outgoing boundary curve arising by radialization that is glued with some incoming boundary curve.
+
+We can easily generalize the map $\tilde \vartheta$ by inserting parallel slit pictures into $n$ annuli instead of one. 
+
+\begin{defi}
+\label{pars_into_n_annuli}
+\symbolindex[a]{$n\A$}{The disjoint union of $n$ annuli in the complex plane.}{Page \pageref{pars_into_n_annuli}}
+Write $n \A = \A_1 \sqcup \dotsc \sqcup \A_n$ for the disjoint union of $n$ annuli in the complex plane.
+There is a map
+\[
+   \tilde \vartheta \colon \tilde C^k(n\A) \times \mathfrak{Par}_{g_1, 1}^{m_1} \times \dotsb \times \mathfrak{Par}_{g_k, 1}^{m_k} \to \Radt_{\tilde g}(\tilde m + n, n) 
+\]
+given by placing $k$ parallel slit pictures into $n$ annuli using the same method as above.
+By this, we have $\tilde g = \sum_{k = 1}^k g_i$ and $\tilde m = \sum_{i = 1}^k m_i$.
+\end{defi}
+
+Here, the regions where parallel slit pictures are inserted can lie on different annuli, but each slit picture is placed completely into a single annulus.
+Thus, the resulting radial slit picture is not connected for $n > 1$, and it is even possible that one annulus stays empty.
+The parameters of the target space of this generalized map $\tilde \vartheta$ are obvious.
+In Proposition \ref{cor_all}, we will use this map to describe how parallel slit pictures can also be placed into radial slit pictures and not only into empty annuli.
+Thus, we also need to generalize the above proposition to
+
+\begin{prop}
+\label{rad_par_operad_gen}
+    Let $\A = \A_1 \sqcup \dotsc \sqcup \A_n$ be the disjoint of $n$ complex annuli.
+    Then, the generalized map $\tilde \vartheta$ restricts to a similarly generalized action of the little cubes operad on parallel slit domains.
+    To be precise, the diagram
+    \[
+    \begin{tikzcd}
+       \tilde C^k(n\A) \times \mathfrak{Par}_{g_1, 1}^{m_1} \times \dotsb \times \mathfrak{Par}_{g_k, 1}^{m_k} \arrow{r}{\tilde \vartheta} & \Radt_{\tilde g}(\tilde m + n, 1) \\
+       \tilde C^k(n\C) \times \mathfrak{Par}_{g_1, 1}^{m_1} \times \dotsb \times \mathfrak{Par}_{g_k, 1}^{m_k} \arrow{r}{\tilde \vartheta} \arrow[hookrightarrow]{u}{\iota \times \text{id}} & \mathfrak{Par}_{\tilde g, n}^{\tilde m} \arrow[hookrightarrow]{u}{\radmap}
+    \end{tikzcd}
+   \]
+   commutes, where $\tilde g = \sum_{i = 1}^{k} g_i$ and $\tilde m = \sum_{i = 1}^k m_i$. 
+\end{prop}
+
+\subsection{\texorpdfstring{$\Part$}{Par} as a Module over \texorpdfstring{$\Radt$}{Rad} [H]}
+\label{par_as_rad_module}
+
+We will now develop an operation that makes the homology of $\Part(n) = \coprod_{g, m} \Par$ a module over the homology of $\Radt(n) = \coprod_{g, m} \Rad$.
+
+Therefore, let $L \in \Part$ and $A \in \Radt$ be two slit pictures with $n(L) = n(A)$.
+We want to merge $L$ and $A$ into a radial slit picture on $n$ new annuli $\tilde \A_1, \dotsc, \tilde \A_n$.
+For a visualization of the following description, see Figure \ref{par_operates_on_rad}.
+Consider a fixed annulus $\tilde \A_k$ and seperate it equally into an inner and an outer ring.
+\begin{figure}[ht]
+  \centering
+  \incgfx{pictures/par_operates_on_rad}
+  \caption{\label{par_operates_on_rad} Three regions of an annulus, into which three parallel slit pictures are placed, and how slits have to be threaded in.}
+\end{figure}
+Put the $k\Th$ level of the parallel slit picture $x$ into the inner ring of $\tilde \A_k$ like via the radialization map, extending the slits to the outer boundary of the annulus. 
+We obtain a new distinguished outgoing boundary curve that arises during radialization, marked red in the picture.
+Starting at the real horizontal line, we insert the $k\Th$ level of the radial slit picture $y$ into the outer ring of the annulus,
+threading in the slits into the distinguished cycle similarly as in Subsection \ref{par_into_annulus}.
+
+\begin{defi}
+   The above procedure defines a a map
+   \[
+      \rho \colon \Radt(n) \times \Part(n) \to \Radt(n)\,, (A, L) \mapsto \rho(A, L) = A.L\,.
+   \]
+\end{defi}
+
+We also denote the map $\rho$ with a low dot since it will turn out that it is a module operation in the sense of operads.
+Before we show that, we take a closer look at the map $\rho$ itself.
+
+\begin{prop}
+   For $A \in \Radt_{g_1}(m_1, n)$ and $L \in \Part_{g_2, n}^{m_2}$, we have $A.L \in \Radt_{\tilde g}(\tilde m, n)$ with $\tilde g = g_1 + g_2 + n - 1$ and $\tilde m = m_1 + m_2$.
+\begin{proof}
+   By construction, the radial slit picture $A.L$ has $n$ incoming boundary curves.
+   Since the $n$ incoming boundary curves of $A$ are glued to the $n$ outgoing boundary curves that arise due to radialization, we have 
+   \[
+      \tilde m = (m_2 + n) - n + m_1 = m_1 + m_2\,.
+   \]
+   Using the formulas for $h$ for each of the three spaces involved, we obtain
+   \[
+      \tilde g = g_1 + g_2 + n - 1\,.
+   \]
+\end{proof}
+\end{prop}
+
+In Figure \ref{rad_is_par_module}, one can see that the genus increases by one for each two neighboring incoming boundary curves of $A$.
+\begin{figure}[ht]
+\centering
+\def\svgwidth{\columnwidth}
+\input{pictures/rad_is_par_module.pdf_tex}
+\caption{\label{rad_is_par_module} The operation $\rho$ on surfaces.}
+\end{figure}
+Note that here, it is always the new outgoing boundary curves of $L$ arising from radialization that are glued together with the incoming boundary curves of $A$.
+
+\begin{prop}
+   Let $n > 0$.
+   There is a right module structure 
+   \[
+      H_*(\Radt(n)) \otimes H_*(\Part(n)) \to H_*(\Radt(n))
+   \]
+   induced by an action of the litte cubes operade.
+\begin{proof}
+   We define the right module structure by the composition
+   \[
+      H_*(\Radt(n)) \otimes H_*(\Part(n)) \xr{\otimes} H_*(\Radt(n) \times \Part(n)) \xr{\rho_*} H_*(\Radt(n))\,.
+   \]
+   The map $\rho$ is induced by a little cubes operade in the following way.
+   We can restrict the map $\tilde \theta$ of Proposition \ref{little_cubes_radial} for $k = 1$ to the point $z = -1$ in the configuration space $\tilde C^1(\A)$ in order to choose
+   the position for inserting one level of a parallel slit picture into one annulus $\A$.
+   We can apply this to a parallel slit picture on $n$ levels by treating the levels seperately.
+   It is also possible to do this if there is already a radial slit picture residing on the annuli since we can thread in the slits of the parallel slit picture.
+   
+   It remains to verify that, for $L_1, L_2 \in \Part(n)$ and $A \in \Radt(n)$, we have $A.(L_1 \cdot L_2) \simeq (A.L_1).L_2$.
+   Using the definition of $\rho$ on the surfaces resulting from glueing the slit pictures, it is not difficult to see that this formula if fulfilled.
+   Now we can compose the induced map $\rho_*$ with the homology cross product in order to obtain the desired operation.
+\end{proof}
+\end{prop}
+
+\subsection{Formulas [H]}
+
+In this subsection, we will see several formulas relating all the maps and operations we have seen so far.
+
+First, we obtain another property of the radialization map from Section \ref{cellular_radialization}.
+The radialization map may not be multiplicative with respect to the radial multiplication (see \ref{radialization_not_mult}).
+However, it is compatible with the operation $\rho$ defined in Subsection \ref{par_as_rad_module}.
+
+\begin{prop}
+\label{prop_rad_compatible}
+   The radialization map is compatible with the operation $\rho$ and the parallel multiplication, i.e., for $L_1$, $L_2 \in \Part(n)$, we have
+   \[
+      \radmap(L_1 \cdot L_2) \simeq \radmap(L_1).L_2\,. 
+   \]
+\begin{proof}
+  See Figure \ref{rad_compatible} for a proof.
+  Here, $L_1$ is colored green and $L_2$ blue.
+  The first picture shows the radial slit picture $\radmap(L_1).L_2$.
+  Note that the slits of $L_1$ are threaded in into a single outgoing boundary curve of $\radmap(L_2)$.
+  We can reverse this threading process in order to move all slits of $L_1$ into a connected part of the annulus.
+  This happens in the second picture.
+  From the radial slit picture shown there, the slits only have to be rotated around the annulus, and their lengths have to be changed,
+  and then we arrive at the third radial slit picture, $\radmap(L_1 \cdot L_2)$.  
+  \begin{figure}[ht]
+  \centering
+  \incgfx{pictures/rad_compatible}
+  \caption{\label{rad_compatible} Proof of Proposition \ref{prop_rad_compatible}.}
+  \end{figure}
+   
+\end{proof}
+\end{prop}
+
+Next, we obtain another little formula that relates radialization and the operation $\rho$ with the composition of radial slit pictures defined in Section \ref{radial_composition}.
+
+\begin{prop}
+\label{rad_rho_comp}
+   Denote the map swapping the two factors of a product by $t$.
+   The diagram
+   \[
+    \begin{tikzcd}
+	\Radt^{\bullet \bullet}_{g_1}(n, n) \times \Part_{g_2, n}^m \arrow{d}{\id \times \radmap} \arrow{r}{\rho} & \Rad^{\bullet \bullet}_{g_1 + g_2 + n - 1}(m + n, n)\\
+	\Radt^{\bullet \bullet}_{g_1}(n, n) \times \Radt^{\bullet \bullet}_{g_2}(m+n, n) \arrow{r}{t} & \Radt^{\bullet \bullet}_{g_2}(m+n, n) \times \Radt^{\bullet \bullet}_{g_1}(n, n) \arrow{u}{\odot_{\pi_n}}
+    \end{tikzcd}
+    \]
+    commutes,
+    where the partial pairing $\pi_n$ pairs the $k\Th$ incoming boundary curve of the second factor with the outgoing boundary curves of the first factor arising from the $k\Th$ boundary curve by radialization.
+    \begin{proof}
+       Recall how the operation $\rho$ is defined on surfaces $F \in \mathfrak M^{\bullet \bullet}_{g_1}(n, n)$ and $F' \in \mathfrak M_{g_2, n}^m$, see Figure \ref{rad_is_par_module}.
+       The surface $F'$ is at first radialized, i.e. each puncture is transformed into an outgoing boundary, 
+       and onto each boundary curve, a pair of pants with one incoming and one outgoing boundary curve is glued.
+       Now the $k\Th$ new outgoing boundary curve arising from the $k\Th$ boundary curve of $F'$ is glued together with the $k\Th$ incoming boundary curve of $F$.
+       But this is exactly what the map $\odot_{\pi_n} \circ t \circ (\id \times \radmap)$ does.
+    \end{proof}
+\end{prop}
+
+Note that we need to restrict to these parameters in order to state the preceeding formula.
+The number of incoming boundary curves of the radial and the parallel slit picture in this formula have to coincide since this is required by the operation $\rho$.
+Furthermore, the number of outgoing boundary curves of the radial slit picture needs to equal the same number due to the composition map.
+
+We can use this proposition to show that, in some special cases, we can relate the operad structure on $\Part$ with the radial composition map by the operation of $\Part$ on $\Radt$.
+The next corollary will state that the diagram
+\[
+ \begin{tikzcd}
+    \Radt^{\bullet \bullet} \times \tilde C^k(n\C) \times \Part^k \arrow{r}{\id \times \tilde \vartheta} \arrow{dd}{\id \times \iota \times \id} & \Radt^{\bullet \bullet} \times \Part \arrow{dr}{\rho} \arrow[dashed]{dd}{\id \times \radmap} & \\
+                                                                                                                              &                                      & \Radt^{\bullet \bullet}\\  
+    \Radt^{\bullet \bullet} \times \tilde C^k(n\A) \times \Part^k \arrow{r}{\id \times \tilde \vartheta}                                        & \Radt^{\bullet \bullet} \times \Radt^{\bullet \bullet} \arrow{ur}{\odot \circ t} & 
+ \end{tikzcd}
+\]
+commutes up to homotopy, whenever it makes sense to write down the compositions of the participating maps.
+We will come to state a more formal version of this diagram.
+But without all the indices, it is easier to see that the left square consists of the commutative diagram in Proposition \ref{rad_par_operad_gen}
+and the triangle of the commutative diagram in Proposition \ref{rad_rho_comp}.
+
+Furthermore, we can already interpret the diagram in this simple version.
+There are two canonical ways to emplace parallel slit pictures into a given radial slit picture in order to obtain another radial slit picture via little cubes operads.
+Firstly, by composing the parallel map $\tilde \theta$ given by operads on the parallel slit pictures with the operation $\rho$ of $\Part$ on $\Radt$;
+secondly, by using the radial map $\tilde \theta$ given by operads followed by the radial composition.
+According to the diagram, these processes coincide whenever they are comparable.
+We now formalize the diagram in 
+
+\begin{cor}
+\label{cor_all}
+Let $\pi_k$ and $t$ as in the preceeding proposition.
+The diagram 
+\[
+ \begin{tikzcd}
+    \Radt^{\bullet \bullet}_{g}(n, n) \times \tilde C^k(n\C) \times (\Part_{g_1, 1}^{m_1} \times \dotsc \times \Part_{g_k, 1}^{m_k}) \arrow{r}{\id \times \tilde \vartheta} \arrow{dd}{\id \times \iota \times \id} & \Radt^{\bullet \bullet}_g(n, n) \times \Part_{g', n}^{m'} \arrow{d}{\rho} \\
+																			                                          & \Radt^{\bullet \bullet}_{g + g' + n - 1}(m' + n, n) \\
+    \Radt^{\bullet \bullet}_{g}(n, n) \times \tilde C^k(n\A) \times (\Part_{g_1, 1}^{m_1} \times \dotsc \times \Part_{g_k, 1}^{m_k}) \arrow{r}{\id \times \tilde \vartheta}                                         & \Radt^{\bullet \bullet}_g(n, n) \times \Radt^{\bullet \bullet}_{g'}(m' + n, n) \arrow{u}{\odot_{\pi_k \circ t}} 
+ \end{tikzcd}
+\]   
+commutes up to homotopy.
+Here, we have $m' = \sum_{i = 1}^k m_i$ and $g' = \sum_{i = 1}^k g_i$.
+\end{cor}
+
+\begin{prop}
+   Let $A$ be a parallel slit picture on $n$ levels, $B$ a radial cell with $n(A) = n(B) = n$. 
+   Then the parallel slit pictures $\alpha (A \cdot \parmap(B))$ and $\parmap(\radmap(A) \radmult B)$ coincide.
+\begin{proof}
+   Consider the product $\radmap(A) \radmult B$ and its parallelization $\parmap(\radmap(A) \radmult B)$, see Figure \ref{homology_op:comparison_par_rad_formula_part_1}.
+  \begin{figure}[ht]
+  \centering
+  \incgfx{pictures/comparison_par_rad_formula_part_1}
+  \caption{\label{homology_op:comparison_par_rad_formula_part_1} The radial / parallel slit pictures $\radmap(A) \radmult B$ and $\parmap(\radmap(A) \radmult B)$.}
+  \end{figure}
+  Comparing this with Figure \ref{homology_op:comparison_par_rad_formula_part_2},
+  we see that $\parmap(\radmap(A) \radmult B)$ results from $\alpha (A \cdot \parmap(B))$ by moving the lowest green slit upwards a little,
+  which means that the two slit pictures agree.
+  \begin{figure}[ht]
+  \centering
+  \incgfx{pictures/comparison_par_rad_formula_part_2}
+  \caption{\label{homology_op:comparison_par_rad_formula_part_2} The parallel slit pictures $A \cdot \parmap(B)$ and $\alpha(A \cdot \parmap(B))$.}
+  \end{figure}
+\end{proof}
+\end{prop}
+
+\begin{prop}
+   Let $A$ be a parallel slit domain on $n$ levels, $B$ a radial slit domain with $n(A) = n(B) = n$. 
+   Then the radial slit domains $\radmap(A) \radmult B$ and $\radmap(A \cdot \parmap(B))$ coincide.
+\begin{proof}
+   Comparing Figures \ref{homology_op:comparison_par_rad_formula2_part_1} and \ref{homology_op:comparison_par_rad_formula2_part_2},
+   we see that we can transform $\radmap(A \cdot \parmap(B))$ into $\radmap(A) \radmult B$ by rotating all slits a little.
+
+  \begin{figure}[ht]
+  \centering
+  \incgfx{pictures/comparison_par_rad_formula2_part_1}
+  \caption{\label{homology_op:comparison_par_rad_formula2_part_1} The radial slit pictures $\radmap(A)$ and $\radmap(A) \radmult B$.}
+  \end{figure}
+  
+  \begin{figure}[ht]
+  \centering
+  \incgfx{pictures/comparison_par_rad_formula2_part_2}
+  \caption{\label{homology_op:comparison_par_rad_formula2_part_2} The slit pictures $A \cdot \parmap B$ and $\radmap(A \cdot \parmap B)$.}
+  \end{figure}
+
+\end{proof}
+
+\end{prop}

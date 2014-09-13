@@ -1,0 +1,73 @@
+\section{The Operation \texorpdfstring{$\alpha$}{alpha} [H]}
+\label{homology_operations:alpha}
+During this section, let $n = r = 1 + \dotsb + 1$ the trivial partition.
+
+Consider a surface $F$ with genus $g$, $m$ punctures and $n$ boundary curves, and choose the $k\Th$ of these boundary curves. 
+We can then add another puncture to $F$ by glueing a cylinder with a puncture to this boundary curve,
+see Figure \ref{map_A_on_surfaces}.
+
+\begin{figure}[ht]
+\centering
+\def\svgwidth{0.3\columnwidth}
+\input{pictures/map_A_on_surfaces.pdf_tex}
+\caption{\label{map_A_on_surfaces} Adding a puncture to a surface.}
+\end{figure}
+
+In order to realize this map on parallel slit pictures, consider the $k\Th$ level of a parallel slit picture $L$.
+Recall that the border of the relevant clipping of $L$ can be identified with the boundary curves and punctures of $L$. 
+The $k\Th$ boundary curve needs to be seperated into one new boundary curve and one new puncture.
+Therefore, we insert a new pair of slits per level as in Figure \ref{map_A_on_cells}.
+The new slits are longer than any other slit of the slit picture, and they are placed below respectively above all other slits.
+
+\begin{figure}[ht]
+\centering
+\incgfx{pictures/map_A_on_cells}
+\caption{\label{map_A_on_cells} Adding a puncture to a parallel slit picture.}
+\end{figure}
+
+In \cite[Theorem 1.3]{BoedigheimerTillmann2001}, Bödigheimer and Tillmann prove the following
+
+\begin{thm}
+   The map $\alpha_k \colon \Modspc \to \mathfrak{M}^{m+1}_{g,n}$ admits a stable retraction.
+   In particular, $\alpha_k$ induces an injective splitting in homology.
+\end{thm}
+
+By applying the map $\alpha_k$ successively for all $k = 1, \dotsc, n$, we obtain 
+
+\begin{defprop}
+\label{alpha}
+\symbolindex[a]{$\alpha$}{The map $\alpha$ adds $n$ new punctures to a parallel cell on $r = n$ levels.}{Definition \ref{alpha}}
+The map
+\[
+   \alpha = \alpha_n \circ \dotsc \circ \alpha_1 \colon \Modspc \to \mathfrak{M}^{m+n}_{g,n}
+\]
+induces a split injective map
+\[
+   \alpha_* \colon H_*(\Modspc) \to H_*(\mathfrak{M}^{m+n}_{g,n})
+\]
+in homology.
+\end{defprop}
+
+As promised in Subsection \ref{cellular_radialization}, we can now proof
+
+\begin{cor}\label{cor_rad_injective}
+   The radialization map 
+   \[
+      \radmap \colon \Modspc \to \ModspcRad
+   \]
+   induces a split injective map on homolgoy.
+   \begin{proof}
+       Note that 
+       \[
+          \alpha = \parmap \circ \radmap\,,
+       \]
+       which can be seen in Figure \ref{rad_injective}.
+       \begin{figure}[ht]
+	\centering
+	\def\svgwidth{\columnwidth}
+	\input{pictures/rad_injective.pdf_tex}
+	\caption{\label{rad_injective} Applying radialization and then parallelization to a surface with punctures and boundaries.}
+	\end{figure}
+	The claim follows with Proposition \ref{alpha}.
+   \end{proof}
+\end{cor}

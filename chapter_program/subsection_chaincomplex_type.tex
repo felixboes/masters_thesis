@@ -1,0 +1,72 @@
+\subsection{The Class ChainComplex [B]}
+\label{program:libhomology:ChainComplex}
+
+We start with the description of the members of the template class
+\begin{lstlisting}
+template< class CoefficientT,
+          class MatrixT,
+          class DiagonalizerT,
+          class HomologyT >
+class ChainComplex;
+\end{lstlisting}
+A \progclass{ChainComplex} is a finite sequence of differentials which we represent by
+\begin{lstlisting}
+std::map< int32_t, MatrixT > differential;
+\end{lstlisting}
+It is reasonable to define the following pass-through methods.
+You access the \nth differential by calling
+\begin{lstlisting}
+MatrixT& operator[]( const int32_t n );
+\end{lstlisting}
+or its \progkeyword{const} counter part
+\begin{lstlisting}
+const MatrixT& at( const int32_t n ) const;
+\end{lstlisting}
+You can test whether the \nth differential is defined by checking whether
+\begin{lstlisting}
+size_t count( const int32_t n ) const;
+\end{lstlisting}
+evaluates to zero.
+The \nth differential is deleted by the following method.
+\begin{lstlisting}
+void erase( const int32_t n );
+\end{lstlisting}
+All homology modules are computed by calling
+\begin{lstlisting}
+HomologyT homology();
+\end{lstlisting}
+In order to compute the \nth homology, one calls
+\begin{lstlisting}
+HomologyT homology( const int32_t n );
+\end{lstlisting}
+If you are interested in the kernel and torsion parts of the $n\Th$ differential, you should call
+\begin{lstlisting}
+HomologyT compute_kernel_and_torsion( int32_t n );
+\end{lstlisting}
+These operations consume by far the most time and 
+we recommend using a parallelized diagonalization process (compare Subsection \ref{program:libhomology:DiagonalizerT:DiagonalizerField}).
+
+The \progclass{DiagonalizerT} in use, is accessed via
+\begin{lstlisting}
+      DiagonalizerT& get_diagonalizer();
+const DiagonalizerT& get_diagonalizer() const;
+\end{lstlisting}
+
+In order to derive the homology of the moduli spaces, we have to handle very large differentials (compare Section \ref{complexity:number_of_mono_cells}).
+Thus we work with a single differential at a time, which is accessed via
+\begin{lstlisting}
+// Access the current differential.
+      MatrixT& get_current_differential();
+const MatrixT& get_current_differential() const;
+
+// Erases the current differential.
+void erase();
+
+// Access the coefficient of the current differential.
+CoefficientT& operator() ( const uint32_t row, const uint32_t col );
+    
+// Return number of rows resp. columns of the current differential
+size_t num_rows() const;
+size_t num_cols() const;
+\end{lstlisting}
+

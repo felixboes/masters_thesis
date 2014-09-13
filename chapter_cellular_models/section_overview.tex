@@ -1,0 +1,159 @@
+\section{Introduction [B,H]}
+\label{cellular_models:introduction}
+\symbolindex[p]{$\mc P = \{ P_1, \ldots, P_m \}$}{The set of punctures in a Riemann surface $F \in \Modspc$.}{Section \ref{cellular_models:introduction}}
+\symbolindex[q]{$\mc Q = (Q_1, \ldots, Q_n)$}{The enumerated points at which the non-vanishing tangent vectors $\mc X$ are attached.}{Section \ref{cellular_models:introduction}}
+\symbolindex[x]{$\mc X = (X_1, \ldots, X_n)$}{The enumerated non-vanishing tangent vectors.}{Section \ref{cellular_models:introduction}}
+\symbolindex[h]{$\Harmr$}{The bundle of potential functions over $\Modspc$.}{Section \ref{cellular_models:from_moduli_spaces_to_parallel_slit_domains}}
+\symbolindex[p]{$\Parr$}{The space of parallel slit domains.}{Sections \ref{cellular_models:introduction} and \ref{cellular_models:parallel}}
+\symbolindex[h]{$\mc H$}{The Hilbert uniformization.}{Sections \ref{cellular_models:introduction}, \ref{cellular_models:parallel:bicomplex} and \ref{cellular_models:radial:bisimplicial_complex}}
+\symbolindex[p]{$(P,P')$}{The parallel slit complex.}{Sections \ref{cellular_models:introduction} and \ref{cellular_models:parallel}}
+\symbolindex[e]{$\E$}{The Ehrenfried complex associated with $(P,P')$ or $(R,R')$}{Sections \ref{cellular_models:introduction} and \ref{cellular_models:ehrenfried}}
+\symbolindex[e]{$\E(h,m;r_1, \ldots, r_n)$}{The Ehrenfried complex associated with $(P,P')$ for fixed $g$, $n$, $m$ and $(r_1, \ldots, r_n)$.}{Section \ref{cellular_models:ehrenfried}}
+\symbolindex[e]{$\E(h,m)$}{The Ehrenfried complex associated with $(R,R')$ for fixed $g$, $n$ and $m$.}{Section \ref{cellular_models:ehrenfried}}
+\symbolindex[r]{$\Re$}{The real part of a complex valued function.}{}
+\symbolindex[m]{$\ModspcRad$}{The moduli space of Riemann surfaces with genus $g$, $m$ outgoing boundary curves and $n$ marked incoming boundary curves.}{}
+\symbolindex[c]{$\mathcal C^+$}{The set of outgoing boundary curves in a Riemann surface $F \in \ModspcRad$.}{Section \ref{cellular_models:introduction}}
+\symbolindex[c]{$ C^+_k$}{A (not distinguishable) outgoing boundary curve in a Riemann surface $F \in \ModspcRad$.}{Section \ref{cellular_models:introduction}}
+\symbolindex[c]{$\mathcal C^-$}{The set of incoming boundary curves in a Riemann surface $F \in \ModspcRad$.}{Section \ref{cellular_models:introduction}}
+\symbolindex[c]{$ C^-_k$}{The $k\Th$ incoming boundary curve in a Riemann surface $F \in \ModspcRad$.}{Section \ref{cellular_models:introduction}}
+\symbolindex[p]{$\mc P = \{ P_1, \ldots, P_n \}$}{The set of marked points on the $n$ incoming boundary curves in a Riemann surface $F \in \ModspcRad$.}{Section \ref{cellular_models:introduction}}
+\symbolindex[g]{$\Gamma^\bullet_g(m, n)$}{The mapping class group with respect to $\ModspcRad$.}{}
+\symbolindex[h]{$\HarmRad$}{The bundle of potential functions over $\ModspcRad$.}{Section \ref{cellular:radial_bundle}}
+\symbolindex[r]{$\Rad$}{The space of radial slit domains.}{Sections \ref{cellular_models:introduction} and \ref{cellular_models:radial}}
+\symbolindex[r]{$(R,R')$}{The radial slit complex.}{Sections \ref{cellular_models:introduction} and \ref{cellular_models:radial}}
+
+{\bf [B]} As mentioned above, we are interested in two families of moduli spaces.
+The first family consits of the moduli spaces $\Modspc$ parametrizing
+Riemann surfaces of genus $g \ge 0$ with $n \ge 1$ boundary curves and $m \ge 0$ permutable punctures.
+The second one is composed of moduli spaces $\ModspcRad$ parametrizing Riemann surfaces of genus $g \ge 0$ with $m \ge 1$ permutable outgoing boundary curves and
+$n \ge 1$ incoming boundary curves, where on each incoming curve a point is marked.
+Let us review Bödigheimer's models for these moduli spaces.
+All details as well as valuable pictures are found in \cite{Boedigheimer19901}, \cite{Boedigheimer19902} and \cite{Boedigheimer2006}.
+
+In order to obtain a good semi-multisimplicial model $\Parr$ for $\Modspc$, we replace every boundary curve by a point with a non-zero tangent vector attached.
+Thus $\Modspc$ is the moduli space of conformal equivalence classes $[F, \mc P, \mc Q, \mc X]$, where
+$F$ is a Riemann surface of genus $g$ with a set of punctures $\mc P = \{ P_1, \ldots, P_m \}$ and with (enumerated) points $\mc Q = ( Q_1, \ldots, Q_n )$ at which (non-vanishing) tangent vectors $\mc X = ( X_1, \ldots, X_n )$ are attached.
+The moduli space $\Modspc$ is the quotient of the contractible Teichmüller space by the action of the corresponding mapping class group $\Gamma_{g,n}^m$.
+Under the assumption $n \ge 1$, the action of $\Gamma_{g,n}^m$ is free so that $\Modspc$ is a manifold of dimension $6g - 6 + 2m + 4n$.
+In this section, we do not elaborate on the advantages of the above mentioned model $\Parr$,
+but state that it is primarily used to translate the Dyer-Lashof operations defined on configuration spaces into those defined on the moduli spaces,
+see Chapter \ref{homology_operations}.
+In what follows, we fix a moduli space $\Modspc$ and an ordered partition $(r_1, \ldots, r_n)$ of $r = r_1 + \ldots + r_n$ with $r_j \ge 1$ for every $j$.
+
+In Section \ref{cellular_models:from_moduli_spaces_to_parallel_slit_domains}, we introduce the bundle $\Harmr$ over $\Modspc$.
+The fibre over a point $[F, \mc P, \mc Q, \mc X]$ consists of certain meromorphic 1-forms and a fixed number of integration constants.
+It is an open half-space of a real affine space.
+Thus the bundle map is a homotopy equivalence. Note that for each partition $(r_1, \ldots, r_n)$ we have such a bundle with fibre dimension depending on $(r_1, \ldots, r_n)$.
+The fibre over $[F, \mc P, \mc Q, \mc X]$ parametrizes all harmonic functions $u$ of predescribed behavior, namely with poles of order $r_j$ at
+the points $Q_j$ in the direction of $X_j$ and logarithmic sinks at the punctures $P_i$.
+Such functions are called potential functions.
+
+The critical gradient flow lines of a given potential function $u$ (along decreasing values of $u$) that leave the critical points of $u$
+(to either run into another critical point, into a sink $P_j$ or into a pole $Q_j$) define the critical graph $\mc K_0$ on $F$.
+Dissecting $F$ along its critical graph $\mc K_0$, we obtain $r$ open and contractible sub-surfaces $F_1, \ldots, F_r$ which we call basins.
+On each basin $F_j$, the harmonic function $u$ is the real part of a holomorphic function $w_j$, unique up to an integration constant.
+
+Each function $w_j$ maps the basin $F_j$ injectively onto an open domain in $\mathbb C$.
+Its image is obviously the entire plane $\mathbb C = \mathbb C_j$ with finitely many slits removed,
+each slit running from some point horizontally to the left all the way to infinity.
+They are commonly called parallel slit domains.
+The slits arise from the (piecewise) cuts along the critical flow lines.
+Observe that right and left banks of such a flow line are now (piecewise) left respectively right banks of possibly different slits on possibly differrent planes.
+Encoding this information allows us to re-glue the surface $F$. 
+We define the space $\Parr$ of these parallel slit domains as a subspace of a finite, semi-multisimplicial space $P$,
+namely as the complement of the (geometric realization of) the subcomplex of degenerate surfaces $P'$.
+The reason for $P$ beeing not multisimplicial is a direct consequence of the fact that the occuring symmetric groups define a semisimplicial set $\Symgrp^\Delta$
+together with pseudo degeneracy maps satisfying all but one simplicial identity (compare Appendix \ref{notation:semi_simpl_sym_grp}).
+
+\index{Hilbert uniformization}
+Summing up, we have a homeomorphism
+\[
+    \mc H \colon \Harmr \to \Parr \,,
+\]
+called Hilbert uniformization.
+The pair $(P,P')$ is a relative manifold $\Parr = P - P'$, orientable for $m < 2$ and of dimension $3h$ with $h = 2g+m+n+r-2$.
+In particular, the homology of $\Parr$ is given by Poincaré duality
+\[
+    H_\ast( \Modspc; \mathbb Z ) = H_\ast( \Parr; \mathbb Z ) \cong H^{3h-\ast}( P, P'; \mathcal O)
+\]
+with $\mathcal O$ the orientation coefficients.
+The bicomplex of $(P,P')$ is called parallel slit complex and admits a purely combinatorial description treated in Section \ref{cellular_models:parallel}. 
+
+{\bf [H]} Turning to the second family of moduli spaces $\ModspcRad$,
+we consider marked conformal equivalence classes of Riemann surfaces with genus $g \ge 0$ and two kinds of boundary cuves.
+There are $m \geq 1$ permutable outgoing boundary curves $C^+_1, \dotsc, C^+_m$ 
+and $n \geq 1$ incoming boundary curves $C^-_1, \dotsc, C^-_n$, each of which has a marked point $P_i \in C^-_i$.
+Thus, a point in the moduli space $\ModspcRad$ is represented by the data $[F, \mathcal C^+, \mathcal C^-, \mathcal P]$,
+where $\mathcal C^+ = C^+_1 \cup \dotsc \cup C^+_m$ respectively $\mathcal C^- = C^-_1 \cup \dotsc \cup C^-_n$ denotes the entire outer respectively inner boundary,
+while $\mathcal P = (P_1, \dotsc, P_n)$ is the (enumerated) set of marked points on the $n$ inner boundary curves.
+Thereby, a conformal homeomorphism $h \colon F \to F'$ between such surfaces is called marked if each $P_i$ is mapped to $P'_i$,
+and the dot in the definition of $\ModspcRad$ refers to this marking.
+
+Analogously to the previous statements,
+the moduli space $\ModspcRad$ is a quotient of the contractible Teichmüller space 
+under the action of the corresponding mapping class group $\Gamma^\bullet_g(m, n)$.
+Excluding the case $g = 0$, $m = n = 1$, the action of $\Gamma^\bullet_g(m, n)$ is free.
+Consequently, $\ModspcRad$ is a manifold of dimension $\dim(\ModspcRad) = 6g-6+3m+4n$
+and a classifying space $B \Gamma^\bullet_g(m, n)$ for the mapping class group $\Gamma^\bullet_g(m, n)$.
+
+We proceed the same way as in the parallel case: 
+In Section \ref{cellular:radial_bundle}, we describe a homotopy equivalent bundle $\HarmRad$ over $\ModspcRad$.
+In Section $\ref{cellular_models:radial}$, we introduce the space $\Rad$ of radial slit configurations homeomorphic to $\HarmRad$,
+which allows us to actually perform homology calculations.
+
+The bundle $\HarmRad$ is constructed similarly as above:
+Over a point $[F, \mathcal C^+, \mathcal C^-, \mathcal P] \in \ModspcRad$, an element of the fibre consists of the data $[F, \mathcal C^+, \mathcal C^-, \mathcal P, w]$ 
+with $w = (u, v_1, \dotsc, v_n)$.
+By this, $u \colon F \to \overline{\R}$ is a certain harmonic potential function,
+and $v_k$ are certain locally defined harmonic conjugates of $u$ on the components, called basins as well, of the complement of the unstable critical gradient flow.
+The functions $u$ and $v_k$ are used to map the basins $F_1, \dotsc, F_n$ of $F$ into $n$ annuli $\A_1, \dotsc, \A_n \subset \C$ with outer radius equals $1$.
+This process can be reversed.
+Since the critical flow lines define segments on the annuli that can be glued together again, the surface $F$ can be re-built from the image of $F$ on the annuli.
+The points in the space $\Rad$ of radial slit domains consist of these annuli together with the information neccessary to encode the glueing.
+We define $\Rad$ in a simplicial way
+such that $\Rad = R - R'$ is the geometric realization of the complement of a subcomplex $R'$ of the semi-multisimplicial complex $R$.
+
+The pair $(R, R')$ is a relative manifold of dimension $3h + n$ with $h = 2g - 2 + m + n$, which is orientable for $m < 2$.
+Altogether, we can express the homology of $\ModspcRad$ via Poincaré duality by
+\[
+    H_\ast( \ModspcRad; \mathbb Z ) = H_\ast( \Rad; \mathbb Z ) \cong H^{3h+n-\ast}( R, R'; \mathcal O)\,,
+\]
+where $\mathcal O$ denotes the orientation coefficients.
+In both Sections \ref{cellular_models:parallel} and \ref{cellular_models:radial}, we give a description of the cells of the bicomplexes $P$ and $R$,
+followed by the explanation of the vertical and horizontal faces, yielding the boundary operators.
+In Section \ref{cellular_models:orientation}, we define the orientation system $\mathcal O$ for the bicomplexes $P$ and $R$.
+
+{\bf [B]} We are left to determine the (co)homology of the finite bicomplex $(P,P')$ respectively $(R,R')$.
+Both complexes have a close connection to the study of the homology of normed groups and in particular the symmetric groups.
+To see this, let $G$ be a group with a norm $N$.
+The bar complex $B_\bullet(G)$ can be filtered by extending the norm for an element $\inhomq[g]$ by
+$N(g_q | \ldots | g_1) = N(g_q) + \ldots + N(g_1)$.
+In \cite{Visy201011}, the spectral sequence $\mc N[G]$ associated with this norm fltration on $B_\bullet(G)$ is studied for a family of groups called factorable (c.f.\ Appendix \ref{notation:factorable_groups}).
+These are normed groups with a certain normal form for its elements in a given set of generators whose word length norm is $N$.
+The symmetric groups with all transpositions as generators are examples of factorable groups.
+Other examples are more general Coxeter groups.
+The main result in \cite{Visy201011} states that for a factorable group, the first page of the above spectral sequence is concentrated in a single diagonal.
+Thus the homology of $G$ is the homology of this diagonal.
+It turns out that the $p\Th$ column of our bicomplex $(P,P')$ respectively $(R,R')$ is a direct summand of the $h\Th$ column of $\mc N^0[\Symgrp_p]$,
+where $q$ is the homological degree of both sides.
+It follows that the columns of our bicomplex have their homology concentrated in the degree $q=h$,
+so the first page of the spectral sequence of the double complex is concentrated in a single row which is by definition the Ehrenfried complex $\E$ associated with $(P,P')$ respectively $(R,R')$.
+
+In Section \ref{cellular_models:ehrenfried}, we adapt the known methods to show that $\E$ is a quasi-isomorphic direct summand of $(P,P')^\ast$ respectively $(R,R')^\ast$,
+which was already formulated and proven for the parallel case with $n=1$ and $r=1$ the trivial partition.
+
+In Section \ref{cellular_models:dual_ehrenfried}, we give an explicit description of the dual Ehrenfried complex:
+We elaborate our geometric insights on the behavior of the horizontal coface operator, in order to introduce the notion of $i\Th$ coboundary traces.
+We then define a canonical bijection
+between the set of $i\Th$ coboundary traces and the set of $i\Th$ cofaces.
+The coface of a top dimensional cell $\Sigma$ corresponding to a given coboundary trace $a$ will be called $a.\Sigma$.
+In Proposition \ref{cellular_models:dual_ehrenfried:cob_are_equal_via_sigma_j_i}, we provide the formula
+\[
+    \del_\E^\ast(\Sigma) = \sum_{i=1}^{p-1} (-1)^i \sum_{a \in T_i(\Sigma)} \kappa^\ast(a.\Sigma)\,,
+\]
+which enables us to define the homology operations described in \cite{Boedigheimer19902} and \cite{Boedigheimer201314} via the dual Ehrenfried complex in Chapter \ref{homology_operations}.
+Another benefit of this definition is the classification of the cells of the Ehrenfried complex (c.f.\ Proposition \ref{cellular_models:dual_ehrenfried:every_cell_is_an_expansion}).
+Roughly speaking, there are a few distinguished cells of low degree which we call thin.
+An arbitrary cell is uniquely obtained from such a thin cell by glueing in a certain number of stripes.
+The geometric meaning and the precise statements are presented in Subsection \ref{cellular_models:dual_ehrenfried:classification_of_the_cells}.
+

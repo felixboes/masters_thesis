@@ -1,0 +1,193 @@
+\subsection{Cells in Homogeneous Notation [B]}
+\label{cellular_models:parallel:cells_in_homogenous_notation}
+In this subsection, the partition $r = r_1 + \ldots + r_n$ is meant to be fixed.
+We define arbitrary cells $\Sigma$ of bidegree $(p,q)$ in the homogenous notation.
+Before going into details, recall our notation for the symmetric groups (see Appendix \ref{notation:semi_simpl_sym_grp}).
+
+\begin{defi}
+    \label{cellular_models:parallel:partition}
+    \index{partition into levels}
+    \symbolindex[p]{$[p] = \{ \ul 0_1, \ul 1_1, \ldots, \ul p_1, \ldots, \ul 0_r, \ul 1_r, \ldots, \ul p_r \}$}
+        {A partition of $p$ into $r$ levels.}
+        {Definition \ref{cellular_models:parallel:partition}}
+    Consider an ordered partition of the natural number $p = p_1+\ldots+p_r$ with all $p_i$ positive.
+    The set
+    \[
+        [p] = \{ \ul 0_1, \ul 1_1, \ldots, \ul{p_1}_1, \ldots, \ul 0_r, \ul 1_r, \ldots, \ul{p_r}_r \}
+    \]
+    consisting of $p+r$ elements is a {\bf partition of $p$ into $r$ levels}.
+    In what follows, we will abuse notation by abbriviating
+    \[
+        \ul p_k = \ul{p_k}_k \,.
+    \]
+    This should not cause any confusion.
+    The set $[p]$ is ordered canonically via
+    \[
+        \ul0_1 < \ul1_1 < \ldots < \ul p_1 < \ldots < \ul 0_r < \ul 1_r < \ldots < \ul p_r \,.
+    \]
+\end{defi}
+
+\begin{defi}
+    \label{cellular_models:parallel:homogeneous_notation}
+    \index{cell!parallel cell in homogeneous notation}
+    \symbolindex[s]{$\Sigma = (\sigma_q, \ldots, \sigma_0)$}{A parallel cell written in homogeneous notation}{Definition \ref{cellular_models:parallel:homogeneous_notation}}
+    Using the {\bf homogeneous notation}, a combinatorial cell of bidegree $(p,q)$ with respect to a given partition $[p]$ is a $(q+1)$-tuple of permutations $\sigma_j \in \Symgrp_{[p]}$
+    \[
+        \Sigma = \homogq \,.
+    \]
+    Most of the time we refere to $\Sigma$ as a cell on $r$ levels, leaving the partition $[p]$ unmentioned.
+\end{defi}
+
+\begin{defi}
+    \label{cellular_models:parallel:inner_cells}
+    \index{cell!inner parallel cell}
+    \index{levels!ascendingly ordered levels}
+    A cell $\Sigma = \homogq$ of bidegree $(p,q)$ is called (parallel) {\bf inner cell} if it is subject to the following conditions.
+    \begin{enumerate}
+        \item Every $\sigma_i$ maps $\ul p_k$ to $\ul 0_k$ for every $k$.
+        \item The zero${}^{\text{th}}$ permutation $\sigma_0$ is fixed to be $\sigma_0 = (\ul 0_1\ \ul 1_1\ \ldots\ \ul p_1)\ldots (\ul 0_r\ \ul 1_r\ \ldots\ \ul p_r)$.
+        \item For every $0 \le i < q$, the permutations $\sigma_i$ and $\sigma_{i+1}$ are distinct.
+        \item There is no symbol $\ul 0_k \le \ul j_k < \ul p_k$ that is mapped to its successor $\ul{j+1}_k$ by all permutations $\sigma_i$.
+        \item The levels of $\Sigma$ are {\bf ordered ascendingly} with respect to the boundary curves,
+            i.e.\ $\sigma_q$ induces on $\{\ul0_1, \ldots, \ul0_r\} \subseteq [p]$ the permutation
+            $(\ul0_1\ \ldots\ \ul0_{p_1})(\ul0_{p_1 + 1} \ \ldots\ \ul0_{p_1+p_2}) \ldots (\ul0_{p_{r-1} + 1} \ \ldots\ \ul0_{p_r})$.
+    \end{enumerate}
+\end{defi}
+
+Reversing the process discussed in Section \ref{cellular_models:from_moduli_spaces_to_parallel_slit_domains}, an inner cell on one level is pictured as follows.
+We start off with the unit square which is cut up into horizontal stripes of the same size.
+The stripes are denoted by the symbols $\ul0$ to $\ul p$.
+Each stripe is divided into rectangles, denoted by the numbers $0$ to $q$,
+hence we subdivided the initial square into $(p+1)(q+1)$ pieces of the same size.
+Now we glue the stripes according to the permutations $\homogq$ as indicated by Figure \ref{cellular_models:parallel:homogeneous_glueing}.
+\begin{figure}[ht]
+\centering
+\incgfx{pictures/cellular_para_homogeneous_glueing}
+\caption{\label{cellular_models:parallel:homogeneous_glueing}Glueing a surface from a cell in homogeneous notation.
+    The thick line indicates the boundary curve (which is seen as a parametrized disc around a pole).}
+\end{figure}
+The top side of the rectangle with coordinate $(j,\ul i)$ is glued to the bottom side of the rectangle with coordinate $(j, \sigma_j(\ul i))$, but we omit to glue the $\ul p\Th$ rectangle to $\ul0\Th$.
+After glueing all pieces, we receive a surface with punctures and a boundary curve (which we understand as the boundary of a contractible neighbourhood of the dipole) as follows.
+The cycle of $\sigma_q$ containing $\ul0$ corresponds to the boundary curve (and therefore to the dipole), which we indicate by a thick line in Figure \ref{cellular_models:parallel:homogeneous_glueing}.
+All the other cycles of $\sigma_q$ resemble the punctures of the surface.
+
+The picture for an inner cell on $r$ levels is similar.
+Here we start off with $r$ unit squares $A_1, \ldots, A_r$, cut each $A_k$ in $(p_k+1)(q+1)$ pieces and glue the collection of all pieces according to the permutations $\sigma_i$.
+Observe that the resulting surface has exactly $n$ boundary curves by it may be disconnected.
+We will treat this case in the next definition.
+The cell in Figure \ref{cellular_models:parallel:closed_disc} resembles a closed disc and corresponds to the example in the previous section, where we cut $\mathbb S^2$ into two pieces along the critical flow of the dipole function $\Re(z^2)$.
+\begin{figure}[ht]
+\centering
+\incgfx{pictures/cellular_para_closed_disc}
+\caption{\label{cellular_models:parallel:closed_disc}The cells $\big((\ul 0_1\ \ul 1_2\ \ul 0_2\ \ul 1_1): (\ul 0_1\ \ul 1_1)(\ul 0_2\ \ul 1_2)\big)$ resembles a closed disc and is understood as the complement of an open disc around infinity in $\mathbb S^2$.}
+\end{figure}
+
+\begin{defi}
+    \label{cellular_models:parallel:connected}
+    \index{cell!connected cell}
+    A combinatorial cell is {\bf connected} if the resulting surface is connected.
+    Wandering on the surface by traversing through the stripes horizontally or (using the glueing information) vertically, we conclude that a cell is connected if and only if the equivalence relation on $[p]$ generated by
+    \[
+        i \sim j \iff \exists k : j = \sigma_k(i)
+    \]
+    consists of exactly one element.
+\end{defi}
+
+\subsection{Cells in Inhomogeneous Notation[B]}
+\label{cellular_models:parallel:cells_in_inhomogenous_notation}
+As before, the ordered partition $r = r_1 + \ldots + r_n$ is meant to be fixed.
+It is fertile to give an equivalent description for inner cells of bidegree $(p,q)$.
+Let $\Sigma = \homogq$ be a inner cell and consider the permutations $\tau_j = \sigma_j \sigma_{j-1}^{-1}$ for $1 \le j \le h$.
+Every symbol $\ul 0_k$ is fixed by every $\tau_i$.
+We sometimes view these as permutations on the symbols $[p] - \{ \ul 0_k \mid 1 \le k \le r\}$.
+In the next definition we rephrase the conditions of Definition \ref{cellular_models:parallel:inner_cells}.
+
+\begin{defi}
+    \label{cellular_models:parallel:inhomogeneous_notation}
+    \index{cell!parallel cell in inhomogeneous notation}
+    \symbolindex[s]{$\Sigma = (\tau_q \mid \ldots \mid \tau_1)$}{A parallel cell written in inhomogeneous notation}{Definition \ref{cellular_models:parallel:inhomogeneous_notation}}
+    Using the {\bf inhomogeneous notation}, a combinatorial cell of bidegree $(p,q)$ with respect to a given partition $[p]$
+    is a $q$-tuple of permutations $\tau_j \in \Symgrp_{[p]}$ written as
+    \[
+        \Sigma = \inhomq \,.
+    \]
+    It is a (parallel) {\bf inner cell} if it is subject to the following conditions
+    \begin{enumerate}
+        \item every permutation $\tau_q, \ldots, \tau_1$ is non-trivial,
+        \item the set of common fixed points of the permutations $\tau_q, \ldots, \tau_1$ is exactly $\{ \ul0_1, \ldots, \ul0_r\}$ and
+        \item the permutation $\tau_q \cdots \tau_1 \sigma_0 \in \Symgrp_{[p]}$ induces on $\{\ul0_1, \ldots, \ul0_r\} \subseteq [p]$ the permutation
+            $(\ul0_1\ \ldots\ \ul0_{p_1})(\ul0_{p_1 + 1} \ \ldots\ \ul0_{p_1+p_2}) \ldots (\ul0_{p_{r-1} + 1} \ \ldots\ \ul0_{p_r})$.
+    \end{enumerate}
+\end{defi}
+The following is clearly a one-to-one correspondence of inner cells with respect to a given partition $[p]$
+\[
+    \homogq \mapsto \inhomq \mspc{with}{20} \tau_i = \sigma_i\sigma_{i-1}^{-1} \,.
+\]
+
+In contrast to the homogeneous notation, where the combinatorial information describes how to traverse through the geometric cell vertically,
+the inhomogeneous notation portrays the tours around each (inner) corner point, which is a stagnation point in the light of Section \ref{cellular_models:from_moduli_spaces_to_parallel_slit_domains}.
+In Figure \ref{cellular_models:parallel:cell_comparison_notations} we picture this for the cell $\Sigma = \big( (\ul0\ \ul2): (\ul0\ \ul1\ \ul2) \big)$ (written in homogeneous notation),
+which should remind the reader of the example portrayed in Figure \ref{cellular_models:from_moduli_spaces_to_parallel_slit_domains:flow_with_one_puncture_with_equipotential_lines}.
+\begin{figure}[ht]
+\centering
+\incgfx{pictures/cellular_para_cell_comparison_notations}
+\caption{\label{cellular_models:parallel:cell_comparison_notations}Comparison of the homogeneous and inhomogeneous notation.}
+\end{figure}
+
+Both the number of punctures and the number of boundary components of the corresponding surface are encoded by the permutation $\sigma_q$.
+\begin{defi}
+    \label{cellular_models:parallel:number_cycles}
+    \label{cellular_models:parallel:number_punctures}
+    \label{cellular_models:parallel:number_boundaries}
+    \label{cellular_models:parallel:norm}
+    \index{cell!number of cycles of a parallel cell}
+    \index{cell!number of punctures of a parallel cell}
+    \index{cell!number of boundaries of a parallel cell}
+    \index{cell!norm of a parallal cell}
+    \symbolindex[n]{$\ncyc(\Sigma)$}{The number of cycles of a parallel cell $\Sigma$.}{Definition \ref{cellular_models:parallel:number_cycles}}
+    \symbolindex[m]{$m(\Sigma)$}{The number of punctures of a parallel cell $\Sigma$.}{Definition \ref{cellular_models:parallel:number_punctures}}
+    \symbolindex[n]{$n(\Sigma)$}{The number of boundaries of a parallel cell $\Sigma$.}{Definition \ref{cellular_models:parallel:number_boundaries}}
+    \symbolindex[n]{$N(\Sigma)$}{The norm of a parallel cell $\Sigma$.}{Definition \ref{cellular_models:parallel:norm}}
+    Consider an arbitrary cell $\Sigma = \homogq$ of bidegree $(p,q)$.
+    \begin{enumerate}
+        \item The {\bf number of cycles} of $\Sigma$ is defined to be the number of cycles of the permutation $\sigma_q$
+            \[
+                \ncyc( \Sigma ) = \ncyc( \sigma_q) \,,
+            \]
+            where we view fixed points as cycle of length zero.
+        \item Every cycle of $\sigma_q$ that contains at least one symbol $\ul 0_k$ is called {\bf boundary cycle} of $\Sigma$.
+            The {\bf number of boundaries} of $\Sigma$ is denoted by
+            \[
+                n(\Sigma) = \#\{ \text{boundary cycle of } \Sigma\}
+            \]
+            and the {\bf number of punctures} of $\Sigma$ is
+            \[
+                m(\Sigma) = \ncyc(\Sigma) - n(\Sigma) \,.
+            \]
+        \item The {\bf norm} of $\Sigma$ is
+            \[
+                N(\Sigma) = N(\sigma_q\sigma_{q-1}^{-1}) + \ldots + N(\sigma_1\sigma_0^{-1}) \,,
+            \]
+            where $N$ measures the word length in the symmetric group $\Symgrp_{[p]}$ with respect to the set of all transpositions.
+    \end{enumerate}
+\end{defi}
+
+\begin{rem}
+    \label{cellular_models:parallel:h_m_n_g_are_recognized}
+    \index{cell!genus of a parallel cell}
+    \symbolindex[g]{$g(\Sigma)$}{The genus of a parallel cell $\Sigma$.}{Remark \ref{cellular_models:parallel:h_m_n_g_are_recognized}}
+    Reversing the dissection process in Section \ref{cellular_models:from_moduli_spaces_to_parallel_slit_domains},
+    the number of punctures and boundary curves of a combinatorial cell $\Sigma$
+    equals the number of punctures and boundary curves of the surface $F$ that is obtained by glueing.
+    Moreover, an inner cell $\Sigma = \inhomq$ defines an imbedded connected graph $\mc K_0$ whose complement are $r$ basins.
+    The poles, punctures and stagnation points correspond to the vertices and $N(\tau_j)+s$ is the number of edges that end in the $s$ stagnations at the $j\Th$ equipotential line.
+    The Euler characteristic of $F$ is
+    \[
+        2-2g = \chi(F) = \#vertices - \#edges + \#faces = m+n - h + r\,,
+    \]
+    so the genus of $F$ is uniquely determined by $h,m$ and the partition.
+    \[
+        g(\Sigma) = \frac{h - m - n - r + 2}{2}
+    \]
+
+\end{rem}

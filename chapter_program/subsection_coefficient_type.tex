@@ -1,0 +1,55 @@
+\subsection{The Type CoefficientT [B]}
+\label{program:libhomology:CoefficientT}
+
+The coefficient ring must be represented by a class that meets the requirements discussed in Subsubsection \ref{program:libhomology:CoefficientT:obligatory_reqs}.
+
+\subsubsection{Obligatory Operations for CoefficientT [B]}
+\label{program:libhomology:CoefficientT:obligatory_reqs}
+Clearly, one has to provide the basic ring operations.
+\begin{lstlisting}
+CoefficientT& operator= ( const CoefficientT& );        // Assignment
+bool          operator==( const CoefficientT& ) const;  // Comparison
+bool          operator!=( const CoefficientT&, const CoefficientT& );
+CoefficientT  operator- () const;                       // Negation
+CoefficientT& operator+=( const CoefficientT& );        // Addition
+CoefficientT  operator+ ( const CoefficientT&, const CoefficientT& );
+CoefficientT& operator-=( const CoefficientT& );        // Subtraction
+CoefficientT  operator- ( const CoefficientT&, const CoefficientT& );
+CoefficientT& operator*=( const CoefficientT& );        // Multiplication
+CoefficientT  operator* ( const CoefficientT&, const CoefficientT& );
+\end{lstlisting}
+If the coefficients form a field, we suggest to implement the division operators.
+\begin{lstlisting}
+CoefficientT& operator/=( const CoefficientT& );
+CoefficientT  operator/ ( const CoefficientT&, const CoefficientT& );
+\end{lstlisting}
+
+The integers are initial in the category of rings, thus it is reasonable to implement the following methods.
+\begin{lstlisting}
+CoefficientT& operator= ( const int );                      // Assignement
+bool          operator==( const int ) const;                // Comparision
+CoefficientT  operator* ( const CoefficientT&, const int ); // Multiplication
+\end{lstlisting}
+
+In our project {\bf kappa}, we intend to save differentials so you should provide a method that stores a \progclass{CoefficientT} (See Subsection \ref{program:kappa:serialization}).
+
+\subsubsection{Coefficients in the Rationals and the Integers Mod \texorpdfstring{$m$}{m} [B]}
+\label{program:libhomology:CoefficientT:our_implementation}
+We offer the classes \progclass{Q} respectively \progclass{Zm} that represent coefficients in $\mathbb Q$ respectively $\mathbb Z / m \mathbb Z$:
+The class \progclass{Q} is defined via the following \progkeyword{typedef}.
+\begin{lstlisting}
+typedef mpq_class Q;
+\end{lstlisting}
+The class \progclass{mpq\_class} itself is the \cpp\ variant of the {\bf GMP} type \progclass{mpq\_t}.
+Before using the class \progclass{Zm}, you have to call the static member function
+\begin{lstlisting}
+static void set_modulus(const uint8_t p, const uint8_t e = 1);
+\end{lstlisting}
+that defines $m = p^e$.
+Omitting the call will throw a segmentation fault which is the result of a division by zero.
+The following self-explaining member functions might be useful.
+\begin{lstlisting}
+static void const print_modulus();    
+static void const print_inversetable();
+static bool       is_field();
+\end{lstlisting}

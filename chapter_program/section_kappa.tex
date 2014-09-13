@@ -1,0 +1,51 @@
+\section{The Program Kappa [B,H]}
+\label{chapter_program:kappa}
+
+The program {\bf kappa} mainly uses the previously introduced {\bf libhomology} (compare Section \ref{program:libhomology}) 
+and the theory developed in Chapter \ref{cellular_models}
+in order to determine the homology of the moduli spaces $\Modspc[1]$ and $\ModspcRad[1]$. 
+Thus, it computes the cohomology of the parallel or radial Ehrenfried complex $\Ehrprog$,
+filtered by cluster sizes.
+
+Recall that the homology of $\Modspc[1]$ and $\ModspcRad[1]$ coincides for $m > 0$, see Proposition \ref{cellular_models:comparision_of_the_models:bundles_are_h_equiv}.
+For computing the homology of $\Modspc[1]$ for fixed $g$ and $m$, 
+it is more efficient to use the radial Ehrenfried complex rather than the parallel one, 
+since its modules and thus differentials are much smaller, see Section \ref{complexity:number_of_mono_cells}.
+However, for $m = 0$, we cannot use the radial model, so we also offer the computation of the homology of $\Modspc[1]$ via the parallel model.
+Since we also determine the dimensions of the modules of the cluster spectral sequence, 
+computation with the parallel model produces new homological information for $m > 0$.
+
+A central class of our computer program is hence the class \progclass{ClusterSpectralSequence}, see Subsection \ref{chapter_program:kappa:css},
+which stores the parallel or radial Ehrenfried complex filtered by cluster sizes.
+
+Since the basis elements of $\Ehrprog$ are monotonous tuples of transpositions,
+another important class of the program kappa is the class \progclass{Tuple} (see Subsection \ref{chapter_program:kappa:tuple}),
+which represents such a basis element and offers many functions that are applied to it
+during the generation of the \progclass{ClusterSpectralSequence}.
+
+With these foundations, we can offer the tool \progname{compute\_css} (see Subsection \ref{chapter_program:kappa:compute_css}) 
+for computing the first three pages of the cluster spectral sequences corresponding to the moduli spaces $\Modspc[1]$ and $\ModspcRad[1]$
+and especially their homology.
+
+We also provide the tool \progname{compute\_cache},
+which computes the bases and the differentials of $\Ehrprog$ and stores them in files via serialization.
+For most $g$ and $m$, 
+the computation of both takes a lot of time,
+and it is thus functional to have the opportunity to store the data of $\Ehrprog$ for later uses.
+
+For example, \progname{compute\_cache} can be used to examine the structure of the Ehrenfried complex via the tools
+\progname{compute\_statistics} and \progname{print\_basis}.
+After \progname{compute\_cache} has been performed, one can call \progname{compute\_statistics}
+to find out various properties of the Ehrenfried complex $\Ehrprog$
+like the sizes of the differentials or their largest entry per column.
+Alternatively, a call of \progname{print\_basis} outputs the basis of the Ehrenfried complex.
+
+Since all these tools mentioned are organized in a similar way, 
+we shall only describe the tool \progname{compute\_css} in detail, see Subsection \ref{chapter_program:kappa:compute_css}.
+Thereafter, we illustrate the above mentioned classes \progclass{Tuple} (compare Subsection \ref{chapter_program:kappa:tuple}) and \progclass{ClusterSpectralSequence} (compare Subsection \ref{chapter_program:kappa:css}),
+which describe the Ehrenfried complex.
+
+\input{chapter_program/subsection_compute_homology}
+\input{chapter_program/subsection_tuple}
+\input{chapter_program/subsection_css}
+\input{chapter_program/subsection_serialization}

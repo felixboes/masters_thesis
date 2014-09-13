@@ -1,0 +1,71 @@
+\subsection{Some Useful Properties [B]}
+In this subsection, we present some properties and formulas that will become handy in later parts of this thesis or in our computer program.
+
+The following definition is inspired by \cite[Lemma 2.3.33]{Hess2012} but uses a different indexing convention.
+\begin{defi}
+    \label{cellular_models:ehrenfried:kappa_sequences}
+    \index{kappa!kappa sequence}
+    \symbolindex[k]{$\kappa_I$}{The summand $\kappa_I = \mueta_{i_1} \circ \ldots \circ \mueta_{i_k}$ with $I = (i_1, \ldots, i_k)$.}{Definition \ref{cellular_models:ehrenfried:kappa_sequences}}
+    \symbolindex[l]{$\Lambda_h$}{Parametrizes the $\kappa$-squences of length $h$.}{Definition \ref{cellular_models:ehrenfried:kappa_sequences}}
+    Let $a$ and $b$ be positive integers.
+    Denote $I_a^b = (a,a+1, \ldots, b-1, b)$ for $a \le b$ and let $I_a^b = ()$ be the empty sequence for $a > b$.
+    The set of {\bf $\kappa$-sequences} is
+    \[
+        \Lambda_1 \{ () \} \mspc{and by concatenation}{20} \Lambda_{n+1} = \{ I_1^n, \ldots, I_n^n, I_{n+1}^n \}.\Lambda_n \,.
+    \]
+    For a $\kappa$-sequence $I = (i_1, \ldots, i_k)$ we set
+    \[
+        \kappa_I = \mueta_{i_1} \circ \ldots \circ \mueta_{i_k} \,.
+    \]
+\end{defi}
+
+\begin{lem}
+    \label{cellular_models:ehrenfried:formula_for_kappa}
+    The map $\kappa$ is the alternating sum of all $\kappa$-sequences:
+    \[
+        \kappa_h = \sum_{(i_1, \ldots, i_k) \in \Lambda_h} (-1)^k \kappa_{(i_1, \ldots, i_k)} \,.
+    \]
+\end{lem}
+
+\begin{proof}
+    By Definition \ref{cellular_models:ehrenfried:definition_kappa}
+    \[
+        \kappa_h = \prod_{q=1}^h \left( \sum_{j=1}^q (-1)^{q-j} (\mueta_j \circ \ldots \circ \mueta_{q-1}) \right) \,.
+    \]
+    We proof the equality by induction on $h$.
+    For $h = 1$, it is readily verified.
+    
+    To proof the induction step $h \mapsto h+1$ let $\mathcal I = \{ I_1^h, \ldots, I_h^h, I_{h+1}^h \}$.
+    Then
+    \begin{align}
+        \kappa_{h+1}
+            &= \left( \sum_{j=1}^{h+1} (-1)^{h+1-j} (\mueta_j \circ \ldots \circ \mueta_h) \right) \circ \prod_{q=1}^{h} \left( \sum_{j=1}^q (-1)^{q-j} (\mueta_j \circ \ldots \circ \mueta_{q-1}) \right) \\
+            &= \left( \sum_{(i_1, \ldots, i_j) \in \mathcal I} (-1)^{j} \kappa_{(i_1, \ldots, i_j)} \right) \circ \left( \sum_{(i_1, \ldots, i_k) \in \Lambda_h} (-1)^k \kappa_{(i_1, \ldots, i_k)} \right) \\
+            \intertext{and composing maps yields}
+            &= \sum_{(i_1, \ldots, i_k) \in \mathcal I .\Lambda_h} (-1)^k \kappa_{(i_1, \ldots, i_k)}
+    \end{align}
+    which is the desired result.
+\end{proof}
+
+To avoid unneccessary computations in later discussions, we need simple way to detect the cases when $d''_i(\Sigma)$ is degenerate for cells $\Sigma \in \E$ of the Ehrenfried complex.
+The next proposition will aid us many times.
+
+\begin{prop}
+\label{cellular_models:ehrenfried:cor_d_hor_deg}
+Let $\Sigma \in P(h,m;r_1, \ldots, r_n)_{p,h}$ be a non-degenerate top dimensional cell and $\ul 1_k \le i < \ul p_k$.
+The $i\Th$ horizontal face of $\Sigma$ is degenerate if and only if there exists $1 \le j \le h$ with
+\[
+    \tau_j = (i\ \sigma_{j-1}(i)) \mspc{or}{20} \sigma_j(i) = i \,.
+\]
+\end{prop}
+\begin{proof}
+Denote the $i\Th$ face of $\Sigma = \inhom$ by $\tilde \Sigma = \inhom[\tilde\tau]$.
+By Proposition \ref{cellular_models:parallel:prop_dh}, we have $\tilde\tau_j = D_i(\tau_j \cdot ( i\ \sigma_{j-1}(i))$ for all $j$.
+
+If there exists $1 \le j \le h$ with (1) $\tau_j = (i\ \sigma_{j-1}(i))$, then $\tilde\tau_j = 1$ and $\tilde\Sigma$ is degenerate.
+If (2) $\sigma_j(i) = i$, then let us assume that $j$ is maximal with this property, i.e.\ either $j = h$ or $j < h$.
+Therefore, we either collapse a puncture of $\Sigma$ which makes $\tilde\Sigma$ degenerate or we have $\tau_{j+1}(i)\neq i$ thus $\tilde\tau_{j+1} = D_i(\tau) = 1$ which shows that $\tilde\Sigma$ is again degenerate.
+
+Conversely, if there is no such $j$ we conclude that all $\tilde\tau_j$ are non-trivial and $\tilde\Sigma$ has the same number of punctures as $\Sigma$.
+The result follows from the non-degeneracy of $\Sigma$.
+\end{proof}

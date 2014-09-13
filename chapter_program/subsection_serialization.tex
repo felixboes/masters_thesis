@@ -1,0 +1,100 @@
+\subsection{Serialization [B]}
+\label{program:kappa:serialization}
+
+The transformation of data and objects of a running computer program into storable information (which can be saved on a hard disk) is called serialization.
+In our project, we want to generate basis elements and differentials to save them for later use, i.e.\ we want to serialize them.
+Therefore, we provide the general purpose template functions
+\begin{lstlisting}
+template < class StorableType >
+void save_to_file_bz2
+    ( StorableType& t, std::string filename, bool print_duration=true );
+\end{lstlisting}
+and
+\begin{lstlisting}
+template < class StorableType >
+void load_from_file_bz2
+    ( StorableType& t, std::string filename, bool print_duration=true);
+\end{lstlisting}
+Both functions, use the \progname{bzip2} algorithm for fast file compresseion, so we produce much smaller files.
+
+\subsubsection{Storable Types [B]}
+A type can be handled by the above template functions, if
+it is defined by the \cppeleven\ standard (such as \progclass{int} or \progclass{std}::\progclass{vector}\progname{<} \progclass{char} \progname{>}) or the {\bf boost \cpp library}.
+Otherwise your class has to meet the following conditions.
+First of all, it has to be a friend of \progclass{boost}\progname{::}\progclass{serialization}\progname{::}\progclass{access}, i.e.\ its class description includes the following line.
+\begin{lstlisting}
+class my_class
+{
+    ...
+    friend class boost::serialization::access;
+    ...
+};
+\end{lstlisting}
+There are two ways of proceeding from here.
+Most commonly, the process of saving and loading is the same.
+In this situation one defines the template member function
+\begin{lstlisting}
+template < class Archive >
+void serialize( Archive &ar, const unsigned int version );
+\end{lstlisting}
+whereas the template parameter \progclass{Archive} is filled in by {\bf boost} (and you do not need to know what it is).
+Now saving and loading is achieved via the binary operator \progname{\&} applied to \progname{ar} and every member variable we want to save and load.
+In the example below, we tell the serialization function, to save and load two out of three member variables.
+\begin{lstlisting}
+class my_class
+{
+    ...
+    int keep_this;
+    int this_is_also_important;
+    int useless;
+    
+    friend class boost::serialization::access;
+    template < class Archive >
+    void serialize( Archive &ar, const unsigned int )
+    {
+        ar & keep_this;
+        ar & this_is_also_important;
+    }
+};
+\end{lstlisting}
+
+There are rare situations, in which a saving mechanism differs from its loading counter part.
+Then one has to implement the function
+\begin{lstlisting}
+template< class Archive >
+void save( Archive & ar, const unsigned int version ) const;
+\end{lstlisting}
+and its counter part
+\begin{lstlisting}
+template< class Archive >
+void load( Archive & ar, const unsigned int version );
+\end{lstlisting}
+and one has to tell {\bf boost} to use these two functions by calling the macro
+\begin{lstlisting}
+BOOST_SERIALIZATION_SPLIT_MEMBER()
+\end{lstlisting}
+afterwards. A simple example could look like this.
+\begin{lstlisting}
+class my_class
+{
+    ...
+    int keep_this;
+    int this_is_also_important;
+    int useless;
+    
+    friend class boost::serialization::access;
+    template< class Archive >
+    void save( Archive & ar, const unsigned int ) const
+    {
+        ar & keep_this & this_is_also_important;
+    }
+    template< class Archive >
+    void load( Archive & ar, const unsigned int )
+    {
+        ar & keep_this & this_is_also_important;
+        useless=0;
+    }
+    BOOST_SERIALIZATION_SPLIT_MEMBER()
+};
+\end{lstlisting}
+For more information one should consider the online manual of \cite{boost}.

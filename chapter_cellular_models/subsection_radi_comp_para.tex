@@ -1,0 +1,244 @@
+\section{Comparison of the Parallel and Radial Models [B,H]}
+
+{\bf [H]} We now want to relate the moduli spaces $\Modspc$ and $\ModspcRad$.
+The most important, well-known fact about their correlation is
+
+\begin{prop}
+    \label{cellular_models:comparision_of_the_models:bundles_are_h_equiv}
+    The moduli spaces $\Modspc$ and $\ModspcRad$ are homotopy equivalent.
+\end{prop}
+
+In particular, the homology of the two spaces coincides.
+In the remaining part of this section, we will construct maps from one kind of these moduli spaces into the other
+or, equivalently, maps between the corresponding bundles $\Harm[(r_1, \dotsc, r_n)]$ and $\HarmRad$ or between the spaces $\Par_{g, n}^m[(r_1, \dotsc, r_n)]$ and $\Rad$ of parallel and radial slit domains.
+
+\subsection{Parallelization [B,H]}
+\label{cellular_parallelization}
+
+{\bf [B]} Consider a surface $F$ with $m$ permutable outgoing boundary curves and $n$ marked incoming boundary curves with a potential function $u$.
+For each outgoing boundary component $C^+_j$, we glue in a disc $D^+_j$ and declare its origin as a logarithmic sink of $u$.
+For each incoming boundary component $C^-_i$, we glue in a disc $D^-_i$ and declare at its origin
+\begin{enumerate}
+    \item a tangent vector $X_i$ pointing towards the marked point on $C^-_i$ and
+    \item a pole of order $r_i$ respecting the tangent vector $X_i$.
+\end{enumerate}
+We sketch this in Figure \ref{cellular_models:comparision_of_the_models:glueing_caps}.
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{\columnwidth}
+    \input{pictures/gluing_caps.pdf_tex}
+    \caption{\label{cellular_models:comparision_of_the_models:glueing_caps}{Three examples of extending the potential $u$.
+        The tangent vector is colored black, the marked point is green and the flow lines of $u$ are light blue.}}
+\end{figure}
+Note that the number of stagnation points in $D^-_i$ is exactly $r_i$.
+We obtain a surface $F'$ with $m$ permutable punctures and $n$ poles with tangent vectors attached.
+Thus, we have constructed a map
+\[
+ \parmap \colon \HarmRad \to \Harmr\,.
+\]
+
+{\bf [H]} On moduli spaces, this construction can be viewed as in Figure \ref{cellular_parallelization_on_modspc}.
+\begin{figure}[ht]
+\centering
+\def\svgwidth{0.8\columnwidth}
+\input{pictures/cellular_parallelization_on_modspc.pdf_tex}
+\caption{\label{cellular_parallelization_on_modspc} The parallelization map applied to a surface.}
+\end{figure}
+We simply declare the incoming boundary curves of a surface $F \in \ModspcRad$ as boundary curves of a resulting surface $F'$.
+Outgoing boundary curves are transformed into punctures by glueing half-open cylinders onto them.
+Thus we also have described the parallelization map 
+\[
+  \parmap \colon \ModspcRad \to \Modspc
+\]
+on moduli spaces.
+
+From Figure \ref{cellular_models:comparision_of_the_models:glueing_caps}, we can also read off how to realize the parallelization map on the spaces of slit domains.
+Consider a radial slit domain $A$ corresponding to a surface $F \in \HarmRad$,
+where the slits reside on $n$ annuli $\A_1, \dotsc, \A_n$.
+Let an ordered partition $r = r_1 + \dotsb + r_n$ be given, with $r_i \geq 1$ for all $i$. 
+We want to transform $A$ into a parallel slit domain on $r$ levels.
+
+Concentrate on a single annulus $\A_i$.
+Since the inner boundary of $\A_i$ corresponds to an inner boundary curve $C^-_i$, 
+we have to imitate the process of glueing a pole of order $r_i$ to $C^-_i$.
+Similar to what is happening to the critical graph on the surface, we split up the annulus $\A_i$ into $r_i$ segments,
+ordered cyclically, starting at the marked point of $A$ on the real horizontal line.
+Each of the segments is mapped onto one level of the arising parallel slit domain as in Figure \ref{cellular_parallelization_on_complexes}.
+\begin{figure}[ht]
+\centering
+\incgfx{pictures/cellular_parallelization_on_complexes}
+\caption{\label{cellular_parallelization_on_complexes} The parallelization map applied to a radial slit domain on one level, with $r = 3$.}
+\end{figure}
+Here, we choose to map all endpoints of slits into the unit square, and scale all distances between slits the same way they were scaled in the segment of the annulus before.
+The levels are ordered at first by the number of the boundary curve, 
+and among those levels corresponding to the same boundary curve by the cyclic ordering of the segments on the annulus $\A_i$.
+
+Now it remains to preserve the information that the segments on the $i\Th$ annulus have to be glued together cyclically.
+Thus, we insert a new pair of slits between the levels corresponding to each two neighboring segments,
+and these slits have to be longer than any of the other slits.
+Compare again Figure \ref{cellular_parallelization_on_complexes},
+and note that the insertion of the new slits corresponds to the insertion of stagnation points in Figure \ref{cellular_models:comparision_of_the_models:glueing_caps}.
+
+\begin{rem}
+ It does not matter where exactly the segments of one annulus are seperated from each other
+ since on the resulting parallel slit domain, the slits of neighboring segments can jump over the newly inserted pairs of slits. 
+\end{rem}
+
+This completes the description of the parallelization map 
+\[
+   \parmap \colon \Rad \to \Parr
+\]
+in terms of radial slit pictures.
+Altogether, we obtain
+
+\begin{defi}
+   There is a map 
+   \[
+      \parmap \colon \ModspcRad \to \Modspc
+   \]
+   called the \textbf{parallelization map}, which is described by the above process.
+   The parallelization map can also be expressed on the corresponding bundles and slit domains.
+\end{defi}
+
+In the special cases when $n = 1$ or $m = 1$, the parallelization map factors through the space $\Par_{g, n}^{m, 1} [1, \dotsc, 1]$ of parallel slit domains with one distinguished puncture.
+On parallel slit pictures, these punctures that are touched by the new slits are distinguished.
+When $n = 1$, this defines a single puncture; when $m = 1$, there is only one puncture anyway.
+Note that, when $n > 1$ and $m > 1$, it is possible that this description defines an arbitrary number $t$ of $1 \leq t \leq \min(n, m)$ puncture.
+In general, we can therefore not determine a number of distinguished punctures for parallelized radial slit domain which is independent of the slits.
+
+\begin{prop}\label{par_factors}
+   Let $n = 1$ or $m = 1$.
+   Then the parallelization map factors through the space $\Par_{g, n}^{m, 1}[(1, \dotsc, 1)]$ as in the following diagram:
+   \[
+    \begin{tikzcd}
+	\Rad \arrow{rr}{\parmap} \arrow{rd}{\parmap^{1}} &                     & \Par_{g, n}^{m}[(1, \dotsc, 1)] \\
+	                     &  \arrow{ru} \Par_{g, n}^{m, 1}[(1, \dotsc, 1)]&
+    \end{tikzcd}
+   \]
+   Here, the map $\parmap^{1} \colon \Rad \to \Par_{g, n}^{m, 1}[(1, \dotsc, 1)]$ is defined as the factorization of the parallelization map through $\Par_{g, n}^{m, 1}[(1, \dotsc, 1)]$,
+   and the unnamed map forgets that one of the punctures is distinguished.
+\end{prop}
+
+\subsection{Radialization [H]}
+\label{cellular_radialization}
+
+The resembling descriptions of the parallel and radial multicomplex suggest a simple map from $\Modspc$ to $\ModspcRadm[m+n]$.
+To see this, remember that a non-degenerate parallel cell $\Sigma = \homogq$ of bidegree $(p, q)$ can also be viewed as a non-degenerate radial cell $\Sigma$ of bidegree $(p, q)$ 
+(see Definition \ref{cellular_models:radial:cells_in_homogenous_notation}).
+Recall that, in the parallel case, the parameter $m(\Sigma)$ equals the number of cycles of $\sigma_q$ subtracted by the number $n$ of boundaries of $\Sigma$, 
+and in the radial case, it equals the number of cycles of $\sigma_q$.
+Hence, the parameter $m(\Sigma)$ increases by $n$ during the transformation of $\Sigma$ from a parallel to a radial cell.
+Note that if $r$ is the number of levels of $\Sigma$, the number of levels of the radial version of $\Sigma$ also is $r$.
+
+Unfortunately, this map $P(g, m, n; r) \to R(g, m + n, r)\,,\ \Sigma \mapsto \Sigma$, is not cellular. 
+Considering for example the cell 
+\[ 
+   \Sigma = (((\ul 2 \ \ul 0) (\ul 1)) : (\ul 0 \ \ul 1 \ \ul 2)) \in P(1, 1; 1) \,,
+\]
+we see that the $2\nd$ horizontal boundary of $\Sigma$ is 
+\[
+   \Sigma' = ((\ul 1) (\ul 0) : (\ul 0 \ \ul 1))\,.
+\]
+This cell is not an inner cell of the parallel slit complex since $\sigma'_1 = (\ul 1)(\ul 0)$ does not map the symbol $\ul 1$ to $\ul 0$.
+But in the radial slit complex, $\Sigma'$ is even non-degenerate.
+
+We still can realize the desired map in terms of slit pictures as in Figure \ref{cellular_radialization_on_complexes}.
+\begin{figure}[ht]
+\centering
+\incgfx{pictures/cellular_radialization_on_complexes}
+\caption{\label{cellular_radialization_on_complexes} The radialization map applied to a parallel slit domain on one level}
+\end{figure}
+Let $L \in \Parr$ be a parallel slit domain on $r$ levels.
+For the $i\Th$ such level, we embed the $i\Th$ copy of the complex plane belonging to the parallel slit picture into an annulus $\A_i \subset \C$ with inner radius $c_i$ and outer radius $1$.
+Thereby, the ends of the slits are put into the interior of the annulus.
+In the picture, the slits all lie in the shaded region.
+In the parallel slit picture, the slits run infinitely to the left, and in the resulting radial slit picture, they run towards the outer boundary of the annulus.
+Note that no slit is put onto the real horizontal line of the annulus.
+
+Tracing the relevant clipping of the levels of the parallel slit picture (e.g. in Figure \ref{cellular_radialization_on_complexes}) indicates how to describe the radialization map in terms of moduli spaces.
+So let $F \in \Modspc$ be a surface with permutable punctures and numbered boundary curves.
+The punctures of $F$ can be read off from the left border of the relevant clipping.
+Thus, the punctures of $F$ are adopted as outgoing boundary curves during radialization.
+In the pictures, there is a bold line indicating what happens to the part of a boundary curve belonging to the relevant clipping of $A$ on one level.
+When $A$ is transformed into a radial slit domain, the boundary curve is spit up into to pieces; 
+the inner boundary of the annulus and portions of the outer boundary.
+Note that, when the boundary curve belongs to more than one level, we obtain inner boundary curves for each of the levels, but only one outcoming boundary curve for the whole boundary curve. 
+
+Thus, we obtain 
+
+\begin{defi}
+ There is a map
+ \[
+    \radmap \colon \Modspc \to \ModspcRadm[m+n]\,,
+ \]
+ which shall be called \textbf{radialization map}.
+ There are realizations of the radialization on slit pictures and on bundles.
+\end{defi}
+
+On moduli spaces, the radialization map can be described like in Figure \ref{cellular_radialization_on_modspc}.
+\begin{figure}[ht]
+\centering
+\def\svgwidth{0.95\columnwidth}
+\input{pictures/cellular_radialization_on_modspc.pdf_tex}
+\caption{\label{cellular_radialization_on_modspc} The radialization map applied to a surface.}
+\end{figure}
+The punctures are transformed into outgoing boundary curves by cutting out small disks around them.
+Onto each boundary curve, we glue a pair of pants with one outgoing and one incoming boundary.
+
+We have already seen how to construct the radialization map
+\[
+    \radmap \colon \Parr \to \Radt_{g}(m+n,r)
+\]
+on the niveau of slit domains.
+Thus, it remains to express it via bundles.
+So let $F \in \Harm$ be a surface with punctures, poles, tangent vectors and a gradient flow.
+We describe the radialization as a map
+\[
+   \radmap \colon \Harm \to \mathfrak H^\bullet_{g}(m + n, r)\,.
+\]
+Here, we also cut out small disks around the punctures and immediately obtain outgoing boundary curves instead.
+This reverses the process displayed in Figure \ref{cellular_models:comparision_of_the_models:glueing_caps},
+but only for the punctures, not for the poles.
+We have already understood how we have to alter the gradient flow around each pole. 
+We want to glue in an outgoing boundary curve around the pole and, for each basin of the pole, an incoming boundary curve
+such that the gradient flow remains the same outside an excerpt around the pole.
+Figure \ref{cellular_radialization_on_bundles_3} shows how this is achieved for the pole of order $3$ visible in Figure \ref{cellular_models:comparision_of_the_models:glueing_caps}.
+\begin{figure}[ht]
+\centering
+\def\svgwidth{0.7\columnwidth}
+\input{pictures/cellular_radialization_on_bundles_3.pdf_tex}
+\caption{\label{cellular_radialization_on_bundles_3} Transforming a pole of order $3$ into one outgoing and three incoming boundary curves.}
+\end{figure}
+
+In the special cases when $n = 1$ or $m = 1$, Proposition \ref{par_factors} yields the following
+
+\begin{prop}
+   If $n = 1$ or $m = 1$, the radialization map is split injective and hence induces a split injective map 
+   \[
+      \radmap_* \colon H_*(\Modspc[n]) \to H_*(\ModspcRadm[m+n])
+   \]
+on homology.
+\begin{proof}
+   Choose $r = n = 1 + \dotsb + 1$ the trivial partition.
+   Consider the composition 
+   \[
+      \Part_{g, n}^m[(1, \dotsc, 1)] \xr{\radmap} \Radt(g, m+n, n) \xr{\parmap^{1}} \Part_{g, n}^{m+n}{1}[(1, \dotsc, 1)] \xr{\text{forget}} \Part_{g, n}^m[(1, \dotsc, 1)] 
+   \]
+   of the radialization map with the parallelization map from Proposition \ref{par_factors} and the forgetful map that forgets the distinguished puncture.
+   In Figure \ref{cellular_rad_is_split}, we see that this composition is the identity.
+   This proves the claim.
+   
+   \begin{figure}[ht]
+   \centering
+   \incgfx{pictures/cellular_rad_is_split}
+   \caption{\label{cellular_rad_is_split}The parallel slit picture $A$ and its radialization $\radmap(A)$.}
+   \vspace{1cm}
+   \incgfx{pictures/cellular_rad_is_split_2}
+   \caption{\label{cellular_rad_is_split_2}The parallel slit pictures $\parmap(\radmap(A))$ and $\text{forget}(\parmap(\radmap(A))) = A$.}
+   \end{figure}
+
+\end{proof}
+\end{prop}
+
+Note that we have to set $r = n$ in the preceding proof since the radialization map always yields a radial slit picture with $r$ annuli.
+In Corollary \ref{cor_rad_injective}, we will be able to show the statement for arbitrary $m$ and $n$.

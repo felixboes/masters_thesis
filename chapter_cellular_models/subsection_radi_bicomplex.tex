@@ -1,0 +1,47 @@
+\subsection{The Radial Slit Complex [H]}
+\label{cellular_models:radial:bisimplicial_complex}
+\index{parallel slit complex}
+\index{cell!degenerate}
+\index{cell!non-degenerate}
+Write $h = 2 g - 2 + m + n$. 
+We are finally able to introduce the \textbf{radial slit complex}, a relative finite multisimplicial complex $(R, R')$, 
+whose homology is just the homology of the moduli space $\ModspcRad$.
+As a first step, define a complex $R = R(g, m, n)$ with possibly non-zero modules $\overline R_{p, q}$ in bidegree $(p, q)$ for each $1 \leq p \leq 2 h$ and $1 \leq q \leq h$.
+Similar to the parallel case, the module $R_{p, q}$ is freely generated over $\Z$ by all those radial cells $\Sigma = (\sigma_q, \dotsc, \sigma_0)$ of bidegree $(p, q)$ with
+\begin{enumerate}
+\item $N(\Sigma) \leq h$,
+\item $m(\Sigma) \leq m$,
+\item $n(\Sigma) \leq n$.
+\end{enumerate}
+
+A cell $\Sigma \in R_{p, q}$ is called \textbf{non-degenerate} with respect to $\ModspcRad$
+if it is a connected inner radial cell that fulfills each of the above conditions with equality.
+All other cells in $R_{p, q}$ are called \textbf{degenerate}.
+
+As in the parallel case, the vertical respectively horizontal boundary operator of a radial cell in $R$ is given by the alternating sum of its horizontal respectively vertical faces.
+Again, faces of degenerate radial cells and the $0\Th$ vertical face of a non-degenerate radial cell are always degenerate.
+But now the $\ul 0_k\Th$ and $\ul p_k\Th$ horizontal face of a radial cell $\Sigma$ is not necessarily degenerate 
+since the condition that all $\ul p_k$ have to be mapped to $\ul 0_k$ by each $\sigma_q$ is dropped for radial cells.
+
+By construction, we have
+
+\begin{thm}
+   The radial slit complex $R$ is a semi-multisimplicial complex and the degenerate cells consitute a subcomplex $R'$.
+   The space of radial slit domains $\Rad$ is the complement of $|R'|$ inside $|R|$.
+\end{thm}
+
+As in the parallel case, we have reviewed the Hilbert uniformization
+\[
+   \mathcal H \colon \HarmRad \xhr{} |R| \,,
+\]
+for which the restriction to $\Rad = |R| - |R'|$ is a homoeomorphism due to \cite{Boedigheimer2006}.
+Summarizing, we obtain
+\begin{thm}
+   The space of radial slit domains $\Rad = |R| - |R'|$ is a manifold of dimension $3h + n$ in the finite, semi-multisimplical complex $(P,P')$.
+   So by Poincaré duality
+    \[
+       H_\ast( \ModspcRad; \mathbb Z ) = H_\ast( \Rad; \mathbb Z ) \cong H^{3h+n-\ast}( R, R'; \mathcal O)\,,
+    \]
+    where $\mathcal O$ are the orientation coefficients.
+\end{thm}
+

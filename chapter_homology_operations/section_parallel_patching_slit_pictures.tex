@@ -1,0 +1,375 @@
+\section{Operations on \texorpdfstring{$\Par_1$}{Par1} by Patching Slit Pictures [B]}
+\label{homology_operations:parallel_patching_slit_pics}
+In this section, we review some of the homology operations provided by \cite{Boedigheimer19902}.
+They are defined on the space of all parallel slit domains on exactly one level.
+\label{page:shorthand_par_1}%
+\symbolindex[p]{$\Par_{g,n}^m$}{A shorthand for $\Par_{g,n}^m[(1)]$.}{Page \pageref{page:shorthand_par_1}}
+\symbolindex[p]{$\Par_1$}{A shorthand for $\coprod_{g,m}\Par_{g,1}^m$.}{Page \pageref{page:shorthand_par_1}}
+In order to make the notation more compact, we write $\Par^m_{g,1} = \Par^m_{g,1}[(1)]$ and $\Par_1 = \coprod_{g,m} \Par^m_{g,1}$.
+\index{operad}
+\index{operad!little cubes operad}
+The mentioned homology operations on $\Par_1$ are induced by the action of a little cubes operad, namely of the ordered configuration spaces of the complex plane.
+The precise background on little cubes operads can be found in \cite{May1972}.
+
+\label{page:configuration_space_cplx_plane}%
+\index{configuration space}
+\symbolindex[c]{$\cspc k (\C)$ resp.\ $C^k(\C)$}{The ordered respectively unordered configuration space of the complex plane.}{Page \pageref{page:configuration_space_cplx_plane}}
+The $k\Th$ ordered configuration space of the complex plane is
+\[
+    \cspc k = \cspc k (\C) = \{ ( z_1, \ldots, z_k) \in \C^k \mid z_i \neq z_j \mspc{for}{5} i\neq j\}
+\]
+where the trivial configuration $() \in \cspc 0$ is seen as the origin of the complex plane.
+\label{page:operad_theta}%
+\symbolindex[t]{$\theta$}{Equips $\big( \cspc k(\C) \big)_{k \ge 0}$ with the structure of a little cubes operad.}{Page \pageref{page:operad_theta}}
+Recall that the family of all configuration spaces $\big( \cspc k(\C) \big)_{k \ge 0}$ constitutes an operad as follows:
+For a configuration $z = (z_1, \ldots, z_l) \in \cspc l$ and configurations $x^{(1)} \in \cspc{k_1}, \ldots, x^{(l)} \in \cspc{k_l}$,
+we continuously choose $l$ paraxial disjoint squares of the same size centred at the points $z_1, \ldots, z_l$,
+in which we insert the configurations $x^{(1)}, \ldots, x^{(l)}$.
+This yields a configuration $\theta(z, x^{(1)}, \ldots, x^{(l)})$ in $\cspc{k_1 + \ldots + k_l}$ (see Figure \ref{homology_operations:parallel_patching_slit_pics:the_configuration_space_is_an_operad}).
+\label{page:operad_unit}%
+\symbolindex[1]{$\Eins$}{The unit of the little cubes operad $\big( \cspc k(\C) \big)_{k \ge 0}$.}{Page \pageref{page:operad_unit}}
+The trivial configuration is seen as the origin of the complex plane and therefore serves as identity $\Eins$.
+Moreover, we have a canonical associativity law.
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{.8\columnwidth}
+    \input{pictures/the_configuration_space_is_an_operad.pdf_tex}
+    \caption{\label{homology_operations:parallel_patching_slit_pics:the_configuration_space_is_an_operad}The configuration spaces $\cspc k(\C)$ define a little cubes operad.}
+\end{figure}
+
+Let us review the action of this little cube operad on the disjoint union $\Par_1 = \coprod_{g,m} \Par^m_{g,1}$ of all parallel slit domains with one boundary curve by defining
+\[
+    \tilde\vartheta \colon \cspc k \times \Par_{g_1,1}^{m_1} \times \ldots \times \Par_{g_k,1}^{m_k} \to \Par_{g,1}^m
+\]
+with $g = g_1 + \ldots + g_k$ and $m = m_1 + \ldots + m_k$.
+Consider $(z_1, \ldots, z_k) \in \cspc k$ at which we want to place given slit pictures $L_1, \ldots, L_k$.
+In the naive approach, we continuously choose $k$ disjoint, paraxial squares of equal size $B_i$ with center $z_i$ in which we want to patch $L_1, \ldots, L_k$, but
+the insertion of a single slit picture implies the removal of certain slits and the introduction of glueing information.
+Ignoring this fact, we may produce degenerate slit configurations, compare Figure \ref{homology_operations:parallel_patching_slit_pics:action_of_the_little_cube_operad_naive}.
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{.4\columnwidth}
+    \input{pictures/action_of_the_little_cube_operad_naive.pdf_tex}
+    \caption{\label{homology_operations:parallel_patching_slit_pics:action_of_the_little_cube_operad_naive}The naive / wrong definition of the action of the little cubes operad
+        does not respect the introduced slits.}
+\end{figure}
+In order to obtain non-degenerate slit pictures, we have to alter our approach.
+The geometric idea is to insert the squares from the rightmost point $z_{j_1}$ to to the leftmost point $z_{j_k}$ one after another, by
+letting the box $B_i$ float vertically from a point near infinity down to $x_i + \sqrt{-1}\cdot y_i$ while jumping through all slits it passes.
+We picture this process for $k=2$ in Figure \ref{homology_operations:parallel_patching_slit_pics:action_of_the_little_cube_operad}.
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{.5\columnwidth}
+    \input{pictures/action_of_the_little_cube_operad.pdf_tex}
+    \caption{\label{homology_operations:parallel_patching_slit_pics:action_of_the_little_cube_operad}The appropriate definition of the action of the little cubes operad.}
+\end{figure}
+
+From the geometric viewpoint, this is clearly an action of the little cubes operad; the details are discussed in \cite[Section 3]{Boedigheimer19902}.
+\begin{thm}[{\cite[Theorem 3.6.2]{Boedigheimer19902}}]
+    \label{homology_operations:thm_action_of_the_little_cube_operad}
+    \symbolindex[t]{$\tilde\vartheta$}{The action of the little cubes operad.}{Theorem \ref{homology_operations:thm_action_of_the_little_cube_operad}}
+    \symbolindex[t]{$\vartheta$}{The action of the little cubes operad by the equivariant action of the symmetric group.}{Theorem \ref{homology_operations:thm_action_of_the_little_cube_operad}}
+    There are operations
+    \[
+        \tilde\vartheta \colon \cspc k \times \Par_{g_1,1}^{m_1} \times \ldots \times \Par_{g_k,1}^{m_k} \to \Par_{g,1}^m
+    \]
+    with the following properties.
+    \begin{enumerate}
+        \item (associativity)
+            The diagram
+            \[
+                \begin{tikzcd}[column sep=2cm]
+                    \cspc l \times (\cspc k \times \Par_{g_1,1}^{m_1} \times \ldots \times \Par_{g_k,1}^{m_k})^l    \arrow{r}{\id \times \tilde\vartheta^k} \arrow{d}{\theta \times \id}    & \cspc l \times (\Par_{g,1}^m)^l \arrow{d}{\tilde\vartheta}\\
+                    \cspc{lk} \times (\Par_{g_1,1}^{m_1} \times \ldots \times \Par_{g_k,1}^{m_k})^l                 \arrow{r}{\tilde\vartheta}                                              & \Par_{lg,1}^{lm}
+                \end{tikzcd}
+            \]
+            commutes for $g = g_1 + \ldots + g_k$ and $m = m_1 + \ldots + m_k$.
+        \item (equivariant associativity)
+            If in addition $g_1 = \ldots = g_k$ and $m_1 = \ldots = m_k$ holds,
+            then the above diagram commutes equivariantly with respect to permutations of the points in a given configuration in $\cspc k$ and 
+            permutations of the factors of $(\Par_{g,1}^{m})^k$.
+            In particular, dividing out the action of $\Symgrp^\times_k = Aut(\{ 1, \ldots,k \})$ defines operations
+            \[
+                \vartheta \colon \cspc k \times_{\Symgrp^\times_k} (\Par_{g,1}^m)^k \to \Par_{kg,1}^{km}
+            \]
+            such that the following diagram commutes
+            \[
+                \begin{tikzcd}[column sep=2cm]
+                    \cspc l \times_{\Symgrp^\times_l} (\cspc k \times_{\Symgrp^\times_k} (\Par_{g,1}^{m})^k)^l        \arrow{r}{\id \times \vartheta^k} \arrow{d}{\theta \times \id}    & \cspc l \times_{\Symgrp^\times_l} (\Par_{g,1}^m)^l \arrow{d}{\vartheta}\\
+                    \cspc{lk} \times_{\Symgrp^\times_lk} ((\Par_{g,1}^m)^k)^l                                         \arrow{r}{\vartheta}                                              & \Par_{lg,1}^{lm}
+                \end{tikzcd}
+            \]
+        \item (unity) 
+            The composition 
+            \[
+                \Par_1 \xr{\Eins \times \id} \cspc 1 \times \Par_1 \xr{\tilde\vartheta} \Par_1
+            \]
+            is homotopic to the identity.
+    \end{enumerate}
+\end{thm}
+
+\begin{defcor}
+    \label{homology_operations:parallel_patching_slit_pics:mu}
+    The restriction
+    \[
+        \mu = \tilde\vartheta|_{(-1 + i, 1 - i)} \colon \Par_1 \times \Par_1 \to \Par_1 \,,
+    \]
+    which places the first slit picture into the upper left and the second slit picture into the lower right (see Figure \ref{homology_operations:parallel_patching_slit_pics:tilde_v_0_applied}),
+    equips $\Par_1$ with the structure of an h-commutative, h-associativ, H-space which admits a two-sided h-unit, the trivial slit picture $ \emptyset$.
+\end{defcor}
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{.2\columnwidth}
+    \input{pictures/tilde_v_0_applied.pdf_tex}
+    \caption{\label{homology_operations:parallel_patching_slit_pics:tilde_v_0_applied}Patching two slit pictures into the complex plane via $\mu$.}
+\end{figure}
+\begin{proof}
+    By the above theorem, it remains to specify a homotopy which makes $\mu$ h-com\-mu\-ta\-tive.
+    In $\cspc 2$ we use some path joining the configurations $( -1 + i, 1 - i)$ and $( 1 - i, -1 + i)$, so
+    \[
+        \mu = \tilde\vartheta|_{(-1 + i, 1 - i)} \simeq \tilde\vartheta|_{(-1 + i, 1 - i)} = \mu \circ t
+    \]
+    with $t$ being the swapping map.
+\end{proof}
+
+\begin{defi}
+    \label{homology_operations:tilde_theta}
+    \symbolindex[t]{$\tilde\vartheta_\ast$}{The homology operation induced by $\tilde\vartheta$}{Definition \ref{homology_operations:tilde_theta}}
+    Using the homology cross product we obtain a family of homology operations
+    \[
+        \tilde\vartheta_\ast \colon H_s(\cspc k) \otimes H_{t_1}( \Par_{g_1,1}^{m_1} ) \otimes \ldots \otimes H_{t_k}(\Par_{g_k,1}^{m_k}) \to H_{s+t}(\Par_{g,1}^m)
+    \]
+    defined by
+    \[
+        \tilde v \otimes x_1 \otimes \ldots \otimes x_k \mapsto \tilde\vartheta_{\star}( \tilde v \otimes x_1 \otimes \ldots \otimes x_k)
+    \]
+    with $g = g_1 + \ldots + g_k$, $m = m_1 + \ldots + m_k$, $t = t_1 + \ldots + t_k$ and $\tilde\vartheta_{\star}$ the induced map in homology.
+\end{defi}
+
+\subsection{The Action of \texorpdfstring{$\cspc 2(\C)$}{C2C} on \texorpdfstring{$\Par_1$}{Par1} in Detail [B]}
+Throughout this thesis, we are mainly interested in the case $k=2$ and we remark that this is not an actual restriction:
+The configuration spaces $\cspc k(\C)$ serve as classifying spaces for the braid groups $B^k$ on $k$ strings whose homology is understood due to \cite{CohenLadaMay1976}.
+The inclusion into the braid group $B^\infty$ on infinitely many strings induces a monomorphism in homology and
+identifies the $p$-torsion $H_\ast(B^k;\mathbb Z / p\mathbb Z)$ with a sub-polynomial-algebra generated by infinitely many generators $a_1, \ldots, b_1, \ldots$,
+where each generator is identified with $a_j = Q_1^{j-1}(a_1)$ or $b_j = \beta a_{j+1}$
+with $a_1$ the distinguished generator in the first homology, $Q_1^k$ an iterated Dyer--Lashof operation and $\beta$ the Bockstein.
+The action of the Dyer-Lashof algebra is therefore determined by the action of $\cspc 2(\C)$.
+A more elaborate description of this fact can be found in the survey article \cite{Vershinin1998}.
+
+Note that the ordered configuration space $\cspc 2$ defines a canonical two-fold covering over the unordered configuration space $C^2$ and this
+covering map is homotopic (as a covering) to the well-known covering $\mathbb S^1 \to \mathbb RP^1$, by regarding the first point of an ordered configuration as (wandering) basepoint.
+\begin{defi}
+    \label{homology_operations:parallel_patching_slit_pics:generators_v}
+    \symbolindex[v]{$\tilde v_0$ and $\tilde v_1$}{The selected generators of $H_0(\cspc 2)$ and $H_1(\cspc 2)$}{Definition \ref{homology_operations:parallel_patching_slit_pics:generators_v}}
+    Under the above identification, we fix the generator $\tilde v_0 = [(-1 + i, 1 - i)] \in H_0(\cspc 2)$ and the generator $\tilde v_1 \in H_1(\cspc 2) = H_1(\mathbb S^1)$
+    which is represented by the identity map $\mathbb S^1 \to \mathbb S^1$, compare Figure \ref{homology_operations:parallel_patching_slit_pics:tilde_v_0_and_tilde_v_1}.
+\end{defi}
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{.2\columnwidth}
+    \input{pictures/tilde_v_0.pdf_tex}
+    \hspace{3cm}
+    \def\svgwidth{.2\columnwidth}
+    \input{pictures/tilde_v_1.pdf_tex}
+    \caption{\label{homology_operations:parallel_patching_slit_pics:tilde_v_0_and_tilde_v_1}The generators $\tilde v_0 \in H_0(\cspc 2)$ and $\tilde v_1 \in H_1(\cspc 2)$.}
+\end{figure}
+
+\begin{defcor}
+    \label{homology_operations:parallel_patching_slit_pics:pontryagin_product}
+    \index{Pontryagin product}
+    \symbolindex[2]{$\#$}{The Pontryagin product}{Definition / Corollary \ref{homology_operations:parallel_patching_slit_pics:pontryagin_product}}
+    The map $\mu$ defines the Pontryagin product
+    \[
+        H_s( \Par_1) \otimes H_t( \Par_1) \to H_{s+t}( \Par_1)
+    \]
+    denoted by
+    \[
+        x \otimes y \mapsto x \# y = \tilde\vartheta_\ast( \tilde v_0 \otimes x \otimes y )
+    \]
+    which equips $\bigoplus_\ast H_\ast( \Par_1)$ with the structure of a commutative, unital ring.
+\end{defcor}
+\begin{defi}
+    \label{homology_operations:parallel_patching_slit_pics:browder_operation}
+    \index{operation!Browder operation}
+    Using the distinguished homology class $\tilde v_1$, the Browder operation
+    \[
+        R_1 \colon H_s( \Par_1) \otimes H_t( \Par_1) \to H_{s+t+1}( \Par_1)
+    \]
+    is sketched in Figure \ref{homology_operations:parallel_patching_slit_pics:tilde_v_1_applied} and defined by
+    \[
+        R_1(x \otimes y) = \tilde\vartheta_\ast( \tilde v_1 \otimes x \otimes y ) \,.
+    \]
+\end{defi}
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{.2\columnwidth}
+    \input{pictures/tilde_v_1_applied.pdf_tex}
+    \caption{\label{homology_operations:parallel_patching_slit_pics:tilde_v_1_applied}We picture the Browder operation $R(x,y)$.}
+\end{figure}
+
+In order to define the Dyer--Lashof operations $Q_0$ and $Q_1$, we restrict ourselves either to homology classes $x$ in $\Par_1$ of even degree or to coefficients in the field $\mathbb F_2$.
+A direct computation shows that every chain $\tilde w$ in $\cspc 2 \simeq \mathbb S^1$ which projects to a cycle $w$ in the unordered configuration space $C^2 \simeq \mathbb RP^1$
+defines a cycle $\tilde w \otimes x \otimes x$ in $\cspc 2 \times_{\Symgrp^\times_2} (\Par_{g,1}^m \times \Par_{g,1}^m)$.
+\begin{defi}
+    Using the homology cross product we obtain a family of homology operations
+    \[
+        \vartheta_\ast \colon H_s(\cspc 2) \otimes H_t( \Par_{g,1}^m ) \to H_{s+2t}(\Par_{2g,1}^{2m})
+    \]
+    by
+    \[
+        w \otimes x \mapsto \vartheta_{\star}( \tilde w \otimes x \otimes x )
+    \]
+    with $\tilde w$ a chain in $\cspc 2$ which projects onto $w$ and $\vartheta_{\star}$ the induced map in homology.
+\end{defi}
+
+\begin{defi}
+    \label{homology_operations:parallel_patching_slit_pics:generators_w}
+    \symbolindex[w]{$\tilde w_0$ and $\tilde w_1$}{The selected chains in $\cspc 2$ which map to the selected generators of $H_0(C^2(\C))$ and $H_1(C^2(\C))$}{Definition \ref{homology_operations:parallel_patching_slit_pics:generators_w}}
+    We fix the chains $\tilde w_0$ respectively $\tilde w_1$ in $\cspc 2$ mapping to the distinguished non-vanishing classes in $H_0(C^2)$ respectively $H_1(C^2)$,
+    compare Figure \ref{homology_operations:parallel_patching_slit_pics:w_0_and_w_1}.
+\end{defi}
+
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{.2\columnwidth}
+    \input{pictures/tilde_w_0.pdf_tex}
+    \hspace{3cm}
+    \def\svgwidth{.2\columnwidth}
+    \input{pictures/tilde_w_1.pdf_tex}
+    \caption{\label{homology_operations:parallel_patching_slit_pics:w_0_and_w_1}The generators $w_0 \in H_0(C^2)$ and $w_1 \in H_1(C^2)$.}
+\end{figure}
+\begin{defi}
+    \label{homology_operations:parallel_patching_slit_pics:Q_0_and_Q_1}
+    \index{operations!Dyer--Lashof operations}
+    \symbolindex[q]{$Q_0$ and $Q_1$}{Dyer--Lashof operations of degree $0$ and $1$}{Definition \ref{homology_operations:parallel_patching_slit_pics:Q_0_and_Q_1}}
+    The Dyer--Lashof operations $Q_0$ and $Q_1$ are
+    \[
+        Q_0 \colon H_t( \Par_{g,1}^m ) \to H_{2t}(\Par_{2g,1}^{2m}) \mspc{with}{20} Q_0(x) = \vartheta_\ast( \tilde w_0 \otimes x \otimes x )
+    \]
+    and
+    \[
+        Q_1 \colon H_t( \Par_{g,1}^m ) \to H_{2t+1}(\Par_{2g,1}^{2m}) \mspc{with}{20} Q_1(x) = \vartheta_\ast( \tilde w_1 \otimes x \otimes x ) \,.
+    \]
+    They are sketched in Figure \ref{homology_operations:parallel_patching_slit_pics:w_0_and_w_1_applied}.
+\end{defi}
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{.2\columnwidth}
+    \input{pictures/tilde_w_0_applied.pdf_tex}
+    \hspace{3cm}
+    \def\svgwidth{.2\columnwidth}
+    \input{pictures/tilde_w_1_applied.pdf_tex}
+    \caption{\label{homology_operations:parallel_patching_slit_pics:w_0_and_w_1_applied}The Operations $Q_0$ and $Q_1$.}
+\end{figure}
+
+\subsection{Formulas for \texorpdfstring{$Q_0$}{Q0}, \texorpdfstring{$Q_1$}{Q1} and \texorpdfstring{$R_1$}{R1} [B]}
+In this subsection, we remind ourselves of well-known formulas for the Dyer--Lashof operations $Q_0$, $Q_1$ and $R_1$ which hold for coefficients in the field $\mathbb F_2$,
+see \cite[Pages 214--218]{CohenLadaMay1976} or \cite[Sections 4.3--4.5]{Boedigheimer19902}.
+
+\begin{prop}
+    The operations $Q_0$ satisfy
+    \begin{enumerate}
+        \item (squaring)
+            \[
+                Q_0(x) = x \# x = x^2\,,
+            \]
+        \item (linearity)
+            \[
+                Q_0(x+y) = Q_0(x) + Q_0(y) \,,
+            \]
+        \item (multiplicativity)
+            \[
+                Q_0(x \# y) = Q_0(x) \# Q_0(y) \,,
+            \]
+        \item (stability)
+            \[
+                Q_0(\rho x) = \rho^2( Q_0(x))
+            \]
+            for $\rho = (\psi\phi)_\ast$ the stabilization map on Page \pageref{page:stabilization_map},
+        \item (units)
+            \[
+                Q_0(1) = 1
+            \]
+            for the respectively units in $H_0( \Par_{g,1}^m )$ or $H_0(\Par_{2g,1}^{2m})$,
+        \item (Nishida relation)
+            \[
+                Sq_{2t}(Q_0(x)) = Q_0(Sq_t(x))
+            \]
+            and
+            \[
+                Sq_{2t+1}(Q_0(x)) = 0
+            \]
+            for $Sq_t$ the dual Steenrod squares.
+    \end{enumerate}
+\end{prop}
+
+\begin{prop}
+    The operations $Q_1$ are not in general additive and the Browder operations measure this defect.
+    They satisfy
+    \begin{enumerate}
+        \item (linearity)
+            \[
+                Q_1(x+y) = Q_1(x) + R_1(x,y) + Q_1(y) \,,
+            \]
+        \item (Cartan formula)
+            \[
+                Q_1(xy) = x^2Q_1(y) + xR_1(x,y)y + Q_1(y)y^2 \,,
+            \]
+        \item (nullification)
+            \[
+                Q_1(1) = 0
+            \]
+            for the unit in $H_0(\Par_{0,1}^m)$,
+        \item (Nishida relations)
+            \[
+                Sq_{2t}(Q_1(x)) = Q_1(Sq_t(x)) + \sum_{\stackrel{i+j=2t}{i<j}} R_1(Sq_i(x), Sq_j(x))
+            \]
+            and
+            \[
+                Sq_{2t+1}(Q_1(x)) = Q_0(Sq_t(x)) + \sum_{\stackrel{i+j=2t+1}{i<j}} R_1(Sq_i(x), Sq_j(x)) \,.
+            \]
+    \end{enumerate}
+\end{prop}
+
+\begin{prop}
+    The Browder operations $R_1$ satisfy
+    \begin{enumerate}
+        \item (commutativity)
+            \[
+                R_1(x,y) = R_1(y,x) \,,
+            \]
+        \item (unit)
+            \[
+                R_1(1,x) = 0 = R_1(x,1)
+            \]
+            for the unit in $H_0(\Par_{0,1}^m)$,
+        \item (nullification)
+            \[
+                R_1(x,x) = 0 \,,
+            \]
+        \item (Cartan formula)
+            \[
+                R_1(xy, x'y') = xR_1(y,x')y' + R_1(x,x')yy' + xx'R_1(y,y') + x'R_1(x,y')y' \,,
+            \]
+        \item (Jacobi identity)
+            \[
+                R_1(x, R_1(y,z)) + R_1(y, R_1(z,x)) + R_1(z, R_1(x,y)) = 0 \,,
+            \]
+        \item (Nishida relation)
+            \[
+                Sq_t(R_1(x,y)) = \sum_{i+j=t} R_1(Sq_i(x), Sq_j(x)) \,,
+            \]
+        \item (Bockstein relation)
+            \[
+                \beta R_1(x,y) = R_1(\beta x, y) + R_1(x, \beta y) \,,
+            \]
+        \item (Ádem relations)
+            \[
+                R_1(x, Q_0(y)) = 0 = R_1(Q_0(x),y)
+            \]
+            and
+            \[
+                R_1(x, Q_1(y)) = 0 = R_1(Q_1(x),y) \,.
+            \]
+    \end{enumerate}
+\end{prop}

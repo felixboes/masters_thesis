@@ -1,0 +1,155 @@
+\subsection{The Operation \texorpdfstring{$T$}{T} via the Dual Ehrenfried Complex [B]}
+In this subsection, we construct the operation $T$ in terms of the dual Ehrenfried complex.
+Geometrically speaking, we start with a combinatorial cell $\Sigma$ and have to introduce two new slits,
+one rotating in a puncture and the other on top of all other slits.
+In the algebraic model, there is no notion of rotating slits but it is easy to come up with the right definition.
+In order to reduce the cohomological degree of the resulting cell by one, we append every cell by a transposition $(\ul{p_r+1}_r\ c)$ with $c$ a symbol in a puncture.
+Using the geometric intuition of jumping slits and relevant $\kappa^\ast$-sequences, it is easy to see that we defined a coboundary map.
+
+\begin{defi}
+    \label{homology_operations:parallel_T:symbols_of_a_puncture}
+    \index{symbols of a puncture}
+    \symbolindex[p]{$\punc(\Sigma)$}{The symbols of the $m$ cycles of $\Sigma$ corresponding to the punctures.}{Definition \ref{homology_operations:parallel_T:symbols_of_a_puncture}}
+    Let $\Sigma = \inhom = \homog$ be a top dimensional, non-degenerate cell in $P(h,m; r_1, \ldots, r_n)$.
+    Denote the cycles of $\sigma_h$ that correspond to the $m$ punctures by $\alpha_1, \ldots, \alpha_m$.
+    The {\bf symbols corresponding to the punctures of $\Sigma$} are
+    \[
+        \punc(\Sigma) = \supp(\alpha_1, \ldots, \alpha_m) \,.
+    \]
+\end{defi}
+\begin{notation}
+    Since $T$ adds a new slit above all other slits, we obtain the ordered partition $p+1 = p_1 + \ldots + p_{r-1} + (p_r+1)$.
+    In particular, the largest symbol is $\ul{p_r+1}_r = p_r+1$.
+\end{notation}
+
+\begin{defi}
+    \label{homology_operations:parallel_T:defn_on_cells}
+    \symbolindex[t]{$T(\Sigma)$}{The homology operation $T$ of $\Sigma$ in terms of the dual Ehrenfried complex.}{Definition \ref{homology_operations:parallel_T:defn_on_cells}}
+    Then the operation $T$ is defined on generators $\Sigma \in \E^\ast$ by
+    \[
+        T(\Sigma) = \sum_{c \in \punc(\Sigma)} \Sigma_c 
+    \]
+    where
+    \[
+        \Sigma_c = \big(\ (\ul{p_r+1}_r\ c) \mid \tau_q \mid \ldots \mid \tau_1 \big) \,.
+    \]
+\end{defi}
+
+\begin{prop}
+    \label{homology_operations:parallel_T:T_is_a_cochain_map}
+    The operation $T$ defines a cochain map
+    \begin{multline*}
+        T \colon \E^{\ast+1}(h,m; r_1, \ldots, r_n) = \E^\ast(h,m; r_1, \ldots, r_n) \otimes \Z[1] \to\\
+        \E^\ast(h+1,m-1;r_1, \ldots, r_n) \,.
+    \end{multline*}
+\end{prop}
+
+\begin{lem}
+    \label{homology_operations:parallel_T:T_is_well_defined}
+    If $\Sigma$ is top dimensional, non-degenerate cell of bidegree $(p,h)$ in $P_{g,n}^m[(r_1, \ldots, r_n)]$, then
+    every term $\Sigma_c$ of $T(\Sigma)$ is a top dimensional, non-degenerate cell of bidegree $(p+1,h+1)$ in $P(h+1,m-1; r_1, \ldots, r_n)$.
+\end{lem}
+
+\begin{proof}
+    Consider $\Sigma = \inhom = \homog$ and let $\Sigma_c = (x_{h+1} \mid \ldots \mid x_1) = ( \sigma_c : \sigma_h : \ldots : \sigma_0)$ be a term of $T(\Sigma)$, i.e.\ 
+    $\Sigma_c = \big( (\ul{p_r+1}_r\ c)\mid \tau_q \mid \ldots \mid \tau_1 \big)$ and $\sigma_c = (\ul{p_r+1}_r\ c)\sigma_h$, with $c \in \punc(\Sigma)$.
+    
+    The following is evident:
+    $N(\Sigma_c) = N(\Sigma) + 1 = h+1$, $\Sigma_c$ is connected, the levels are ordered and there is neither $1 = x_i$ nor a common fixed point of $x_{q+1}, \ldots, x_1$.
+    From $\sigma_c = (\ul{p_r+1}_r\ c) \sigma_h$ and $\ul{p_r+1}_r \not\in \punc(\Sigma) \ni c$ we deduce
+    \[
+        n(\Sigma_c) = n(\Sigma) \mspc{and}{20} m(\Sigma_c) = m(\Sigma) - 1\,.
+    \]
+\end{proof}
+
+\begin{lem}
+    \label{homology_operations:parallel_T:T_commutes_with_del_pi}
+    We have
+    \[
+        T\del_\KK^\ast\pi^\ast = \del_\KK^\ast\pi^\ast T \,.
+    \]
+\end{lem}
+
+In order to prove the lemma, we use Proposition \ref{cellular_models:dual_ehrenfried:cob_tr_equals_cob} to show that every term in $T\del_\KK^\ast\pi^\ast(\Sigma)$ occures in $\del_\KK^\ast\pi^\ast T(\Sigma)$.
+Then, using Proposition \ref{cellular_models:dual_ehrenfried:cob_tr_equals_cob} again, the difference of both sums is zero.
+
+\begin{proof}
+    By Proposition \ref{cellular_models:dual_ehrenfried:cob_tr_equals_cob}, the terms of $\del_\KK^\ast \pi^\ast(\Sigma)$ correspond bijectively to all coboundary traces of $\Sigma$.
+    Applying $T$, every term $x$ of $T\del_\KK^\ast \pi^\ast(\Sigma)$ is identified with an $i\Th$ coboundary trace $a = a(x)$ and a symbol $c = c(x)$ corresponding to one of the punctures of $a.\Sigma$.
+    
+    If $c \neq i$, we identify $x$ with the term $\tilde a .\Sigma_{\tilde c}$, where $\tilde c = d_i^\Delta(c)$ and $\tilde a$ is the $i\Th$ coboundary trace of $\Sigma_{\tilde c}$ with
+    \begin{align}
+        \label{homology_operations:parallel_T:T_commutes_with_del_pi:c_neq_i}
+        \tilde a_j = \begin{cases} a_j & j \le h \\ (\ul{p_r+1}_r\ c)(a_h) & j = h+1 \end{cases}
+    \end{align}
+    as both $\tilde a \in T_i(\Sigma_{\tilde c})$ and $x = \tilde a.\Sigma_{\tilde c}$ are readily verified.
+    
+    Otherwise, i.e\ if $c = i$, we identify $x$ with the term $a'.\Sigma_{c'}$ where $c' = d_i^\Delta(a_h)$ and  $a'$ is the $i\Th$ coboundary trace of $\Sigma_{c'}$ with
+    \begin{align}
+        \label{homology_operations:parallel_T:T_commutes_with_del_pi:c_eq_i}
+        a_j' = \begin{cases} a_j & j \le h \\ a_h & j = h+1 \end{cases}
+    \end{align}
+    as both $a' \in T_i(\Sigma_{c'})$ and $x = a'.\Sigma_{c'}$ are again readily verified.
+    
+    Observe that in case \eqref{homology_operations:parallel_T:T_commutes_with_del_pi:c_neq_i} we have
+    \[
+        \tilde a_{h+1} = S_i(\ul{p_r+1}_r\ \tilde c)(a_j)
+    \]
+    and in case \eqref{homology_operations:parallel_T:T_commutes_with_del_pi:c_eq_i} we have
+    \[
+        \tilde a_{h+1} \neq S_i(\ul{p_r+1}_r\ c')(a_j) \,.
+    \]
+    We identify the terms of $T\del_\KK^\ast\pi^\ast(\Sigma)$ with all coboundary traces $a = (a_{h+1} : \ldots : a_0)$ of all terms of $T(\Sigma)$ that satisfy both
+    \[
+        a_j \neq a_{j-1} \mspc{for some}{10} j \le h \mspc{and}{30} a_j \neq (S_i\tau_j)(a_{j-1}) \mspc{for some}{10} j \le h \,.
+    \]
+    The remaining terms of $\del_\KK^\ast\pi^\ast T(\Sigma) - T\del_\KK^\ast\pi^\ast(\Sigma)$
+    are identified with the coboundary traces of all terms $\Sigma_c = (x_{h+1} \mid \ldots \mid x_1)$ of $T(\Sigma)$ that satisfy
+    \begin{align}
+        \label{homology_operations:parallel_T:T_commutes_with_del_pi:a_j_equal_a_j_1}
+        a_j = a_{j-1} = i+1 \mspc{for all}{10} j \le h \mspc{and}{30} a_{h+1} \neq a_h
+        \intertext{or}
+        \label{homology_operations:parallel_T:T_commutes_with_del_pi:a_j_equal_S_i_x_j}
+        a_j = (S_i x_j)(a_{j-1})  \mspc{for all}{10} j \le h \mspc{and}{30} a_{h+1} \neq (S_i x_{h+1})(a_h) \,.
+    \end{align}
+    Let us reformulate \eqref{homology_operations:parallel_T:T_commutes_with_del_pi:a_j_equal_a_j_1} and \eqref{homology_operations:parallel_T:T_commutes_with_del_pi:a_j_equal_S_i_x_j}.
+    Clearly
+    \begin{align}
+        a \in T_i(\Sigma_c) \text{ satisfies \eqref{homology_operations:parallel_T:T_commutes_with_del_pi:a_j_equal_a_j_1}}
+            &\iff S_i( \ul{p_r+1}_r\ c )(i+1) \neq i+1 \\
+            &\iff c = i \\
+            &\iff a = (\ul{p_r+1}_r: i+1 : \ldots : i+1) \mspc{and}{10} i \in \punc(\Sigma) \\
+            \label{homology_operations:parallel_T:T_commutes_with_del_pi:a_j_equals_a_j_1_equiv}
+            &\iff a = (\ul{p_r+1}_r: i+1 : \ldots : i+1) \mspc{and}{10} \sigma_h(i) \in \punc(\Sigma)
+    \end{align}
+    and
+    \begin{align}
+        a \in T_{i+1}(\Sigma_c) \text{ satisfies \eqref{homology_operations:parallel_T:T_commutes_with_del_pi:a_j_equal_S_i_x_j}}
+            &\iff S_{i+1}( \ul{p_r+1}_r\ c )(a_h) \neq a_h
+            \intertext{using $a_j = S_{i+1}(\tau_j\cdots\tau_1)(i+2) = s_{i+1}^\Delta(\sigma_j(i))$ yields}
+            &\iff c = a_h = \sigma_h(i) \\
+            &\iff a = (s_{i+1}^\Delta(\sigma_h(i)) : s_{i+1}^\Delta(\sigma_h(i)) : \ldots : s_{i+1}^\Delta(\sigma_0(i))) \notag \\
+            \label{homology_operations:parallel_T:T_commutes_with_del_pi:a_j_equal_S_i_x_j_equiv}
+            &\phantom{{}\iff} \mspc{and}{10} \sigma_h(i) \in \punc(\Sigma) \,.
+    \end{align}
+    By \eqref{homology_operations:parallel_T:T_commutes_with_del_pi:a_j_equals_a_j_1_equiv} and \eqref{homology_operations:parallel_T:T_commutes_with_del_pi:a_j_equal_S_i_x_j_equiv}
+    the remaining terms of $\del_\KK^\ast\pi^\ast T(\Sigma) - T\del_\KK^\ast\pi^\ast(\Sigma)$ come in pairs, where
+    \[
+        a \in T_i(\Sigma_i) \mspc{is paired with}{30} a' \in T_{i+1}(\Sigma_{\sigma_h(i)})
+    \]
+    and a direct computation shows
+    \[
+        a.\Sigma_i = \big(\ (\ul{p_r+1}_r\ i+1) \mid S_{i+1}\tau_q \mid \ldots \mid S_{i+1}\tau_1 \big) = a'.\Sigma_{\sigma_h(i)}
+    \]
+    which finishes the proof:
+    \[
+        \del_\KK^\ast\pi^\ast T(\Sigma) - T\del_\KK^\ast\pi^\ast(\Sigma)
+            = \sum_{a \in T_i(\Sigma_i)} (-1)^i a.\Sigma_i + (-1)^{i+1} a'.\Sigma_{\sigma_h(i)} = 0 \,.
+    \]
+\end{proof}
+
+\begin{proof}[Proof of Proposition \ref{homology_operations:parallel_T:T_is_a_cochain_map}]
+    The map $T$ is well defined by Lemma \ref{homology_operations:parallel_T:T_is_well_defined},
+    it commutes up to $\kappa^\ast$ with $\del_\E^\ast = \kappa^\ast \del_\KK^\ast \pi^\ast$ by Lemma \ref{homology_operations:parallel_T:T_commutes_with_del_pi},
+    so the comparision of relevant $\kappa^\ast$-sequences using Lemma \ref{cellular_models:dual_ehrenfried:f_dual_vanishes_at_monotonous_spot} ends the proof.
+\end{proof}

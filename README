@@ -1,0 +1,38 @@
+Nichtmathematische Werkzeuge und Einstellungen
+
+# Computerzeug
+################
+
+- Computerzeug -> Git
+---------------------
+- Bitbucket dient als Host. Man sollte das Tutorial lesen.
+- Dateien, die allein lokal von Bedeutung sind (wie zum Beispiel die Datei
+  '*.creator.user' welche Qt-Creator anlegt, um lokale Editoreinstellungen
+  zu speichern) sollten pro Repository in
+    .git/info/exclude
+  bzw. global in
+    ~/.gitignore
+  hinterlegt sein. Damit git die uncommitteten Dateien ignoriert, muss noch 
+    git update-index --assume-unchanged 
+  aufgerufen werden. Weitere Informationen gibts auch in den folgende Manpages.
+    man 5 gitignore
+  Bis jetzt habe ich in .gitignore Folgendes gesammelt.
+    *~
+    *.aux
+    *.bbl
+    *.blg
+    *.log
+    *.out
+    *.tex.backup
+    *.kate-swp
+    *.creator.user
+- Lokale Änderungen werden mit folgendem Befehl gespeichert.
+    git commit -m "Kommentar"
+- Um die lokale Änderung an den master-Zweig zu schicken benutzt man
+    git push origin master
+  Wir wollen im wesentlichen immer origin -> master. Um das als Standardeinstellung
+  zu speichern schreiben wir einmal
+    git push -u origin master
+  Anschließend reicht der folgende Befehl aus, um den master-Zweig auf den neusten
+  Stand zu bringen.
+    git push

@@ -1,0 +1,144 @@
+\section{Radial Multiplication [H]}
+\label{homology_operations:radial_multiplication}
+We will now define a multiplication for radial slit pictures,
+which looks very analogous to the multiplication for parallel slit pictures.
+Nevertheless, it will turn out that the radialization map defined in Subsection \ref{cellular_radialization} is not multiplicative with respect to these multiplications, compare Remark \ref{radialization_not_mult}.
+
+So let $A$ respectively $A'$ be two radial slit domains, each on $n$ annuli.
+We merge each corresponding pair of annuli of the radial slit pictures of $A$ and $A'$ into one as in Picture \ref{homology_op:radial_mult}.
+\begin{figure}[ht]
+\centering
+\incgfx{pictures/radial_mult}
+\centering
+\incgfx{pictures/radial_mult_result}
+\caption{\label{homology_op:radial_mult} Two radial slit pictures $A$ and $A'$ and their product $A \radmult A'$.}
+\end{figure}
+We subdivide the new annulus equally into an outer and an inner ring, putting $A$ into the outer ring and $A'$ into the inner ring,
+whereby $A'$ uses the lower half of the slits and $A'$ the upper half.
+Be aware that the slits of $A$ also start at the outer boundary of the annulus.
+Thus we introduce a new slit pair on each annulus in order to ensure that the outer boundary curves of $A$ and $A'$ do not interfere.
+We obtain
+
+\begin{defi}
+\label{rad_mult_defi}
+\symbolindex[m]{$\radmult$}{Radial multiplication map}{Definition \ref{rad_mult_defi}}
+\index{radial multiplication}
+   Let $A \in \Rad$ and $A' \in \Radt_{g'}(m', n)$ be two radial slit domains
+   with the same number of incoming boundary curves.
+   The \textbf{product} 
+   \[ 
+      A \radmult A'
+   \]
+   of $A$ and $A'$ is given by the radial slit domain obtained by the process described above.
+   We shall refer to this multiplication as \textbf{radial multiplication}. 
+\end{defi}
+
+\begin{prop}
+   The radial multiplication is a map
+   \[
+       \radmult \colon \Rad \times \Radt_{g'}(m', n) \to \Radt_{\tilde g}(\tilde m, n)\,,
+   \]
+   where $\tilde g = g + g' + n - 1$ and $\tilde m = m + m'$.
+\begin{proof}
+   By construction, we obtain $n(A \radmult A') = n$.
+   Due to the insertion of the new slits, we assert 
+   \[
+      m(A \radmult A') = m(A) + m(A')\,.
+   \]
+   Using the formula $N(A) = 2 g(A) - 2 + m(A) + n(A)$ for $A$, $A'$ and $A \radmult A'$,
+   we obtain 
+   \[
+      g(A \radmult \A') = g + g' + n - 1\,.    
+   \]
+\end{proof}
+\end{prop}
+
+In order to develop a deeper understanding why these formulas are correct,  
+let us see how radial multiplication looks on surfaces, compare Figure \ref{homology_op:radial_mult_on_modspc}.
+
+\begin{figure}[ht]
+\centering
+\def\svgwidth{0.8\columnwidth}
+\input{pictures/homology_op_radial_mult_on_modspc.pdf_tex}
+\caption{\label{homology_op:radial_mult_on_modspc} Radial multiplication applied to surfaces $F$ and $F'$.}
+\end{figure}
+
+The $k\Th$ inner boundary curves of $F$ and $F'$ are connected by a tube, upon which a new $k\Th$ inner boundary curve arises.
+Thereby, each two neighboring tubes contribute to the genus of the new surface.
+The newly inserted slits make sure that the outer boundary curves of the new surface are simply the outer boundary curves of $F$ and $F'$. 
+
+Now we come to several properties we expect to be fulfilled by a multiplication,
+and see which of them are indeed satisfied by this radial multiplication.
+
+\begin{prop}
+Radial multiplication is associative up to homotopy.
+\begin{proof}
+   Let $A, B, C$ be three radial slit pictures. 
+   In Figure \ref{homology_op:radial_mult_associative}, we see how $A \radmult (B \radmult C)$ can be homotoped into $(A \radmult B) \radmult C$
+   by successively applying slit jumps and changing the lengths of slits.
+   \begin{figure}[hp]
+   \centering
+   \incgfx{pictures/radial_mult_associative_in_steps}
+   \vspace{1cm}
+   \centering
+   \incgfx{pictures/radial_mult_associative_in_steps_2}
+   \vspace{1cm}
+   \centering
+   \incgfx{pictures/radial_mult_associative_in_steps_3}
+   \caption{\label{homology_op:radial_mult_associative} Transforming $A \radmult (B \radmult C)$ into $(A \radmult B) \radmult C$, to be read from the left to the right and then from up to down.}
+   \end{figure}
+\end{proof}
+\end{prop}
+
+If we consider the definition of the radial multiplication on surfaces, we immediately see
+
+\begin{prop}
+   Radial multiplication is commutative up to homotopy.
+\end{prop}
+
+Note that the insertion of a new pair of slits on each annulus nicely maintains all glueing information, 
+but also cause several disadvantages.
+
+\begin{rem}
+  Radial multiplication does not have a unit (even up to homotopy):
+  Consider a radial slit domain $A$ and try to imagine another radial slit domain $B$, for which $A \radmult B$ is homotopic to $A$. 
+  But since we always insert a new pair of slits isolating $A$ from the rest of the annulus, we will always obtain an additional outgoing boundary curve,
+  no matter how $B$ looks like (even if it is empty).
+\end{rem}
+
+\begin{rem}
+   Since the radial multiplication of two slit pictures involves inserting new slits, 
+   we cannot directly describe it in terms of operads. 
+   See Section \ref{radial_composition} for an associative operation that does fulfill this property, but that is only defined under limited conditions.
+\end{rem}
+
+\begin{rem}\label{radialization_not_mult}
+   The radialization map 
+   \[
+      \radmap \colon \Modspc \to \mathfrak M_g(m + n, n)
+   \]
+   defined in Subsection \ref{cellular_radialization} is not multiplicative with respect to the radial multiplication and any of the multiplications $\mu^{\upuparrows}$, $\mu^{\updownarrows}$ or $\mu^{cs}$
+   from Subsections \ref{homology_operations:parallel_patching_slit_pics:construction_of_mu_upuparrows}, 
+   \ref{homology_operations:parallel_patching_slit_pics:construction_of_mu_updownarrows}
+   and \ref{homology_operations:parallel_patching_slit_pics:construction_of_mu_cs}.
+   To see this, let $F$ respectively $F'$ be two surfaces with $m$ respectively $m'$ punctures, and with $n$ boundary curves each.
+   Compare $\radmap(F) \radmult \radmap(F')$ and $\radmap(F \cdot F')$ with $\_\cdot\_$ denoting any of these parallel multiplications.
+   Recall that the radialization map applied to $F$ transforms the punctures of $F$ in outgoing boundaries and creates one additional outgoing boundary for each boundary curve of $F$.
+   Hence, the number of outgoing boundaries of $\radmap(F) \radmult \radmap(F')$ equals $m + n + m' + n$.
+   On the other hand, the product $F \cdot F'$, however the parallel multiplication is chosen among $\mu^{\upuparrows}$, $\mu^{\updownarrows}$ or $\mu^{cs}$, 
+   only keeps the punctures from $F$ and $F'$ and does not create any new ones.
+   Thus, we have
+   \[
+    m(\radmap(F \cdot F')) = m + m' + n \neq m + m' + 2n = m(\radmap(F) \radmult \radmap(F'))
+   \]
+   for $n >  0$, which is always presumed.
+\end{rem}
+
+Summarizing the positive results, we obtain
+
+\begin{cor}
+  Radial multiplication yields an associative and commutative homology operation
+  \[
+     \radmult_* \colon H_*(\mathfrak M_g(m, n)) \otimes H_*(\mathfrak M_{g'}(m', n)) \to H_*(\mathfrak M_{g+g'+n - 1}(m + m', n))\,.
+  \]
+\end{cor}

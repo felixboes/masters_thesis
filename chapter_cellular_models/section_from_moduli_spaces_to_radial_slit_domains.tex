@@ -1,0 +1,104 @@
+\section{The Bundle \texorpdfstring{$\HarmRad$}{{H\_g(m, n)}} [H]}
+\label{cellular:radial_bundle}
+
+In this section, we want to outline the construction of the bundle $\HarmRad$ over the moduli space $\ModspcRad$.
+For further details, see \cite{Boedigheimer2006}.
+
+Let $[F, \mathcal C^+, \mathcal C^-, \mathcal P] \in \ModspcRad$ be a point of the moduli space, using the same notation as in the introduction (Section \ref{cellular_models:introduction}).
+In order to describe the fiber over this point, we proceed as follows.
+By classical potential theory, e.g. \cite[Theorem I.25]{opac-b1083717}, there exists a \textbf{harmonic potential} $u \colon F \to \R$
+without any singularities and with all critical points in the interior of $F$.
+The potential $u$ is uniquely determined by the complex structure and by the conditions that 
+\begin{enumerate}
+ \item on each boundary curve $C^+_k$ and $C^-_k$, $u$ is constant and non-negative, and
+ \item for each outer boundary curve $C^+_k$, the constant value is $0$.
+\end{enumerate}
+Thereby, we can only choose the constant value of $u$ on one kind of boundary curves.
+Here, it will be on the outgoing ones.
+On the incoming boundaries, the potential $u$ yields constants $c_k > 0$ such that $u(C^-_k) = c_k$.
+
+Similar as in the parallel case, we construct the unstable critical graph $\mathcal K_0$ of the negative gradient flow $- grad_u$.
+Again calling the zeroes $\mathcal S$ of the gradient flow \textbf{stagnation points},
+note that each flow line leaving a stagnation point $S$ either goes to another stagnation point or to a point $Q^+ \in \mathcal C^+$ in the outer boundary.
+These points shall be called \textbf{cut points}, and the set of all cut points is denoted by $\mathcal Q^+$.
+In Figure $\ref{trousers}$, we see an example for a surface with $n = 2$ incoming boundaries, $m = 1$ outgoing boundaries and $g = 0$.
+Some lines of the gradient flow are indicated in blue, whereas the unstable flow lines, which are used to build up the critical graph, are drawn bold.
+For reasons of clarity, only the critical flow line is drawn on the backside of the surface.
+
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{.7\columnwidth}
+    \input{pictures/intro_trousers.pdf_tex}
+    \caption{
+        \label{trousers}
+        The gradient flow of a potential function on a surface with $n = 2$, $m = 1$ and $g = 0$.}
+\end{figure}
+
+Since $u$ is locally the real part of a holomorphic function,
+the stagnation points $S \in \mathcal S$ are saddle points of some index $-2h \leq \ind(S) \leq -1$.
+The sum of these indices has to equal the Euler characteristic $\chi(F)= -h$, 
+thus we can conclude that there are at most $h$ stagnation points.
+
+The vertices of the unstable critical graph are the points in $VK_0 = S \cup \mathcal Q^+$.
+The (directed) edges of the unstable critical graph correspond to the (directed) unstable flow lines only.
+It is possible that $\mathcal K_0$ is empty, namely when $F$ is an annulus.
+Note that every component of the complement of the critical graph in $F$ contains exactly one boundary curve.
+Hence, we can write $F_1, \dotsc, F_n$ for the components of $F \backslash \mathcal K_0$, which we also call \textbf{basins}.
+Since the gradient vector field does not have any singularities,
+we obtain a deformation retraction of $F_k$ onto $C^-_k$ by running the flow lines backwards.
+
+In Figure \ref{trousers_flat}, our surface from Figure \ref{trousers} is looked at from above and dissected along the unstable critical graph,
+yielding one basin for each of the two incoming boundary curves.
+
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{.7\columnwidth}
+    \input{pictures/intro_trousers_flat.pdf_tex}
+    \caption{
+        \label{trousers_flat}
+        The surface with $n = 2$, $m = 1$ and $g = 0$ of Figure \ref{trousers} looked at from above, dissected along the unstable critical graph.}
+\end{figure}
+
+On each basin $F_k$, the harmonic function $u_k = u \mid_{F_k} \colon F_k \to \R$ is the real part of a holomorphic function
+\[
+   w_k = u_k + i v_k \colon F_k \to \C\,,
+\]
+where $v_k$ is a harmonic conjugate of $u_k$.
+The function $v_k$ is only defined up to integer multiples of $2\pi i$,
+but after this it is unique up to an additive constant $d_k$.
+This we fix soon.
+Thus, the function
+\[
+ W_k(z) = \exp(-w_k(z)) = \exp(-u_k(z)) \exp(-i v_k(z)) \colon F_k \to \subset \C
+\]
+is well defined and maps $F_k$ injectively into an annulus $\A_k$. 
+By this, the modulus is determined by $u_k$ and the angle by $v_k$. 
+Since $\exp(-u(z))$ equals $1$ when restricted to any outer boundary curve $C^+_l$ incident to $F_k$ 
+and $\rho_k := \exp(-c_k) < 1$ when restricted to $C^-_k$,
+the image of $F_k$ under $W_k$ is contained in an annulus $\A_k$ with outer radius $1$ and inner radius $\rho_k < 1$.
+The additive constant $d_k$ in the definition of the harmonic conjugate $v_k$ of $u_k$ 
+can be chosen such that the marked point $P_k$ on the incoming boundary curve $Q^-_k$ is mapped to the real point $(\rho_k, 0)$ of the annulus.
+The image of $F_k \subset \A_k$ consists of the entire annulus, 
+where finitely many slits from the outer boundary towards the center of the annulus are missing.
+Remembering that the surface originally was glued together along these missing slits,
+we can reconstruct the surface $F$ from the image of the basins $F_k$ on the annuli $\A_k$.
+A more detailed description of these so-called radial slit domains follows in Section \ref{cellular_models:radial}.
+
+We are now ready to finish the description of the bundle $\HarmRad$.
+Let $\HarmRad$ be the space of all 
+\[
+   [F, \mathcal C^+, \mathcal C^-, \mathcal P, w]\,.
+\] 
+As above, $[F, \mathcal C^+, \mathcal C^-, \mathcal P] \in \ModspcRad$ is a point in the moduli space
+and $w = (u, (v_k)_{k = 1, \dotsc, n})$ with
+$u \colon F \to \R$ being the harmonic potential defined on the whole surface $F$,
+and the functions $v_k \colon F_k \to \R$ being locally defined harmonic conjugates of $u$ on the basins $F_k$, for $k = 1, \dotsc, n$.
+There is a projection
+\[
+  \HarmRad \xr{\cong} \ModspcRad\,, [F, \mathcal C^+, \mathcal C^-, \mathcal P, w] \mapsto [F, \mathcal C^+, \mathcal C^-, \mathcal P]\,,
+\]
+ with trivial fibres since there are no free parameters in the choice of $u$ and $v_k$.
+Thus, the dimension of $\HarmRad$ equals
+\[
+ \dim(\HarmRad) = \dim(\ModspcRad) = 3h + n = 6g - 6 + 3 m + 4 n\,.
+\]

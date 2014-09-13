@@ -1,0 +1,173 @@
+\subsection{The Tool \progname{compute\_css} [B,H]}
+\label{chapter_program:kappa:compute_css}
+
+The tool \progname{compute\_css}, which computes the homology of the moduli spaces $\Modspc[1]$ and $\ModspcRad[1]$
+by deriving the second term of the corresponding cluster spectral sequence,
+is the most important tool supported by the project {\bf kappa}.
+In Subsubsection \ref{chapter_program:kappa:compute_css:usage}, we describe 
+how one operates this tool, 
+while in Subsubsection \ref{chapter_program:kappa:compute_css:implementation},
+we explain its implementation. 
+
+\subsubsection{Usage [H]}
+\label{chapter_program:kappa:compute_css:usage}
+
+For the computation of the homology of the moduli space $\ModspcRad[1]$, 
+one can use the command
+\begin{lstlisting}
+.\compute_css -g arg -m arg (-q | -s arg)
+\end{lstlisting}
+Thereby,
+\begin{itemize}
+\item the parameter \progname{g} is the genus of the moduli space,
+\item the parameter \progname{m} is the number of punctures of the moduli space,
+\item one can either use the parameter $q$ or the parameter $s$. 
+      If $q$ is chosen -- without any argument -- homology with rational coefficients will be computed.
+      If the parameter $s$ is set to some positive prime, we will compute homology with coefficients in $\Z/s\Z$.
+\end{itemize}
+As the output of this command, one obtains a description of the $E^0$, $E^1$ and $E^2$ term of the cluster spectral sequence associated with $\ModspcRad[1]$,
+and can read off the homology from the $E^2$ page.  
+
+Recall that, for $m > 0$, the homology of the moduli space $\Modspc[1]$ coincides with the homology of the moduli space $\Modspc[1]$ 
+(compare Proposition \ref{cellular_models:comparision_of_the_models:bundles_are_h_equiv}).
+For determining the homology of $\Modspc[1]$ for $m = 0$ 
+or the dimensions of the modules in the cluster spectral sequence of $\Modspc[1]$, one can set the optional parameter
+\begin{itemize}
+ \item \progname{parallel}
+\end{itemize}
+to true.
+
+For instance, the call
+\begin{lstlisting}
+ ./compute_css -g 1 -m 3 -s 2
+\end{lstlisting}
+computes the homolgy of the moduli space $\mathfrak{M}^\bullet_1(3, 1)$ with $\Z/2\Z$ coefficients, 
+while the call
+\begin{lstlisting}
+ ./compute_css -g 1 -m 3 -q --parallel 1
+\end{lstlisting}
+determines the homolgy of the moduli space $\mathfrak{M}^1_{3, 1}$ with rational coefficients.
+
+There are other optional parameters that improve the performance or handling of the program.
+\begin{itemize}
+\item The optional parameter \progname{t} is the number of threads 
+      that are allowed to be used for parallelization,
+      which is $1$ by default. 
+\item In addition, one can use the optional parameter \progname{num\_remaining\_threads}
+      to determine how exactly computations are parallelized. 
+      For a detailed explanation, see \ref{diag_field_implementation}.
+      The total number of threads used will then be 
+      \[
+        \text{\progname{num\_threads + num\_remaining\_threads,}}
+      \]
+      and we recommend to use one third of the total number of threads as remaining threads.
+\item The optional parameters \progname{first\_diff} respectively \progname{last\_diff} are the minimal respectively maximal $p \in \N$ 
+      for which the homology $H_p(\Modspc[1])$ is supposed to be computed,
+      which are $0$ respectively $2h$ by default.
+\end{itemize}
+
+If the command \progname{help} is used or if the input is not valid,
+instructions for use will be printed to the console.
+
+During the computations, we offer intermediate results and progress bars as console output. 
+When the computation of the homology is finished, 
+the file 
+\[
+\text{\progname{compute\_homology\_(parameters)}}
+\]
+created by the program contains all the intermediate and final results.
+Be aware that this means that calls with the same parameters produce files with the same names and hence old files are overwritten.
+The intermediate results give the oportunity to abort the computation
+and continue it some other time, 
+using the parameters \progname{first\_diff} and \progname{last\_diff} to select certain homology groups.
+
+\subsubsection{Implementation Details [B,H]}
+\label{chapter_program:kappa:compute_css:implementation}
+
+{\bf [H]} The computation of the cluster spectral sequence and the homology starts in the main function of the file 
+\begin{lstlisting}
+main_compute_css.cpp
+\end{lstlisting}
+The input parameters described above are stored in the struct
+\begin{lstlisting}
+SessionConfig;
+\end{lstlisting}
+which also tests whether the given configuration of parameters is valid, 
+outputting the correct usage to the console if not.
+Apart from the data members corresponding to the input parameters, 
+the struct \progclass{SessionConfig} contains the data member
+\begin{lstlisting}
+SignConvention sgn_conv;
+\end{lstlisting}
+it can set on its own in dependence on the parameters for the coefficients.
+The \progclass{SignConvention} parameter can have three different values, 
+which indicate which signs have to be respected in the computation of the differentials. 
+This way, we avoid sign computations whenever we can.
+We set the parameter to \progname{no\_signs} if we only compute the homology up to sign, 
+which is the case if we use coefficients in $\Z/2\Z$. 
+If we have different coefficients and \progname{m} $\geq 2$, the moduli space $\Modspc[1]$ is non-orientable and the sign convention is set to \progname{all\_signs}. 
+Otherwise, it equals \progname{no\_orientation\_sign}. 
+
+At the begin of the computation, the constructor of \progclass{ClusterSpectralSequenceT} is called with respect to the parameters provided above.
+Thereby, the bases (see Subsubsection \ref{chapter_program:kappa:css:gen_bases}) are generated, with basis elements sorted by their cluster number.
+In particular, printing the $E^0$-term to screen is readily done.
+
+{\bf [B]} The main task is determining the first and second page of the cluster spectral sequence.
+Recall Section \ref{css:section_matrix_version}, which discusses the matrix version of the cluster spectral sequence.
+The $p\Th$ transposed transformation matrix of $\del_\E$ is a block matrix of the form
+\[ 
+    \begin{pmatrix}
+        d^1 & d^0 \\
+            & d^1   & d^0 \\
+            &       & d^1   & d^0 \\
+            &       &       &       & \ddots
+    \end{pmatrix} \,,
+\]
+if we sort the basis elements by their number of clusters.
+The modules of the $E^1$-term are given by
+\[
+    \ker(d^0) / \img(d^0)\,,
+\]
+whereas the modules of the $E^2$-term are given by
+\[
+    \ker(d^1|_{\ker(d^0)}) / \big( \img(d^0) + \img(d^1|_{\ker(d^0)}) \big) \,.
+\]
+Hence, it suffices to apply all row operations induced by the sub-matrices $d^0$ and proceed with the diagonalization process of
+the parts of the (altered) sub-matrices $d^1$ that are in the kernel of the (diagonalized) sub-matrices $d^0$.
+In order to save execution time and memory, our program operates on exactly one $d^0$ and one $d^1$ sub matrix at a time:
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\For{$p = 1$ \KwTo $2h$}
+{
+    \For{$l=1$ \KwTo $p$}
+    {
+        Construct $d^1_{p,l}$ and apply row operations of $d^0_{p,l-1}$
+        
+        Forget $d^0_{p,l-1}$
+        
+        Generate $d^0_{p,l}$
+        
+        Compute and save kernel and image of $d^0_{p,l}$
+        
+        Print the homological results to the screen
+        
+        Save the diagonal of $d^0_{p,l}$ and detect superflous rows of $d^1_{p,l}$
+        
+        Compute and save the kernel and image of $d^1_{p,l}$
+        
+        Print the homological results to the screen
+        
+        Forget $d^1_{p,l}$
+    }
+}
+Print all three pages of the spectral sequence to the screen.
+\caption{Computing $E^1$ and $E^2$}
+\end{algorithm}
+
+Here, we have $h = 2g + m$ in the parallel case and $h = 2g + m - 1$ in the radial case.
+
+During all computations, the function \progname{compute\_css} generates the previously mentioned intermediate results 
+printed out in the console and into the corresponding output file.
+Furthermore, it measures the duration of the important steps of the computations 
+and also writes them into the console. 

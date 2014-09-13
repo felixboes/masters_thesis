@@ -1,0 +1,35 @@
+\section{Comparison of Computational Approaches [H]}
+
+In this section, we will see arguments that emphasize further why computing the homology of the moduli spaces is such a hard problem.
+Besides, we argue why we chose our strategies for the computations.
+
+Review our computational approach for determining the homology of $\Modspc$ and $\ModspcRad$ for $n = 1$ with rational and finite fields coefficients.
+We construct the parallel or radial Ehrenfried complex (see Section \ref{cellular_models:ehrenfried}) with its filtration by cluster sizes (compare Chapter \ref{chapter_css}).
+Thereby, the bases of the Ehrenfried complex are ordered in such a way that the differentials have a certain block form, see Subsection \ref{css:section_matrix_version}.
+At this point, there are many ways to derive the homological data.
+We diagonalize the differentials via parallelized Gaussian elimination while exploiting the special structure of the matrices due to the cluster filtration.
+In the preceding section, we saw that the modules of the Ehrenfried complex are extremely large, so we have to diagonalize its differentials as efficient as possible.
+
+The study of manifolds via Morse Theory is well-known.
+In \cite{Forman2002}, Forman proposes a discrete analogon for semisimplicial complexes with respect to arbitrary coefficients.
+Here a large discrete Morseflow yields a small, homotopy equivalent subcomplex.
+Unfortunately, finding an optimum Morse flow is generally NP-hard due to Joswig and Pfetsch (compare \cite{JoswigPfetsch2006}).
+In practice, a simple greedy algorithm will produce a Morse flow not far away from an optimum solution.
+The construction of the associated smaller complex is the most time consuming process.
+It is (in terms of complexity theory) slightly faster than the state of the art SNF algorithms that do not make use of concurrency.
+It is slower than the Gaussian elimination algorithm.
+For calculations with coefficients in $\mathbb Z$ or $\mathbb Z / p^k \mathbb Z$, we recommend Jäger's parallelized algorithm based on the Smith normal form.
+
+For coefficients in a field, diagonalizing even reduces to determining the rank.
+We imagined that there are numerical ways of improving our techniques.
+However, due to Beuchler (see \cite{Beuchler201402}), numerical algorithms for rank determination do not fit our requirements.
+These algorithms are in general unstable, i.e. they do not compute the rank exactly.
+They become more stable the smaller the kernel of the matrix is.
+But in our case, the kernels of the huge matrices are about half of their size.
+Hence, we cannot rely on such algorithms at all.
+
+Beuchler recommended using preconditioning algorithms on our matrices instead, e.g. the nested dissection methods presented in \cite[Chapter 8]{GeorgeLiu1981}.
+Such algorithms are applied before the actual computation in order to bring the matrix into a form that makes diagonalizing easier.
+Thus, rows or columns are reordered such that there are less row or column operations neccessary, or such that the entries of the matrix do not become too big during the computation.
+For instance, our application of the cluster spectral sequence can be seen as a preconditioning method that exploits the special shape of the matrix.
+Hence, we do not use any further preconditioning. 

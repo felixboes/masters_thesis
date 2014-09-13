@@ -1,0 +1,109 @@
+\section{The Radial Slit Complex [H]}
+\label{cellular_models:radial}
+
+We will now construct the radial slit complex $(R,R')$ associated with the moduli space $\ModspcRad$.
+Recall that we have defined a homeomorphism $\HarmRad \xr{\cong} \ModspcRad$ (compare Section \ref{cellular:radial_bundle}).
+There is a space $\Rad$ of radial slit configurations, which is homeomorphic to $\HarmRad$
+and can be defined as the geometric realization of the difference $R - R'$ of the multicomplex $R$ and its subcomplex $R'$.
+The latter are described in this section.
+Like the parallel slit complex $(P, P')$, $(R, R')$ is only a semi-multisimplicial complex.
+In contrast to $\HarmRad$, it has a purely combinatorical description.
+Hence, it is very suitable for determining the homology of
+\begin{align*}
+   H_\ast( \ModspcRad; \Z ) &= H_\ast( \HarmRad; \Z ) \\
+                            &\cong H^{3h+n-\ast}( \HarmRad; \mathcal O ) = H^{3h+n-\ast}( \Rad; \mathcal O ) = H^{3h+n-\ast}( R, R'; \mathcal O)
+\end{align*}
+via a computer program.
+Here, the isomorphism is given by Poincaré duality and $\mathcal O$ is the orientation system, 
+for which a simplicial definition is provided in Section \ref{cellular_models:orientation}.
+
+If not stated otherwise, the genus $g$, the number of outgoing boundaries $m$ and the number of incoming boundary curves $n$ are fixed throughout this section.
+Be aware that these letters mean different things in the radial case than in the parallel case.
+Moreover, the partition $R = (r_1, \dotsc, r_n)$ is always of the form $R = (1, \dotsc, 1)$ here.
+Consequently, we have $r = n$ and can omit $r$ as well as the paritition $R$.
+\index{partition into levels}
+Hence, $[p]$ always denotes the set
+\[
+    [p] = \{ \ul 0_1, \ul 1_1, \ldots, \ul p_1, \ldots, \ul 0_n, \ul 1_n, \ldots, \ul p_n \}\,,
+\]
+in the radial case, where $p = p_1+\ldots+p_n$ is a partition of $p$ into $n$ levels with all $p_i$ positive (compare Definition \ref{cellular_models:parallel:partition} for the meaning of $[p]$ in the parallel case). 
+As before, we write $h = 2g+m+n-2$ in contrast to the formula for $h$ in the parallel case.
+
+Recall the definition of the fibre over a point $[F, \mathcal C^+, \mathcal C^-, \mathcal P] \in \ModspcRad$ in the homotopy equivalent bundle $\HarmRad$ over $\ModspcRad$ in Section \ref{cellular:radial_bundle}.
+We ended up with a function
+\[
+   W_k = \exp(-u_k) \exp(- i v_k) \colon F_k \to \A_k \subset \C
+\]
+for each $k = 1, \dotsc, n$.
+This maps the basin $F_k$ into an annulus $\A_k$ with inner radius $\rho_k < 1$ and outer radius $1$,
+filling the annulus up to some missing slits.
+We shall now give a more detailled discription of the image of the maps $W_k$ for $k = 1, \dotsc, n$, 
+which we call a \textbf{radial slit picture} (see Figure \ref{trousers_radial}).
+\index{radial slit picture}
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{.7\columnwidth}
+    \input{pictures/intro_trousers_radial.pdf_tex}
+    \caption{
+        \label{trousers_radial}
+        The surface of Figures \ref{trousers} and \ref{trousers_flat} with $n = 2$, $m = 1$ and $g = 0$ mapped into two annuli via $W_1$ and $W_2$.}
+\end{figure}
+
+The $n$ annuli $\A_1, \dotsc, \A_n$ are called the annuli or level upon which the radial slit picture resides.
+The $k\Th$ incoming boundary curve of the surface $F$ is mapped to the inner boundary cycle of the $k\Th$ annulus,
+and the marked point $P_k$ on the incoming boundary curve $C^-_k$ is mapped to the point $(\rho_k, 0)$ on this cycle.
+Thus we use to refer to the inner boundary cycle of the $k\Th$ annulus as its $k\Th$ inner boundary.
+
+When we delete an edge of the unstable critical graph from $F$, we obtain, on either side, a bank still belonging to $F$.
+Each of these banks may belong to a different basin.
+After all maps $W_k$ are applied to the basins $F_k$,
+the deleted edges of the critical graph yield missing slits on the annuli.
+Thereby, the banks belonging to the same edge may be seperated from each other.
+Since there are at most $h$ stagnation points (compare \ref{cellular:radial_bundle}) and each of them results in at most two missing slits,
+there are at most $2h$ missing slits on the annuli in total. 
+Note that the endpoints of the slits lie anywhere on the annuli apart from their inner and outer boundary cycles. 
+
+An outer boundary curve $C^+_l$ of $F$ is mapped to the outer boundary cycles of the annuli $\A_1, \dotsc, \A_n$,
+however not necessarily consecutive or even on one annulus only.
+While traversing $C^+_l$ in the surface $F$, one occasionally meets a cut point $Q^+$. 
+In particular, this cut point is one endpoint of an edge of the unstable critical graph, so the two banks of this edge may be seperated as described above.
+But if we start at an arbitrary point of the image of $C^+_l$ under some map $W_k$,
+we can run through the entire image of $C^+_l$ under any map $W_k$ in the annuli $\A_1, \dotsc, \A_n$.
+Thereby, we have to jump across paired slits whenever they are met.
+We thus refer to these parts of the outer boundary of all annuli $\A_1, \dotsc, \A_n$ as the outer boundary curve of our radial slit picture.
+In Figure \ref{trousers_radial}, we can run through the single outer boundary curve along the outer boundary of the annuli clockwise
+if we jump from $\alpha$ to $\alpha'$ and from $\beta'$ to $\beta$ on our way.
+
+By adding equipotential lines through the stagnation points, 
+we obtain $0 \leq q \leq h$ concentrical lines on each annulus $\A_k$.
+Extending the lines of the slits towards the inner and outer boundary of $\A_k$,
+we obtain a subdivision of each annulus into regions.
+
+This completes our description of a radial slit picture.
+Vice versa, the surface $F$ can be obtained from the radial slit picture.  
+We can re-glue previously connected basins along the missing slits in order to re-construct the surface $F$.
+Note that the resulting surface is the same if slits move in the annuli, or even if smaller slits jump across larger slits.
+Thus, such radial slit pictures are considered as equal.
+
+In order to obtain a multisimplicial description of these radial slit pictures, 
+we will normalize them in the following subsection, resulting in a new structure called cell.
+Note that two regions are only glued together if they lie in the same concentrical stripe of any annulus (maybe on two different annuli).
+Hence, we can express the glueing via one permutation $\sigma_j \in \SymGr_{[p]}$ per concentrical stripe $0 \leq j \leq q$,
+where $[p]$ is the set
+\[
+[p] = \{ \ul 0_1, \ul 1_1, \ldots, \ul p_1, \ldots, \ul 0_n, \ul 1_n, \ldots, \ul p_n \}\,,
+\]
+which denotes the radial segments of the $k\Th$ annulus by $\ul 0_k, \dotsc, \ul p_k$.
+In the Subsections \ref{cellular_models:radial:cells_in_homogenous_notation} and \ref{cellular_models:radial:cells_in_inhomogenous_notation},
+we will see how exactly this defines the cells $\Sigma = homogq$ of the relative multicomplex $(R, R')$, using two different perspectives.
+
+The positions of the slits define an inner point of the multisimplex $\Delta^p \times \Delta^q$.
+Collapsing concentrical stripes and radial segments defines vertical and horizontal faces of the cells,
+see Subsection \ref{cellular_models:radial:faces}.
+After this preparation, we can introduce the radial slit complex $(R, R')$ in Subsection \ref{cellular_models:radial:bisimplicial_complex}.
+
+\input{chapter_cellular_models/subsection_radi_cells}
+
+\input{chapter_cellular_models/subsection_radi_faces}
+
+\input{chapter_cellular_models/subsection_radi_bicomplex}

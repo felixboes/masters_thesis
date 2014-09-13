@@ -1,0 +1,181 @@
+\makeatletter
+\newcommand{\mylabel}[2]{%
+   \protected@write \@auxout {}{\string \newlabel {#1}{{#2}{\thepage}{#2}{#1}{}} }%
+   \hypertarget{#1}{#2}%
+}%
+\makeatother
+
+\newcommand{\todo}[1]{{\bf\color{red}-- #1 --}}
+\newcommand{\incgfx}[1]{ \IfFileExists{#1}{ \includegraphics{#1} }{ \parbox{5cm}{Could not include your picture. You might want to run 'make pictures'} } }
+\def\cpp{{C\nolinebreak[4]\hspace{-.05em}\raisebox{.4ex}{\tiny\bf ++}}}
+\def\cppeleven{{C\nolinebreak[4]\hspace{-.05em}\raisebox{.4ex}{\tiny\bf ++}11}}
+
+\newcommand{\blanc}{\mbox{\hspace{3pt}\underline{\ \ }\hspace{3pt}}}    % Blank
+\newcommand{\mspc}[2]{ \hspace{#2pt}\text{#1}\hspace{#2pt} }            % Setze Wort in Mathe-Umgebung und lasse dabei Platz.
+\newcommand{\xr}[1]{ \xrightarrow{\hspace{6pt}{#1}\hspace{6pt}} }       % Abbildungspfeil nach rechts mit Formel drüber.
+\newcommand{\xhr}[1]{ \xhookrightarrow{\hspace{6pt}{#1}\hspace{6pt}} }  % Abbildungspfeil mit Bogen nach rechts mit Formel drüber.
+\newcommand{\xdr}[1]{ \xtwoheadrightarrow{\hspace{6pt}{#1}\hspace{6pt}} }       % Abbildungspfeil mit zwei Köpfen nach rechts mit Formel drüber.
+\newcommand{\xl}[1]{ \xleftarrow {\hspace{6pt}{#1}\hspace{6pt}} }       % Abbildungspfeil nach links mit Formel drüber.
+\renewcommand{\to}{\xr{}}                                               % Abbildungspfeil nach rechts im selben Format wie oben.
+\newcommand{\xmr}[1]{ \xmapsto{\hspace{6pt}{#1}\hspace{6pt}} }          % Elementpfeil nach rechts mit Formel drüber.
+\renewcommand{\mapsto}{\xmr{}}                                          % Elementpfeil nach rechts im selben Format wie oben.
+
+\newcommand{\B}{\mathbb B}
+\newcommand{\bldots}{\raisebox{.5ex}{\fbox{$\ldots$}}}
+\DeclareMathOperator{\cl}{cl}
+\DeclareMathOperator{\cof}{cf}
+\newcommand{\cspc}[1]{{\tilde C^{#1}}}
+\DeclareMathOperator{\cyc}{cyc}
+\newcommand{\del}{\partial}
+\newcommand{\dE}{\hat \partial}
+\DeclareMathOperator{\Diff}{Diff}
+\newcommand{\dimx}[4]{\dim_{#4}H_{#3-p}(\mathfrak M_{#1,1}^{#2};{#4})}
+\newcommand{\dimr}[3]{\dimx{#1}{#2}{#3}{R}}
+\newcommand{\dimf}[3]{\dimx{#1}{#2}{#3}{\mathbb F_2}}
+\newcommand{\dimq}[3]{\dimx{#1}{#2}{#3}{\mathbb Q}}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Eins}{\mathbbm{1}}
+%\newcommand{\Ehr}[1][n]{\mathbb{E}^m_{g,{#1}}}
+\newcommand{\Ehrr}[1][r_1, \ldots, r_n]{\mathbb E(h,m;{#1})}
+\newcommand{\equicl}{\sim_{\mathrm{CL}}}
+\DeclareMathOperator{\grad}{grad}
+\newcommand{\Harm}{\mathfrak{H}^m_{g,n}}
+\newcommand{\Harmr}{{\Harm}[(r_1, \ldots, r_n)]}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\mf}[1]{\mathfrak{#1}}
+\DeclareMathOperator{\hgt}{ht}
+\DeclareMathOperator{\ind}{ind}
+\DeclareMathOperator{\img}{im}
+\newcommand{\KK}{\mathbb K}
+\newcommand{\MM}{\mathfrak M}
+\newcommand{\Modspc}[1][n]{\mathfrak{M}^m_{g,#1}}
+\DeclareMathOperator{\ncyc}{ncyc}
+\newcommand{\Ncplx}{\mathcal N}
+\newcommand{\nth}{\ensuremath{n^{\text{th}}}}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\Par}[1][]{\mathfrak{Par}#1}
+\newcommand{\Parr}[1][n]{\mathfrak{Par}^m_{g,#1}[(r_1, \ldots, r_n)]}
+\DeclareMathOperator{\punc}{punc}
+\DeclareMathOperator{\supp}{supp}
+\newcommand{\SymGr}{\mathfrak S}
+\newcommand{\Symgrp}{\mathfrak S}
+\newcommand{\SymD}{\SymGr^\Delta}
+\newcommand{\Thin}{Thin_{g,n}^m[(r_1, \ldots, r_n)]}
+\newcommand{\tildeModspc}{\widetilde{\mathfrak M}_{g,n}^m}
+\newcommand{\ov}{\overline}
+\newcommand{\ul}[1]{\underline{\smash{#1}}}
+
+\DeclareRobustCommand\updownarrows{%
+    {%
+        \ensuremath{%
+            \raisebox{-.5ex}{\rotatebox{90}{$\scriptstyle\rightleftarrows$}}
+        }
+    }
+}
+
+\newcommand{\tl}[1]{\multicolumn{1}{|r||}{#1}}
+
+% Siehe http://tex.stackexchange.com/questions/56079/using-tikz-inside-a-figure-caption
+\DeclareRobustCommand\ikurz{%
+    {%
+        \ensuremath{%
+            \mathrel{%
+                \begin{tikzpicture}[baseline=-.75ex]
+                    \draw [line width=0.1ex, line cap=round]
+                        (0, 0.3ex) -- (1.2ex, 0.3ex);
+                    \draw [line width=0.1ex, line cap=round]
+                        (0, 0) -- (.5ex, 0);
+                \end{tikzpicture}%
+            }%
+        }%
+    }%
+}
+\DeclareRobustCommand\ilang{%
+    {%
+        \ensuremath{%
+            \mathrel{%
+                \begin{tikzpicture}[baseline=-.75ex]
+                    \draw [line width=0.1ex, line cap=round]
+                        (0, 0) -- (1.2ex, 0);
+                    \draw [line width=0.1ex, line cap=round]
+                        (0, 0.3ex) -- (.5ex, 0.3ex);
+                \end{tikzpicture}%
+            }%
+        }%
+    }%
+}
+
+\newcommand{\nzweizelle}[5]{
+    {%
+        \ensuremath{%
+            \ %
+            \tikz[baseline={([yshift=-2.5pt]current bounding box.center)}, x=15pt, y=7pt, every node/.style={shape=circle, fill=black, inner sep=.8pt}]{%
+                \foreach \y in {1,...,#5}
+                {
+                    \draw (-0.5, \y) -- (1.5, \y);
+                }
+                \draw[color=black!50] (-0.5,.7) -- (1.5,.7) -- (1.5, {#5 + .3}) -- (-0.5, {#5 + .3}) -- (-0.5, .7);
+                \draw (0,#1) node {} -- (0,#2) node {};
+                \draw (1,#3) node {} -- (1,#4) node {};
+            }%
+            \ %
+        }%
+    }%
+}
+\newcommand{\vierzweizelle}[4]{\nzweizelle{#1}{#2}{#3}{#4}{4}}
+\newcommand{\dreizweizelle}[4]{\nzweizelle{#1}{#2}{#3}{#4}{3}}
+
+\newcommand{\zweizweizelle}[4]{%
+    {%
+        \ensuremath{%
+            \ %
+            \tikz[baseline={([yshift=-2.5pt]current bounding box.center)}, x=15pt, y=7pt, every node/.style={shape=circle, fill=black, inner sep=.8pt}]{%
+                \foreach \y in {1,...,2}
+                {
+                    \draw (-0.5, \y) -- (1.5, \y);
+                }
+                \draw (0,#1) node {} -- (0,#2) node {};
+                \draw (1,#3) node {} -- (1,#4) node {};
+            }%
+            \ %
+        }%
+    }%
+}
+
+\DeclareRobustCommand\mueta{%
+    {%
+        \ensuremath{%
+            \tikz[baseline={([yshift=-3.5pt]current bounding box.center)}, x=5pt, y=2.5pt, every node/.style={shape=circle, fill=black, inner sep=.8pt}]{%
+                \draw[line width=.8pt] (1,4) -- (.5,3.2) -- (.5,1.8) -- (1,1);
+                \draw[line width=.8pt] (0,4) -- (.5,3.2) -- (.5,1.8) -- (0,1);
+            }%
+        }%
+    }%
+}
+
+
+\makeatletter
+\providecommand*{\twoheadrightarrowfill@}{%
+  \arrowfill@\relbar\relbar\twoheadrightarrow
+}
+\providecommand*{\twoheadleftarrowfill@}{%
+  \arrowfill@\twoheadleftarrow\relbar\relbar
+}
+\providecommand*{\xtwoheadrightarrow}[2][]{%
+  \ext@arrow 0579\twoheadrightarrowfill@{#1}{#2}%
+}
+\providecommand*{\xtwoheadleftarrow}[2][]{%
+  \ext@arrow 5097\twoheadleftarrowfill@{#1}{#2}%
+}
+\makeatother
+
+\newcommand{\homog}[1][\sigma]{{\ensuremath{(#1_h : \ldots : #1_0)}}}
+\newcommand{\homogq}[1][\sigma]{{\ensuremath{(#1_q : \ldots : #1_0)}}}
+\newcommand{\inhom}[1][\tau]{{\ensuremath{(#1_h \mid \ldots \mid #1_1)}}}
+\newcommand{\inhomq}[1][\tau]{{\ensuremath{(#1_q \mid \ldots \mid #1_1)}}}
+
+
+\newcommand{\progclass}[1]{{\ttfamily\color{col_classes}#1}}
+\newcommand{\progkeyword}[1]{{\ttfamily\color{col_keywords}#1}}
+\newcommand{\progmember}[1]{{\ttfamily\color{col_members}#1}}
+\newcommand{\progname}[1]{{\ttfamily#1}}

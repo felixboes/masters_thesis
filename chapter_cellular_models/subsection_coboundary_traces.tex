@@ -1,0 +1,307 @@
+\subsection{The Coface Operator via Coboundary Traces [B]}
+In this subsection, we proceed as described above.
+We encode our geometric intuition in the notion of $i\Th$ coboundary trace and show
+that the canonical map from the set of $i\Th$ coboundary traces $T_i(\Sigma)$ to the set of $i\Th$ cofaces $\cof_i(\Sigma)$ is bijective.
+Hereby, we focus on the parallel Ehrenfried complex as our proofs become more compact and the radial case is treated analogously.
+
+Recall that the horizontal boundary operator is defined as the alternating sum of the faces of $\Delta^{p_1} \times \ldots \times \Delta^{p_r}$.
+It is therefore computed ``levelwise'' and it might be helpful to think of parallel slit domains with exactly one level.
+
+\begin{defi}
+    \label{cellular_models:dual_ehrenfried:cofaces}
+    \index{coboundary!coboundary of a cell}
+    \index{coboundary!set of coboundaries}
+    \symbolindex[c]{$\cof_i(\Sigma)$}{The set of all $i\Th$ cofaces of a given cell $\Sigma$}{Definition \ref{cellular_models:dual_ehrenfried:cofaces}}
+    Let $\Sigma = \inhom$ be a non-degenerate cell in the double complex $P/P'$ of bidegree $(p,h)$.
+    The set of its $i\Th$ cofaces is denoted by
+    \[
+        \cof_i(\Sigma) = \{ \tilde\Sigma \in P_{p+1, h} \mid d_i''(\tilde\Sigma) = \Sigma \} \,.
+    \]
+\end{defi}
+
+\begin{defi}
+    \label{cellular_models:dual_ehrenfried:cob_tr}
+    \index{coboundary!coboundary trace}
+    \index{coboundary!set of coboundary traces}
+    \symbolindex[a]{$\homog[a]$}{A coboundary trace of a cell $\Sigma$.}{Definition \ref{cellular_models:dual_ehrenfried:cob_tr}}
+    \symbolindex[t]{$T_i(\Sigma)$}{The set of all $i\Th$ coboundary traces of a given cell $\Sigma$.}{Definition \ref{cellular_models:dual_ehrenfried:cob_tr}}
+    Let $\Sigma = \inhom$ be a parallel non-degenerate top dimensional cell with respect to $[p]$ and let $\ul 0_k < i \le \ul p_k$.
+    A sequence $\homog[a]$ in $[p]$ is called $i\Th$ {\bf coboundary trace of $\Sigma$} if it satisfies the following conditions:
+    \begin{enumerate}
+        \item \label{cellular_models:dual_ehrenfried:cob_tr:normalization} $a_0 = i+1$.
+        \item \label{cellular_models:dual_ehrenfried:cob_tr:choice} If $a_j \neq a_{j-1}$, then $a_j = (S_i\tau_j)(a_{j-1})$
+                    (or equivalently: if $a_j \neq (S_i\tau_j)(a_{j-1})$, then $a_j = a_{j-1}$).
+        \item \label{cellular_models:dual_ehrenfried:cob_tr:i} $a_j \neq (S_i\tau_j)(a_{j-1})$ at least once.
+        \item \label{cellular_models:dual_ehrenfried:cob_tr:i+1} $a_j \neq a_{j-1}$ at least once.
+    \end{enumerate}
+    The set of all $i\Th$ coboundary traces of $\Sigma$ is denoted by
+    \[
+        T_i(\Sigma) = \{ (a_h : \ldots : a_0) \text{ is an $i\Th$ coboundary trace of $\Sigma$} \} \,.
+    \]
+\end{defi}
+
+Let us elaborate on the above definition.
+Condition \ref{cellular_models:dual_ehrenfried:cob_tr:normalization} is the normalization corresponding to $\sigma_0(i) = i+1$.
+The second condition encodes jumping slits and glueing in stripes.
+In this sense, condition \ref{cellular_models:dual_ehrenfried:cob_tr:i} forbids glueing in a stripe below all stripes of height $i$ and
+condition \ref{cellular_models:dual_ehrenfried:cob_tr:i+1} forbids glueing in a stripe above all stripes of height $i$.
+Recalling that the $\ul0_k\Th$ slit of a radial cells might be empty the next definition is the obvious analogue to Definition \ref{cellular_models:dual_ehrenfried:cob_tr}.
+
+\begin{defi}
+    \label{cellular_models:dual_ehrenfried:cob_tr_radial}
+    Let $\Sigma = \inhom$ be a radial non-degenerate top dimensional cell with respect to $[p]$ and let $\ul 0 < i \le \ul{p+1}_k$.
+    A sequence $\homog[a]$ in $[p]$ is called $i\Th$ {\bf coboundary trace of $\Sigma$} if it satisfies the following conditions:
+    \begin{enumerate}
+        \item \label{cellular_models:dual_ehrenfried:cob_tr_radial:normalization} $a_0 = \begin{cases}i+1& i \neq \ul{p+1}_k \\ \ul0_k & i = \ul {p+1}_k\end{cases}$.
+        \item \label{cellular_models:dual_ehrenfried:cob_tr_radial:choice} If $a_j \neq a_{j-1}$, then $a_j = (S_i\tau_j)(a_{j-1})$
+                    (or equivalently: if $a_j \neq (S_i\tau_j)(a_{j-1})$, then $a_j = a_{j-1}$).
+        \item \label{cellular_models:dual_ehrenfried:cob_tr_radial:i} If $i \neq \ul0_k$ we have $a_j \neq (S_i\tau_j)(a_{j-1})$ at least once.
+        \item \label{cellular_models:dual_ehrenfried:cob_tr_radial:i+1} If $i \neq \ul{p+1}_k$ we have $a_j \neq a_{j-1}$ at least once.
+    \end{enumerate}
+    The set of all $i\Th$ coboundary traces of $\Sigma$ is denoted by
+    \[
+        T_i(\Sigma) = \{ (a_h : \ldots : a_0) \text{ is an $i\Th$ coboundary trace of $\Sigma$} \} \,.
+    \]    
+\end{defi}
+
+
+\begin{rem}
+    \label{cellular_models:dual_ehrenfried:cob_tr_do_not_contain_i}
+    Observe that the symbol $i$ does not occur in an $i\Th$ coboundary trace.
+\end{rem}
+
+\begin{defi}
+    \label{cellular_models:dual_ehrenfried:a_dot_sigma}
+    \symbolindex[a]{$a.\Sigma$}{The coboundary of $\Sigma$ corresponding to $a$.}{Definition \ref{cellular_models:dual_ehrenfried:a_dot_sigma}}
+    Let $\Sigma = \inhom$ be a non-degenerate top dimensional cell with respect to $[p]$ and let $i = \ul i_k \in [p]$ and $a \in T_i(\Sigma)$.
+    Then we define
+    \[
+        a.\Sigma = \inhom[\tilde\tau]
+    \]
+    with
+    \[
+        \tilde\tau_j =
+            \begin{cases}
+                S_i\tau_j                               & a_j = (S_i\tau_j)(a_{j-1}) \\
+                (i\ a_{j-1}) S_i\tau_j (i\ a_{j-1})     & a_j \neq (S_i\tau_j)(a_{j-1})
+            \end{cases}
+    \]
+    and with respect to the partition of $p+1 = p_1 + \ldots + p_{k-1} + (p_k + 1 ) + p_{k+1} + \ldots + p_r$.
+\end{defi}
+
+\begin{rem}
+    \label{cellular_models:dual_ehrenfried:tilde_tau_i_iS_i}
+    For $a \in T_i(\Sigma)$ and $a.\Sigma = \inhom[\tilde\tau]$, we have
+    \[
+        a_j \neq (S_i\tau_j)(a_{j-1}) \mspc{iff}{10} \tilde\tau_j(i) \neq i \mspc{iff}{10} \tilde\tau_j = (i\ (S_i\tau_j)(a_{j-1})) \,.
+    \]
+\end{rem}
+
+\begin{prop}
+    \label{cellular_models:dual_ehrenfried:cob_tr_equals_cob}
+    Consider $P=P(h,m;r_1, \ldots, r_n)$, the bisimplicial complex associated with $\Modspc$.
+    For every non-degenerate cell $\Sigma \in P_{p,h}$ and $\ul1_k \le i \le \ul p_k$, the map
+    \[
+        \Phi \colon T_i(\Sigma) \to \cof_i(\Sigma) \mspc{with}{20} a \mapsto a.\Sigma
+    \]
+    is bijective.
+    The $p\Th$ coboundary operator of the associated Ehrenfried complex is therefore
+    \[
+        \del_\E^\ast( \Sigma ) = \sum_{i=1}^p (-1)^i \sum_{a \in T_i(\Sigma)} \kappa^\ast(a.\Sigma) \,.
+    \]
+\end{prop}
+
+We prove this proposition using the following basic properties.
+
+\begin{lem}
+    \label{cellular_models:dual_ehrenfried:cob_are_equal_via_sigma_j_i}
+    Consider $\Sigma = (\tau_h \mid \ldots \mid \tau_1)$ and $\Sigma' = (\tau_h' \mid \ldots \mid \tau_1')$ of bidegree $(p,h)$
+    that have their $i\Th$ horizontal face in common.
+    Assume that $\sigma_j(i) = \sigma'_j(i)$ for all $j$.
+    Then already $\Sigma = \Sigma'$.
+\end{lem}
+
+\begin{proof}
+    Using the definition of the horizontal differential (see \ref{cellular_models:parallel:faces}), we have
+    \[
+        (i\ \sigma_j(i)) \sigma_j = D_i(\sigma_j) = D_i(\sigma'_j) = (i\ \sigma'_j(i)) \sigma'_j = (i\ \sigma_j(i)) \sigma'_j
+    \]
+    for arbitrary $j$, up to renormalization.
+    Hence $\sigma_j = \sigma'_j$ for all $j$ and the claim follows.
+\end{proof}
+
+\begin{lem}
+    \label{cellular_models:dual_ehrenfried:cob_tr_def_sigma_j_i}
+    Let $a = \homog[a]$ be an $i\Th$ coboundary trace of $\Sigma$ and denote $a.\Sigma = \homog[\tilde\sigma]$.
+    Then we have
+    \[
+        a_j = \tilde\sigma_j(i) \,.
+    \]
+\end{lem}
+
+\begin{proof}
+    By construction $a_0 = i+1 = \tilde\sigma_0(i)$.
+    We assume there is a minimal index $j$ with $a_j \neq \tilde\sigma_j(i)$.
+    Hence
+    \[
+        a_j \neq \tilde\sigma_j(i) =
+            \tilde\tau_j(\tilde\sigma_{j-1}(i)) =
+            \tilde\tau_j(a_{j-1}) =
+            \begin{cases}
+                (S_i\tau_j)(a_{j-1})                                    & a_j = (S_i\tau_j)(a_{j-1}) \\
+                \big( (i\ a_{j-1}) S_i\tau_j (i\ a_{j-1}) \big)(a_{j-1}) = a_{j-1}  & a_j \neq (S_i\tau_j)(a_{j-1})
+            \end{cases}
+    \]
+    by definition of $\tilde\tau_j$.
+    The first case is clearly impossible, and the second case implies $\sigma_j(i) = a_{j-1} = a_j$ by \ref{cellular_models:dual_ehrenfried:cob_tr:choice} in Definition \ref{cellular_models:dual_ehrenfried:cob_tr}.
+\end{proof}
+
+\begin{lem}
+    \label{cellular_models:dual_ehrenfried:a_Sigma_is_cob}
+    Let $a \in T_i(\Sigma)$.
+    Then
+    \[
+        d_i''(a.\Sigma) = \Sigma \,.
+    \]
+\end{lem}
+
+\begin{proof}
+    Denote $a.\Sigma = \inhom[\tilde\tau] = \homog[\tilde\sigma]$ and $d_i''(a.\Sigma) = \inhom[\tilde\tau'']$.
+    For $q \ge j \ge 1$, by Proposition \ref{cellular_models:parallel:prop_dh} and Lemma \ref{cellular_models:dual_ehrenfried:cob_tr_def_sigma_j_i},
+    we have
+    \[
+        \tilde\tau_j'' = D_i( \tilde\tau_j \cdot (i\ a_{j-1})) = 
+            \begin{cases}
+                D_i( S_i\tau_j \cdot (i\ a_{j-1})) & a_j = (S_i\tau_j)(a_{j-1}) \\
+                D_i( (i\ a_{j-1}) \cdot S_i\tau_j) & a_j \neq (S_i\tau_j)(a_{j-1}) \\
+            \end{cases} \,.
+    \]
+    Now $(i\ a_{j-1})$ is disregarded in both cases by Proposition \ref{cellular_models:parallel:prop_dh} and we are done as $D_iS_i\tau_j = \tau_j$.
+\end{proof}
+
+\begin{lem}
+    \label{cellular_models:dual_ehrenfried:a_Sigma_is_non_deg}
+    Consider a non-degenerate cell $\Sigma \in P_{p,h}$ and let $a \in T_i(\Sigma)$.
+    Then the cell $a.\Sigma \in P_{p+1,h}$ is also non-degenerate.
+\end{lem}
+
+\begin{proof}
+    Denote
+    \[
+        \Sigma = \inhom = \homog \mspc{and}{20} a.\Sigma = \tilde\Sigma = \inhom[\tilde\tau] = \homog[\tilde\sigma] \,.
+    \]
+    We show that $\tilde\Sigma$ is a connected inner cell with the correct number of punctures and boundaries.
+    
+    Clearly, $\tilde\tau_j \neq 1$ for all $q \ge j \ge 1$.
+    Recall that the $\tilde\tau_q, \ldots, \tilde\tau_1$ have a fixed point $k$ in common if and only if $\tilde\sigma_j(k-1) = k$ for all $j$.
+    By assumtion, $D_i(\tilde\sigma_j) = \sigma_j$ and $\Sigma$ is an inner cell.
+    Hence, it suffices to check $k=i,i+1$.
+    By condition \ref{cellular_models:dual_ehrenfried:cob_tr:i} in Definition \ref{cellular_models:dual_ehrenfried:cob_tr},
+    there is at least one $a_j \neq (S_i\tau_j)(a_{j-1})$.
+    This implies $\tilde\tau_j(i) \neq i$ (see Remark \ref{cellular_models:dual_ehrenfried:tilde_tau_i_iS_i}).
+    By condition \ref{cellular_models:dual_ehrenfried:cob_tr:i+1} in Definition \ref{cellular_models:dual_ehrenfried:cob_tr},
+    there is at least one $j$ with $a_j \neq a_{j-1}$.
+    This implies $\tilde\sigma_j(i) \neq i+1$ for at least one $j$.
+    Thus $\tilde\Sigma$ is an inner cell.
+    
+    By Lemma \ref{cellular_models:dual_ehrenfried:a_Sigma_is_cob}, $\tilde\Sigma$ is an $i\Th$ coboundary of $\Sigma$.
+    In particular, it is connected.
+    Moreover, $\tilde\sigma_j(i) = a_j \neq i$ (by Lemma \ref{cellular_models:dual_ehrenfried:cob_tr_def_sigma_j_i} and Remark \ref{cellular_models:dual_ehrenfried:cob_tr_do_not_contain_i}) 
+    and $D_i(\tilde\sigma_j) = \sigma_j$.
+    Therefore
+    \[
+        \ncyc(\tilde\Sigma) = \ncyc(\Sigma)
+    \]
+    and, by construction, $N(\tilde\Sigma) = h$.
+    The levels of $\tilde\Sigma$ are ordered ascendingly as this is true for $\Sigma$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition \ref{cellular_models:dual_ehrenfried:cob_tr_equals_cob}]
+    The map $\Phi$ is well defined by Lemma \ref{cellular_models:dual_ehrenfried:a_Sigma_is_non_deg} and Lemma \ref{cellular_models:dual_ehrenfried:a_Sigma_is_cob}.
+    
+    By Lemma \ref{cellular_models:dual_ehrenfried:cob_tr_def_sigma_j_i},
+    every $i\Th$ coboundary trace $a\in T_i(\Sigma)$ defines a coboundary $a.\Sigma = \homog[\tilde\sigma]$ with $a_j = \tilde\sigma_j(i)$.
+    We conclude that $\Phi$ is injective (as a consequence of Lemma \ref{cellular_models:dual_ehrenfried:cob_are_equal_via_sigma_j_i}).
+    
+    Using Lemma \ref{cellular_models:dual_ehrenfried:cob_tr_def_sigma_j_i} and Lemma \ref{cellular_models:dual_ehrenfried:cob_are_equal_via_sigma_j_i},
+    it remains to show that every $i\Th$ coboundary $\tilde\Sigma = \homog[\tilde\sigma]$ defines an $i\Th$ coboundary trace $a$ of $\Sigma$ with $a_j = \tilde\sigma_j(i)$.
+    Both the conditions
+    \[
+        \tilde\sigma_0(i) = i+1 \mspc{and}{20} \tilde\sigma_j(i) \neq \tilde\sigma_{j-1}(i) \text{ at least once}
+    \]
+    are clearly satisfied; it remains to prove \ref{cellular_models:dual_ehrenfried:cob_tr:choice} and \ref{cellular_models:dual_ehrenfried:cob_tr:i}.
+    
+    In order to show condition \ref{cellular_models:dual_ehrenfried:cob_tr:choice} of Definition \ref{cellular_models:dual_ehrenfried:cob_tr},
+    let $\tilde\sigma_{j-1}(i) \neq \tilde\sigma_j(i) = \tilde\tau_j(\tilde\sigma_{j-1}(i))$.
+    But $\tilde\sigma_{j-1}(i) \neq i \neq \tilde\sigma_j$ by Proposition \ref{cellular_models:ehrenfried:cor_d_hor_deg}, hence $\tau_j(i) = i$.
+    Now, by Proposition \ref{cellular_models:parallel:prop_dh},
+    \[
+        \tau_j = D_i(\tilde\tau_j (i\ \tilde\sigma_{j-1}(i))) = D_i( \tilde\tau_j)\,, \mspc{hence}{20} \tilde\tau_j = S_i\tau_j \,.
+    \]
+    We have shown that
+    \[
+        \tilde\sigma_j(i) \neq \tilde\sigma_{j-1}(i) \mspc{implies}{20} \tilde\sigma_j(i) = \tilde\tau_j(\tilde\sigma_{j-1}(i)) = (S_i\tau_j)(\tilde\sigma_{j-1}(i)) \,.
+    \]
+    
+    It remains to proof condition \ref{cellular_models:dual_ehrenfried:cob_tr:i} of Definition \ref{cellular_models:dual_ehrenfried:cob_tr}.
+    By assumption, $\tilde\Sigma$ is an inner cell, so $\tilde\tau_j = (i\ c)$ for at least one $j$ with $c \neq \tilde\sigma_{j-1}(i)$ by Proposition \ref{cellular_models:ehrenfried:cor_d_hor_deg}.
+    We have
+    \[
+        \tau_j = D_i(\tilde\tau_j (i\ \tilde\sigma_{j-1}(i))) \mspc{hence}{20} S_i\tau_j = (c\ \tilde\sigma_{j-1}(i)) 
+    \]
+    and therefore
+    \[
+        (S_i\tau_j)(\tilde\sigma_{j-1}(i)) = c \neq \tilde\sigma_{j-1}(i) \,.
+    \]
+\end{proof}
+
+The next proposition states in what sense two cofaces might differ.
+\begin{prop}
+    \label{cellular_models:dual_ehrenfried:difference_of_two_cofaces}
+    Let $\Sigma = (\tau_h \mid \ldots \mid \tau_1)$ and $\Sigma' = (\tau_h' \mid \ldots \mid \tau_1')$ be cells of bidegree $(p,h)$ that have their $i\Th$ face in common.
+    If we assume $\sigma_j(i) = \sigma'_j(i)$ for all $j$ then $\Sigma = \Sigma'$.
+    In any case, the transpositions $\tau_j$ and $\tau_j'$ satisfy
+    \begin{enumerate}
+        \item[\mylabel{cellular_models:dual_ehrenfried:lem:common_face:i_fix}{(1)}] If $\tau_j(i) = i = \tau_j'(i)$, then
+            \[
+                \tau_j' = \tau_j \,.
+            \]
+        \item[(2)]Otherwise we can assume without loss of generality $\tau_j = (i\ c)$.
+            \begin{enumerate}
+                \item[\mylabel{cellular_models:dual_ehrenfried:lem:common_face:sigmas_equal}{(2.1)}] If in addition $\sigma_{j-1}(i) = \sigma'_{j-1}(i)$, then
+                    \[
+                        \tau_j' = (\sigma_{j-1}(i)\  c) \mspc{or}{20} \tau_j' = (i\ c) \,. 
+                    \]
+                \item[\mylabel{cellular_models:dual_ehrenfried:lem:common_face:sigmas_distinct}{(2.2)}] If in addition $\sigma_{j-1}(i) \neq \sigma'_{j-1}(i)$, then
+                    \[
+                        \tau_j' = (\sigma_{j-1}(i)\  c) \mspc{or}{20} \tau_j' = (i\ \sigma_{j-1}(i)) \,.
+                    \]
+            \end{enumerate}
+    \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    The first statement is Lemma \ref{cellular_models:dual_ehrenfried:cob_are_equal_via_sigma_j_i}, so we concentrate on the second one.
+    We denote the $i\Th$ face of the above cells by $d''_i( \Sigma ) = ( \bar \tau_q \mid \ldots \mid \bar \tau_1 )$ and omit the subscripts since $j$ is fixed.
+    Identifying the permutations in $\SymGr_{p-1}$ with their image under the $i\Th$ pseudo degeneracy $S_i \colon \SymGr_{p-1} \xhr{} \SymGr_p$,
+    Proposition \ref{cellular_models:parallel:prop_dh} yields
+    \begin{align}
+        \label{cellular_models:para:lem:common_face:prf_1} & \bar \tau = \tau                          & & \text{for } \tau(i) = i\,, \\
+        \label{cellular_models:para:lem:common_face:prf_2} & \bar \tau = ( \sigma(i)\ c ) \neq \id     & & \text{for } \tau = (i\ c)\,,
+    \end{align}
+    This implies \ref{cellular_models:dual_ehrenfried:lem:common_face:i_fix}.
+    The cases \ref{cellular_models:dual_ehrenfried:lem:common_face:sigmas_equal} and \ref{cellular_models:dual_ehrenfried:lem:common_face:sigmas_distinct} follow immediately from
+    \[
+        ( \sigma(i)\ c ) \overset{\eqref{cellular_models:para:lem:common_face:prf_2}}{=}
+            \bar \tau =
+            \bar \tau' = 
+            \begin{cases}
+                \tau' & \text{for } \tau'(i) = i \text{ by \eqref{cellular_models:para:lem:common_face:prf_1}} \\
+                ( \sigma'(i)\ c' ) & \text{for } \tau'(i) \neq i \text{ by \eqref{cellular_models:para:lem:common_face:prf_2}}
+            \end{cases}\,,
+    \]
+    since for $( \sigma(i)\ c ) = ( \sigma(i)'\ c' )$, equation $\eqref{cellular_models:para:lem:common_face:prf_2}$ yields
+    \[
+        \tau' = \begin{cases} (i\ c) & \text{for } \sigma(i) = \sigma'(i) \\ (i\ \sigma(i)) & \text{for } \sigma(i) \neq \sigma'(i) \end{cases}\,.
+    \]
+\end{proof}

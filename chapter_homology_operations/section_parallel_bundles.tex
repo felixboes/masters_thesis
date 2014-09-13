@@ -1,0 +1,189 @@
+\section{Operations on \texorpdfstring{$\Par$}{Par} via Bundles [B]}
+\label{homology_operations:operations_par_via_bundles}
+We assume that the reader is familiar with spectral sequences.
+There are several introductions to the theory of spectral sequences and we recommend working through \cite[Chapter 5]{Weibel1995} or \cite[Chapter 9]{Spanier199412}.
+
+In this section, we sketch three homology operations that are induced by certain bundle maps.
+For a more detailed discussion we refere the reader to \cite[Chapter 4]{Mehner201112}.
+Moreover, we realize the homology operation $T$ via the dual Ehrenfried complex using our description of the coboundary operator.
+
+For trivial bundles $F \to X \to B$ with $F$ a $q$-dimensional, connected, oriented, closed manifold,
+taking the cross product with the fundamental class defines a homomorphism in integral homology
+\[
+    H_p(B) \to H_{p+q}(X) \,.
+\]
+For oriented bundles a similar construction is possible and there are many ways to state naturality of this construction.
+The next proposition is an algebraic solution.
+For a given bundle with fibre $F$, denote by $\dim(F)$ the largest homological degree with $H_{\dim(F)}(F) \neq 0$.
+\label{page:q_dim_bundle}%
+\index{fibre bundle!$q$-dimensional fibre bundle}
+In this case, we call $X$ a $\dim(F)$-dimensional bundle over $B$.
+\begin{prop}
+    \label{homology_operations:parallel_bundles:generalized_cross_product}
+    \index{orientation!with respect to a coefficient ring}
+    \symbolindex[o]{$\otimes$}{The natural map $\otimes \colon H_p(B;R) \otimes H_q(F;R) \to H_{p+q}(X;R)$ being the homology cross product for trivial bundles.}{Definition \ref{homology_operations:parallel_bundles:generalized_cross_product}}
+    Fix a coefficient ring $R$ and a homological degree $q$.
+    For the category of $R$-oriented%
+    \footnote{
+        We assume that the induced action of the fundamental groupoid on $H_\ast(F;R)$ is trivial.
+        Geometrically speaking, the tour along a closed path in $X$ is always orientation preserving (with respect to the fibres and the coefficient ring).
+    },
+    $q$-dimensional bundles $F \to X \to B$ there is a natural map
+    \[
+        \otimes \colon H_p(B;R) \otimes H_q(F;R) \to H_{p+q}(X;R)
+    \]
+    which agrees with the homological cross product in case $X$ is a trivial bundle and $H_\ast(F)$ is of finite rank and torsion free.
+\end{prop}
+\begin{proof}
+    Recall the construction of the homological Leray--Serre spectral sequence (\cite[Chapter 9]{Spanier199412}).
+    The base $B$ is (up to CW-replacement) a CW-complex and the preimage of the cellular filtration $F_pB$ of $B$ defines a filtration of $X$.
+    The associated spectral sequence is the Leray--Serre spectral squence with second page
+    \[
+        E^2_{p,q} = H_p(B; H_q(F;R)) \Rightarrow H_{p+q}(X;R) \,.
+    \]
+    The local coefficient system is trivial by assumption.
+    In particular, we have natural, exact sequences
+    \[
+        H_p(B;R) \otimes H_q(F;R) = E^2_{p,q} \xr{\alpha} E^\infty_{p,q} \to 0
+    \]
+    and
+    \[
+        0 \to E^\infty_{p,q} \xr{\beta} H_{p+q}(X;R)
+    \]
+    since $E^\infty_{p,q} = F_pH_{p+q}(X;R) / F_{p-1}H_{p+q}(X;R)$ and $E^\infty_{p-k,q+k} = 0$ for $k > 0$.
+    Thus
+    \[
+        \otimes = \beta \alpha \colon H_p(B;R) \otimes H_q(F;R) \to H_{p+q}(X;R)
+    \]
+    is a natural homomorphism.
+    
+    For $X$ the trivial bundle $B \times F \to B$ the filtration of $X$ is just $F_pX = F_pB \times F$.
+    By the Eilenberg-Zilber theorem, we have a natural chain homotopy equivalence
+    \[
+        C(X) \simeq C(B) \otimes C(F)\,,
+    \]
+    so the induced filtration on the right hand side is $(F_pC(B)) \otimes C(F)$.
+    But this filtration induces the Tor spectral sequence which collapses at the second page (as $H_\ast(F)$ is torsion free and of finite rank).
+    In particular, the Leray--Serre spectral squence of $B \times F \to F$ is natural isomorphic to this Tor spectral sequence, 
+    so the map $\otimes$ agrees (up to natural isomorphism) with the homology cross product.
+\end{proof}
+
+\label{page:transfer_map}%
+\index{transfer}
+\symbolindex[t]{$tr$}{The transfer map.}{Page \pageref{page:transfer_map}}
+Consider the space of parallel slit domains with a distinguished punctures $\Par_{g,n}^{m-1,1}[(r_1, \ldots, r_n)]$.
+This is a non-trivial $m$-fold covering $\Par_{g,n}^{m-1,1} \xr{\pi} \Par_{g,n}^m[(r_1, \ldots, r_n)]$ and
+we have the transfer map%
+\footnote{%
+    The transfer map is already defined on the singular complexes by summing over the $m$ choices of lifting singular chains.
+    Note that $\pi_\ast \circ tr$ is just the multiplication by $m$.
+}%
+\[
+    tr \colon H_\ast(\Par_{g,n}^m[(r_1, \ldots, r_n)]) \to H_\ast(\Par_{g,n}^{m-1,1}[(r_1, \ldots, r_n)])\,. 
+\]
+For varying slit domains, we continuously insert a small circle around the distinguished puncture.
+This defines a non-trivial orientable circle bundle $\mathbb S^1 \to \mathfrak I_T \to \Par_{g,n}^{m-1,1}[(r_1, \ldots, r_n)]$.
+Adding a pair of slits, one slit ending in a given point $z$ of the small circle and its partner above all other slits (take a glance at Figure \ref{homology_operations:parallel_bundles:operation_t})
+defines a continuous map
+\label{page:operation_map_t}%
+\symbolindex[t]{$\tilde\vartheta_T$}{A map inserting a pair of slits.}{Page \pageref{page:operation_map_t}}
+\[
+    \tilde\vartheta_T \colon \mathfrak I_T \to \Par_{g+1,n}^{m-1}[(r_1, \ldots, r_n)] \,.
+\]
+\begin{figure}[ht]
+    \centering
+    \incgfx{pictures/operation_t.pdf}
+    \caption{\label{homology_operations:parallel_bundles:operation_t}%
+        The operation $(\tilde\vartheta_T)_\ast$ inserts a new pair of slits while rotating the slit sitting in the distinguished puncture.}
+\end{figure}
+Topologically, we forget the distinguished puncture, remove small discs around the two points and glue in a handle, increasing the genus of the surface by one.
+\begin{defi}
+    \label{homology_operations:parallel_bundles:def_operation_t}
+    \symbolindex[t]{$(\tilde\vartheta_T)_\ast$}{The homology operation induced by $\tilde\vartheta_T$.}{Definition \ref{homology_operations:parallel_bundles:def_operation_t}}
+    The map $\tilde\vartheta_T$ induces the homology operation
+    \[
+        T \colon H_s(\Par_{g,n}^m[(r_1, \ldots, r_n)]) \to H_{s+1}(\Par_{g+1,n}^{m-1}[(r_1, \ldots, r_n)])
+    \]
+    by
+    \[
+        x \mapsto (\tilde\vartheta_T)_\star( tr(x) \otimes [\mathbb S^1]) \,,
+    \]
+    where $[\mathbb S^1]$ is the fundamental class of the circle and $\otimes$ as in Proposition \ref{homology_operations:parallel_bundles:generalized_cross_product}
+    and $(\tilde\vartheta_T)_\star$ the induced homomorphism in homology.
+    We imagine $(\tilde\vartheta_T)_\ast$ as seen in Figure \ref{homology_operations:parallel_bundles:operation_t}.
+\end{defi}
+
+Similar to the construction above, we continuously embed a circle $C$ near a distinguished puncture and consider two distinct points on $C$
+This is, up to homotopy, a non-trivial orientable circle bundle $\mathbb S^1 \to \mathfrak I_F \to \Par_{g,n}^{m-1,1}[(r_1, \ldots, r_n)]$.
+Inserting a pair of slits which end in the two marked points on the circle (take a glance at Figure \ref{homology_operations:parallel_bundles:operation_f}) defines a continuous map
+\label{page:operation_map_f}%
+\symbolindex[t]{$\tilde\vartheta_F$}{A map inserting a pair of slits.}{Page \pageref{page:operation_map_f}}
+\[
+    \tilde\vartheta_F \colon \mathfrak I_F \to \Par_{g,n}^{m+1}[(r_1, \ldots, r_n)] \,.
+\]
+\begin{figure}[ht]
+    \centering
+    \incgfx{pictures/operation_f.pdf}
+    \caption{\label{homology_operations:parallel_bundles:operation_f}%
+        The operation $(\tilde\vartheta_F)_\ast$ inserts a new pair of rotating slits sitting in the distinguished puncture.}
+\end{figure}
+Topologically, we introduce a new puncture near the distinguished one.
+\begin{defi}
+    \label{homology_operations:parallel_bundles:def_operation_f}
+    \symbolindex[t]{$(\tilde\vartheta_F)_\ast$}{The homology operation induced by $\tilde\vartheta_F$.}{Definition \ref{homology_operations:parallel_bundles:def_operation_f}}
+    For $m \ge 1$, the map $\tilde\vartheta_F$ induces the homology operation
+    \[
+        F \colon H_s(\Par_{g,n}^m[(r_1, \ldots, r_n)]) \to H_{s+1}(\Par_{g,n}^{m+1}[(r_1, \ldots, r_n)])
+    \]
+    by
+    \[
+        x \mapsto (\tilde\vartheta_F)_\star( tr(x) \otimes [\mathbb S^1])
+    \]
+    where $[\mathbb S^1]$ is the fundamental class of the circle and $\otimes$ as in Proposition \ref{homology_operations:parallel_bundles:generalized_cross_product}
+    and $(\tilde\vartheta_F)_\star$ the induced homomorphism in homology, see Figure \ref{homology_operations:parallel_bundles:operation_f}.
+\end{defi}
+
+Similarly, for the space of parallel slit domains with two distinguished, enumerated punctures $\Par_{g,n}^{m-2,1,1}[(r_1, \ldots, r_n)]$,
+there is a non-trivial orientable torus bundle $\tilde{\mathfrak I}_E \to \Par_{g,n}^{m-2,1,1}[(r_1, \ldots, r_n)]$ by considering two enumerated circles on the surface, each near one of the two enumerated punctures.
+Dividing out the obvious action of $\Symgrp_2^\times = Aut(\{1,2\})$ (defined by interchanging the coordinates in the torus respectively the enumerated punctures)
+defines a $\mathbb F_2$-orientable torus bundle
+\[
+    \mathbb S^1 \times \mathbb S^1 \to \mathfrak I_E \to \Par_{g,n}^{m-2,2}[(r_1, \ldots, r_n)]
+\]
+with $\Par_{g,n}^{m-2,2}[(r_1, \ldots, r_n)]$ the space of parallel slit domains with two distinguished, unordered punctures.
+Inserting a pair of slits which end in the two marked points on the two unordered circles (take a glance at Figure \ref{homology_operations:parallel_bundles:operation_e})
+defines a continuous map
+\label{page:operation_map_e}%
+\symbolindex[t]{$\tilde\vartheta_T$}{A map inserting a pair of slits.}{Page \pageref{page:operation_map_e}}
+\[
+    \tilde\vartheta_E \colon \mathfrak I_E \to \Par_{g+1,n}^{m-2}[(r_1, \ldots, r_n)] \,.
+\]
+Topologically, we forget the two distinguished punctures, remove small discs around the two points and glue in a handle, increasing the genus of the surface by one.
+In order to define the homology operation, observe that the forgetful map
+\[
+    \Par_{g,n}^{m-2,2}[(r_1, \ldots, r_n)] \to \Par_{g,n}^m[(r_1, \ldots, r_n)]
+\]
+is a $\binom{m}{2}$-fold non-trivial covering, so we have again a transfer map $tr$.
+\begin{defi}
+    \label{homology_operations:parallel_bundles:def_operation_e}
+    \symbolindex[t]{$(\tilde\vartheta_E)_\ast$}{The homology operation induced by $\tilde\vartheta_E$.}{Definition \ref{homology_operations:parallel_bundles:def_operation_e}}
+    For $m \ge 2$, the map $\tilde\vartheta_E$ induces the homology operation
+    \[
+        E \colon H_s(\Par_{g,n}^m[(r_1, \ldots, r_n)]) \to H_{s+2}(\Par_{g+1,n}^{m-2}[(r_1, \ldots, r_n)])
+    \]
+    by
+    \[
+        x \mapsto (\tilde\vartheta_E)_\star( tr (x) \otimes [\mathbb S^1 \times \mathbb S^1])
+    \]
+    where $[\mathbb S^1 \times \mathbb S^1]$ is the fundamental class of the torus and $\otimes$ as in Proposition \ref{homology_operations:parallel_bundles:generalized_cross_product}
+    and $(\tilde\vartheta_E)_\star$ the induced homomorphism in homology.
+    We sketch our geometric interpretation of $(\tilde\vartheta_E)_\ast$ in Figure \ref{homology_operations:parallel_bundles:operation_e}.
+\end{defi}
+\begin{figure}[ht]
+    \centering
+    \incgfx{pictures/operation_e.pdf}
+    \caption{\label{homology_operations:parallel_bundles:operation_e}%
+        The operation $(\tilde\vartheta_E)_\ast$ inserts a new pair of independently rotating slits sitting in the distinguished punctures.}
+\end{figure}
+
+\input{chapter_homology_operations/subsection_parallel_operation_t}

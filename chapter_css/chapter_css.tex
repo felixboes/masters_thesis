@@ -1,0 +1,235 @@
+\chapter{Cluster Spectral Sequence}
+\label{chapter_css}
+{\bf [B]}
+We assume that the reader is familiar with spectral sequences.
+There are several introductions to the theory of spectral sequences and we recommend working through \cite[Chapter 5]{Weibel1995} or \cite[Chapter 9]{Spanier199412}.
+
+As before, we discuss the parallel and radial slit complex $P(h,m;r_1, \ldots, r_n)$ and $R(h,m,n)$ at once.
+In order to have a compact notation, we concentrate on the parallel case and
+we keep $g$, $n$, $m$ and $(r_1, \ldots, r_n)$ fixed.
+\label{page:PP}%
+\symbolindex[p]{$\PP_{\bullet,\bullet}$}{The abbriviation $\PP_{\bullet,\bullet}(h,m,; r_1, \ldots, r_n) = (P / P')_{\bullet, \bullet}$ with $P_{\bullet, \bullet} =  P_{\bullet,\bullet}(h,m,; r_1, \ldots, r_n)$.}{Page \pageref{page:PP}}
+The double complex is denoted by $P_{\bullet,\bullet} = P_{\bullet,\bullet}(h,m,; r_1, \ldots, r_n)$,
+the relative bicomplex associated with a fixed $P_{\bullet,\bullet}(h,m,; r_1, \ldots, r_n)$ is $\PP_{\bullet, \bullet} = (P / P')_{\bullet, \bullet}$
+and the corresponding Ehrenfried complex is $\E = \E_\bullet(h,m; r_1, \ldots, r_n)$.
+
+In this chapter, we follow \cite{Boedigheimer201314}.
+We define a filtration on the bicomplex $\PP_{\bullet, \bullet}$ inducing a filtration on the Ehrenfried complex $\E_\bullet$.
+In both cases, we obtain a first quadrant spectral sequence which collapses at the second page.
+
+\section{The Cluster-Filtration on \texorpdfstring{$\PP_{\bullet, \bullet}$}{P} and \texorpdfstring{$\E_\bullet$}{E} [H]}
+The upcoming filtration is inspired by the following observation.
+For a surface $F$ and a potential function $u$, we obtain the critical graph $\mc K_0$ on $F$.
+Observe that $\mc K_0$ is connected.
+Removing all poles and punctures from $\mc K_0$ yields a possibly disconnected graph $\mc K_-$ with $c$ connected components.
+We imagine the horizontal and vertical face operators, which were defined on slit domains, as follows.
+The critical flow lines and the equipotential lines which run through the stagnation points indicate vertical and horizontal stripes.
+Each vertical or horizontal face operator collapses its corresponding stripe.
+Let us assume that the surface, which results from a single collapse, is non-degenerate in order to study how $\mc K_-$ is altered.
+It is readily seen that vertical faces leave the number of connected components of $\mc K_-$ fixed since vertical faces only collapse edges inside $\mc K_-$.
+The horizontal face operator collapses a horizontal stripe $l$ along an equipotential line.
+Therefore, it identifies the edges of $\mc K_-$ which form the upper margin of $l$ with the edges of $\mc K_-$ that form the lower margin of $l$.
+The number of connected components of the new graph is therefore at most $c$ and at least $c-1$.
+Keeping this in mind, following definitions and lemmata are straightforward.
+\begin{defi}
+    \label{css:cluster_relation}
+    \index{cluster!index cluster}
+    \index{cluster!cluster number}
+    \symbolindex[2]{$\equicl$}{The equivalence relation used to count the clusters of a given cell.}{Definition \ref{css:cluster_relation}}
+    \symbolindex[c]{$c(\Sigma)$}{The cluster number of a given cell $\Sigma$.}{Definition \ref{css:cluster_relation}}
+    Consider a cell $ \Sigma = \homogq = \inhomq \in \PP_{p,q}$ with respect to $[p] = \{ \ul0_1, \ldots, \ul p_1, \ldots, \ul 0_r, \ldots, \ul p_r\}$. 
+    On $[p]$, we declare a relation $\equicl$ as follows.
+    \begin{center}
+        $i \equicl i'$ \hspace{10pt} if \hspace{10pt} $i$ and $i'$ are in the same cycle of some $\tau_j$. 
+    \end{center}
+    The transitive closure of $\equicl$ is an equivalence relation.
+    Equivalence classes are called {\bf (index) cluster} of $\Sigma$.
+    The number $c(\Sigma) = c$ of equivalence classes is called the {\bf cluster number} of $\Sigma$ and we set $c(0) = 0$. 
+\end{defi}
+
+\begin{rem}
+    Obviously, we have $1 \leq c(\Sigma) \leq h$ for every generator $\Sigma$.
+\end{rem}
+
+\begin{defi}
+    \label{css:cluster_filtration_of_PP}
+    \index{cluster!cluster filtration of the double complex}
+    \symbolindex[F]{$F_c\PP$}{The cluster filtration of the double complex $\PP$.}{Definition \ref{css:cluster_filtration_of_PP}}
+    The modules of the bicomplex $\PP$ are filtred as follows.
+    For $c = 1, \ldots, h$, let
+    \[
+        F_c\PP_{p,q} = \langle  \Sigma \mspc{with}{10} c(\Sigma) \leq c \rangle \,.
+    \]
+    This filtration of the chain modules is a filtration of the chain complex by the next lemma. 
+\end{defi}
+
+\begin{lem}
+    \label{css:c_induces_a_filtration}
+    For a generator $\Sigma \in \PP_{p,q}$ we have
+    \begin{enumerate}
+        \item \label{css:c_induces_a_filtration_vertical} $c( d'_j(\Sigma) ) = c(\Sigma)$ for all $j$ and
+        \item \label{css:c_induces_a_filtration_horizontal} $c( \Sigma ) -1 \leq c( d''_i( \Sigma ) ) \leq c(\Sigma)$ for all $i \in [p]$,
+    \end{enumerate}
+    if the faces are non-degenerate and therefore generators.
+\end{lem}
+\begin{proof}
+    The index set $[p]$ of a non-degenerate vertical face $d'_j(\Sigma)$ agrees with the index set of $\Sigma$.
+    In fact, the equivalence relation $\equicl$ coincides on these index sets.
+    
+    The index set of a horizontal face $d''_{\ul i_k}(\Sigma)$ is reduced by one, namely --- in the inhomogeneous notation --- by identifying $\ul i_k$ with $\ul{i+1}_k$.
+    This changes the number of clusters if and only if $\ul i_k \not\equicl \ul{i+1}_k$, and obviously we have at most one cluster less.
+    
+    Thus $c(\del(\Sigma)) \leq c(\Sigma)$ and the filtration is a filtration of a chain complex. 
+\end{proof}
+
+The definition of the equivalence relation $\equicl$ on the index set $[p]$ of a cell $\Sigma$ is valid for all non-degenerate cells $\Sigma$.
+In particular, we have a cluster number $c(\Sigma)$ defined for the generators of the Ehrenfried complex.
+We need to see how it behaves under the boundary operator $\del_\E$.
+Recall that $\E$ is a quasi-isomorphic direct summand\footnote{%
+    To be precise, the Ehrenfried complex is, up to a shift in the homological degree, identified with a direct summand.
+    The inclusion induces an isomorphism in homology.
+} of the total complex of $\PP$.
+The projection $\pi$ onto the top dimensional monotone cells is just the projection onto this summand.
+The inverse of $\pi$ is $\kappa$, compare Section \ref{cellular_models:ehrenfried}.
+
+\begin{defi}
+    \label{css:cluster_filtration_of_E}
+    \index{cluster!cluster filtration of the Ehrenfried complex}
+    \symbolindex[F]{$F_c\E$}{The cluster filtration of the Ehrenfried complex.}{Definition \ref{css:cluster_filtration_of_E}}
+    The modules of $\E$ are filtred as follows.
+    For $c = 1, \ldots, h$, let
+    \[
+        F_c\E_p = \langle  \Sigma \mspc{with}{10} c(\Sigma) \leq c \rangle \,.
+    \]
+\end{defi}
+
+This filtration of the chain modules is a filtration of the chain complex by the next lemma since $\del_\E = \pi \circ \del'' \circ \kappa$.
+
+\begin{lem}
+    \label{css:c_induces_a_filtration_ehr}
+    For a generator $\Sigma \in \E_p$ we have
+    \begin{enumerate}
+        \item \label{css:c_induces_a_filtration_pi} $c( \pi (\Sigma) ) = c( \Sigma)$ and
+        \item \label{css:c_induces_a_filtration_kappa} $c( \kappa( \Sigma ) ) = c( \Sigma )$.
+    \end{enumerate}
+\end{lem}
+This lemma is an immediate consequence of Section \ref{cellular_models:ehrenfried} as $\E$ is a direct summand of $Tot(\PP)$.
+However, we give another proof.
+\begin{proof}
+    The projection $\pi$ preserves the cluster number if $\Sigma$ is monotone.
+    
+    Recall that $\kappa$ is the alternating sum of all $\kappa$-sequences
+    \[
+        \kappa_{(j_1, \ldots, j_k)} = \mueta_{j_1} \circ \ldots \circ \mueta_{j_k}
+    \]
+    and $\mueta_l$ is the composition $\eta\mu$ of the multiplication $\mu$ with the factorability structure $\eta$,
+    applied to $\tau_{j+1} | \tau_j$ in the $h$-tuple $\Sigma = \inhom$.
+    Since $d'_j( \mueta_l( \Sigma )) = d'_j( \Sigma )$ for all $j = 1, \ldots, h-1$ 
+    it follows from \ref{css:c_induces_a_filtration_vertical} in Lemma \ref{css:c_induces_a_filtration},
+    that $c(\mueta_l( \Sigma))$ is either zero or equal to the cluster number of $\Sigma$.
+    Thus the same is true for iterations of these $\mueta_l$ for various $l$. 
+    In the linear combination $\kappa( \Sigma )$ all non-zero terms therefore have the same cluster number as $\Sigma$.
+    Since $\Sigma$ itself is such a term, claim \ref{css:c_induces_a_filtration_kappa} follows.
+\end{proof}
+
+\begin{prop}
+    \label{css:filtration_degree_boundary}
+    Let $\Sigma$ be a generator in $\PP$ or $\E$ and denote the respective boundary operator by $\del = \del_{\PP}$ or $\del_\E$.
+    The cluster number of every non-vanishing term $\tilde\Sigma$ in $\del(\Sigma)$ satisfies
+    \[
+        c( \Sigma ) -1 \leq c( \tilde\Sigma ) \leq c(\Sigma) \,.
+    \]
+\end{prop}
+\begin{proof}
+    The claim is an immediate consequence of Lemmata \ref{css:c_induces_a_filtration} and \ref{css:c_induces_a_filtration_ehr} since $\del_\E = \pi \circ \del'' \circ \kappa$.
+\end{proof}
+
+\section{The Cluster Spectral Sequence for \texorpdfstring{$\PP_{\bullet, \bullet}$}{P} and \texorpdfstring{$\E_\bullet$}{E} [B]}
+\label{css:cluster_spectral_sequence_chapter}%
+\index{cluster!cluster spectral sequence}
+Throughout this section, we fix a ring $A$.
+Consequently, we treat $\PP$ and $\E$ as complexes over $A$.
+
+\begin{prop}
+    \label{css:cluster_spectral_sequence}
+    \symbolindex[e]{$E^0_{k,c}(\PP)$}{The cluster spectral sequence of the double complex.}{Proposition \ref{css:cluster_spectral_sequence}}
+    \symbolindex[e]{$E^0_{p,c}(\E)$}{The cluster spectral sequence of the Ehrenfried complex.}{Proposition \ref{css:cluster_spectral_sequence}}
+    Let $g$, $n$, $m$ and $(r_1, \ldots, r_n)$ be given and set $h = 2g-2+m+n+r_1 + \ldots + r_n$.
+    There are two first quadrant spectral sequences
+    \[
+        E^0_{k,c}(\PP) = \bigoplus_{p+q=k}\left[F_c\PP_{p,q}(h,m;r_1, \ldots, r_n) / F_{c-1}\PP_{p,q}(h,m;r_1, \ldots, r_n) \right]
+    \]
+    converging towards
+    \[
+        E^0_{k,c}(\PP) \Rightarrow H_{k+c}( \PP_{\bullet, \bullet}(h,m;r_1, \ldots, r_n) ; A )
+    \]
+    and
+    \[
+        E^0_{p,c}(\E) = F_c\E_p(h,m;r_1, \ldots, r_n) / F_{c-1}\E_p(h,m;r_1, \ldots, r_n)
+    \]
+    converging towards
+    \[
+        E^0_{p,c}(\E) \Rightarrow H_{p+c}( \E_\bullet(h,m;r_1, \ldots, r_n); A ) \,.
+    \]
+    Both spectral sequences collapse at the second page.
+\end{prop}
+\begin{proof}
+    The existence of both spectral sequences is evident.
+    Both complexes $\PP$ and $\E$ are bounded, so the associated spectral sequence is first quadrant and convergent.
+    The only non-trivial differentials are page zero and one by Proposition \ref{css:filtration_degree_boundary}, see Lemma \ref{css:collapsing_ss}.
+\end{proof}
+\begin{rem}
+If $A$ is a field, then we have
+\[
+    H_\ast( \E_\bullet(h,m;r_1, \ldots, r_n); A ) = \bigoplus_{p+c=\ast} E^2_{p,c}(\E) \,.
+\]
+This is one foundation of our computer-aided computations.
+\end{rem}
+
+\begin{lem}
+    \label{css:collapsing_ss}
+    Consider a chain complex $(C, \del)$ with filtration $F_cC$ and assume $\del$ decreases the filtration degree by at most $s$.
+    Then, the associated spectral sequence collapses at $E^{s+1}$.
+\end{lem}
+\begin{proof}
+    In order to prove the convergence theorem for reasonable filtred chain complexes (c.f.\ \cite[Chapter 9, Theorem 2]{Spanier199412}) one finds
+    \[
+        Z^r_{p,c} = \{ x \in F_pC_{p+c} \mid \del x \in F_{p-r}C_{p+c-1} \}
+    \]
+    and
+    \[
+        E^r_{p,c} = Z^r_{p,c} / \big( Z^{r-1}_{p-1,c+1} + \del(Z^{r-1}_{p+r-1,c-r+2})\big) \,.
+    \]
+    The $r\Th$ differential $d^r_{p,c} \colon E^r_{p,c} \to E^r_{p-r,c+r-1}$ is induced by $\del$ since
+    \[
+        \del(Z^r_{p,c}) \subseteq Z^r_{p-r,c+r-1} \mspc{and}{20} \del\big( Z^{r-1}_{p-1,c+1} + \del(Z^{r-1}_{p+r-1,c-r+2})\big) \subseteq \del(Z^{r-1}_{p-1,c+1}) \,.
+    \]
+    For $r \ge s+1$, we assumed $\del(Z^r_{p,c}) = 0$.
+    We conclude $d^r = 0$ and $E^\infty = E^{s+1}$.
+\end{proof}
+
+\section{The Cluster Spectral Sequence in Terms of Matrices [B]}
+\label{css:section_matrix_version}
+Let us study the differentials of the spectral sequence associated with the Ehrenfried complex.
+The presented arguments can be applied to $\PP$ as well.
+
+The Ehrenfried complex is a based chain complex and the cluster-filtration has a remarkable effect on the transformation matrices.
+We exploit this fact in our computer program, compare Section \ref{program}.
+The filtration of $\E$ is induced by a filtration of the bases elements.
+For each degree $p$, we regroup the basis elements with identical cluster number and order the groups ascendingly.
+The boundary operator reduces the filtration degree by at most one by Proposition \ref{css:filtration_degree_boundary}.
+The $p\Th$ transformation matrix is therefore a block matrix.
+\[ 
+    \begin{pmatrix}
+        d^0 & d^1 \\
+            & d^0   & d^1 \\
+            &       & d^0   & d^1 \\
+            &       &       &     & \ddots
+    \end{pmatrix}
+\]    
+The submatrices $d^0$ or $d^1$ correspond to the differentials of the zeroth respectively first page.
+Observe that the second term $E^2$ is given by
+\[
+    \ker( d^1|_{\ker(d^0)}) / \left[ \img(d^0) + \img(d^1|_{\ker(d^0)}) \right] \,.
+\]
+For actual computation, it is worthwile to detect the homology via determining and diagonalizing the transformation matrix block by block.

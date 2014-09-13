@@ -1,0 +1,23 @@
+\section{The Library Libhomology [B,H]}
+\label{program:libhomology}
+
+With {\bf libhomology} we provide an expandable framework for all kinds of homology computations.
+In our context, it is used as the foundation of the program kappa (see Section \ref{chapter_program:kappa}).
+In the following we explain use and essential details of its classes.
+
+The template class \progclass{ChainComplex} is the core of {\bf libhomology}.
+Here we think of a chain complex as a finite sequence of compatible matrices $D_n$ satisfying $D_{n-1} D_n = 0$ which we call differential.
+We do not mention bases.
+Given a \progclass{ChainComplex}, our goal is to determine its homology.
+Therefore one needs an implementation of the coefficient ring \progclass{CoefficientT} (see Subsection \ref{program:libhomology:CoefficientT}) and the matrix type \progclass{MatrixT} (see Subsection \ref{program:libhomology:MatrixT}) of the differentials.
+The class \progclass{HomologyT} (see Subsection \ref{program:libhomology:HomologyT}) specifies the scope of homological information one wants to extract.
+These should be derived using the class \progclass{DiagonalizerT} (see Subsection \ref{program:libhomology:DiagonalizerT}) which diagonalizes matrices by applying row or column operations.
+
+The implementations of the classes \progclass{ChainComplex}, \progclass{MatrixT}, \progclass{DiagonalizerT} and \progclass{HomologyT} are interdependent,
+so we recommend to skim over the details on the first reading.
+
+\input{chapter_program/subsection_chaincomplex_type}
+\input{chapter_program/subsection_coefficient_type}
+\input{chapter_program/subsection_matrix_type}
+\input{chapter_program/subsection_diagonalizer_type}
+\input{chapter_program/subsection_homology_type}

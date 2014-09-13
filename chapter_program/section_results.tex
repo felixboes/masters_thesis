@@ -1,0 +1,19 @@
+\section{Results [B,H]}
+\label{program:results}
+
+As discussed above, our program computes the cluster spectral sequence of a given Ehrenfried complex, i.e.\ we compute the cohomology of the associated moduli space.
+In this section, we list the results our computer program provides.
+Hereby, we distinct the parallel and radial case.
+We compute the cluster spectral sequence with respect to coefficients $R$ being either the rationals $\mathbb Q$ or the field $\mathbb F_2$.
+Given parameters $g$ and $m$, we provide several tables with entries $\dim_R E^s_{p,l}$ for
+\begin{enumerate}
+    \item $s$ equals $0$, $1$ or $2$,
+    \item $p$ the homological degree and
+    \item $l$ the cluster number.
+\end{enumerate}
+The rightmost column of each table notes $\dim_R \sum_{l} E^s_{p,l}$.
+For $s=2$, we thus provide the dimensions of the homology of the moduli spaces $\dim_R H_{2h-p}(\mathfrak M;R)$,
+where $h = 2g+m$ in the parallel case and $h = 2g + m -1$ in the radial case.
+
+\input{chapter_program/subsection_results_parallel}
+\input{chapter_program/subsection_results_radial}

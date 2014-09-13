@@ -1,0 +1,388 @@
+\section{Operations for Parallel Slit Domains on Several Levels [B]}
+\label{homology_operations:glueing_construction}
+In this section, we propose a generalization of the above operations to parallel slit domains on several levels.
+Hereby, we imagine the parallel slit domains in question as slit pictures and surfaces with boundaries simultaneously.
+Consequently, we picture the product of two parallel slit domains $L_1 \in \Par_{g_1,1}^{m_1}[(1)]$ and $L_2 \in \Par_{g_2,1}^{m_2}[(1)]$ as follows.
+We view $L_1$ and $L_2$ as disjoint paraxial rectangles that miss several slits and identify them with the associated surfaces $F_1$ and $F_2$ which have exactly one boundary curve,
+see Figure \ref{homology_operations:parallel_patching_slit_pics:general_glueing_two_slit_pics_and_surfaces}.
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{.7\columnwidth}
+    \input{pictures/general_glueing_two_slit_pics_and_surfaces.pdf_tex}
+    \caption{\label{homology_operations:parallel_patching_slit_pics:general_glueing_two_slit_pics_and_surfaces}Two surfaces with boundary and their associated parallel slit domains.}
+\end{figure}
+
+The slit picture $\mu(L_1, L_2)$ is obtained by glueing in a stripe which joins the top of $L_2$ with the bottom of $L_1$.
+\label{page:glueing_construction_arcs_c_plus_and_c_minus}%
+\symbolindex[c]{$c^+$ resp.\ $c^-$}{The arcs of a boundary curve of a surface, which correspond to the top respectively bottom of a slit picture}{Page \pageref{page:glueing_construction_arcs_c_plus_and_c_minus}}
+The boundary of the surfaces $F_1$ respectively $F_2$ admits a distinguished arc $c_2^+$ respectively $c_1^-$,
+which corresponds to the top respectively bottom of the associated slit picture.
+Joining $c_1^-$ with $c_2^+$ by glueing a stripe inbetween gives rise to the surface associated with $\mu(L_1, L_2)$,
+compare Figure \ref{homology_operations:parallel_patching_slit_pics:general_glueing_two_slit_pics_and_surfaces_glued}.
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{.8\columnwidth}
+    \input{pictures/general_glueing_two_slit_pics_and_surfaces_glued.pdf_tex}
+    \caption{\label{homology_operations:parallel_patching_slit_pics:general_glueing_two_slit_pics_and_surfaces_glued}The surface associated with the parallel slit domain $\mu(L_1, L_2)$.}
+\end{figure}
+In order to define the glueing construction, we will think of two surfaces to stand opposite to each other,
+compare Figure \ref{homology_operations:parallel_patching_slit_pics:general_glueing_two_surfaces_glued_untwisted}.
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{.8\columnwidth}
+    \input{pictures/general_glueing_two_surfaces_glued_untwisted.pdf_tex}
+    \caption{\label{homology_operations:parallel_patching_slit_pics:general_glueing_two_surfaces_glued_untwisted}The surface associated with the parallel slit domain $\mu(L_1, L_2)$.}
+\end{figure}
+
+\subsection{The Glueing Construction [B]}
+In order to treat the general case, consider a parallel slit domain $L \in \Parr$.
+The associated surface $F$ has exactly $n$ boundary curves $C_1, \ldots, C_n$,
+each $C_i$ is subdivided into $r_i$ increasingly enumerated regions and each region admits two arcs $c^+_{ij}$ and $c^-_{ij}$ which correspond to the top and bottom
+of the incidential level of the parallel slit domain $L$.
+
+Fix parallel slit domains $L_1 \in \Par_{g_1, n_1}^{m_1}[(r_1^{(1)}, \ldots, r_{n_1}^{(1)})]$ and $L_2 \in \Par_{g_2, n_2}^{m_2}[(r_1^{(2)}, \ldots, r_{n_2}^{(2)})]$.
+We discuss the glueing construction for the associated surfaces $F_1$ and $F_2$ at first.
+Imagine $F_1$ to stand left of $F_2$.
+Moreover, the boundary curves of $F_1$ form the boundaries of tubes that tend to $F_2$ and analogously 
+the boundary curves of $F_2$ form the boundaries of tubes that tend to $F_1$ 
+as is sketched in Figure \ref{homology_operations:parallel_patching_slit_pics:general_glueing_two_surfaces_look_at_each_other}.
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{\columnwidth}
+    \input{pictures/general_glueing_two_surfaces_look_at_each_other.pdf_tex}
+    \caption{\label{homology_operations:parallel_patching_slit_pics:general_glueing_two_surfaces_look_at_each_other}Two surfaces looking at each other.}
+\end{figure}
+
+In the first step, we match some of the arcs $c^-$ of $F_1$ with some of the arcs $c^+$ of $F_2$.
+The matching is not allowed to be empty (this would produce a disconnected surface).
+In the second step, we join the matched arcs by glueing (untwisted) stripes inbetween.
+The resulting surface $F$ has $m= m_1+m_2$ punctures, but both the genus $g$ and the number of boundary curves $n$ is subject to the chosen matching.
+In the third step, we choose an enumeration of the boundaries of $F$ and for each boundary $C_i$ of $F$
+there are $r_i$ arcs $c^-$ which were not used in the glueing process (e.g.\ all arcs $c^-$ in $F_2$).
+The resulting (ordered) partition is therefore $r = r_1 + \ldots +r_n$.
+Moreover, we choose an arc $c^-_i$ for each boundary curve $C_i$ of $F$ and
+the levels of the associated parallel slit domain are ordered with respect to the occurence of the incidential arcs $c^-$
+by wandering through the corresponding boundary curve starting at the arc $c^-_i$ chosen above.
+
+In terms of parallel slit domains, we start with the choice of a partial, non-empty matching of the respective levels of $L_1$ and $L_2$.
+Using the action of the little cubes operad for each pair of levels, we emplace each pair into its own complex plane.
+The number of punctures is $m = m_1 + m_2$, the norm is $h = h_1 + h_2$, but both the number $n$ of boundary curves and the number $r_i$ of levels per boundary curve have to be computed
+--- note that the number of levels is not determined by $r^{(1)}$, $r^{(2)}$ and the size of the matching ---
+and the genus is given by $g = \frac{h+2-m-n-r}{2}$.
+Having this done, we choose an enumeration of the $n$ boundary curves by declaring a first level for each boundary.
+The remaining levels are ordered by their occurence of the permutation induced by $\sigma_{h}$.
+This ends the construction of a non-degenerate parallel slit domain in $\Par_{g,n}^m[(r_1, \ldots, r_n)]$.
+
+We reflect the construction discussed above in the next
+\begin{defi}
+    The {\bf combinatorial type} $G$ which specifies the glueing construction {\bf depends on} the parameters
+    \[
+        \mathfrak P(G) = (g_1, g_2, n_1, n_2, m_1, m_2, (r_1^{(1)}, \ldots, r_{n_1}^{(1)}), (r_1^{(2)}, \ldots, r_{n_2}^{(2)}))
+    \]
+    and {\bf consists of} the following two data.
+    \begin{enumerate}
+        \item A partial, non-empty matching of the levels.
+    \end{enumerate}
+    The size of the matching is denoted by $s(G)$.
+    The corresponding surface of genus $g(G)$ has $m(G) = m_1 + m_2$ punctures and $n(G)$ (yet unordered) boundary curves each consisting of several levels.
+    \begin{enumerate}
+        \setcounter{enumi}{1}
+        \item A partial enumeration of the levels such that each boundary curve belongs to exactly one selected level.
+    \end{enumerate}
+    The corresponding ordered configuration is $(r^{(G)}_1, \ldots, r^{(G)}_{n(G)})$.
+    The {\bf set of combinatorial types} that specify a glueing construction is denoted by $\mc G$.
+\end{defi}
+
+Using the introduced notation we have proven the following
+\begin{prop}
+    \label{homology_operations:parallel_patching_slit_pics:glueing_construction_defines_operations}
+    For every combinatorial type $G \in \mc G$ with parameters
+    \[
+        \mathfrak P(G) = (g_1, g_2, n_1, n_2, m_1, m_2, (r_1^{(1)}, \ldots, r_{n_1}^{(1)}), (r_1^{(2)}, \ldots, r_{n_2}^{(2)}))
+    \]
+    there are operations
+    \begin{multline*}
+        \tilde\vartheta_G \colon 
+            \left( \coprod_{s(G)} \cspc 2(\C) \right) \times
+            \Par_{g_1, n_1}^{m_1}(r_1^{(1)}, \ldots, r_{n_1}^{(1)}) \times
+            \Par_{g_2, n_2}^{m_2}(r_1^{(2)}, \ldots, r_{n_2}^{(2)}) \to\\
+            \Par_{g(G), n(G)}^{m(G)}(r^{(G)}_1, \ldots, r^{(G)}_{n(G)}) \,,
+    \end{multline*}
+    where each $\cspc 2(\C)$ acts on exactly one predescribed pair of matched levels.
+    Using the homology cross product, we obtain homology operations
+    \begin{multline*}
+        (\tilde\vartheta_G)_\ast \colon 
+            H_i(\cspc 2(\C))^{\oplus s(G)} \otimes
+            H_j(\Par_{g_1, n_1}^{m_1}(r_1^{(1)}, \ldots, r_{n_1}^{(1)})) \otimes
+            H_k(\Par_{g_2, n_2}^{m_2}(r_1^{(2)}, \ldots, r_{n_2}^{(2)})) \to\\[10pt]
+            H_{i+j+k}(\Par_{g(G), n(G)}^{m(G)}(r^{(G)}_1, \ldots, r^{(G)}_{n(G)})) \,.
+    \end{multline*}
+\end{prop}
+
+Now that we have established the general framework, let us discuss three special cases of the glueing construction.
+The first operation $\mu^{\upuparrows}$ is discussed in terms of parallel slit domains,
+the second operation $\mu^{\updownarrows}$ is discussed in terms of surfaces with boundaries
+and the third operation $\mu^{cs}$ is discussed in terms of the dual Ehrenfried complex.
+
+\subsection{The Operation \texorpdfstring{$\mu^{\upuparrows}_\ast$}{muupuparrows*} [B]}
+\label{homology_operations:parallel_patching_slit_pics:construction_of_mu_upuparrows}
+\symbolindex[m]{$\mu^\upuparrows$}{A selected glueing construction}{Subsubsection \ref{homology_operations:parallel_patching_slit_pics:construction_of_mu_upuparrows}}
+The first homology operation is induced by a product called $\mu^{\upuparrows}$
+\label{page:shorthand_par_n_r}%
+\symbolindex[p]{$\Par_n[(r_1, \ldots, r_n)]$}{A shorthand for $\Par_n[(r_1, \ldots, r_n)] = \coprod_{g,m}\Parr$.}{Page \pageref{page:shorthand_par_n_r}}
+and is defined for all parallel slit domains in $\Par_n[(r_1, \ldots, r_n)] = \coprod_{g,m} \Par_{g,n}^m[(r_1, \ldots, r_n)]$ with $n$ and $r=r_1 + \ldots + r_n$ fixed.
+For two parallel slit domains $L_1 \in \Par_{g_1,n}^{m_1}[(r_1, \ldots, r_n)]$ and $L_2 \in \Par_{g_2,n}^{m_2}[(r_1, \ldots, r_n)]$,
+we match the levels with the same index and insert each pair into a complex plane via $\mu$.
+The resulting parallel slit domains are sketched in Figure \ref{homology_operations:parallel_patching_slit_pics:mu_upuparrows} where $L_1$ is colored green and $L_2$ is colored blue.
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{.85\columnwidth}
+    \input{pictures/mu_upuparrows.pdf_tex}
+    \caption{\label{homology_operations:parallel_patching_slit_pics:mu_upuparrows}The parallel slit domain $\mu^\upuparrows(L_1, L_2)$.}
+\end{figure}
+Note that for each pair of boundary curves $C_i$ of $L_1$ and $L_2$ with $r_i \equiv_{2} 1$ the resulting parallel slit domain $L$ receives exactly one boundary curve,
+but for $r_i \equiv_{2} 0$ we receive two boundaries.
+This is due to the fact that the induced ordering of the levels of $L$ is
+\[
+    \big( ( \ul0_1, \ldots, \ul0_{r_1} )( \ul0_{r_1+1}, \ldots, \ul0_{r_2} ) \ldots \big)^2 = ( \ul0_1, \ul0_3, \ldots ) \ldots \,.
+\]
+We order the boundaries and levels ascendingly, i.e.\ the lowest level corresponds to the first level of the first boundary.
+The subsequent levels are ordered with respect to their occurence in $( \ul0_1, \ldots, \ul0_{r_1} )^2$.
+On the remaining levels we repeat this process until all levels are ordered.
+The resulting parallel slit domain $L$ has $\tilde m = m_1 + m_2$ punctures,
+$\tilde n = n + \#\{ r_i \equiv_2 0\}$ boundary components,
+the ordered partition $(\tilde r_1, \ldots \tilde r_{\tilde n})$ arises from $(r_1, \ldots, r_n)$ by replacing every even $(\ldots, r_i, \ldots )$ by $(\ldots, \frac{r_i}{2}, \frac{r_i}{2}, \ldots)$
+and the genus is $\tilde g = g_1 + g_2 + \frac{n+r-\#\{r_i \equiv_2 0\}}{2} - 1$.
+We write $\mu^\upuparrows(L_1, L_2)$ to remind us that the levels of both parallel slit domains occured ascendingly.
+This ends the discussion of the first selected homology operation.
+Summing up, we have
+\begin{defprop}
+    \label{homology_operations:parallel_patching_slit_pics:operation_mu_upuparrows}
+    \symbolindex[m]{$\mu^\upuparrows_\ast$}{A selected homology operation}{Definition / Proposition \ref{homology_operations:parallel_patching_slit_pics:operation_mu_upuparrows}}
+    Using the homology cross product we obtain a family of homology operations
+    \[
+        \mu^\upuparrows_\ast \colon H_s(\Par_{g_1,n}^{m_1}[(r_1, \ldots, r_n)])  \otimes H_t(\Par_{g_2,n}^{m_2}[(r_1, \ldots, r_n)]) \to H_{s+t}(\Par_{\tilde g,\tilde n}^{\tilde m}[(\tilde r_1, \ldots, \tilde r_n)])
+    \]
+    by
+    \[
+        x \otimes y \mapsto \mu^\upuparrows_\star( x \otimes y ) \,,
+    \]
+    with $\tilde g$, $\tilde m$, $\tilde n$ and $\tilde r$ as above and $\mu^\upuparrows_\star$ the induced map in homology.
+\end{defprop}
+
+\subsection{The Operation \texorpdfstring{$\mu^{\updownarrows}_\ast$}{muupdownarrows*} [B]}
+\label{homology_operations:parallel_patching_slit_pics:construction_of_mu_updownarrows}
+\symbolindex[m]{$\mu^\updownarrows$}{A selected glueing construction}{Subsubsection \ref{homology_operations:parallel_patching_slit_pics:construction_of_mu_updownarrows}}
+The second homology operation is induced by a product called $\mu^{\updownarrows}$
+and is defined for all parallel slit domains in $\Par_n[(r_1, \ldots, r_n)] = \coprod_{g,m} \Par_{g,n}^m[(r_1, \ldots, r_n)]$ with $n$ and $r=r_1 + \ldots + r_n$ fixed.
+Consider two parallel slit domains $L_1 \in \Par_{g_1,n}^{m_1}[(r_1, \ldots, r_n)]$ and $L_2 \in \Par_{g_2,n}^{m_2}[(r_1, \ldots, r_n)]$
+and imagine their associated surfaces $F_1$ and $F_2$ such that the boundary components with the same numbering are in the face of each other.
+For each boundary curve we join the arcs $c^-$ in $F_1$ with the arcs $c^+$ on the opposite side in $F_2$.
+In Figure \ref{homology_operations:parallel_patching_slit_pics:parallel_mutliplication_three_slit_pictures}, we sketch this for parallel slit domains $L_1 = L_2$
+with combinatorial type $\Sigma_1 = \Sigma_2 = ((\ul1_3\ \ul1_2) | (\ul2_3\ \ul1_1))$ and
+\begin{figure}[ht]
+    \centering
+    
+    \def\svgwidth{.5\columnwidth}
+    \raisebox{-0.5\height}{\input{pictures/parallel_mutliplication_glueing_naive.pdf_tex}}
+    \hspace{10pt}
+    \def\svgwidth{.3\columnwidth}
+    \raisebox{-0.5\height}{\input{pictures/parallel_mutliplication_three_slit_pictures.pdf_tex}}
+    \caption{
+        \label{homology_operations:parallel_patching_slit_pics:parallel_mutliplication_three_slit_pictures}
+        The multiplication of two closed discs on three levels, where $g=m=0$, $n=1$ and $r=3$.}
+\end{figure}
+we obtain the same surface by connecting the boundary component of $L_1$ with the boundary component of $L_2$ by a tube which has three additional, enumerated boundary curves,
+see Figure \ref{homology_operations:parallel_patching_slit_pics:parallel_mutliplication_glueing_with_handle}.
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{.5\columnwidth}
+    \input{pictures/parallel_mutliplication_glueing_with_handle.pdf_tex}
+    \caption{
+        \label{homology_operations:parallel_patching_slit_pics:parallel_mutliplication_glueing_with_handle}
+        A better picture for the multiplication of two closed discs on three levels, where $g=m=0$, $n=1$ and $r=3$.}
+\end{figure}
+In general, every two boundary components with the same numbering say $i$ are connected by a tube with $r_i$ additional boundary curves enumerated by the arcs $c^-$ in $F_1$.
+The resulting surface has $\tilde n = r$ enumerated boundary components and it is clear that the associated partition is $(1 + \ldots + 1)$.
+Moreover, the number of punctures of the resulting parallel slit domain is $\tilde m = m_1 + m_2$ and by taking a glance at Figure \ref{homology_operations:parallel_patching_slit_pics:parallel_mutliplication_global_glueing}
+it is clear that its genus is $g_1+ g_2+ n-1$.
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{.6\columnwidth}
+    \input{pictures/parallel_mutliplication_global_glueing.pdf_tex}
+    \caption{
+        \label{homology_operations:parallel_patching_slit_pics:parallel_mutliplication_global_glueing}
+        The genus of the resulting surface is $g_1+g_2 + n - 1$, it has $m_1 + m_2$ punctures and $r$ enumerated boundary components.
+        The associated partition is $(1,\ldots,1)$.}
+\end{figure}
+
+As operation on parallel slit domains, we match the ascending levels of $L_1$ with the descending levels of $L_2$.
+This is denoted by the symbol $\mu^{\updownarrows}$.
+This ends the discussion of the second selected homology operation.
+Summing up, we provided
+\begin{defprop}
+    \label{homology_operations:parallel_patching_slit_pics:operation_mu_updownarrows}
+    \symbolindex[m]{$\mu^\updownarrows_\ast$}{A selected homology operation}{Definition / Proposition \ref{homology_operations:parallel_patching_slit_pics:operation_mu_updownarrows}}
+    Using the homology cross product we obtain a family of homology operations
+    \[
+        \mu^\updownarrows_\ast \colon H_s(\Par_{g_1,n}^{m_1}[(r_1, \ldots, r_n)])  \otimes H_t(\Par_{g_2,n}^{m_2}[(r_1, \ldots, r_n)]) \to H_{s+t}(\Par_{\tilde g,\tilde n}^{\tilde m}[(\tilde r_1, \ldots, \tilde r_n)])
+    \]
+    by
+    \[
+        x \otimes y \mapsto \mu^\updownarrows_\star( x \otimes y ) \,,
+    \]
+    with $\tilde g = g_1 + g_2 + n-1$, $\tilde m = m_1 + m_2$, $\tilde n = r$ and partition $(1, \ldots, 1)$, and $\mu^\updownarrows_\star$ the induced map in homology.
+\end{defprop}
+
+\subsection{The Operation \texorpdfstring{$\mu^{cs}_\ast$}{muconnected_sum*} [B]}
+\label{homology_operations:parallel_patching_slit_pics:construction_of_mu_cs}
+\symbolindex[m]{$\mu^{cs}$}{A selected glueing construction}{Subsubsection \ref{homology_operations:parallel_patching_slit_pics:construction_of_mu_cs}}
+The third homology operation is induced by a product called $\mu^{cs}$
+\label{page:shorthand_par}%
+\symbolindex[p]{$\Par$}{A shorthand for $\Par = \coprod_{g,m,(r_1,\ldots, r_n)}\Parr$.}{Page \pageref{page:shorthand_par}}
+and is defined for all parallel slit domains in $\Par = \coprod_{g,m,(r_1,\ldots, r_n)}\Parr$.
+If we think of parallel slit domains as surfaces with poles, the well-known product $\mu$, which was defined above for $n=r=1$,
+is understood as the connected sum at the distinguished dipole.
+The product $\mu^{cs}$ (which we are about to define) does the same and its superscript should remind us of the connected sum operation.
+For two parallel slit domains $L_1 \in \Par_{g_1,n_1}^{m_1}[(r^{(1)}_1, \ldots, r^{(1)}_{n_2})]$ and $L_2 \in \Par_{g_2,n_2}^{m_2}[(r^{(2)}_1, \ldots, r^{(2)}_{n_2})]$,
+we consider the connected sum of the two associated surfaces with respect to the first level of $L_1$ and the last level of $L_2$, see Figure \ref{homology_operations:parallel_patching_slit_pics:mu_cs}.
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{.3\columnwidth}
+    \input{pictures/mu_cs.pdf_tex}
+    \caption{\label{homology_operations:parallel_patching_slit_pics:mu_cs}The parallel slit domain $\mu^{cs}(L_1, L_2)$.}
+\end{figure}
+
+Let us describe this operation in terms of the dual Ehrenfried complex.
+\begin{defi}
+    \label{homology_operations:parallel_patching_slit_pics:connected_sum}
+    \index{connected sum of parallel slit domains}
+    Consider cells $\Sigma = \inhomq[\tau] \in P^\ast(h,m; r_1, \ldots, r_n)$ of bidegree $(p,q)$ and $\Sigma' = \inhomq[\tau'] \in P^\ast(h',m';r'_1, \ldots, r'_n)$ of bidegree $(s, t)$
+    and denote the $s\Th$ iterated pseudo degeneracy $S = S_0 \circ \cdots \circ S_0 \colon \SymGr_{p} \to \SymGr_{s+p}$.
+    The {\bf connected sum of} $\Sigma$ and $\Sigma'$ is
+    \[
+        \mu^{cs}(\Sigma, \Sigma') = (-1)^{pq} (S\tau_q \mid \ldots \mid S\tau_1 \mid \tau'_t \mid \ldots \mid \tau'_1)
+    \]
+    as cell in $P(h+h',m+m'; r_1', \ldots, r_{n'-1}', r_{n'}' + r_1, r_2, \ldots, r_n)$.
+\end{defi}
+
+\begin{prop}
+    \label{homology_operations:parallel_multiplication:multiplication_is_a_cochainmap}
+    The connected sum defines a cochain map
+    \begin{multline*}
+        \mu^{cs} \colon \E^\ast(h,m;r_1, \ldots, r_n) \otimes \E^\ast(h',m';r_1', \ldots, r_n') \to\\
+        \E^\ast(h+h', m+m'; r_1', \ldots, r_{n'-1}', r_{n'}' + r_1, r_2, \ldots, r_n)
+    \end{multline*}
+    and therefore a homology operation on the associated moduli spaces.
+\end{prop}
+
+\begin{notation}
+    In order to simplify notation, we write $\Sigma \cdot \Sigma'$ instead of $\mu^{cs}_\ast(\Sigma, \Sigma')$.
+    Moreover, we assume $r = [(1)] = r'$, since the general case is proven in the same way.
+\end{notation}
+
+\begin{lem}
+    \label{homology_operations:parallel_multiplication:multiplication_is_well_def}
+    If $\Sigma$ and $\Sigma'$ are non-degenerate cells, then the same holds true for $\Sigma \cdot \Sigma'$.
+\end{lem}
+
+\begin{proof}
+    Consider non-degenerate cells $x = (x_q\mid \ldots\mid x_1) \in \E^\ast(q,m;1)_p$ and $y = (y_t\mid\ldots\mid y_1) \in \E^\ast(t,m';1)_s$ and denote their product by
+    \[
+        z = (z_{t+q} \mid \ldots \mid z_{1}) = (Sx_q \mid \ldots \mid Sx_q \mid y_t \mid \ldots \mid y_1) \,.
+    \]
+    By assumption, there is neither $1 = x_i$ respectively $1 = y_i$ nor a common fixed point of $x_q, \ldots, x_1$ respectively $y_t, \ldots y_1$, so the same holds true for $z$.
+    Moreover, $N(z) = N(x) + N(y)$.
+    Thus, $z$ is non-degenerate in $\E^\ast(t+q,m+m';1)_{s+p}$ if the number of boundary curves is
+    \begin{align}
+        \label{homology_operations:parallel_multiplication:multiplication_is_well_def:boundary_curves} n(z) &= n(x) + n(y) - 1
+        \intertext{and the number of punctures is}
+        \label{homology_operations:parallel_multiplication:multiplication_is_well_def:punctures} m(z) &= m(x) + m(y) \,.
+    \end{align}
+    We compare the cycles of
+    \[
+        \alpha = z_{t+q} \cdots z_{1} \cdot(\ul 0\  \ldots\  \ul{s+p} )
+    \]
+    with the cycles of
+    \[
+       \sigma = x_q \cdots x_1 \cdot(\ul 0\  \ldots\  \ul p ) \mspc{and}{20} \rho = y_t \cdots y_1 \cdot(\ul 0\  \ldots\  \ul s ) \,.
+    \]
+    By construction $z_{t+q} \cdots z_{t+1}$ respectively$z_t \cdots z_1$ is an automorphism of the set $\{\ul{s+1}, \ldots, \ul{s+p}\}$ respectively$\{\ul 1, \ldots, \ul s\}$, so
+    \[
+        \alpha|_{\{\ul 0, \ldots, \ul{s-1}\}} = \rho|_{\{\ul 0, \ldots, \ul{s-1}\}}
+    \]
+    and
+    \[
+        \alpha|_{\{\ul s, \ldots, \ul{s+p-1}\}} = S(\sigma)|_{\{\ul s, \ldots, \ul{s+p-1}\}} \,.
+    \]
+    Therefore, $\ul 0$ and $\ul s$ are in the same orbit of $\alpha$ whereas every other cycle corresponds to exactly one cycle of either $\sigma$ or $\rho$.
+    Both \eqref{homology_operations:parallel_multiplication:multiplication_is_well_def:boundary_curves} and \eqref{homology_operations:parallel_multiplication:multiplication_is_well_def:punctures} are immediate consequences.
+    
+    In order to prove the general case, observe that $\mu^{cs}_\ast(\Sigma, \Sigma')$ is connected.
+    Observe that its levels are ordered appropriately.
+\end{proof}
+
+\begin{lem}
+    \label{homology_operations:parallel_multiplication:leibniz_rule}
+    The connected sum is subject to the Leibniz rule
+    \[
+         (\del_\KK^\ast \pi^\ast x) \cdot y + (-1)^{|x|}x \cdot (\del_\KK^\ast \pi^\ast y)= \del_\KK^\ast \pi^\ast(x \cdot y)
+    \]
+\end{lem}
+
+\begin{proof}
+    The signs are readily checked.
+    It suffices to show that the following relation,
+    \[
+        \cof_{i-p'}(x) \sqcup \cof_i(y) \sim \cof_i(x \cdot y)
+    \]
+    with
+    \[
+        \cof_{i-p'}(x) \ni \tilde x \sim \tilde x \cdot y \mspc{and}{20} \cof_i(y) \ni \tilde y \sim x \cdot \tilde y
+    \]
+    is a bijection.
+    By Proposition \ref{cellular_models:dual_ehrenfried:cob_tr_equals_cob} it suffices to compare the corresponding coboundary traces.
+    But a coboundary trace of $x \cdot y$ is a sequence in either $\{ \ul 0, \ldots, \ul s\}$ or $\{ \ul{s+1}, \ldots, \ul{s+p}\}$
+    and therefore corresponds to a coboundary trace of either $x$ or $y$.
+    The converse is true by the same argument.
+\end{proof}
+
+\begin{lem}
+    \label{homology_operations:parallel_multiplication:kappa_commutes_with_products}
+    The map $\kappa^\ast$ commutes with connected sums, i.e.\ 
+    \[
+        \kappa^\ast(\Sigma \cdot \Sigma') = (\kappa^\ast \Sigma) \cdot (\kappa^\ast \Sigma') \,.
+    \]
+\end{lem}
+
+\begin{proof}
+    This is an immediate consequence of Lemma \ref{cellular_models:dual_ehrenfried:relevant_kappa_dual_sequences_of_blocks}.
+\end{proof}
+
+\begin{proof}[Proof of Proposition \ref{homology_operations:parallel_multiplication:multiplication_is_a_cochainmap}]
+    The product of two monotoneous cells is clearly monotoneous.
+    
+    We have 
+    \[
+        (\del_\KK^\ast \pi^\ast x) \cdot y + (-1)^{|x|}x \cdot (\del_\KK^\ast \pi^\ast y) = \del_\KK^\ast \pi^\ast(x \cdot y)
+    \]
+    by Lemma \ref{homology_operations:parallel_multiplication:leibniz_rule} and $\kappa^\ast$ commutes with products by Lemma \ref{homology_operations:parallel_multiplication:kappa_commutes_with_products}.
+    \[
+        (\kappa^\ast\del_\KK^\ast \pi^\ast x) \cdot \kappa^\ast y + (-1)^{|x|}\kappa^\ast x \cdot (\kappa^\ast\del_\KK^\ast \pi^\ast y) = \kappa^\ast\del_\KK^\ast \pi^\ast(x \cdot y)
+    \]
+    The cells $x$ and $y$ are monotoneous, thus by Lemma \ref{cellular_models:dual_ehrenfried:f_dual_vanishes_at_monotonous_spot}
+    \[
+        \kappa^\ast(x) = x \mspc{and}{20} \kappa^\ast(y) = y \,.
+    \]
+\end{proof}
+
+This ends the discussion of the third selected homology operation.
+Summing up, we provided
+\begin{defprop}
+    \label{homology_operations:parallel_patching_slit_pics:operation_mu_cs}
+    \symbolindex[m]{$\mu^{cs}_\ast$}{A selected homology operation}{Definition / Proposition \ref{homology_operations:parallel_patching_slit_pics:operation_mu_cs}}
+    By Poincaré duality the operation on the dual Ehrenfried complex defines an operation
+    \[
+        \mu^{cs}_\ast \colon H_{s}( \mathfrak M_{g_1,n_1}^{m_1} ) \otimes H_t ( \mathfrak M_{g_2,n_2}^{m_2} ) \to H_{s+t}(\mathfrak M_{g_1+g_2,n_1+n_2}^{m_1 + m_2}) \,.
+    \]
+\end{defprop}

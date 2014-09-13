@@ -1,0 +1,51 @@
+\newcommand{\eps}{\varepsilon}
+\newcommand{\A}{\mathbb A}
+\newcommand{\C}{\mathbb C}
+\newcommand{\F}{\mathbb F}
+\newcommand{\M}{\mathfrak M}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\V}{\mathbb V}
+\newcommand{\dimrx}[4]{\dim_{#4}H_{#3-p}(\mathfrak M_{#1}(#2, 1);{#4})}
+\newcommand{\dimrr}[3]{\dimrx{#1}{#2}{#3}{R}}
+\newcommand{\dimrf}[3]{\dimrx{#1}{#2}{#3}{\mathbb F_2}}
+\newcommand{\dimrq}[3]{\dimrx{#1}{#2}{#3}{\mathbb Q}}
+%\newcommand{\Ehrprog}{\mathbb{E}^m_{g,1}}
+\newcommand{\Ehrprog}{\E}
+\newcommand{\Modspcpunc}[1][n]{\mathfrak{M}^{m, n}_{g,#1}}
+\newcommand{\ModspcRad}[1][n]{\mathfrak{M}^\bullet_g(m, #1)}
+\newcommand{\ModspcRadm}[1][m]{\mathfrak{M}^\bullet_g(#1, n)}
+\newcommand{\Rcomplex}[1][m]{R^\bullet_g({#1}, n)}
+\newcommand{\Pcomplex}[1][m]{P^{#1}_{g,n}}
+\newcommand{\Rad}[1][n]{{\mathfrak{Rad}_g(m,#1)}}
+\newcommand{\Radt}{\mathfrak{Rad}}
+\newcommand{\Part}{\mathfrak{Par}}
+\newcommand{\HarmRad}[1][n]{\mathfrak{H}^{\bullet}_g(m, #1)}
+\newcommand{\Har}{\mathfrak H}
+\DeclareMathOperator{\height}{ht}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\parmap}{par}
+\DeclareMathOperator{\radmap}{rad}
+\DeclareMathOperator{\rot}{rot}
+\newcommand{\Th}{\ensuremath{^{\text{th}}}}
+\newcommand{\nd}{\ensuremath{^{\text{nd}}}}
+\newcommand{\complex}{{\bf\color{green} which complex? }}
+
+%Siehe http://tex.stackexchange.com/questions/56079/using-tikz-inside-a-figure-caption
+\DeclareRobustCommand\radmult{%
+    {%
+        \ensuremath{%
+            \mathrel{%
+                \tikz[baseline={([yshift=-3.5pt]current bounding box.center)}, x=5pt, y=2.5pt, every node/.style={shape=circle, fill=black, inner sep=.8pt}]{%
+                    \draw[line width=0.9pt] (5, 0) -- (3, 0);
+                    \draw[line width=0.9pt] (2, 0) -- (0, 0);
+                    \filldraw (3, 0) circle (1pt);
+                    \filldraw (2, 0) circle (1pt);
+                }%
+            }%
+        }%
+    }%
+}

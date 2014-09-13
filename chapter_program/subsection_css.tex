@@ -1,0 +1,270 @@
+\subsection{The Class ClusterSpectralSequence [B,H]}
+\label{chapter_program:kappa:css}
+
+Having described how basis elements of the Ehrenfried complex $\Ehrprog$ are represented by our computer program, 
+we will now explain how the cluster spectral sequence associated with $\Ehrprog$ is realized 
+and how the methods provided by the class \progclass{Tuple} (compare Subsection \ref{chapter_program:kappa:tuple}) are combined 
+to compute its differentials.
+For these purposes, we introduce the class \progclass{ClusterSpectralSequence}, 
+which is a template class with the class type of the underlying \progclass{ChainComplex} as a template parameter
+(compare Subsection \ref{program:libhomology:ChainComplex}).
+
+At first, we are going to describe the class \progclass{CSSBasis} in Subsection \ref{chapter_program:kappa:css:css_basis}, 
+which represents the basis of a single module of the cluster spectral sequence. 
+Next, we describe the data members of the \progclass{ClusterSpectralSequence} (Subsection \ref{chapter_program:kappa:css:data_members}),
+which are most importantly a collection of bases of the modules of the Ehrenfried complex and 
+a collection of its differentials.
+Thereafter, we explain how the bases (see Subsubsection \ref{chapter_program:kappa:css:gen_bases}) and 
+the differentials (see Subsubsection \ref{chapter_program:kappa:css:gen_diff}) are generated, 
+and what other methods are provided by the class \progclass{ClusterSpectralSequence} (see Subsubsection \ref{chapter_program:kappa:css:more_methods}). 
+
+\subsubsection{CSSBasis [H]}
+\label{chapter_program:kappa:css:css_basis}
+
+Just like the cluster spectral sequence associated with $\Ehrprog$ consists of a finite number of modules, 
+our class \progclass{ClusterSpectralSequence} contains a finite number of \progclass{CSSBases}, 
+which are structs representing the bases of these modules.
+
+Thus the only data member of the struct \progclass{CSSBasis} is the basis
+\begin{lstlisting}
+BasisType basis;
+\end{lstlisting}
+Thereby, \progclass{BasisType} is a map storing all \progclass{Tuples} of this basis, sorted by cluster sizes.
+For each cluster size $l$, we organize the corresponding \progclass{Tuples} in an \progname{std::unordered\_set}
+with an appropriate hash function that makes it possible to search for basis elements in amortized constant running time.
+
+The struct \progclass{CSSBasis} provides the usual methods for saving and loading as well as the functions
+\begin{lstlisting}
+uint64_t size( int32_t l ) const;
+\end{lstlisting}
+returning the number of basis elements with exactly $l$ clusters and 
+\begin{lstlisting}
+uint64_t total_size() const;
+\end{lstlisting}
+returning the total number of basis elements.
+
+Since the computation of the differential (compare Subsubsection \ref{chapter_program:kappa:css:gen_diff}) requires 
+a unique identification of one basis element among the other basis elements of the same cluster size of one \progclass{CSSBasis}, 
+there is a method
+\begin{lstlisting}
+int64_t id_of( Tuple& t );
+\end{lstlisting} 
+returning the unique \progname{id} of the given \progclass{Tuple} \progname{t}. 
+If \progname{t} is not an element of this \progclass{CSSBasis}, we return \progname{-1} to indicate the failure of the function.
+
+The most important method of the struct \progclass{CSSBasis} is the function
+\begin{lstlisting}
+uint32_t add_basis_element ( Tuple& t );
+\end{lstlisting}
+
+Using the method \progname{num\_clusters} of the class \progclass{Tuple} (see Subsubsection \ref{program:kappa:tuple:basics}),
+it inserts the \progclass{Tuple} \progname{t} into the part of the basis corresponding to its number of clusters
+and sets the \progname{id} of \progname{t} to the current number of basis elements with exactly $l$ clusters. 
+This means that if one builds up a \progclass{MonoBasis} by successively adding basis elements,
+all basis elements can be distinguished by their \progname{ids}.
+
+\subsubsection{Data Members [H]}
+\label{chapter_program:kappa:css:data_members}
+
+The class \progclass{ClusterSpectralSequence} represents the cluster spectral sequence assoicated with the Ehrenfried complex.
+Hence, it contains a collection of \progclass{CSSBases} 
+\begin{lstlisting}
+std::map< uint32_t, CSSBasis > basis_complex;
+\end{lstlisting}
+where for each $0 \leq p \leq 2h$, the basis elements of the Ehrenfried complex on the symbols $0, \dotsc, p$ are stored,
+and the data member
+\begin{lstlisting}
+MatrixComplex diff_complex;
+\end{lstlisting}
+where at each time, the differential needed for computations is stored.
+
+Note that \progclass{MatrixComplex} is a template parameter. 
+Depending on the coffficients of the homology one wants to compute,
+it can be chosen to be \progclass{ClusterSpectralSequenceQ} or \progclass{ClusterSpectralSequenceZm}.
+For coefficients in the field $\mathbb F_2$, we highly recommend to use \progclass{ClusterSpectralSequenceBool} for efficiency reasons.
+The genus \progmember{g}, the number of punctures \progmember{m} and the number \progmember{h} of transpositions in a basis tuple 
+associated with this \progclass{MonoComplex} are also stored as data members. 
+Furthermore, the data member
+\begin{lstlisting}
+SignConvention sign_conv;
+\end{lstlisting}
+indicates which sign convention (see also Subsubsection \ref{chapter_program:kappa:compute_css:implementation}) is used to compute the homology of this \progclass{MonoComplex},
+and the data member
+\begin{lstlisting}
+size_t num_threads;
+\end{lstlisting}
+determines the number of threads using for the construction of the differentials.
+
+\subsubsection{Generating Bases [H]}
+\label{chapter_program:kappa:css:gen_bases}
+
+The first step to build up a \progclass{ClusterSpectralSequence} is to call the constructor
+\begin{lstlisting}
+ClusterSpectralSequence( uint32_t genus, 
+                         uint32_t num_punctures, 
+                         SignConvention sgn, 
+                         uint32_t num_working_threads, 
+                         uint32_t num_remaining_threads );
+\end{lstlisting}
+For an explanation of the parameters \progname{num\_working\_threads} and \progname{num\_remaining\_threads}, 
+see Subsubsection \ref{diag_field_implementation}.
+In the constructor, \progclass{Diagonalizer} is configured (compare Subsection \ref{program:libhomology:DiagonalizerT}), 
+and the bases of all the modules belonging to the \progclass{MonoComplex} are initialized 
+via a recursive method we want to explain now. 
+
+Our aim is to enumerate all cells $\Sigma = (\tau_h \mid \ldots \mid \tau_1)$ 
+of bidegree $(p, h)$ for all $0 \leq p \leq 2h$ such that
+\begin{enumerate}
+ \item All $\tau_i$ are non-trivial transpositions on the symbols $min, \dotsc, p$.
+ \item Each symbol $min, \dotsc, p$ is permuted non-trivially by at least one $\tau_i$.
+ \item $\Sigma$ is monotonous.
+\end{enumerate}
+Hereby, in the parallel case, $min$ equals $1$, and in the radial case, we want to enumerate all cells for $min = 0$ or $min = 1$.
+
+The enumeration of all these cells works recursively.
+Let $\Sigma = (\tau_k \mid \ldots \mid \tau_1)$ be a cell fulfilling the above conditions, 
+but with bidegree $(p, k)$ with $k < h$.
+Assume we want to find all possibilities to extend such a cell $\Sigma$ to a monotonous tuple $\Sigma'$ of $k+1$ transpositions
+by inserting a transposition $\tau_{k + 1}$, perharps using more symbols. 
+The following cases occur.
+
+\begin{enumerate}
+\item We also use the symbols $min, \dotsc, p$ for $\tau_{k+1}$.
+      Since $\Sigma'$ is supposed to be monotonous, 
+      $\tau_{k + 1}$ needs to contain the symbol $p$.
+      Hence we can set $\tau_{k + 1} := (p, i)$ with $i \in \{min, \dotsc, p-1\}$ chosen arbitrarily.
+\item We insert a new row into our parallel slit domain and use the symbols $min, \dotsc, p + 1$ for $\Sigma'$.
+      By monotony, $\tau_{k + 1}$ has to contain the highest symbol $p + 1$. 
+      But now there are two possibilities:
+      \begin{enumerate}
+      \item The new row is inserted as a $(p+1)\Th$ row above the old rows. 
+            Hence the symbol that is contained in $\tau_{k + 1}$ apart from $p + 1$
+            is one of the symbols that were already used for the transpositions $\tau_1, \dotsc, \tau_k$, 
+            and we can set $\tau_{k + 1} := (p + 1, i)$ with $i \in \{min, \dotsc, p\}$ chosen arbitrarily.
+      \item The new row is inserted as the $i\Th$ row for some $i \in \{min, \dotsc, p\}$  
+            and the indices of the old rows $min, \dotsc, p$ are shifted up by one.
+            Note that these indices are also shifted up in the transpositions of $\Sigma$.
+            By monotony and since all symbols in $\{min, \dotsc, p\}$ have to be covered, 
+            the new transposition has to be $\tau_{k + 1} := (p + 1, i)$, 
+            meaning that the symbol $p + 1$ is also used by at least one of the transpositions $\tau_1, \dotsc, \tau_k$, 
+            and that the symbol $i$ is used by $\tau_{k + 1}$ only.
+      \end{enumerate}
+\item We insert two rows into our slit domain, using the symbols $\{min, \dotsc, p + 2\}$. 
+      Thus the symbols used by the new transposition $\tau_{k + 1}$ do not yet appear in $\Sigma$.
+      Therefore $\tau_{k + 1}$ has to contain the symbol $p + 2$ and some other symbol $i \in \{min, \dotsc, p + 1\}$.
+      Again, the indices of the rows $i + 1, \dotsc, p$ have to be shifted up by $1$ in the transpositions of $\Sigma$.
+\end{enumerate}
+
+We can use these observations to define the recursive method
+\begin{lstlisting}
+void gen_bases( uint32_t k, uint32_t p, uint32_t min, Tuple& tuple );
+\end{lstlisting}
+This methods gets as input data a monotonous \progclass{Tuple} consisting of $k$ transpositions 
+which contain each of the symbols $min, \dotsc, p$ at least once,
+and the minimum symbol the transpositions may contain.
+Using the above case distinction, it calls itself recursively with the appropriate parameters
+and stores all the transpositions with $h$ transpositions detected thereby in the corresponding basis,
+but only if they contain the required number of cycles.
+
+Now we can describe the way the constructor of the \progclass{CSS} sets up its \progmember{basis\_complex}.
+
+\begin{prop}
+We can enumerate all basis elements of the parallel Ehrenfried complex
+by defining the \progclass{Tuple} $\Sigma = ((2, 1))$ consisting of only one \progclass{Transposition},
+and then calling the recursive function \progname{gen\_bases(1, 2, 1, $\Sigma$)}. 
+
+For enumerating all basis elements of the radial Ehrenfried complex,
+we additionally need to call the recursive function \progname{gen\_bases(1, 1, 0, $\Sigma'$)} with $\Sigma' = ((1, 0))$.
+\begin{proof}
+
+Note that for a given $\Sigma$, the tranpositions arising from the different cases fulfill the above conditions (i) - (iii),
+and that they are all distinct.
+If we consider two different \progclass{Tuples}, 
+the transpositions arising from the case distinction also cannot coincide
+since either they have different numbers of transpositions or
+their starting sequence of transpositions already differs.
+Especially, we don't enumerate \progclass{Tuples} multiple times by the two initial calls in the radial case
+since the first family of \progclass{Tuples} does not contain the symbol $0$, and the second family does.
+
+Hence it suffices to show that all monotonous transpositions can be found by our algorithm.
+By induction on the number of transpositions, 
+we can assume that we have already built up all monotonous tuples with $k$ transpositions.
+Let $\Sigma' = (\tau_{k + 1}\mid \dotsc\mid \tau_1)$ be monotonous. 
+Then $\tau_{k + 1} = (p+1, i)$ with $i \in \{1, \dotsc, p\}$ by monotony.
+The tuple $\Sigma := (\tau_k \mid \dotsc \mid \tau_1)$ is also monotonous, 
+but we might have to shift the indices $i, \dotsc, p+1$ down by one
+if the symbol $i$ is not contained in the transpositions $\tau_1, \dotsc, \tau_k$.
+This yields one of the tuples of $k$ transpositions we have already found.
+By reverting the process just described, we can rebuild $\Sigma'$ from $\Sigma$, 
+and this case is covered by the above case distinction.
+\end{proof}
+\end{prop}
+
+\subsubsection{Generating Differentials [B]}
+\label{chapter_program:kappa:css:gen_diff}
+
+In Subsubsection \ref{chapter_program:kappa:compute_css:implementation}, we explained how both the $E^1$-term and $E^2$-term are computed.
+Recalling Chapter \ref{cellular_models}, the $p\Th$ differential of the Ehrenfried complex is given by the composition $\pi \del''_p \kappa$.
+The member function
+\begin{lstlisting}
+gen_d0( const int32_t p, const int32_t l );
+\end{lstlisting}
+generates the restriction of the $p\Th$ differential $\del_\E$ to the cells of $\Ehrprog$ with exactly $l$ clusters.
+Similarly, the method
+\begin{lstlisting}
+gen_d1_stage_1( const int32_t p, const int32_t l );
+\end{lstlisting}
+generates the restriction of the $p\Th$ differential $\del_\E$ from the cells with $l$ clusters to the cells with $l-1$ clusters and
+applies all row operations to this restriction that come from the sub-matrix $d^0$ from above.
+
+For runtime reasons, we thereby use yet another formula for the map $\kappa$.
+\begin{prop}
+    Let $I'$ be the set of tuples of integers $(t_h, \ldots, t_1)$ such that $0 \leq t_q < q$.
+    Then the map
+    \[
+        \{ 0, \ldots, h! - 1\} \to I'
+        \mspc{with}{20}
+        k \mapsto \left( \left\lfloor \frac{k}{(q-1)!} \right\rfloor \pmod q\right)_q
+    \]
+    is a bijection.
+\end{prop}
+\begin{proof}
+We show that
+\[
+    (t_h, \ldots, t_1) \mapsto \sum_{q=2}^h t_q \cdot (q-1)!
+\]
+defines an inverse of the above map. 
+Since both sets have the same cardinality, 
+it suffices to show that this map is a right inverse.
+For a fixed coordinate $q \in \{1, \dotsc, h\}$, we compute
+\[
+    \sum_{q=2}^h t_q \cdot (q-1)! = \sum_{q=r}^h t_q \cdot (q-1)! + \sum_{q=2}^{r-1} t_q \cdot (q-1)!\,.
+\]
+Using induction on $r$, we see that
+\[
+    \sum_{q=2}^{r-1} t_q \cdot (q-1)! < (r-1)!\,,
+\]
+since for $r = 1$, the statement is true, and if we assume the statement for $r-1$, we can conclude
+\begin{align*}
+    \sum_{q=2}^{r} t_q \cdot (q-1)! &= \sum_{q=2}^{r-1} t_q \cdot (q-1)! + t_r (r-1)! \\
+                                    &< (r-1)!               + (r-1) (r-1)! \\
+                                    &= r!\,.
+\end{align*}
+From this, we get
+\[
+    \left\lfloor \frac{\sum_{q=2}^h t_q \cdot (q-1)!}{(r-1)!} \right\rfloor=\left\lfloor \sum_{q=r}^h t_q \cdot \frac{(q-1)!}{(r-1)!} + \sum_{q=2}^{r-1} t_q \cdot \frac{(q-1)!}{(r-1)!} \right\rfloor = \sum_{q=r}^h t_q \cdot \frac{(q-1)!}{(r-1)!}
+\]
+since the left sum is integral and the right sum vanishes after rounding down.
+Taking the remaining term modulo $r$, we get $t_r$ as a result since all summands but the $r\Th$ are zero modulo $r$.
+\end{proof}
+
+\subsubsection{More Member Functions [H]}
+\label{chapter_program:kappa:css:more_methods}
+
+We also offer class methods to print the \progmember{basis\_complex} and the \progmember{matrix\_complex}, and a method
+\begin{lstlisting}
+void erase_differential( int32_t p );
+\end{lstlisting}
+which deletes the \progmember{p}${}\Th$ differential and releases its memory. 
+This function is defined because we only want to keep a differential in the memory
+as long as we really need it due to storage limitation.

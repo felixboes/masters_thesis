@@ -1,0 +1,74 @@
+\section{The Dual Ehrenfried Complex [B]}
+\label{cellular_models:dual_ehrenfried}
+In this section, we introduce the notion of coboundary traces to provide explicit formulas for both the horizontal coface operator $(\del'')^\ast$ and
+the coboundary operator $\del_\E^\ast$.
+Moreover, we study some usefull properties of $\kappa^\ast$ and classify the cells of a given Ehrenfried complex.
+
+Let us sketch the process of constructing horizontal cofaces of a given top dimensional cell $\Sigma = \inhom$.
+Every transposition defines a slit of pairs where shorter slits sit atop of longer slits if they are of the same height.
+In some pictures (e.g.\ Lemma \ref{cellular_models:dual_ehrenfried:f_dual_of_a_cell}), we indicate this pairing by an arc joining the two slits.
+In Figure \ref{cellular_models:dual_ehrenfried:motivate_coboundaries_pre} we picture the cell $\Sigma = ((\ul3\ \ul1)|(\ul2\ \ul1))$.
+\begin{figure}[ht]
+\centering
+\incgfx{pictures/cellular_ehrenfried_dual_motivate_coboundaries_pre}
+\caption{\label{cellular_models:dual_ehrenfried:motivate_coboundaries_pre}The cell $((\ul3\ \ul1)|(\ul2\ \ul1))$. Here $g=1$, $n=1$ and $m=0$.}
+\end{figure}
+
+We obtain a coboundary by glueing a stripe inbetween the two slits of height $\ul 1$.
+More sophisticated, we let the shorter slit jump through the longer slit, in order to end up below the long slit of height $\ul2$, and glue in the stripe afterwards.
+The two coboundaries are sketched in Figure \ref{cellular_models:dual_ehrenfried:motivate_coboundaries} where we shade the stripe which was glued in.
+\begin{figure}[ht]
+\centering
+\incgfx{pictures/cellular_ehrenfried_dual_motivate_coboundaries}
+\caption{\label{cellular_models:dual_ehrenfried:motivate_coboundaries}Two coboundaries of $((\ul3\ \ul1)|(\ul2\ \ul1))$. Still $g=1$, $n=1$ and $m=0$.}
+\end{figure}
+
+For a cell with more slits we might have more choices for jumps as seen in the next example.
+The cell $\Sigma = \big( (\ul4\ \ul1) | (\ul3\ \ul1) | (\ul3\ \ul1) | (\ul2\ \ul 1) \big)$ is skeched in Figure \ref{cellular_models:dual_ehrenfried:motivate_more_coboundaries_pre}
+\begin{figure}[ht]
+\centering
+\incgfx{pictures/cellular_ehrenfried_dual_motivate_more_coboundaries_pre}
+\caption{\label{cellular_models:dual_ehrenfried:motivate_more_coboundaries_pre}The cell $\big( (\ul4\ \ul1) | (\ul3\ \ul1) | (\ul3\ \ul1) | (\ul2\ \ul 1) \big)$. Here $g=2$, $n=1$ and $m=0$.}
+\end{figure}
+and we construct the three coboundaries seen in Figure \ref{cellular_models:dual_ehrenfried:motivate_more_coboundaries}.
+To obtain coboundary (1), we let slits 2, 3 and 4 of height $\ul1$ jump through slit 1.
+For coboundary (2), we let slits 3 and 4 of height $\ul1$ jump through slit 2,
+and for coboundary (3), we slits 2  and 3 of height $\ul1$ jump through slit 1.
+\begin{figure}[ht]
+\centering
+\incgfx{pictures/cellular_ehrenfried_dual_motivate_more_coboundaries}
+\caption{\label{cellular_models:dual_ehrenfried:motivate_more_coboundaries}Three coboundaries of $\big( (\ul4\ \ul1) | (\ul3\ \ul1) | (\ul3\ \ul1) | (\ul2\ \ul 1) \big)$ that arise from different jumps.}
+\end{figure}
+
+The key insight is that an $i\Th$ coboundary $\tilde\Sigma$ is determined by its sequence $\tilde\sigma_j(i)$.
+By this, we see that constructing a coboundary should be the same as constructing such a sequence by choosing which slits are going to jump.
+We encode our geometric intuition in the notion of $i\Th$ coboundary trace (see Definition \ref{cellular_models:dual_ehrenfried:cob_tr})
+and show that the canonical map from the set of $i\Th$ coboundary traces $T_i(\Sigma)$ to the set of $i\Th$ cofaces $\cof_i(\Sigma)$ is bijective (see Proposition \ref{cellular_models:dual_ehrenfried:cob_tr_equals_cob}).
+The coface corresponding to a given coboundary trace $a$ is denoted by $a.\Sigma$.
+Using our notation, the coboundary operator of the Ehrenfried complex is
+\[
+    \del_\E^\ast(\Sigma) = \sum_{i=1}^p (-1)^i \sum_{a \in T_i(\Sigma)} \kappa^\ast(a.\Sigma) \,.
+\]
+Most importantly the explicit formula and a better understanding of $\kappa^\ast$ (developed in Subsection \ref{cellular_models:dual_ehrenfried:kappa_dual})
+allows us to define homology operations on the moduli space via coboundary maps defined on the dual Ehrenfried complex, see Chapter \ref{homology_operations}.
+
+Moreover, we classify the cells of a fixed Ehrenfried complex.
+Cofaces $\tilde\Sigma$ are said to arise as basic expansions of $\Sigma$ if the construction involves no jumps, in the sense of the above paragraphs.
+Cells that do not arise this way are called thin.
+Applying basic expansions is commutative (this is made precise by Proposition \ref{cellular_models:dual_ehrenfried:basic_expansions_commute})
+and every cell in $\E$ arises uniquely from a thin cell by applying a set of basic expansions:
+\begin{prop*}[\ref{cellular_models:dual_ehrenfried:every_cell_is_an_expansion}]
+    Denote the set of thin cells by $\Thin$, the set of basic expansions of a cell $\Sigma$ by $Bsupp(\Sigma)$ and the power set operator by $\mc Pow$.
+    There is a bijection
+    \[
+        ex \colon \coprod_{\Sigma \in \Thin} \mc Pow( Bsupp(\Sigma)) \to Cells(\E) \mspc{with}{20} Bsupp(\Sigma) \supseteq J \mapsto J.\Sigma \,.
+    \]
+\end{prop*}
+In particular, the number of cells of a given degree is the sum of certain binomial coefficients and the dimension of $\E$ is
+\[
+    \dim \E = \sum_{p=2}^{2h} 2^{(2h-p)} \cdot |\{\Sigma \in \E_p \text{ thin} \}| \,.
+\]
+
+\input{chapter_cellular_models/subsection_coboundary_traces}
+\input{chapter_cellular_models/subsection_dual_of_kappa}
+\input{chapter_cellular_models/subsection_classification_of_cells}

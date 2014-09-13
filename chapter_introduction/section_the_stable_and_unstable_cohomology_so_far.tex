@@ -1,0 +1,211 @@
+\section{A Survey on the Stable and Unstable (Co-)Homology [B]}
+First of all, we recall the definition of the mapping class group.
+Consider the space $\Diff_{g,n}^{m}$ of orientation-preserving diffeomorphisms on a surface of genus $g$, leaving its $n$ boundary curves pointwise fixed while permuting $m$ selected points.
+Paths in $\Diff_{g,n}^{m}$ are isotopies and $\Gamma_{g,n}^m = \pi_0(\Diff_{g,n}^m)$ is the group of path components.
+Analogously, the mapping class group $\Gamma_g^\bullet(m,n)$ is the group of path components of the space of diffeomorphisms on a surface of genus $g$ leaving the $n$ incoming boundary curves pointwise fixed while permuting the outgoing $m$ boundary curves.
+The group structure is induced by the composition of diffeomorphisms.
+The mapping class groups $\Gamma_{g,n}^m$ and $\Gamma_g^\bullet(m,n)$ are known to be isomorphic.
+
+\paragraph{Stable (Co-)Homology}
+We begin with a revision of the stable cohomology of $\Gamma_{g,n} = \Gamma_{g,n}^0$.
+Glueing a pair of pants along one or two boundary curves of a given oriented surface induces a group homomorphism
+$\varphi_g \colon \Gamma_{g,n} \to \Gamma_{g,n+1}$, respectively $\psi_g \colon \Gamma_{g, n+1} \to \Gamma_{g+1,n}$ on the mapping class groups,
+by extending the diffeomorphisms in question via the identity.
+If the surface has exactly one boundary curve, glueing in a disc induces a homomorphism $\vartheta \colon \Gamma_{g,1} \to \Gamma_{g,0}$.
+Due to \cite{Harer1985}, the mapping class groups $\Gamma_{g,n}$ with $n \ge 1$ are homologically stable.
+Including several improvements concerning the degree of stabilization we have
+\begin{thm*}[Harer]
+    Let $g \ge 0$ and $n \ge 1$.
+    The induced map
+    \[
+        \varphi_\ast \colon H_\ast( \Gamma_{g,n}; \mathbb Z ) \to H_\ast( \Gamma_{g,n+1}; \mathbb Z)
+    \]
+    is an injection for all $\ast$ and an isomorphism for $\ast \le \frac{2}{3}g$.
+    The induced map
+    \[
+        \psi_\ast \colon H_\ast( \Gamma_{g,n+1}; \mathbb Z ) \to H_\ast( \Gamma_{g+1,n}; \mathbb Z)
+    \]
+    is a surjection for $\ast \le \frac{2}{3}g + \frac{1}{3}$ and an isomorphism for $\ast \le \frac{2}{3}g - \frac{2}{3}$.
+    The induced map
+    \[
+        \vartheta_\ast \colon H_\ast( \Gamma_{g,1}; \mathbb Z ) \to H_\ast( \Gamma_{g,0}; \mathbb Z)
+    \]
+    is a surjection for $\ast \le \frac{2}{3}g + 1$ and an isomorphism for $\ast \le \frac{2}{3}g$.
+\end{thm*}
+\label{page:stabilization_map}%
+A proof including the mentioned improvements can be found in \cite{Wahl2012}.
+
+The composition $\psi_g \varphi_g \colon \Gamma_{g,1} \to \Gamma_{g+1,1}$ is injective and $\Gamma_{\infty,1} = \cup_{g=1}^\infty \Gamma_{g,1}$ is the stable mapping class group.
+We obviously obtain $\varinjlim H_\ast( \Gamma_{g,1}; \mathbb Z ) \cong H_\ast(\Gamma_{\infty,1})$.
+\begin{thm*}[Mumford's Conjecture (Madsen--Weiss \cite{MadenWeiss2007})]
+    The rational cohomology of the stable mapping class group is a polynomial algebra
+    \[
+        H^\ast( \Gamma_{\infty,1}; \mathbb Q ) \cong \mathbb Q[ \kappa_1, \kappa_2, \ldots ]
+    \]
+    in the Mumford--Morita--Miller classes $\kappa_i$ living in degree $2i$.
+\end{thm*}
+
+\paragraph{Unstable Homology}
+In contrast to the stable picture, very little is known about the unstable one, i.e., the homology or cohomology of single moduli spaces.
+Note that for a class in degree say $2$ to be stable, we have to go to $g \ge 4$.
+
+Before reviewing $\Modspc$, consider the moduli space $\tildeModspc$ of Riemann surfaces of genus $g$ where both the boundary curves and punctures are pointwise fixed.
+For single degrees $\ast = 1,2,3$, there are results known for almost all $g$.
+Based on the works of Mumford \cite{Mumford1967} and Powell \cite{Powell1978} the first integral homology is known to be
+\[
+    H_1(\tildeModspc; \mathbb Z) \cong
+        \begin{cases}
+            \mathbb Z / 10      & g=2 \\
+            0                   & g\ge3
+        \end{cases} \,.
+\]
+A proof of this version can be found in Korkmaz--Stipsicz \cite{KorkmazStipsicz2003}.
+Moreover, \cite{KorkmazStipsicz2003} improves a theorem by Harer \cite[Theorem 0.a]{Harer1991}:
+\[
+    H_2(\tildeModspc; \mathbb Z) \cong \mathbb Z^{m+1} \mspc{for}{20} g \ge 4 \,.
+\]
+The third rational homology vanishes due to \cite[Theorem 0.b]{Harer1991}:
+\[
+    H_3(\mathfrak{M}_{g,n}^0; \mathbb Q) = 0 \mspc{for}{20} g \ge 6 \,.
+\]
+
+In case of no punctures but permutable boundary, the first integral homology is known due to Korkmaz--McCarthy \cite[Theorem 3.13]{KorkmazMcCarthy2000}.
+Denoting the corresponding moduli space by $\mathfrak M_{g,(n)}^0$ they show
+\[
+    H_1( \mathfrak M_{g,(n)}^0; \mathbb Z) \cong
+    \begin{cases}
+        \mathbb Z / 10                          & g=1, n=0,1 \\
+        \mathbb Z / 12 \oplus \mathbb Z/ 2      & g=1, n\ge2 \\
+        \mathbb Z / 10                          & g=2, n=0,1 \\
+        \mathbb Z / 10 \oplus \mathbb Z/ 2      & g=2, n\ge2 \\
+        0                                       & g=3, n=0,1 \\
+        \mathbb Z / 2                           & g=3, n\ge2 \\
+    \end{cases} \,.
+\]
+
+In this thesis we study the moduli space $\Modspc$.
+For $g=0$ and $n=1$, the integral homology of the moduli space $\mathfrak{M}_{0,1}^m$ coincides with the well-known group homology of the braid group on $m$ strings.
+Besides that, there are some scattered computations for low $g$ and $n$.
+
+\paragraph{Slit models}
+In \cite{Boedigheimer19901} Bödigheimer provides the space of parallel slit domains $\Par_{g,n}^m$, which is homeomorphic to an affine bundle over $\Modspc$ via the Hilbert uniformization.
+It is a manifold and an open subspace of a finite semi-multisimplicial space $P$ making it possible
+(1) to compute the homology of the moduli spaces via Poincaré duality and
+(2) to define an operad structure by the action of the little cubes operad on the family of moduli spacess $\Modspc$;
+this induces an action of the Dyer-Lashof algebra on their homology.
+Exploiting this model, Ehrenfried could completly compute the integral homology for $g=2$ and $n=1$, compare \cite{Ehrenfried1997}.
+This is, up to date and apart from $g=0$ and $g=1$, the only moduli space whose integral homology is known. 
+His result is reproduced in the following tabl.
+\[
+    H_\ast( \mathfrak{M}_{2,1}^0; \mathbb Z) \cong
+        \begin{cases}
+            \mathbb Z                           & \ast = 0\\
+            \mathbb Z/10                        & \ast = 1\\
+            \mathbb Z/2                         & \ast = 2\\
+            \mathbb Z \oplus \mathbb Z/2        & \ast = 3\\
+            \mathbb Z/6                         & \ast = 4\\
+            0                                   & \ast \ge 5
+        \end{cases}
+\]
+Later, Godin obtained the same results with different methods, compare \cite{Godin2007}.
+For $g=3$ and $m=1$, Wang computed the $p$-torsion for many primes in \cite{Wang201102}.
+We will describe her results in detail, see below.
+
+We mentioned above a complex $P$ with a subcomplex $P'$ such that $P - P' = \Par$.
+The double complex associated with $P$ admits an explicit combinatorial decribtion.
+However, the number of cells prevents (even computer-aided) calculations exceeding $h = 5$ where $h = 2g-2+m+2n$.
+To demonstrate this, we list the number of cells in bidegree $(p,q)$ for $g=1$ and $m=3$ (see Figure \ref{introduction:number_cells_g_1_m_3_n_1}).
+\begin{figure}[ht]
+    \centering
+    \begin{tabular}{|r||r|r|r|r|r|r|r|}
+        \hline
+        $q=5$ & 640 & 12425 & 74610 & 202825 & 278600 & 189000 & 50400 \\ \hline
+        $q=4$ & 800 & 18500 & 122700 & 357280 & 516880 & 365400 & 100800 \\ \hline
+        $q=3$ & 240 & 7425 & 57375 & 185220 & 289380 & 217350 & 63000 \\ \hline
+        $q=2$ & 10 & 650 & 6800 & 26600 & 47740 & 39900 & 12600 \\ \hline
+        $q=1$ & 0 & 0 & 35 & 315 & 910 & 1050 & 420 \\ \hline \hline
+              & $p=4$ & $p=5$ & $p=6$ & $p=7$ & $p=8$ & $p=9$ & $p=10$ \\ \hline
+    \end{tabular}
+    \caption{\label{introduction:number_cells_g_1_m_3_n_1}The number of cells of the bicomplex for $\mathfrak M_{1,1}^3$.}
+\end{figure}
+Due to \cite{Visy201011}, the vertical homology of $(P,P')$ is always concentrated in its top row being of degree $q=h$.
+The resulting chain complex, called Ehrenfried complex, is considerably smaller, compare Figure \ref{introduction:cells_ehr_g_1_m_3_n_1}.
+\begin{figure}[ht]
+    \centering
+    \begin{tabular}{|r|r|r|r|r|r|r|}
+        \hline
+        70 & 700 & 2520 & 4480 & 4270 & 2100 & 420 \\ \hline \hline
+        $p=4$ & $p=5$ & $p=6$ & $p=7$ & $p=8$ & $p=9$ & $p=10$ \\ \hline
+    \end{tabular}
+    \caption{\label{introduction:cells_ehr_g_1_m_3_n_1}The number of cells of the Ehrenfried complex for $\mathfrak M_{1,1}^3$.}
+\end{figure}
+These insights make it possible to perform several computations for $h \le 6$.
+In \cite{Wang201102}, Wang computes the elementary divisors modulo $p^{k_p}$ of the differentials in this Ehrenfried complex for
+$p^{k_p} = 2^6$, $3^4$, $5^3$, $7^2$, $11^2$, $13^2$, $17$, $19$ and $23$.
+Observe that there might be undetected $p$-torsion of the form $\mathbb Z / p^k \mathbb Z$ in case
+(1) $p$ a prime greater then $23$ and $k \ge 1$ or
+(2) $p$ a prime at most $23$ and $k > k_p$.
+Besides $H_0(\Modspc;\mathbb Z) = \mathbb Z$,
+we have $H_1(\mathfrak{M}_{3,1}^0;\mathbb Z) = 0$ due to \cite{Powell1978} and $H_2(\mathfrak{M}_{3,1}^0;\mathbb Z) = \mathbb Z \oplus \mathbb Z / 2 \mathbb Z$ due to \cite{Sakasai2012}.
+For $2g+m=6$ and $n=1$, the remaining free summands where unkown until this point in time.
+Using a new spectral sequene, we provide the free parts by computing the rational homology.
+This, in turn, allows for $g=3$ and $n=1$ to conclude, that Wang had indeed discovered all $p$-torsion for $p \le 23$.
+\begin{thm*}[Bödigheimer, Powell, Sakasai, Wang, B., H.]
+    Let $k_2 = 6$, $k_3 = 4$, $k_5 = 3$, $k_7 = k_{11} = k_{13} = 2$, $k_{17} = k_{19} = k_{23} = 1$ and $k_p = 0$ for $p > 23$ prime.
+    The integral homology of the moduli spaces $\mathfrak{M}_{3,1}^0$, $\mathfrak{M}_{2,1}^2$ or $\mathfrak{M}_{1,1}^6$ is given by the following tables,
+    where $\bldots$ denotes in the first case possible $p$-torsion for primes $p > 23$, 
+    and in the other two cases possible $p$-torsion of the form $\mathbb Z / p^k \mathbb Z$ for $p$ any prime and $k > k_p$.
+    \\[2pt]
+    \noindent The integral homology of the moduli space $\mathfrak{M}_{3,1}^0$ is
+    \[
+        H_\ast( \mathfrak{M}_{3,1}^0; \mathbb Z ) \cong 
+            \begin{cases}
+                \mathbb Z           & \ast = 0\\
+                0                   & \ast = 1\\
+                \mathbb Z \oplus \mathbb Z / 2                                  & \ast = 2\\
+                \mathbb Z \oplus \mathbb Z/2 \oplus \mathbb Z/3 \oplus \mathbb Z/4 \oplus \mathbb Z/7 \oplus \bldots & \ast = 3\\
+                (\mathbb Z/2)^2 \oplus (\mathbb Z/3)^2  \oplus \bldots          & \ast = 4\\
+                \mathbb Z \oplus \mathbb Z/2 \oplus \mathbb Z/3  \oplus \bldots & \ast = 5\\
+                \mathbb Z \oplus (\mathbb Z/2)^3  \oplus \bldots                & \ast = 6\\
+                \mathbb Z / 2  \oplus \bldots   & \ast = 7\\
+                0  \oplus \bldots               & \ast = 8\\
+                \mathbb Z  \oplus \bldots       & \ast = 9\\
+                0                               & \ast \ge 10\\
+            \end{cases}\,,
+    \]
+    \\[2pt]
+    \noindent The integral homology of $\mathfrak M_{2,1}^2$ is
+    \[
+        H_\ast( \mathfrak{M}_{2,1}^2; \mathbb Z ) \cong 
+        \begin{cases}
+            \mathbb Z           & \ast = 0\\
+            (\mathbb Z/2)^2 \oplus \mathbb Z/5 \oplus \bldots    & \ast = 1\\
+            \mathbb Z \oplus (\mathbb Z/2)^2 \oplus \bldots      & \ast = 2\\
+            \mathbb Z^3 \oplus (\mathbb Z/2)^4 \oplus \bldots    & \ast = 3\\
+            \mathbb Z \oplus (\mathbb Z/2)^5 \oplus (\mathbb Z/3)^3 \oplus \bldots       & \ast = 4\\
+            \mathbb Z^2 \oplus (\mathbb Z/2)^4 \oplus \mathbb Z/3 \oplus \bldots         & \ast = 5\\
+            \mathbb Z^2 \oplus (\mathbb Z/2)^3 \oplus \bldots    & \ast = 6\\
+            \mathbb Z/2 \oplus \bldots                           & \ast = 7\\
+            0                   & \ast \ge 8\\
+        \end{cases}
+    \]
+    
+    \noindent The integral homology of $\mathfrak M_{1,1}^4$ is
+    \[
+        H_\ast( \mathfrak{M}_{1,1}^4; \mathbb Z ) \cong 
+        \begin{cases}
+            \mathbb Z           & \ast = 0\\
+            \mathbb Z \oplus \mathbb Z/2 \oplus \bldots          & \ast = 1\\
+            (\mathbb Z/2)^3 \oplus \bldots                       & \ast = 2\\
+            \mathbb Z^2 \oplus (\mathbb Z/2)^3 \oplus \bldots    & \ast = 3\\
+            \mathbb Z^3 \oplus (\mathbb Z/2)^2 \oplus \bldots    & \ast = 4\\
+            \mathbb Z^2 \oplus \mathbb Z/2 \oplus \bldots        & \ast = 5\\
+            \mathbb Z \oplus \bldots     & \ast = 6\\
+            0                           & \ast \ge 7\\
+        \end{cases}
+    \]
+\end{thm*}
+One might conjecture that the undetermined torsion $\bldots$ is trivial in all cases.
+
+In \cite{Mehner201112}, Mehner provides a computer program that computes the integral and $\mathbb F_2$ homology of single moduli spaces for $n=1$, $g \le 2$.
+Moreover, he implements simplicial versions of the Dyer-Lashof operations introduced in \cite{Boedigheimer19902} and obtaines some of the generators of the respectively homology via operations.

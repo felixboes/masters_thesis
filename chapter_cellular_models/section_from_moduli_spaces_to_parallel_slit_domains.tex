@@ -1,0 +1,207 @@
+\section{The Bundle \texorpdfstring{$\Harmr$}{Hmgn[r]} [B]}
+\label{cellular_models:from_moduli_spaces_to_parallel_slit_domains}
+\label{page:potential_function_parallel}%
+\index{potential function}
+\symbolindex[u]{$u$}{A potential function defined on a Riemann surface.}{Page \pageref{page:potential_function_parallel}}
+
+We start off with the construction of the bundle $\Harmr$ for a fixed moduli space $\Modspc$ and an ordered partition $(r_1, \ldots, r_n)$ of $r = r_1 + \ldots + r_n$.
+Consider a point $[F, \mc P, \mc Q, \mc X]$ in the moduli space $\Modspc$.
+For positive real numbers $B_1^-, \ldots, B_m^-$ and $B_1^+, \ldots, B_n^+$ that satisfy the residue equation $\sum_{i=1}^{m} B_i^- - \sum_{j=1}^n B_j^+ = 0$,
+and complex numbers $a_{jk}$ where $j = 1, \ldots, n$ while $k = 1, \ldots, r_j-1$, there is a {\bf potential function} $u \colon F \to \ov{\mathbb R}$, i.e.\ 
+\begin{enumerate}
+    \item $u|_{F - (\mc P \cup \mc Q)}$ is harmonic;
+    \item in a chart domain $V_i$ around $P_i$ with coordinates $z = x + \sqrt{-1}\cdot y$ such that $z(P_i) = 0$
+        \[
+            u(z) = B_i^- \log|z| + \phi_i \mspc{with}{20} \phi_i \colon V_i \to \mathbb R \text{ harmonic};
+        \]
+    \item in a chart domain $W_j$ around $Q_j$ with coordinates $z = x + \sqrt{-1}\cdot y$ such that $z(Q_j) = 0$ and $(T_{Q_j}z) (X_j) = \frac{\del}{\del x} \in T_0\mathbb C$
+        \[
+            u(z) = \Re \left( \frac{1}{z^{r_j}} + \sum_{k=1}^{r_j-1} \frac{a_{jk}}{z^k} \right) - B_j^+ \log|z| + \psi_j \mspc{with}{20} \psi_j \colon W_j \to \mathbb R \text{ harmonic} \,.
+        \]
+\end{enumerate}
+Such a potential function is unique up to an additive constant $D_0$, i.e.\
+it is uniquely defined by one real, $n+m-1$ positive and $r-n$ complex parameters.
+A proof of this classical result can be found in many sources, for example \cite{Koch199105}.
+The condition $\sum_{i=1}^{m} B_i^- - \sum_{j=1}^n B_j^+ = 0$ is imposed by the Residue Theorem
+(the complex differential $\del u$ is a meromorphic 1-form, so the sum of its residues vanishes).
+
+
+Following \cite[Section 3.2]{Boedigheimer19901}, we use the flow of $-\grad_u$, the gradient field of steepest descent of a potential function $u$,
+in order to construct the (directed) critical graph $\mc K_0 \subset F$.
+This may be seen as a 1-skeleton of $F$.
+Before going on, let us look at two very simple examples.
+In Figure \ref{cellular_models:from_moduli_spaces_to_parallel_slit_domains:re_z} we sketch the flow lines of the harmonic function $\Re(z) = x$ and 
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{.3\columnwidth}
+    \input{pictures/flow_Re_z_sphere.pdf_tex}
+    \hfill
+    \def\svgwidth{.3\columnwidth}
+    \input{pictures/flow_Re_z_at_zero.pdf_tex}
+    \hfill
+    \def\svgwidth{.3\columnwidth}
+    \input{pictures/flow_Re_z_at_infinity.pdf_tex}
+    \caption{\label{cellular_models:from_moduli_spaces_to_parallel_slit_domains:re_z}The gradient flow of $\Re(z)$ on the sphere $\mathbb S^2$ and in charts around zero and infinity.}
+\end{figure}
+Figure \ref{cellular_models:from_moduli_spaces_to_parallel_slit_domains:re_z_squared} pictures the flow lines of $\Re(z^2) = x^2 - y^2$.
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{.3\columnwidth}
+    \input{pictures/flow_Re_z_squared_sphere.pdf_tex}
+    \hfill
+    \def\svgwidth{.3\columnwidth}
+    \input{pictures/flow_Re_z_squared_at_zero.pdf_tex}
+    \hfill
+    \def\svgwidth{.3\columnwidth}
+    \input{pictures/flow_Re_z_squared_at_infinity.pdf_tex}
+    \caption{\label{cellular_models:from_moduli_spaces_to_parallel_slit_domains:re_z_squared}The gradient flow of $\Re(z^2)$ on the sphere $\mathbb S^2$ and in charts around zero and infinity.}
+\end{figure}
+Geometrically speaking, the conditions on the potential function $u$ are as follows.
+At every point $Q_j$, the dominating term is the pole $\Re(\frac{1}{z^{r_j}})$ whereas
+the terms $\Re ( \frac{a_{jk}}{z^k} )$ for $k = r_j - 1, \ldots, 1$ and the logarithmic term $B^+_j\log|z|$ have no influence on the qualitative picture.
+In Figures \ref{cellular_models:from_moduli_spaces_to_parallel_slit_domains:re_z} or \ref{cellular_models:from_moduli_spaces_to_parallel_slit_domains:re_z_squared},
+the chart around infinity pictures the stream lines near a pole of order $r_j = 1$ or $r_j = 2$.
+At a point $P_j$ the gradient flow has a sink as pictured in Figure \ref{cellular_models:from_moduli_spaces_to_parallel_slit_domains:re_log_z}.
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{.3\columnwidth}
+    \input{pictures/flow_log_z_at_zero.pdf_tex}
+    \caption{\label{cellular_models:from_moduli_spaces_to_parallel_slit_domains:re_log_z}The gradient flow of $\Re(\log(z)) = \log|z|$ near zero.}
+\end{figure}
+The coefficients $B_i^-$ respectively $B_j^+$ indicate the magnitude of the logarithmic sink respectively source.
+Following the stream lines, one will end up either in one of the singularities $\mc P \cup \mc Q$ or in a critical point of $u$.
+At a critical point, $u$ has the form $\Re(z^k)$ for some $k \ge 2$.
+The critical graph of $u$ consists of all critical flow lines that start in such critical points. %
+\label{page:stagnation_point_parallel}%
+\index{stagnation point}
+\index{stagnation point!set of stagnation points}
+\symbolindex[s]{$S$}{A critical point of a given potential function $u$}{Page \pageref{page:stagnation_point_parallel}}
+\symbolindex[s]{$\mc S$}{The set of stagnation points of a given potential function $u$}{Page \pageref{page:stagnation_point_parallel}}
+A point $S \in F$ at which $\grad_u$ vanishes is called {\bf stagnation point} and we denote the {\bf set of stagnation points} by $\mc S$ --- they are the critical points of $u$.
+\label{page:critical_graph_parallel}%
+\index{critical graph}
+\index{critical edge}
+\symbolindex[k]{$\mc K_0$}{The critical graph of a given potential function $u$}{Page \pageref{page:stagnation_point_parallel}}
+The vertices of $\mc K_0$ are $V\mc K_0 = \mc S \cup \mc P \cup \mc Q$ and the edges $\gamma \in E\mc K_0$ are specific segments of the gradient flow of $u$:
+For two vertices $S_0 \in \mc S$ and $S_1 \in V\mc K_0$ with $t_0 = u(S_0) < u(S_1) = t_1$ (as points in $\ov {\mathbb R}$),
+a smooth curve $\gamma \colon [t_0, t_1] \to F$ starting in $S_0$ and ending in $S_1$ is called {\bf critical edge} if it satisfies the conditions
+\begin{enumerate}
+    \item $u(\gamma(t)) = t$ and
+    \item $\dot{\gamma}(t) = -\grad_u(\gamma(t)) \neq 0$ for $t_0 < t < t_1$.
+\end{enumerate}
+In particular, curves must not traverse through critical points.
+
+Both potential functions in Figures \ref{cellular_models:from_moduli_spaces_to_parallel_slit_domains:re_z} and
+\ref{cellular_models:from_moduli_spaces_to_parallel_slit_domains:re_z_squared} have exactly one singularity namely at infinity. 
+The harmonic function $\Re(z)$ has no stagnation points and $\Re(z^2)$ has exactly one.
+In Figure \ref{cellular_models:from_moduli_spaces_to_parallel_slit_domains:flow_with_one_puncture}, we picture the flow of a potential function $u$
+having one dipole $Q$ of simple order, one puncture $P$ and one stagnation point $S$.
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{.9\columnwidth}
+    \input{pictures/flow_with_one_puncture.pdf_tex}
+    \caption{\label{cellular_models:from_moduli_spaces_to_parallel_slit_domains:flow_with_one_puncture}The gradient flow of a potential function which has exactly one dipole $Q$ of simple order, one puncture $P$ and one stagnation point $S$.
+        We have $g=0$, $m=1$ and $n=1$.}
+\end{figure}
+
+\label{page:basin_parallel}%
+\index{basin}
+Dissecting $F$ along the critical graph $\mc K_0$ yields $r$ open, contractible%
+\footnote{%
+    Using the flow lines, each $F_j$ is contracted to an equipotential line $l_i$.
+    Observe that every potential line $l_i$ is contractible since $\mc Q$ and $\mc P$ are removed.
+} components $F_1, \ldots, F_r$ called {\bf basins}.
+These basins are ordered.
+The poles $\mc Q$ are enumerated and at every pole $Q_j$, the tangent vector $X_j$ points into the first since distinguished component,
+whereas the others are numbered following counter-clockwise around $Q_j$.
+In Figure \ref{cellular_models:from_moduli_spaces_to_parallel_slit_domains:flow_with_three_basins} we illustrate the stream lines of $\Re(z^3)$ on $\mathbb S^2$ around infinity.
+The critical flow is stressed and the basins are denoted by $F_1$,$F_2$ or $F_3$.
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{.4\columnwidth}
+    \input{pictures/flow_with_three_basins.pdf_tex}
+    \caption{\label{cellular_models:from_moduli_spaces_to_parallel_slit_domains:flow_with_three_basins}Dissecting $\mathbb S^2$ along the critical graph of $\Re(z^3)$ yields three basins.}
+\end{figure}
+
+From the topological point of view, we obtain a cell decomposition.
+This means that the homotopy type of $F$, which is just its genus, can be reconstructed from glueing the disc-shaped components $F_j$.
+In order to keep track of the given complex structure, we follow \cite{Boedigheimer19901}.
+On every sub-surface $F_j$, the harmonic function $u$ admits a harmonic conjugate $v_j$, unique up to an integration constant, by letting
+\[
+    v_j(\zeta) = \int_{\zeta_o}^\zeta \frac{\del u}{\del x}dy - \frac{\del u}{\del y}dx \mspc{for some}{20} \zeta_0 \in F_j \,.
+\]
+The holomorphic function $w_j = u + \sqrt{-1}\cdot v_j$ maps the basin $F_j$ injectively onto an open domain in $\mathbb C$ and
+its image is obviously the entire plane with finitely many slits removed,
+each slit running from some point horizontally to the left all the way to infinity.
+Changing the integration constant $D_j$ corresponds to a translation parallel to the imaginary axis.
+
+Let us go back to the examples pictured in Figures \ref{cellular_models:from_moduli_spaces_to_parallel_slit_domains:re_z_squared} and
+\ref{cellular_models:from_moduli_spaces_to_parallel_slit_domains:flow_with_one_puncture}.
+Dissecting the sphere along the critical flow lines of $u = \Re(z^2)$ yields exactly two components $F_1  = \{ z \in \mathbb S^2 - \infty \mid \Re(z) > 0\}$ and $F_2 = \{ z \in \mathbb S^2 - \infty \mid \Re(z) < 0\}$.
+The tangent vector $X$ points into the first component $F_1$.
+For the other example, consider Figure \ref{cellular_models:from_moduli_spaces_to_parallel_slit_domains:flow_with_one_puncture_with_equipotential_lines}
+where we added three dashed lines on which $u$ is constant --- so-called equipotential lines --- and sketch the relevant clipping under the biholomorphic function.
+The critical graph is stressed.
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{.72\columnwidth}
+    \raisebox{-0.5\height}{\input{pictures/flow_with_one_puncture_with_equipotential_lines.pdf_tex}}
+    \hfill
+    \def\svgwidth{.26\columnwidth}
+    \raisebox{-0.5\height}{\input{pictures/flow_with_one_puncture_slit_picture.pdf_tex}}
+    \caption{
+        \label{cellular_models:from_moduli_spaces_to_parallel_slit_domains:flow_with_one_puncture_with_equipotential_lines}
+        The gradient flow of a potential function and the slit picture.
+        We have $g=0$, $m=1$ and $n=1$.}
+\end{figure}
+In Figure \ref{cellular_models:from_moduli_spaces_to_parallel_slit_domains:flow_with_one_puncture_with_equipotential_lines_with_help} on Page \pageref{page:huge_picture_flow},
+we picture an enlarged version of Figure \ref{cellular_models:from_moduli_spaces_to_parallel_slit_domains:flow_with_one_puncture_with_equipotential_lines}
+with enumerated equipotential lines in order to provide more guidance.
+
+Let $\Harmr$ be the space of all $(F, \mc P, \mc Q, \mc X, w)$ with $w = (u, v_1, \ldots, v_r)$, where
+$u$ is a globally defined potential function as declared above and each $v_j$ is a harmonic conjugates of $u$, defined only on $F_j$.
+There is a projection
+\[
+    \Harmr \xr{\simeq} \Modspc
+\]
+with contractible fibres,
+namely the space of all $(a_{jk}, B^-_i, B^+_j, D_0, \ldots, D_r)$ subject only to the residue equation.
+More precisely, it is the open affine half-space $\mathbb C^{r-n} \times \mathbb R^{m+n-1}_{>0} \times \mathbb R^{r+1}$.
+This bundle would be trivial if we required both $(r_1, \ldots, r_n) = (1, \ldots, 1)$ and non-permutable punctures $\mc P$.
+
+Its real dimension is readily computed, as $2(r-n) + m+n-1 + 1$ real parameters correspond to a choice of $u$ and
+every harmonic conjugate $v_j$ is unique up to an additive constant, adding $r$ real dimensions:
+\[
+    \dim \Harmr = \dim \Modspc + (2(r-n) + m+n-1 + 1) + r = 6g-6 + 3m + 3n + 3r = 3h \,.
+\]
+
+We end this section with the following remark.
+There are situation in which we want to think of surfaces with boundary or, in terms of slit picutes, of the relevant clipping as seen in Figure \ref{cellular_models:from_moduli_spaces_to_parallel_slit_domains:flow_with_one_puncture_with_equipotential_lines}.
+This is achieved by removing the critical graph as well as specific discs around the poles and punctures.
+Each disc around a puncture $P_j \in \mc P$ is bound by an equipotential circle beeing a closed curve on which $u$ is constant,
+whereas each disc around a pole $Q_i \in \mc Q$ is bounded by a circle consisting of flow lines or equipotential lines, see Figure \ref{cellular_models:from_moduli_spaces_to_parallel_slit_domains:flow_with_three_basins_and_cut}.
+Observe that this process can be reversed without loss of information as the basins are ordered.
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{.4\columnwidth}
+    \input{pictures/flow_with_three_basins_and_cut.pdf_tex}
+    \caption{\label{cellular_models:from_moduli_spaces_to_parallel_slit_domains:flow_with_three_basins_and_cut}%
+        The red matter is removed and the thick red lines are seen as the boundary curves of the resulting surface.}
+\end{figure}
+
+\begin{sidewaysfigure}[hbtp]
+    \centering
+    \def\svgwidth{\columnwidth}
+    \input{pictures/flow_with_one_puncture_with_equipotential_lines_with_help.pdf_tex}
+    
+    \vspace{.5cm}
+    
+    \def\svgwidth{.4\columnwidth}
+    \input{pictures/flow_with_one_puncture_slit_picture_with_help.pdf_tex}
+    \caption{
+        \label{page:huge_picture_flow}
+        \label{cellular_models:from_moduli_spaces_to_parallel_slit_domains:flow_with_one_puncture_with_equipotential_lines_with_help}%
+        The gradient flow of a potential function and the slit picture.
+        The dashed curves are equipotential lines and we have $g=0$, $m=1$ and $n=1$.}
+\end{sidewaysfigure}
+

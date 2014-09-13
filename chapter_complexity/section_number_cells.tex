@@ -1,0 +1,153 @@
+\section{An Estimation of the Number of Cells of \texorpdfstring{$\E(h,m;1)$}{E(h,m;1)} [B,H]}
+\label{complexity:number_of_mono_cells}
+{\bf [B]} In this section, we concentrate on combinatorial cells on exatcly one level, i.e.\ $n = 1$ and $r = (1)$.
+Recalling definitions \ref{cellular_models:parallel:inhomogeneous_notation} and \ref{cellular_models:ehrenfried:definition:cells},
+the combinatorial type of a non-degenerate cell $\Sigma$ in the Ehrenfried complex is a finite word $\Sigma = \inhomq$ of transpositions $\tau_k \in \Symgrp_p$ with
+\begin{align}
+    \label{CharCellPerm} \tag{$\Sigma1$} & \text{every element $1 \le k \le p$ is permuted non-trivially by at least one transposition} \\
+    \label{CharCellMono} \tag{$\Sigma2$} & \hgt(\tau_q) \ge \ldots \ge \hgt(\tau_1).
+\end{align}
+Let us denote the sum of all Ehrenfried complexes by
+\[
+    \ul\E = \bigoplus_{g,m} \Ehrr[1] \,.
+\]
+Clearly, this sum is finite in each bidegree $(p,q)$.
+More precisely:
+\begin{prop}
+    \label{prop:number_of_mono_cells}
+    The number of cells of $\ul\E_{p,q}$ is
+    \begin{align}
+        \label{Char_A_p_q} A(p,q) = \dim (\ul\E_{p,q}) = \sum_{k=1}^{p-1} a_{p,k} \cdot k^{q-1} \,,
+    \end{align}
+    where the coefficients $a_{p,k}$ are
+    \begin{align}
+        \label{Char_2_1} a_{2,1}         &= 1 \\
+        \label{Char_p_leq_k}     a_{p,k} &= 0                                                    & \text{for} & \hspace{10pt} p \le k \\
+        \label{Char_k_leq_p_2}   a_{p,k} &= -\frac{p-1}{p-1-k} ( a_{p-2,k} + 2a_{p-1,k} )        & \text{for} & \hspace{10pt} 1 \le k \le p-2 \\
+        \label{Char_p_geq_3}   a_{p,p-1} &= - \sum_{k=1}^{p-2} a_{p,k}                           & \text{for} & \hspace{10pt} 3 \le p \,.
+    \end{align}
+\end{prop}
+
+{\bf [H]} Before going into the proof, we provide an essential remark and list some values of $A(p,q)$ in Figure \ref{complexity:table_number_of_cells_for_all_m}.
+\begin{cor}
+    The number of cells of $\ul\E_{p, q}$ depends polynomially on $p$ and exponentially on $q$ and the number of cells of the radial Ehrenfried complex in bidegree $(p, q)$ is
+    \[
+        B_{p, q} = A_{p, q} + A_{p+1, q}\,.
+    \]
+\end{cor}
+\begin{proof}
+    The first statement is evident.
+    Let us take a look at the number of cells $B_{p, q}$ in the radial Ehrenfried complex.
+    Recall that its basis is given by all radial cells $\Sigma = (\tau_q \mid \dotsc, \mid \tau_1)$,
+    where all $\tau_i$ are transpositions on the symbols $\{\ul0, \dotsc, \ul p\}$ 
+    subject to the conditions \eqref{CharCellPerm} and \eqref{CharCellMono} from above.
+    Thus, in radial bidegree $(p, q)$, we have all the parallel cells of bidegree $(p, q)$, 
+    and for all parallel cells $\Sigma$ of bidegree $(p+1, q)$ the $0\Th$ face $d_0(\Sigma)$.
+\end{proof}
+\begin{rem}
+Since, for fixed $g$ and $m$, the parallel Ehrenfried complex consists of cells with $q = 2g + m$ transpositions,
+but the radial of cells with $q = 2g + m - 1$ transpositions,
+the preceding corollaries recommend to use the radial model for homology computations instead of the parallel one.
+\end{rem}
+
+\begin{figure}[ht]
+\centering
+\begin{tabular}{|r||r|r|r|r|r|r|r|r|r|r|}
+    \hline
+    $A(p,q)$ & $q=1$ & $q=2$ & $q=3$ & $q=4$ & $q=5$ & $q=6$ & $q=7$ & $q=8$ \\
+    \hline
+    \hline
+    $p=2$ & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+    \hline
+    $p=3$ & 0 & 4 & 12 & 28 & 60 & 124 & 252 & 508 \\
+    \hline
+    $p=4$ & 0 & 3 & 36 & 183 & 720 & 2523 & 8316 & 26463 \\
+    \hline
+    $p=5$ & 0 & 0 & 40 & 496 & 3560 & 20240 & 101640 & 474096 \\
+    \hline
+    $p=6$ & 0 & 0 & 15 & 655 & 9150 & 84950 & 639765 & 4256805 \\
+    \hline
+    $p=7$ & 0 & 0 & 0 & 420 & 13356 & 211296 & 2408616 & 22738716 \\
+    \hline
+    $p=8$ & 0 & 0 & 0 & 105 & 11200 & 329434 & 5858832 & 79210803 \\
+    \hline
+    $p=9$ & 0 & 0 & 0 & 0 & 5040 & 326368 & 9572256 & 189588288 \\
+    \hline
+    $p=10$ & 0 & 0 & 0 & 0 & 945 & 200025 & 10639755 & 320787891 \\
+    \hline
+    $p=11$ & 0 & 0 & 0 & 0 & 0 & 69300 & 7957180 & 388089460 \\
+    \hline
+    $p=12$ & 0 & 0 & 0 & 0 & 0 & 10395 & 3839220 & 334326685 \\
+    \hline
+    $p=13$ & 0 & 0 & 0 & 0 & 0 & 0 & 1081080 & 200600400 \\
+    \hline
+    $p=14$ & 0 & 0 & 0 & 0 & 0 & 0 & 135135 & 79774695 \\
+    \hline
+    $p=15$ & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 18918900 \\
+    \hline
+    $p=16$ & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 2027025 \\
+    \hline
+\end{tabular}
+\caption{\label{complexity:table_number_of_cells_for_all_m}The number of cells of $\underline{\mathbb E}_{p,q}$ for small $p$ and $q$.}
+\end{figure}
+
+{\bf [B]} We deduce Proposition \ref{prop:number_of_mono_cells} from the following oberservation.
+
+\begin{lem}
+    \label{lem:Apq_recursion}
+    The numbers $A(p,q)$ fulfill
+    \begin{align}
+        \label{CharA1q}         A(1,q) &= 0 \\
+        \label{CharA2q}         A(2,q) &= 1 \\
+        \label{CharApq}         A(p,q) &= (p-1) \big( A(p-2,q-1) + 2A(p-1,q-1) + A(p,q-1) \big) & \text{for} & \hspace{10pt} p > 2 \\
+        \label{CharAp_ge_2q}    A(p,q) &= 0                                                     & \text{for} & \hspace{10pt} p > 2q \,.
+    \end{align}
+\end{lem}
+
+\begin{proof}
+    Properties \eqref{CharA1q}, \eqref{CharA2q} and \eqref{CharAp_ge_2q} are consequences of \eqref{CharCellPerm}.
+    The following Figure \ref{complexity:Apq_recursion_lemma_figure} destincts the possible cases of appending a cell by one transposition and therefore proofs the remaining property \eqref{CharApq}.
+    \begin{figure}[ht]
+        \centering
+        
+        \hspace{10pt}
+        \fbox{\incgfx{pictures/proof_lemma_Apq_recursive_case1.pdf}} \hspace{1cm}
+        \fbox{\incgfx{pictures/proof_lemma_Apq_recursive_case2.pdf}}
+        \hspace{10pt}
+        
+        \vspace{.5cm}
+        
+        \hspace{10pt}
+        \fbox{\incgfx{pictures/proof_lemma_Apq_recursive_case3.pdf}} \hspace{1cm}
+        \fbox{\incgfx{pictures/proof_lemma_Apq_recursive_case4.pdf}}
+        \hspace{10pt}
+    \caption{\label{complexity:Apq_recursion_lemma_figure}The possible cases of appending a monotonous cell by one transposition.}
+    \end{figure}
+\end{proof}
+
+\begin{proof}[Proof of Proposition \ref{prop:number_of_mono_cells}]
+    We are going to prove proposition \ref{prop:number_of_mono_cells} by induction on $p$.
+    The base cases $p = 1$ and $p = 2$ are immediate by \eqref{CharA1q} and \eqref{CharA2q}.
+    
+    To deduce the induction step, we start with \eqref{CharApq}
+    \begin{align*}
+        A(p,q)
+            &= (p-1) \big( A(p-2,q-1) + 2A(p-1,q-1) + A(p,q-1) \big) \\
+        \intertext{which is by the induction hypotheses \eqref{Char_A_p_q} and \eqref{Char_p_leq_k}}
+            &= (p-1) \left( \sum_{k=1}^{p-2} a_{p-2,k} \cdot k^{q-2} \mspc{$+$}{10} 2 \sum_{k=1}^{p-2} a_{p-1,k} \cdot k^{q-2} \mspc{$+$}{10} A(p,q-1) \right) \\
+            &= (p-1) \left( \sum_{k=1}^{p-2} a_{p-2,k} \cdot (p-1)^0 k^{q-2} \mspc{$+$}{10} 2 \sum_{k=1}^{p-2} a_{p-1,k} \cdot (p-1)^0k^{q-2} \mspc{$+$}{10} A(p,q-1) \right) \,.
+    \end{align*}
+    Fix $1 \le k \le p-2$ in the above equation and use lemma \ref{lem:Apq_recursion} to substitute $A(p,l)$ successively.
+    We obtain
+    \begin{align*}
+            & (p-1)(a_{p-2,k} + 2a_{p-1,k}) \sum_{l=0}^{q-2} (p-1)^l k^{q-2-l}\,.
+        \intertext{Using $(a-b)\sum_{k=0}^{q-2}a^k \cdot b^{q-2-k} = a^{q-1} - b^{q-1}$ yields}
+            =&\ (p-1)(a_{p-2,k} + 2a_{p-1,k}) \frac{ (p-1)^{q-1} - k^{q-1} }{p-1-k} \\
+            =&\ - \frac{p-1}{p-1-k}(a_{p-2,k} + 2a_{p-1,k}) \cdot k^{q-1} \mspc{$+$}{10}\frac{p-1}{p-1-k}(a_{p-2,k} + 2a_{p-1,k}) \cdot (p-1)^{q-1} \,.
+    \end{align*}
+    The left hand side is the coefficient of $k^{q-1}$ and the right hand side is a summand of the coefficient of $(p-1)^{q-1}$, hence
+    \begin{align*}
+        a_{p, k} = - \frac{p-1}{p-1-k}(a_{p-2,k} + 2a_{p-1,k}) \mspc{and}{20} a_{p, p-1} = - \sum_{k=1}^{p-2} a_{p,k} \,.
+    \end{align*}
+    But $a_{p,k} = 0$ for $k \ge p$ is also clear.
+\end{proof}

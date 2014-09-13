@@ -1,0 +1,217 @@
+\subsection{Classification of the Cells of the Ehrenfried Complex [B]}
+\label{cellular_models:dual_ehrenfried:classification_of_the_cells}
+In this subsection, we encode the geometric ideas presented in the first paragraphs of Section \ref{cellular_models:dual_ehrenfried}
+in order to study cofaces that are obtained by glueing a stripe inbetween two slits of the same height.
+As we concentrate on the Ehrenfried complex $\E$ (and its dual), we are only interested in top dimensional cells of the bicomplex.
+Hence the position of a stripe, which is about to be glued in, is just a coordinate $(j,i)$ with $h \ge j \ge 1$ and $p \ge i \ge 1$.
+Proposition \ref{cellular_models:dual_ehrenfried:basic_expansions_commute} states that glueing in different stripes is commutative (up to relabeling the heights).
+A cell that does not arise from such a process will be called thin and Proposition \ref{cellular_models:dual_ehrenfried:every_cell_is_an_expansion}
+states that every cell of $\E$ is uniquely obtained from a thin cell by such an expansion.
+
+\begin{defi}
+    \label{cellular_models:dual_ehrenfried:basic_coboundary_traces}
+    \index{coboundary!basic coboundary trace}
+    \index{cell!basic expansion of a cell}
+    Consider a cell $\Sigma \in \E$.
+    An $i\Th$ coboundary trace $\inhom[a]$ is {\bf basic} it there exists an index $j$ with
+    \begin{enumerate}
+        \item $a_{j-1} = \ldots = a_0 = i+1$,
+        \item $a_j = (S_i\tau_j)(a_{j-1}) \neq a_{j-1}$ (i.e.\ $\tau_i = (i\ d^\Delta_i(a_j))$) and
+        \item $a_{k+1} = (S_i\tau_{k+1})(a_k)$ for $h \ge k \ge j$.
+    \end{enumerate}
+    In this case, the coface $a.\Sigma$ is called {\bf basic expansion} of $\Sigma$.
+\end{defi}
+
+\begin{lem}
+    \label{cellular_models:dual_ehrenfried:basic_coboundary_traces_have_unique_j_and_i}
+    Let $a = \homog[a]$ be a basic coboundary trace of $\Sigma$.
+    Then, the $j$ mentioned in Definition \ref{cellular_models:dual_ehrenfried:basic_coboundary_traces} is unique and
+    $\homog[a]$ is an $i\Th$ coboundary trace with $i = \tau_j( d_i^\Delta(a_j) )$.
+    Moreover,
+    \begin{align}
+        \label{cellular_models:dual_ehrenfried:basic_coboundary_trace_applied_to_cell}
+        a.\Sigma = (S_i\tau_h \mid \ldots \mid S_i\tau_j \mid S_{i+1}\tau_{j-1} \mid \ldots \mid S_{i+1}\tau_1) \,.
+    \end{align}
+
+\end{lem}
+
+\begin{proof}
+    The index $j$ is clearly unique and $a_j$ fulfills $a_j = (S_i\tau_j)(i+1) \neq i+1$, so $a_j = s_i^\Delta( \tau_j(i) )$ or equivalently $d_i^\Delta(a_j) = \tau_j(i)$.
+    
+    Equation \eqref{cellular_models:dual_ehrenfried:basic_coboundary_trace_applied_to_cell} is readily verified using Definitions
+    \ref{cellular_models:dual_ehrenfried:a_dot_sigma} and \ref{cellular_models:dual_ehrenfried:basic_coboundary_traces}.
+\end{proof}
+
+\begin{lem}
+    \label{cellular_models:dual_ehrenfried:Btrace_is_Bsupp}
+    \symbolindex[b]{$Btrace(\Sigma)$}{The set of basic coboundary traces of $\Sigma$.}{Lemma \ref{cellular_models:dual_ehrenfried:Btrace_is_Bsupp}}
+    \symbolindex[b]{$Bsupp(\Sigma)$}{This set is canonically identified with the set of basic coboundary traces of $\Sigma$.}{Lemma \ref{cellular_models:dual_ehrenfried:Btrace_is_Bsupp}}
+    For $\Sigma \in \E_p$, the set $Btrace(\Sigma)$ of basic coboundary traces is in one-to-one correspondence to the disjoint union
+    \[
+        Bsupp(\Sigma) = \coprod_{h \ge j \ge 1} \supp(\tau_j) \cap \supp(\tau_{j-1}, \ldots, \tau_1) \,,
+    \]
+    where $\homog[a] \in Btrace(\Sigma)$ is mapped to the unique index $i$ in the $j\Th$ component,
+    with $j$ and $i = \tau_j( d_i^\Delta(a_j) )$ as in Lemma \ref{cellular_models:dual_ehrenfried:basic_coboundary_traces_have_unique_j_and_i}.
+    In particular, the number of basic coboundary traces is
+    \[
+        |Btrace(\Sigma)| = |Bsupp(\Sigma)| = 2h-p \,.
+    \]
+\end{lem}
+
+\begin{proof}
+    By Definitions \ref{cellular_models:dual_ehrenfried:cob_tr} and \ref{cellular_models:dual_ehrenfried:basic_coboundary_traces},
+    the sequence $\homog[a]$ is a basic coboundary trace with respect to $j$ if and only if
+    \begin{enumerate}
+        \item $a_{j-1} = \ldots = a_0 = i+1$,
+        \item $a_k \neq (S_i\tau_k)(a_{k-1})$ at least once,
+        \item $a_j = (S_i\tau_j)(a_{j-1})$ and
+        \item $a_k = (S_i\tau_k)(a_{k-1})$ for $h \ge k > j$.
+    \end{enumerate}
+    Thus, the indicated map is a bijection $Btrace(\Sigma) \cong Bsupp(\Sigma)$.
+
+    A symbol $i$ occures in $Bsupp(\Sigma)$ exactly $k$ times if and only if it is in the support of exactly $k+1$ transpositions.
+    Thus
+    \begin{align*}
+        \left| \coprod_{h \ge j \ge 1} \supp(\tau_j) \cap \supp(\tau_{j-1}, \ldots, \tau_1) \right| 
+            &= \sum_i \left( \left( \sum_j \left| \{i \} \cap \supp(\tau_j) \right| \right) - 1 \right)\\
+            &= \left( \sum_{i,j} \left| \{i \} \cap \supp(\tau_j) \right| \right) - p \\
+            &= \left( \sum_j \left| \supp(\tau_j) \right| \right) - p \\
+            &= 2h-p \,.
+    \end{align*}
+\end{proof}
+
+\begin{notation}
+    \label{cellular_models:dual_ehrenfried:j_notation}%
+    \symbolindex[j]{$j^\epsilon$}{In order to classify the cells of the Ehrenfried complex, we need a more handy notation for basic coboundary traces.}{Notation \ref{cellular_models:dual_ehrenfried:j_notation}} 
+    In order to forumlate Proposition \ref{cellular_models:dual_ehrenfried:basic_expansions_commute} we introduce yet another notation.
+    We want to ignore the index shifts that occures if we compare $Bsupp(\Sigma)$ with $Bsupp(a.\Sigma)$ for a basic coboundary trace $a = \homog[a]$:
+    It suffices to compare the relative index in the support of every transposition.
+    For $s_j = \supp(\tau_j) \cap \supp(\tau_{j-1}, \ldots, \tau_1)$, we have $|s_j| \le 2$.
+    Thus we write
+    \[
+        s_j \ni c = j^\eps \mspc{with}{20} \eps = \begin{cases} 0 & c = \min(s_j) \\ 1 & c = \max(s_j) \end{cases} \mspc{and identify}{20} j^0 = j^1 \mspc{if}{10} |s_j| = 1 \,.
+    \]
+    Using the bijection in Lemma \ref{cellular_models:dual_ehrenfried:Btrace_is_Bsupp}, we write $a(j^\eps)$ for the basic coboundary trace corresponding to $j^\eps \in Bsupp(\Sigma)$ and
+    denote by $j^\eps.\Sigma$ the coboundary $a(j^\eps).\Sigma$.
+\end{notation}
+
+\begin{prop}
+    \label{cellular_models:dual_ehrenfried:basic_expansions_commute}
+    Using the above notation, let $j^\eps \in Bsupp(\Sigma)$.
+    Then
+    \begin{align}
+        \label{cellular_models:dual_ehrenfried:compute_bsupp_of_jeps_dot_Sigma}
+        Bsupp(j^\eps.\Sigma) = Bsupp(\Sigma) - \{ j^\eps \} \,.
+    \end{align}
+    Moreover, basic expansions commute, i.e.\ for two distinct basic coboundary traces $j_1^{\eps_1}$ and $j_2^{\eps_2} \in Bsupp(\Sigma)$, we have
+    \begin{align}
+        \label{cellular_models:dual_ehrenfried:basic_expansions_commute_formula}
+        j_2^{\eps_2}.( j_1^{\eps_1}.\Sigma ) = j_1^{\eps_1}.( j_2^{\eps_2}.\Sigma ) \,.
+    \end{align}
+\end{prop}
+
+\begin{proof}
+    Using Lemma \ref{cellular_models:dual_ehrenfried:basic_coboundary_traces_have_unique_j_and_i}, we have
+    \[
+        a(j^\eps).\Sigma = (S_i\tau_h \mid \ldots \mid S_i\tau_j \mid S_{i+1}\tau_{j-1} \mid \ldots \mid S_{i+1}\tau_1) = \inhom[\tilde\tau]
+    \]
+    for $i = \tau_j( d_i^\Delta(a_j) )$.
+    Up to an order preserving renaming of the symbols, we have
+    \[
+        \supp(\tilde\tau_k) \cap \supp(\tilde\tau_{k-1}, \ldots, \tilde\tau_1) = s_i^\Delta(\ \supp(\tau_k) \cap \supp(\tau_{k-1}, \ldots, \tau_1)\ )
+    \]
+    if $i$ is not in the support of $\tau_k$.
+    Otherwise a case by case analysis yields
+    \[
+        \supp(\tilde\tau_k) \cap \supp(\tilde\tau_{k-1}, \ldots, \tilde\tau_1) =
+            \begin{cases}
+                s_{i+1}^\Delta(\ \supp(\tau_k) \cap \supp(\tau_{k-1}, \ldots, \tau_1) \ ) & \text{for } k < j \\
+                s_{i}^\Delta(\ (\supp(\tau_k) \cap \supp(\tau_{k-1}, \ldots, \tau_1) \ ) - \{ i + 1\} & \text{for } k = j \\
+                s_{i}^\Delta(\ \supp(\tau_k) \cap \supp(\tau_{k-1}, \ldots, \tau_1) \ ) & \text{for } k > j 
+            \end{cases} \,,
+    \]
+    and \eqref{cellular_models:dual_ehrenfried:compute_bsupp_of_jeps_dot_Sigma} is an immediate consequence.
+    
+    The commutativity \eqref{cellular_models:dual_ehrenfried:basic_expansions_commute_formula} follows from
+    \eqref{cellular_models:dual_ehrenfried:compute_bsupp_of_jeps_dot_Sigma} and
+    the behaviour of the bijection $Bsupp(\Sigma) = Btrace(\Sigma)$ in Lemma \ref{cellular_models:dual_ehrenfried:Btrace_is_Bsupp}.
+\end{proof}
+
+\begin{defi}
+    \label{cellular_models:dual_ehrenfried:expansion_of_Sigma}
+    \index{cell!expansion of a cell}
+    \symbolindex[j]{$J.\Sigma = j_1^{\eps_1}. \cdots. j_t^{\eps_t}.\Sigma$}{The iterated coboundary of $\Sigma$ where all $j_k$ are basic coboundary traces.}{Definition \ref{cellular_models:dual_ehrenfried:expansion_of_Sigma}}
+    Consider a cell $\Sigma \in \E$ and a non-empty subset $J = \{ j_1^{\eps_1}, \ldots, j_t^{\eps_t} \} \subseteq Bsupp(\Sigma)$.
+    The cell
+    \[
+        J.\Sigma = j_1^{\eps_1}. \cdots. j_t^{\eps_t}.\Sigma
+    \]
+    is called an {\bf expansion} of $\Sigma$.
+\end{defi}
+
+\begin{defi}
+    \label{cellular_models:dual_ehrenfried:thin_cells}
+    \index{cell!thin cell}
+    \index{cell!set of thin cells}
+    \symbolindex[t]{$\Thin$}{The set of thin cells}{Definition \ref{cellular_models:dual_ehrenfried:thin_cells}}
+    A cell $\Sigma \in \E$ that is not an expansion of some other cell is called \textbf{thin}.
+    The set of thin cells is $\Thin$.
+\end{defi}
+
+\begin{prop}
+    \label{cellular_models:dual_ehrenfried:every_cell_is_an_expansion}
+    \symbolindex[e]{$ex$}{The expansion map}{Proposition \ref{cellular_models:dual_ehrenfried:every_cell_is_an_expansion}}
+    \symbolindex[p]{$\mc Pow$}{The power set operator}{Proposition \ref{cellular_models:dual_ehrenfried:every_cell_is_an_expansion}}
+    Every cell $\Sigma \in \E$ is a unique expansion of a thin cell, i.e.
+    denoting the power set operator by $\mc Pow$, there is a bijection
+    \[
+        ex \colon \coprod_{\Sigma \in \Thin} \mc Pow( Bsupp(\Sigma)) \to Cells(\E) \mspc{with}{20} Bsupp(\Sigma) \supseteq J \mapsto J.\Sigma \,.
+    \]
+\end{prop}
+
+\begin{proof}
+    The expansion map $ex$ is surjective by the definition of thin cells.
+    
+    In order to proof injectivity, consider thin cells $\tilde\Sigma$ and $\tilde\Sigma'$ together with
+    $J \subseteq Bsupp(\tilde\Sigma)$ of minimal size and some $K \subseteq Bsupp(\tilde\Sigma')$ such that
+    $J.\tilde\Sigma = K.\tilde\Sigma'$.
+    We show that $J$ has to be empty to deduce $\tilde\Sigma = K.\tilde\Sigma'$, so $K$ is also empty (because $\tilde\Sigma$ is thin).
+    
+    Assume $J$ is non-empty and consider $j^\eps \in J$ and $k^\delta \in K$.
+    We denote
+    \[
+        \Sigma = (J - \{j^\eps\}).\tilde\Sigma = \inhom \mspc{and}{20} \Sigma' = (K - \{k^\delta\}).\tilde\Sigma' = \inhom[\tau'] \,.
+    \]
+    By assumption,
+    \begin{align}
+        j^\eps.\Sigma
+            &= (S_a\tau_h \mid \ldots \mid S_a\tau_j \mid S_{a+1}\tau_{j-1} \mid \ldots \mid S_{a+1}\tau_1) \\
+            \label{cellular_models:dual_ehrenfried:every_cell_is_an_expansion_comparision_of_two_sequences}
+            &= (S_b\tau_h' \mid \ldots \mid S_b\tau_k' \mid S_{b+1}\tau_{k-1}' \mid \ldots \mid S_{b+1}\tau_1') = k^\delta\Sigma'
+    \end{align}
+    for some unique $a$ and $b$.
+    
+    Here, $a=b$ is impossible:
+    If $j = k$, the index set $J$ was clearly not minimal,
+    but for $j > k$, we have $S_{a+1}\tau_k = S_a\tau_k'$ with $a \in \supp(\tau_k)$ by (ii) in Definition \ref{cellular_models:dual_ehrenfried:basic_coboundary_traces},
+    so $\supp(S_{a+1}\tau_k) \not\ni a+1 \in \supp(S_a\tau_k')$.
+    
+    Without loss of generality, let $a < b$.
+    Similar to the previous consideration, $a+1 = b$ and $j > k$ must not hold at once as otherwise $S_a\tau_j = S_b\tau_j' = S_{a+1}\tau_j'$ with $\supp(S_{a+1}\tau_j) \ni a+1 \not\in \supp(S_{a+1}\tau_j')$.
+    
+    Now that we excluded all troublesome cases, the transpositions of $j^\eps.\Sigma$ and $k^\delta.\Sigma'$ at the $l\Th$ spot are
+    \[
+        S_c\tau_l = S_d\tau_l'
+    \]
+    for appropriate $c < d$.
+    We deduce
+    \[
+        S_d\tau_l' = S_cS_{d-1}\tau'' \mspc{with}{20} \tau_l'' = D_c\tau_l' \neq 1_\SymGr
+    \]
+    as (by the identities in Proposition \ref{notation:DiSj_identities})
+    \[
+        S_c\tau_l = S_cD_cS_c\tau_l \mspc{and}{20} D_cS_d\tau_l'' = S_{d-1}D_c\tau_l' \,.
+    \]
+    Substituting the transpositions of $k^\delta.\Sigma'$ in equation \eqref{cellular_models:dual_ehrenfried:every_cell_is_an_expansion_comparision_of_two_sequences},
+    it is readily seen that $J$ was not minimal.
+\end{proof}

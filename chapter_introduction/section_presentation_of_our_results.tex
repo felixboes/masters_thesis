@@ -1,0 +1,234 @@
+\section{Our Results in the Unstable Case [B]}
+In our thesis, we obtain several new results.
+In this section, we discuss the most important ones.
+
+We review Bödigheimer's models introduced in \cite{Boedigheimer19901} and \cite{Boedigheimer2006}.
+We discuss the first model, the space of parallel slit domains $\Parr$ sitting in the semi-multisimplicial parallel slit complex $(P,P')$.
+As before, we dissect a given surface using the flow lines of distinguished potential functions with exactly $n$ poles $\mc Q = (Q_1, \ldots, Q_n)$.
+Here we permit poles of arbitrary order $r_1, \ldots, r_n \ge 1$ and obtain a parallel slit domain on $r = r_1 + \ldots + r_n$ planes.
+The second model is the space of radial slit domains $\Rad$ sitting in the radial slit complex $(R,R')$.
+These models are manifolds.
+Moreover, they are homotopy equivalent to moduli space $\Parr \simeq \Modspc$ respectively $\Rad \simeq \ModspcRad$.
+For both models, we construct the associated Ehrenfried complex $\E$ and show that 
+(1) the theorem of Bödigheimer (that the Hilbert uniformization provides a homeomorphism)
+as well as the theorem of Visy (that the vertical homology of the corresponding double complex is concentrated in degree $h$) hold for both
+the parallel slit complex with arbitrary $n$ and $r = r_1 + \ldots + r_n$ and the radial slit complex.
+The following diagram shows the schematic picture of our approach.
+The homology of the moduli spaces is determined with the help of several models and the lower line represents both the parallel and radial models.
+\[
+    \resizebox{\linewidth}{!}{
+        \begin{tikzcd}[row sep=10ex, scale=1.3, ampersand replacement=\&]
+            \&\&\&\&\&H_\ast(\mathfrak M) \\
+            B\Gamma \arrow[<-, shorten <=1ex, shorten >=1ex]{rr}{\simeq} \arrow[dashed, out=25, in=180, shorten <=1ex, shorten >=1ex]{rrrrru}[description]{H_\ast} \&\&
+            \mathfrak M \arrow[<-, shorten <=1ex, shorten >=1ex]{rr}[swap]{\text{affine bundle}} \arrow[dashed, shorten <=1ex, shorten >=1ex]{rrru}[description]{H_\ast} \&\&
+            \mathfrak H \arrow[shorten <=1ex, shorten >=1ex]{rr}{\cong}[swap]{\text{Hilbert uniformization}} \arrow[dashed, shorten <=1ex, shorten >=1ex]{ru}[description]{H_\ast} \&\&
+            \stackbin[\mathfrak R]{\mathfrak P}{\scriptscriptstyle{resp.}} \arrow[<-, shorten <=1ex, shorten >=1ex]{rr}[swap]{\text{Poincaré duality}} \arrow[dashed, shorten <=1ex, shorten >=1ex]{lu}[description]{H_\ast} \&\&
+            \stackbin[(R,R')]{(P,P')}{\scriptscriptstyle{resp.}} \arrow[<-, shorten <=1ex, shorten >=1ex]{rr}{\simeq}[swap]{\text{quasi-isomorphic}} \arrow[dashed, shorten <=1ex, shorten >=1ex]{lllu}[description]{H^{\ast-\ldots}} \&\&
+            \E \arrow[dashed, out=155, in=0, shorten <=1ex, shorten >=1ex]{lllllu}[description]{H^{\ast-\ldots}}
+        \end{tikzcd}
+    }
+\]
+All in all we have:
+\begin{thm*}[Bödigheimer, Visy, B., H.]
+    The parallel slit complex respectively the radial slit complex is a relative manifold of dimension $6g-6+3m+3n+3r$ respectively $6g-6+3m+4n$.
+    The Ehrenfried complex is a quasi-isomorphic direct summand%
+    \footnote{%
+        To be precise, the Ehrenfried complex is, up to a shift in the homological degree, identified with a direct summand.
+        The inclusion induces an isomorphism in homology.
+    } of $P/P'$ respectively $R/R'$.
+    In particular
+    \[
+        H_\ast(\Modspc;\Z) \cong H^{3h-\ast}(P,P'; \mathcal O) \cong H^{2h-\ast}(\E; \mathcal O)
+    \]
+    where $h = 2g-2+m+n+r$ and $\mathcal O$ are the orientation coefficients respectively
+    \[
+        H_\ast(\ModspcRad;\Z) \cong H^{3h+n-\ast}(R,R'; \mathcal O) \cong H^{2h+n-\ast}(\E; \mathcal O)
+    \]
+    where $h=2g-2+m+n$ and $\mathcal O$ are the orientation coefficients.
+\end{thm*}
+
+In \cite{Boedigheimer201314}, Bödigheimer introduces a filtration of the bicomplex $\PP = P/P'$ respectively $R/R'$.
+It is, roughly speaking, given by the number of components of the critical graph associated with the gradient flow of the given potential function.
+It induces a filtration of the Ehrenfried complex.
+\begin{prop*}[Bödigheimer]
+    There are two first quadrant spectral sequences
+    \[
+        E^0_{k,c}(\PP) = \bigoplus_{p+q=k}\left[F_c\PP_{p,q} / F_{c-1}\PP_{p,q} \right] \Rightarrow H_{k+c}( \PP_{\bullet, \bullet} )
+    \]
+    and
+    \[
+        E^0_{p,c}(\E) = F_c\E_p / F_{c-1}\E_p \Rightarrow H_{p+c}( \E_\bullet ) \,.
+    \]
+    Both spectral sequences collapse at the second page.
+\end{prop*}
+
+Implementing the spectral sequence for the Ehrenfried complex in a software project we compute the rational and some $\mathbb F_p$ homology of certain moduli spaces with $h \le 8$.
+A short form of the rational results can be found in Section \ref{introduction:more_rational_homology} and
+the complete description is presented in Section \ref{program:results}.
+In particular, we confirm the rational version of Wang's conjecture.
+\begin{thm*}[Bödigheimer, B., H.]
+    The rational homology of the moduli space of Riemann surfaces of genus three with one boundary component is
+    \[
+        \begin{tabular}{|r|r|r|r|r|r|r|r|r|r|r|}
+            \hline
+            \multicolumn{11}{|c|}{$H_p( \mathfrak{M}_{3,1}^0; \mathbb Q )$} \\ \hline
+            $p=0$&$p=1$&$p=2$&$p=3$&$p=4$&$p=5$&$p=6$&$p=7$&$p=8$&$p=9$&$p\ge10$\\ \hline \hline
+            $\mathbb Q$&$0$&$\mathbb Q$&$\mathbb Q$&$0$&$\mathbb Q$&$\mathbb Q$&$0$&$0$&$\mathbb Q$&$0$\\ \hline
+        \end{tabular}\,.
+    \]
+    The rational homology of the moduli space of Riemann surfaces of genus two with one boundary component and two permutable punctures is
+    \[
+        \begin{tabular}{|r|r|r|r|r|r|r|r|r|}
+            \hline
+            \multicolumn{9}{|c|}{$H_p( \mathfrak{M}_{2,1}^2; \mathbb Q )$} \\ \hline
+            $p=0$&$p=1$&$p=2$&$p=3$&$p=4$&$p=5$&$p=6$&$p=7$&$p\ge8$\\ \hline \hline
+            $\mathbb Q$&$0$&$\mathbb Q$&$\mathbb Q^3$&$\mathbb Q$&$\mathbb Q^2$&$\mathbb Q^2$&$0$&$0$\\ \hline
+        \end{tabular}\,.
+    \]
+    The rational homology of the moduli space of Riemann surfaces of genus one with one boundary component and four permutable punctures is
+    \[
+        \begin{tabular}{|r|r|r|r|r|r|r|r|}
+            \hline
+            \multicolumn{8}{|c|}{$H_p( \mathfrak{M}_{1,1}^4; \mathbb Q )$} \\ \hline
+            $p=0$&$p=1$&$p=2$&$p=3$&$p=4$&$p=5$&$p=6$&$p\ge7$\\ \hline \hline
+            $\mathbb Q$&$\mathbb Q$&$0$&$\mathbb Q^2$&$\mathbb Q^3$&$\mathbb Q^2$&$\mathbb Q$&$0$\\ \hline
+        \end{tabular}\,.
+    \]
+\end{thm*}
+
+Most of the well-known homology operations on the moduli spaces were constructed via the bicomplexes (see below).
+In order to realize them in terms of the dual Ehrenfried complex, we provide an explicit formula for the coboundary operator via so-called coboundary traces:
+\begin{prop*}[B., H.]
+    The coboundary of a cell $\Sigma \in \E$ of degree $p$ is
+    \[
+        \del_\E^\ast(\Sigma) = \sum_{i=1}^p (-1)^i \sum_{a \in T_i(\Sigma)} \kappa^\ast( a.\Sigma ) \,.
+    \]
+\end{prop*}
+
+Using this formula, we discuss some of the well-known homology operations.
+Moreover, we classify the cells of a given Ehrenfried complex.
+\begin{prop*}[B., H.]
+    Every cell in the Ehrenfried complex $\E$ is uniquely obtained as an expansion of a thin cell in $\E$.
+\end{prop*}
+
+Bödigheimer's models have a strong connection to configuration spaces.
+Roughly speaking, a parallel slit domain $L \in \Parr$ consists of $r = r_1 + \ldots + r_n$ copies of the complex plane with finitely many slits removed,
+each slit running from some point horizontally to the left all the way to infinity.
+There is a pairing of the slits, subject to several conditions.
+It is reasonable to think that the pairing enables us to jump through a given slit to end up at its partner.
+The description of a radial slit domain $L \in \Rad$ is similar.
+Here we consider paired slits on an annulus each running from some point radially to the outer boundary.
+There are various geometric flavoured constructions.
+\begin{prop*}[Bödigheimer]
+    For every $g \ge 0$, $n \ge 1$, $m \ge 1$ and partition $(r_1, \ldots, r_n)$ of $r = r_1 + \ldots + r_n$,
+    there are continous maps
+    \[
+        par \colon \Rad \to \Parr
+    \]
+    and
+    \[
+        rad \colon \Parr \to \Rad \,.
+    \]
+    The maps are indicated in the following by Figures \ref{intro:parallelization} and \ref{intro:radialization}.
+\end{prop*}
+\begin{figure}[ht]
+    \centering
+    \incgfx{pictures/intro_parallelization.pdf}
+    \caption{\label{intro:parallelization}The parallelization map with $n=1$ and $r = 3$.}
+\end{figure}
+\begin{figure}[ht]
+    \centering
+    \incgfx{pictures/intro_radialization.pdf}
+    \caption{\label{intro:radialization}The radialization map.}
+\end{figure}
+We discuss several homology operations.
+One family of operations is induced by the action of little cubes operads, namely
+the ordered configuration spaces with respect to the complex plane $\cspc k (\C)$ or the annulus $\cspc k (\A)$, compare \cite{Boedigheimer19902} and \cite{Boedigheimer2006}.
+We propose a generalization of the well-known operations on $\Par_{g,n}^m[(1, \ldots, 1)]$ to $\Parr$ for an arbitrary partition $(r_1, \ldots, r_n)$.
+There are many generalizations which are all covered by our glueing construction.
+Roughly speaking, one has to decide how two surfaces, corresponding to given parallel slit domains $L_1$ and $L_2$, are glued along parts of their boundary and
+one has to declare an enumeration of the resulting boundaries.
+\begin{defi*}[B., H.]
+    The {\bf combinatorial type} $G$ which specifies the glueing construction {\bf depends on} the parameters
+    \[
+        \mathfrak P(G) = (g_1, g_2, n_1, n_2, m_1, m_2, (r_1^{(1)}, \ldots, r_{n_1}^{(1)}), (r_1^{(2)}, \ldots, r_{n_2}^{(2)}))
+    \]
+    and {\bf consists of} the following two data.
+    \begin{enumerate}
+        \item A partial, non-empty matching of the planes of the parallel slit domains in $\Par_{g_1, n_1}^{m_1}(r_1^{(1)}, \ldots, r_{n_1}^{(1)})$ and $\Par_{g_2, n_2}^{m_2}(r_1^{(2)}, \ldots, r_{n_2}^{(2)})$.
+    \end{enumerate}
+    The size of the matching is denoted by $s(G)$.
+    The glueing construction defines a surface of genus $g(G)$ with $m(G) = m_1 + m_2$ punctures and $n(G)$ (yet unordered) boundary curves each consisting of several planes.
+    \begin{enumerate}
+        \setcounter{enumi}{1}
+        \item A partial enumeration of the planes such that each boundary curve belongs to exactly one selected planes.
+    \end{enumerate}
+    The corresponding ordered configuration is $(r^{(G)}_1, \ldots, r^{(G)}_{n(G)})$.
+    The {\bf set of combinatorial types} that specify a glueing construction is denoted by $\mc G$.
+\end{defi*}
+\begin{prop*}[Bödigheimer]
+    For every combinatorial type $G \in \mc G$ with parameters
+    \[
+        \mathfrak P(G) = (g_1, g_2, n_1, n_2, m_1, m_2, (r_1^{(1)}, \ldots, r_{n_1}^{(1)}), (r_1^{(2)}, \ldots, r_{n_2}^{(2)}))
+    \]
+    there are homology operations induced by the action of the little cubes operad
+    \begin{multline*}
+        (\tilde\vartheta_G)_\ast \colon 
+            H_i(\cspc 2(\C))^{\oplus s(G)} \otimes
+            H_j(\Par_{g_1, n_1}^{m_1}(r_1^{(1)}, \ldots, r_{n_1}^{(1)})) \otimes
+            H_k(\Par_{g_2, n_2}^{m_2}(r_1^{(2)}, \ldots, r_{n_2}^{(2)})) \to\\[10pt]
+            H_{i+j+k}(\Par_{g(G), n(G)}^{m(G)}(r^{(G)}_1, \ldots, r^{(G)}_{n(G)}))\,.
+    \end{multline*}
+\end{prop*}
+
+In addition to the parallelization and radialization map mentioned above,
+we have the following propositions relating the space of parallel slit domains to the space of radial slit domains.
+\begin{prop*}[Bödigheimer]
+    The action of the little cubes operad on the space of parallel slit domains extends to an operation
+    \[
+        \begin{tikzcd}
+            \tilde C^k(\A) \times \mathfrak{Par}_{g_1, 1}^{m_1} \times \dotsb \times \mathfrak{Par}_{g_k, 1}^{m_k} \arrow{r}{\tilde \vartheta} & \Radt_{\tilde g}(\tilde m + 1, 1) \\
+            \tilde C^k(\C) \times \mathfrak{Par}_{g_1, 1}^{m_1} \times \dotsb \times \mathfrak{Par}_{g_k, 1}^{m_k} \arrow{r}{\tilde \vartheta} \arrow[hookrightarrow]{u}{\iota \times \text{id}} & \mathfrak{Par}_{\tilde g, 1}^{\tilde m} \arrow[hookrightarrow]{u}{rad}
+        \end{tikzcd} \,,
+   \]
+   where $\tilde g = \sum_{i = 1}^{k} g_i$ and $\tilde m = \sum_{i = 1}^k m_i$.
+\end{prop*}
+\begin{prop*}[Bödigheimer]
+    Let $n \ge 1$ and $\Par_n = \coprod_{g,m}\Par_{g,n}^m[(1, \ldots, 1)]$ and $\mathfrak{Rad}_n = \coprod_{g,m}\Rad$.
+    There is a right module structure
+    \[
+        H_\ast(\mathfrak{Rad}_n) \otimes H_\ast(\Par_n) \to H_\ast(\mathfrak{Rad}_n)
+    \]
+    induced by an action of the little cubes operad.
+\end{prop*}
+\begin{prop*}[Bödigheimer]
+    There is a composition operation
+    \[
+        \odot \colon \mathfrak{M}^{\bullet \bullet}_g(l, m) \times \mathfrak{M}^{\bullet \bullet}_{g'}(m, n) \to \mathfrak{M}^{\bullet \bullet}_{\tilde g}(l, n)\,, (F, F') \mapsto F \odot F'\,,
+    \]
+    where $\tilde g = g + g' + m - 1$.
+\end{prop*}
+
+Besides operations which are induced by the action of little cubes operads,
+we generalize the operations discussed in \cite{Mehner201112} to arbitrary $n$ and $(r_1, \ldots, r_n)$, present the radial multipliciation
+\[
+    \radmult \colon \Rad \times \Radt_{g'}(m', n) \to \Radt_{\tilde g}(m+m', n)\,,
+\]
+with $\tilde g = g + g' + n - 1$ and introduce $\alpha \colon \mathfrak{M}_{g,n}^m \to \mathfrak{M}_{g,n}^{m+n}$
+inducing a split injective map in homology
+\[
+    \alpha_\ast \colon H_\ast(\mathfrak{M}_{g,n}^m) \to H_\ast(\mathfrak{M}_{g,n}^{m+n}) \,.
+\]
+Rotating radial slit domains simultaneously induces the operation of degree one
+\[
+    rot \colon H_i(\Rad) \to H_{i+1}(\Rad)
+\]
+with $rot^2 = 0$.
+Eventually, we present formulas relating some of the operations.
+
+Furthermore, we provide an ongoing, extendable software project consisting of about 4500 lines of code.
+It was used to compute the homology of the moduli spaces for $h \le 8$ and
+the first author plans to implement the known operations in order to relate the found generators.
+In addition, there are upcoming master students under the supervision of Bödigheimer who will implement further features of both the Ehrenfried complex and its corresponding bicomplex.
+
+A deeper study of the cluster spectral sequence, the relations of generators via homology operations and the interdependencies of these operations outline an ongoing research project.

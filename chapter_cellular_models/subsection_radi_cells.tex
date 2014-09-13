@@ -1,0 +1,195 @@
+\subsection{Radial Cells in Homogeneous Notation [H]}
+\label{cellular_models:radial:cells_in_homogenous_notation}
+\index{radial slit annulus}
+\symbolindex[a]{$\A$}{An annulus $\A \subset \C$ in the complex plane}{}
+Recall Definition \ref{cellular_models:parallel:homogeneous_notation}.
+
+\begin{defi}(Definition \ref{cellular_models:parallel:homogeneous_notation})
+\label{cellular_models:radial:homogeneous_notation}
+    \index{radial cell in homogeneous notation}
+    \index{cell!radial cell in homogeneous notation}
+    \symbolindex[s]{$\Sigma = (\sigma_q, \ldots, \sigma_0)$}{A radial cell written in homogeneous notation}{Definition \ref{cellular_models:radial:homogeneous_notation}}
+Using the {\bf homogeneous notation}, a combinatorial cell of bidegree $(p,q)$ with respect to the partition $[p]$ is a $(q+1)$-tuple of permutations $\sigma_j \in \Symgrp_{[p]}$
+    \[
+        \Sigma = \homogq \,.
+    \]
+    Most of the time we refer to $\Sigma$ as a cell on $n$ levels, leaving the partition $[p]$ unmentioned.
+\end{defi}
+
+Note that this definition of a cell still makes sense in the radial case.
+An inner cell, however, is defined differently now.
+
+\begin{defi}
+\label{cellular_models:radial:inner_cells}
+    \index{cell!inner radial cell}
+    A cell $\Sigma = \homogq$ of bidegree $(p,q)$ is called {\bf radial inner cell} if it satisfies the following conditions:
+    \begin{enumerate}
+        \item The zero${}^{\text{th}}$ permutation $\sigma_0$ is fixed to be the levelwise cyclic permutation 
+              \[\sigma_0 = (\ul 0_1\ \ul 1_1\ \ldots\ \ul p_1)\ldots (\ul 0_n\ \ul 1_n\ \ldots\ \ul p_n)\,.\]
+        \item For every $0 \le i < q$, the permutations $\sigma_i$ and $\sigma_{i+1}$ are distinct.
+        \item There is no symbol $\ul 0_k \le \ul j_k < \ul p_k$ that is mapped to its successor $\ul{j+1}_k$ by all permutations $\sigma_i$.
+    \end{enumerate}
+\end{defi}
+
+Note that the difference of a radial inner cell to a parallel inner cell is 
+that the symbols $\ul p_k$ do not necessarily have to be mapped to $\ul 0_k$ by each permutation $\sigma_j$.
+Therefore, every parallel inner cell can be viewed as a radial inner cell, 
+and every radial inner cell, which is not a parallel cell, is the $\ul 0_k\Th$ face of a parallel inner cell of bidegree $(p + 1, q)$.
+ 
+A radial cell of bidegree $(p, q)$ on $n$ levels with respect to the partition $[p]$ is represented geometrically by a \textbf{radial slit annulus} in the following way.
+
+Let $\A_1, \dotsc, \A_n \subset \C$ be annuli in distinct complex planes.
+Each annulus $\A_k$ shall be centered at $0$, having outer radius $1$ and inner radius $r_k$ for fixed $0 < r_k < 1$.
+Introduce $p_k+1$ equally sized radial segments on the annulus $\A_k$, numbered clockwise by the symbols $\ul 0_k, \dotsc, \ul p_k$.
+To normalize the numeration, we require that the line preceding the $0\Th$ segment $\ul 0_k$ in clockwise ordering lies on the positive real line.
+Furthermore, we introduce $q+1$ concentrical, equidistant stripes on each annulus. 
+The $0\Th$ stripe is incident to the inner boundary of the annulus,
+and all other stripes are numbered with the symbols $1, \dotsc, q$ towards the outer boundary.
+
+This way we obtain a subdivision of each annulus $\A_k$ into $(q+1)(p_k+1)$ regions with coordinates $(j, \ul i)$, 
+where $\ul i \in \{\ul 0_k, \dotsc, \ul p_k\}$ and $j \in \{0, \dotsc, q\}$.
+As in the parallel case, we obtain a surface by performing identifications within the set of the $j\Th$ stripes on each annuli, for each $j = 0, \dotsc, q$.
+By this, the line segment preceding a region $(j, \ul i)$ is glued with the line segment succeeding the region $(j, \sigma_j(\ul i))$,
+see Figure \ref{radial:slit_annuli:homogeneous_cell}.
+It is possible that the two regions lie on two different annuli.
+
+\begin{figure}[ht]
+\centering
+\incgfx{pictures/radial_homogeneous_cell}
+\caption{\label{radial:slit_annuli:homogeneous_cell} The homogeneous representation of a radial cell.}
+\end{figure}
+
+Note that we have reversed the process described in \ref{cellular:radial_bundle} and at the beginning of this Subsection.
+The surface resulting from glueing has $n$ incoming boundary curves arising from the $n$ inner circles of the annuli. 
+On each inner boundary, there is a marked point corresponding to the point $(R_k, 0)$ on the $k\Th$ annulus.
+The cycles of $\sigma_q$ yield the outgoing boundary curves of the surface, which do not have a specific order.
+If we require the cell $\Sigma$ to be connected as in Definition \ref{cellular_models:parallel:connected}, the resulting surfaces will also be connected.
+
+\subsection{Radial Cells in Inhomogeneous Notation [H]}
+\label{cellular_models:radial:cells_in_inhomogenous_notation}
+
+Like a parallel inner cell, a radial inner cell can be expressed in \textbf{inhomogeneous notation} by writing
+\[
+    \Sigma = (\tau_q \mid \ldots \mid \tau_1)\,,
+\]
+where $\tau_j = \sigma_j \cdot \sigma_{j-1}^{-1}$ for $j = 1, \dotsc, q$. 
+One should be cautious about the permutations $\tau_j$.
+Whereas, in the parallel case, we could assume the $\tau_j$ to act on the symbols $[p] - \{0_k \colon 1 \leq k \leq n\}$ only,
+we cannot do this here since we do not require that $\ul p_k$ is mapped to $\ul 0_k$ by each permutation $\sigma_j$.
+Therefore, the symbols $\ul 0_k$ might be permuted non-trivially by some $\sigma_j \cdot \sigma_{j-1}^{-1}$, 
+but they might be fixpoints of each transposition $\tau_j$ as well.
+We receive permutations $\tau_q, \dotsc, \tau_1$ on the whole set of symbols $[p]$.
+Using this notation, we obtain an equivalent way to state Definition \ref{cellular_models:radial:inner_cells}.
+
+\begin{defi}
+    \label{cellular_models:radial:inhomogeneous_notation}
+    \index{inhomogeneous notation}
+    \index{radial cell in inhomogeneous notation}
+    \symbolindex[s]{$\Sigma = (\tau_q \mid \ldots \mid \tau_1)$}{A radial cell written in inhomogeneous notation}{\ref{cellular_models:radial:inhomogeneous_notation}}
+    A combinatorial cell of bidegree $(p,q)$ with respect to the partition $[p]$ written in {\bf inhomogeneous notation}
+    is a $q$-tuple of permutations
+    \[
+        \Sigma = \inhomq \,,
+    \]
+    where each $\tau_j$ acts on the set of symbols $[p]$.
+    It is a {\bf radial inner cell} if satisfies the following conditions:
+    \begin{enumerate}
+        \item Every permutation $\tau_q, \ldots, \tau_1$ is non-trivial.
+        \item The set of common fixed points of the permutations $\tau_q, \ldots, \tau_1$ is a subset of $\{ \ul0_1, \ldots, \ul0_r\}$.
+        \item The permutations $\tau_q, \ldots, \tau_1$ do not have any fixed point in common.
+    \end{enumerate}
+\end{defi}
+
+Similar as in the parallel case, we draw inhomogeneous radial cells like in Picture \ref{radial:slit_annuli:inhomogeneous_cell}.
+There could also be a slit on the positive real line, and there could be more than one slit per symbol.
+Again, the inhomogeneous picture of a radial cell reveals how tours around the stagnation points look like.
+
+\begin{figure}[ht]
+\centering
+\incgfx{pictures/cellular_radi_inhom_cell}
+\caption{\label{radial:slit_annuli:inhomogeneous_cell} The inhomogeneous representation of the radial cell $\Sigma = ((\ul 4, \ul 2)\mid (\ul 3, \ul 1))$ with $N(\Sigma) = 2$, $n(\Sigma) = 1$, $m(\Sigma) = 1$.}
+\end{figure}
+
+In order to finish a full combinatorial description for a point in the bundle $\HarmRad$, 
+we need to encode the numbers of incoming and outgoing boundaries,
+rewriting Definition \ref{cellular_models:parallel:number_cycles} for the radial case.
+
+\begin{defi}
+    \label{cellular_models:radial:number_cycles}
+    \label{cellular_models:radial:number_punctures}
+    \label{cellular_models:radial:number_boundaries}
+    \label{cellular_models:radial:norm}
+    \index{cell!number of cycles of a radial cell}
+    \index{cell!number of punctures of a radial cell}
+    \index{cell!number of boundaries of a radial cell}
+    \index{cell!norm of a radial cell}
+    \symbolindex[n]{$\ncyc(\Sigma)$}{The number of cycles of a radial cell $\Sigma$.}{Definition \ref{cellular_models:radial:number_cycles}}
+    \symbolindex[m]{$m(\Sigma)$}{The number of punctures of a radial cell $\Sigma$.}{Definition \ref{cellular_models:radial:number_punctures}}
+    \symbolindex[n]{$n(\Sigma)$}{The number of boundaries of a radial cell $\Sigma$.}{Definition \ref{cellular_models:radial:number_boundaries}}
+    \symbolindex[n]{$N(\Sigma)$}{The norm of a radial cell $\Sigma$.}{Definition \ref{cellular_models:radial:norm}}
+
+    Consider an arbitrary radial cell $\Sigma = \homogq$ of bidegree $(p,q)$.
+    \begin{enumerate}
+        \item The {\bf number of incoming cycles} of $\Sigma$ is defined to be the number $n(\Sigma)$ of annuli, on which $\Sigma$ is defined,
+              and thus equals the number of cycles of $\sigma_0$.
+        \item The {\bf number of outgoing cycles} of $\Sigma$ is defined to be the number 
+            \[
+                m( \Sigma ) = \ncyc( \sigma_q)
+            \]
+	    of cycles of the permutation $\sigma_q$, including fixpoints.
+        \item The {\bf norm} of $\Sigma$ is
+            \[
+                N(\Sigma) = N(\sigma_q\sigma_{q-1}^{-1}) + \ldots + N(\sigma_1\sigma_0^{-1}) \,,
+            \]
+            where $N$ measures the word length in the symmetric group $\Symgrp_{[p]}$ with respect to the set of all transpositions.
+    \end{enumerate}
+\end{defi}
+
+With this definition, the number of inner and outer boundary curves of a radial cell $\Sigma$
+coincides with the number of the surface resulting from the glueing process described in Subsection \ref{cellular_models:radial:cells_in_homogenous_notation}.
+
+\begin{rem}
+   Recall that, for a parallel inner cell $\Sigma = \homogq$, the permutation $\sigma_q$ is supposed to have $m+n$ cycles instead of $m$, see Definition \ref{cellular_models:parallel:inner_cells}.
+   This occures because, in the parallel case, only $m$ of these $m+n$ cycles of $\sigma_q$ correspond to the $m$ punctures of the resulting surface 
+   and the remaining cycles, which contain at least one symbol $\ul 0_k$, correspond to the $n$ boundary curves of the surfaces.
+   But in the radial case, all the cycles of $\sigma_q$ correspond to the $m$ outgoing boundary curves of the surface resulting from glueing $\Sigma$.
+\end{rem}
+
+Note that we can read off the Euler characteristic and the genus of the surface from the cell.
+
+\begin{prop}
+    Let $\Sigma = \homogq$ be a radial inner cell with $m(\Sigma) = m$, $n(\Sigma) = n$ and $N(\Sigma) = h$.
+    Then the Euler characteristic of the surface $F$ resulting from glueing $\Sigma$ according to the permutations $\sigma_j$ equals
+    \[
+       \chi(F) = -h = - 2g + 2 - m - n\,.
+    \]
+\begin{proof}
+    Note that the slits and the concentrical lines of $\Sigma$ yield an embedded graph $\mc K_0 \subset F$, the unstable critical graph.
+    The vertices correspond to the cut points $\mathcal Q^+$ on the outgoing boundaries and to the stagnation points $\mathcal S$.
+    On the $j\Th$ equipotential line, all stagnation points are connected by a cycle and there are $N(\tau_j)$ edges connecting stagnation points to the outgoing boundaries.
+    The number of faces of $\mc K_0$ equals $n$.
+    
+    Since we want to use this embedded graph for determining the Euler characteristic, we would like it to be connected with contractible faces. 
+    In order to obtain a connected graph, we add edges around the outgoing boundary curves.
+    After having done so, there is one additional edge for each cut point $Q^+$.
+    If we additionally introduce one vertex per incoming boundary $C^-_k$, together with one loop around $C^-_k$ and one edge connecting it to some vertex of the critical graph (without introducing any crossings),
+    each face of the resulting graph is contractible and the number of faces remains $n$.
+    Hence, the Euler characteristic of $F$ is given by
+    \begin{align*}
+       \chi(F) &= \#vertices - \#edges + \#faces \\
+               &= |\mathcal Q^+| + |\mathcal S| + n - (|\mathcal S| + h + |\mathcal Q^+| + 2n ) + n \\
+               &= -h\,.
+    \end{align*}
+\end{proof}
+\end{prop}
+
+\begin{cor}
+\label{cellular_models:radial:h_m_n_g_are_recognized}
+\index{cell!genus of a radial cell}
+\symbolindex[g]{$g(\Sigma)$}{The genus of a radial cell $\Sigma$.}{Remark \ref{cellular_models:radial:h_m_n_g_are_recognized}}
+    Let $\Sigma = \homogq$ be a radial inner cell with $m(\Sigma) = m$, $n(\Sigma) = n$, $N(\Sigma) = h$.
+    Then, the genus of the surface $F$ resulting from glueing $\Sigma$ according to the permutations $\sigma_j$ equals
+    \[
+       g(\Sigma) = \frac{h - m - n + 2}{2}\,. 
+    \]
+\end{cor}

@@ -1,0 +1,188 @@
+\section{The Orientation System [H]}
+\label{cellular_models:orientation}
+\index{orientation system}
+\symbolindex[o]{$\mathcal O$}{Orientation system of the manifold $\Harm[(r_1, \dotsc, r_n)]$ or $\HarmRad$.}{Section \ref{cellular_models:orientation}}
+
+Let $\M$ denote the moduli space $\Modspc[r]$ or $\ModspcRad$ with fixed $g$, $m$, $n$, and possibly $r$,
+Let $\Har$ denote the corresponding bundle over $\M$.
+For simplicity, we always use the letter $P$ for the associated relative multisimplicial complex $(P, P')$
+instead of writing $(R, R')$ in the radial case.
+
+Since $\Har$ is non-orientable when $m > 1$, 
+we need to use a local orientation system $\mathcal O$ to compute its homology via generalized Poincaré duality
+\[
+   H_\ast( \M; \Z ) = H_\ast( \Har; \Z ) \cong H^{d-\ast}( \Har; \mathcal O ) = H^{d-\ast}( P, P'; \mathcal O)\,,
+\]
+where $\mathcal O$ are the orientation coefficients and $d$ denotes the dimension of $\Har$.
+We follow Mehner's approach to define the orientation system (see \cite[Chapter 3.7]{Mehner201112}) because
+it can be applied to the parallel case as well as to the radial case
+and because its implementation is a simple calculation (compare Subsubsection \ref{program:kappa:tuple:orientation_sign}).
+In the following, we describe the idea of our orientation system, starting with the notion of orientation in the manifold $\Har$
+and continuing with the bisemisimplicial orientation system for $(P, P')$.
+
+By $\tilde \Har$, we denote the orientable covering space of $\Har$ that arises from $\Har$ by numbering the $m$ punctures in the parallel case,
+respectively the $m$ outgoing boundary curves in the radial case.
+The symmetric group $\SymGr_m$ acts on $\tilde \Har$ by permuting the punctures respectively outgoing boundaries, 
+with $\Har = \tilde \Har / \SymGr$.
+The elements of the alternating group $\mathfrak A_m \subset \SymGr_m$ are exactly those elements that act orientation-preserving, compare \cite[Chapter 3.4]{Mehner201112}.
+Hence, it is a simple exercise to see that the quotient $\overline \Har = \tilde \Har / \mathfrak A_m$ arising from $\tilde \Har$ is orientable.
+As an orientable twofold covering of $\Har$ with orientation reversing deck transformations, 
+$\overline \Har$ is isomorphic to the orientation covering of $\Har$ and thus can be used to define an orientation system for $\Har$.
+
+In order to perform explicit calculations, we need to see how this notion of orientation transfers to the bicomplex $P$.
+By $(\tilde P, \tilde P')$, we denote the relative bicomplex corresponding to $\tilde \Har$.
+Recall that, in the radial case, the $m$ outgoing boundary curves of a surface 
+correspond to the $m$ cycles of the permutation $\sigma_q$ belonging to a cell $\Sigma \in R$;
+while in the parallel case, the $m$ punctures correspond to those $m$ cycles of $\sigma_q$ belonging to $\Sigma \in P$
+that do not contain any symbol $\ul 0_k$. 
+Thus, a permutation of the punctures corresponds to a permutation of the cycles of $\sigma_q$,
+apart from the cycles containing some $\ul 0_k$ in the parallel case.
+Hence, a cell $\tilde \Sigma \in \tilde P$ can be written as a pair $\tilde \Sigma = (\Sigma, \nu)$, 
+where the function $\nu \colon [p] \to \{0, \dotsc, m\}$ defines a numeration of the cycles, i.e.
+\begin{enumerate}
+   \item $\nu$ is invariant under $\sigma_q$,
+   \item $\nu$ induces a bijection
+   \begin{itemize}
+      \item $[p]/ \sigma_q \to \{0, \dotsc, m\}$ in the parallel case,
+      \item $[p]/ \sigma_q \to \{1, \dotsc, m\}$ in the radial case, and
+   \end{itemize}
+   \item in the parallel case, we have $\nu(\ul 0_k) = 0$ for all $k = 1, \dotsc, r$.
+\end{enumerate}
+Note that the application of the vertical face operator $d'_j$ to $\Sigma$ leaves $\sigma_q$ and hence $\nu$ invariant, for $j = 1, \dotsc, q-1$.
+Thus, the vertical boundary of $\tilde P$ is simply given by 
+\[
+   \tilde \del_j' = (\del_j'(\Sigma), \nu)\,.
+\]
+When the horizontal face operator $d''_i$ is applied to $\Sigma$, $i \in [p]$, the symbol $i$ is erased from its cycle in $\sigma_q$.
+We obtain a numeration of the cycles of $d''_i(\Sigma)$ by keeping the cycle numbers for all remaining symbols.
+This yields the formula 
+\[
+   \tilde \del_i''(\Sigma) = (\del_i''(\Sigma), \nu \circ d_i^\Delta) 
+\]
+after to renormalization.
+A cell $(\Sigma, \nu) \in \tilde P$ is degenerate if and only if $\Sigma \in P$ is degenerate, 
+and $\tilde P' \subset \tilde P$ is the subset of degenerate cells.
+
+Defining an orientation system for the bicomplex $(P, P')$ means 
+that we may need to alter the definition of the vertical and horizontal differentials by additional signs in order to correct the change of orientation induced by permutations of the punctures or outgoing boundaries.
+To be precise, we choose a distinguished lift to $\tilde P$ for all cells of $P$.
+Considering some $\Sigma \in P$, we obtain a cell $\tilde \Sigma = (\Sigma, \nu)$ with a distinguished numeration $\nu$ of the cycles of $\sigma_q$.
+Then we apply any face operator $d$ to $\Sigma$ and, correspondingly, $\tilde d$ to $\tilde \Sigma$. 
+As $\widetilde{d\Sigma}$ and $\tilde {d} (\tilde \Sigma)$ lie in the same orbit under $\SymGr_m$, 
+there is a permutation $\pi \in \SymGr_m$ that transforms the two different numerations of the cycles of $\sigma_q$ into each other.
+Projecting everything down to the orientation covering $\overline P$, 
+the projections of the two lifts $\widetilde{d\Sigma}$ and $\tilde d (\tilde \Sigma)$ give two orientations of the cell $d(\Sigma)$.
+Therefore, the differential $d$ is orientation preserving if and only if $\pi$ is a permutation in the alternating group $\mathfrak A_m$.
+If $d$ is orientation reversing, we correct this by using an additional sign in the differential for $(P, P')$ depending on $\Sigma$.
+Thus we aim at defining differentials 
+\[
+   \hat \del' = \sum_{j = 0}^{q} (-1)^j \eps_j'(\Sigma) d_j'(\Sigma)
+\]
+
+and 
+
+\[
+   \hat \del'' = \sum_{i \in [p]} (-1)^i \eps_i''(\Sigma) d_i''(\Sigma)
+\]
+on the cells of $P, P'$ with signs $\eps_j', \eps_i'' \in \{\pm 1\}$ such that each face operator $\eps_j'(\Sigma) d_j'(\Sigma)$ and $\eps_i''(\Sigma) d_i''(\Sigma)$ preserves orientations.
+
+Let us now see how the minimum symbols of the cycles of $\sigma_q$ determine the distinguished lift.
+
+\begin{defi}
+   Let $\Sigma = \homogq \in P$ be a cell in homogeneous notation.
+   The \textbf{distinguished lifting} for $\Sigma$ to $\tilde P$ is given by the cell $\tilde \Sigma = (\Sigma, \nu)$,
+   where $\nu$ is defined by the following procedure:
+   \begin{enumerate}
+      \item Decompose $\sigma_q$ into disjoint cycles, yielding a decomposition
+	 \begin{itemize}
+	    \item $\sigma_q = \alpha_0 \dotsc \alpha_m$ in the parallel case,
+	    \item $\sigma_q = \alpha_1 \dotsc \alpha_m$ in the radial case.
+         \end{itemize} 
+      \item Denote the minimum symbol of each cycle $\alpha_k$ by $a_k$.
+      \item \begin{itemize}
+               \item In the parallel case, choose the indices $0, \dotsc, m$ such that $a_0 < \dotsc < a_m$,
+               \item In the radial case, choose the indices $1, \dotsc, m$ such that $a_1 < \dotsc < a_m$.
+            \end{itemize}
+      \item For a symbol $i \in [p]$ belonging to cycle $\alpha_k$, set $\nu(i) = k$. 
+   \end{enumerate}
+\end{defi}
+
+Note that for $m = 1$, $\Har$ and $\tilde \Har$ coincide, and we can keep the differentials unchanged.
+
+For the $j\Th$ vertical face operator, recall that $\tilde d'_j(\tilde \Sigma)$ preserves the numeration $\nu$, 
+hence we can always set $\eps_j'(\Sigma) = 1$.
+But already for $m = 2$, there are situations when the horizontal differential changes the orientation of a cell.
+
+\begin{example}
+Let $\Sigma \in P$ be a parallel cell on one level with $\sigma_q = (\ul 0\ \ul 4) (\ul 1\ \ul 3) (\ul 2)$.
+Then $\tilde \Sigma$ is given by $\Sigma$ together with the distinguished numeration $\nu$ of the cycles
+\[
+\begin{matrix}
+i      & \ul 0 & \ul 1 & \ul 2 & \ul 3 & \ul 4 \\
+\nu(i) & 0 & 1 & 2 & 1 & 0
+\end{matrix}\,.
+\]
+The application of the horizontal face operator $\tilde d''_{\ul 1}$ erases the symbol $\ul 1$ from $\sigma_q$
+and renormalizes the permutation.
+The new numeration of the cycles of $d''_1(\Sigma)$ is given by
+\[
+\begin{matrix}
+i      & \ul 0 & \ul 1 & \ul 2 & \ul 3 \\
+\nu(i) & 0 & 2 & 1 & 0
+\end{matrix}\,.
+\]
+On the other hand, first applying $d''_{\ul 1}$ to $\Sigma$ and then lifting it to $\tilde P$ yields the distinguished numeration
+\[
+\begin{matrix}
+i      & \ul 0 & \ul 1 & \ul 2 & \ul 3 \\
+\nu(i) & 0 & 1 & 2 & 0
+\end{matrix}\,.
+\]
+Hence the difference of the two permutations is the transposition $(1 \ 2)$, 
+yielding $\eps_{\ul 1}''(\Sigma) = -1$ because this means that $d''_{\ul 1}$ reverses orientations.
+\end{example}
+
+More generally, let $\Sigma \in P_{p, q}$ be an oriented parallel or radial cell together with the distinguished numeration $\nu$ of the cycles of $\sigma_q$.
+Consider $i \in [p]$.
+In the parallel case, we can assume that $i \neq \ul 0_k, \ul p_k$ since then the $i\Th$ faces are always degenerate.
+Examine the sign difference $\eps_i''(\Sigma)$ of the numeration of the cycles of $\sigma_q$ given by $\tilde d''_i (\tilde \Sigma)$ 
+and the distinguished numeration of $d''_i \Sigma$.
+Assume that the decomposition $\sigma_q = (\alpha_0) \alpha_1 \dotsc, \alpha_m$ 
+and the minimum symbols $(a_0 < ) a_1 < \dotsc < a_m$ are chosen as above,
+and that the symbol $i$ is contained in the cycle $\alpha_k$.
+\begin{enumerate}
+\item
+The symbol $i$ is a fixed point of $\sigma_q$. 
+Then the number of cycles of $\del_i(\Sigma)$ is $m$ instead of $m+1$, 
+thus $\del''_i(\Sigma)$ is degenerate and this case is not of interest.
+\item 
+The symbol $i$ is not the minimum symbol of the cycle $\alpha_k$.
+Then $\nu$ is not affected by the application of $d''_i$, meaning that $\eps_i''(\Sigma) = 1$.
+\item 
+We have $a_k = i$.
+When $d''_i$ is applied, the symbol $i$ is removed from its cycle, 
+leaving another element $i' > i$ as the smallest element of the cycle $\alpha_k$.
+Now the numeration $\nu_i = \nu \circ {d_i}^\Delta$ is not necessarily the distinguished numeration of $d''_i(\Sigma)$
+since we do not know whether $i' < a_{k + 1}$.
+But we can transform $\nu_i$ into the distinguished numeration 
+by swapping $i'$ with all $a_{l}$ such that $i < a_l < i'$.
+This means that the sign difference $\eps_i''(\Sigma)$ is exactly $(-1)^{l - k}$,
+where $l$ is the maximum symbol with $i < a_l < i'$.
+\end{enumerate}
+
+Hence, setting $\hat d_i''(\Sigma) = \eps_i''(\Sigma)d_i''(\Sigma)$ corrects all the changes in orientations.
+We obtain
+
+\begin{prop}
+   The homology of the moduli spaces $\M = \Modspc$ respectively $\ModspcRad$ can be determined via 
+   \[
+      H_\ast( \M; \Z ) = H^{d-\ast}( P, P'; \mathcal O) = H^{d-\ast}( \hat P, \hat P')\,.
+   \]
+   Here, $(P, P')$ is the relative parallel respectively radial bicomplex.
+   The relative bicomplex $(\hat P, \hat P')$ consists of the same cells as $(P, P')$ together with the vertical differential $\hat \del' = \del'$ 
+   and, for $\Sigma \in \hat P$, the horizontal differential
+   \[
+      \hat \del'' =   \sum_{i \in [p]} (-1)^i \eps_i''(\Sigma) d_i''(\Sigma)
+   \]
+   with $\eps_i''(\Sigma)$ as above.
+\end{prop}

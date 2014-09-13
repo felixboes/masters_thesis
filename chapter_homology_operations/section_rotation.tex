@@ -1,0 +1,74 @@
+\section{Rotation of Radial Slit Pictures [H]}
+\label{homology_operations:rotation}
+
+In this section, we want to construct an operation on the space $\Rad$ of radial slit domains that looks like a rotation of the annuli on which radial slit pictures reside.
+
+Consider the bundle $\HarmRad \cong \Rad$ first.
+Recall that its elements are tuples $[F, \mathcal C^+, \mathcal C^-, \mathcal P, w]$.
+For an explanation of the notation and more details about the following explanation, see Section \ref{cellular:radial_bundle}.
+Here, we only mention that $\mathcal P = (P_1, \dotsc, P_n)$ is the set of marked points on the enumerated incoming boundary curves $C^-_1, \dotsc, C^-_n$ of the surface $F$, 
+On each incoming boundary curve $C^-_k$, we can let the sphere act by rotating the marked point $P_k$ by an angle $\theta_k$.
+We obtain
+
+\begin{defi}
+   There is a group operation
+  \[
+    \psi \colon (\mathbb S^1)^n \times \HarmRad \to \HarmRad
+  \]
+  given by
+  \[
+    (\theta_1, \dotsc, \theta_n).[F, \mathcal C^+, \mathcal C^-, (P_1, \dotsc, P_n), w] = [F, \mathcal C^+, \mathcal C^-, (\theta_1 P_1, \dotsc, \theta_n P_n), w]\,.
+  \]
+  Here, $\theta_k P_k$ is a shorthand for 
+  \[
+  \theta_k P_k = \varphi_k(\theta_k\varphi_k^{-1}(P_k)) \in C^-_k\,,
+  \]
+  where $\varphi_k \colon \mathbb S^1 \to C^-_k$ parametrizes the $k\Th$ incoming boundary curve.
+\end{defi}
+
+Recall that we obtain a radial slit picture from $[F, \mathcal C^+, \mathcal C^-, \mathcal P, w]$ by mapping it into $n$ annuli $\A_1, \dotsc, \A_n$,
+whereby the marked point $P_k$ is mapped to the real point of the inner boundary of the annulus $\A_k$.
+Hence, a rotation of $P_k$ by an angle $\theta_k$ implies a rotation of the marked point on $\A_k$ by $\theta_k$.
+Equivalently, we can leave the marked point on the annulus in the same place as before and rotate all slits on the annulus by an angle $-\theta_k$ instead.
+We chose the latter variant in order to avoid confusions about the location of the marked point.
+\begin{figure}[ht]
+  \centering
+  \incgfx{pictures/rotation}
+  \caption{\label{rotation} Rotating a radial slit picture by an angle of $50$ degree.}
+  \end{figure}
+By composing the induced map of this group operation in homology with the homology cross product, we obtain
+
+\begin{defi}
+   There is a map 
+   \[
+       H_i((\mathbb S^1)^n) \otimes H_j(\HarmRad) \to H_{i+j}(\HarmRad)\,, \gamma \otimes x \mapsto \psi_*(\gamma \times x)\,.
+   \]
+   The restriction 
+   \[
+       \rot_\gamma \colon H_j(\HarmRad) \to H_{j+1}(\HarmRad)\,, \rot_\gamma = \psi_*(\gamma \times x)
+   \]
+   of this map is called the \textbf{rotation map} with respect to $\gamma \in H_1((\mathbb S_1)^n)$.
+\end{defi}
+
+\begin{prop}
+   The rotation map satisfies the following properties:
+   \begin{enumerate}
+    \item Rotation is associative, i.e. for $\gamma_1, \gamma_2 \in H_1((\mathbb S_1)^n)$, we have
+    \[
+       \rot_{\gamma_1} \rot_{\gamma_2} = \rot_{\gamma_1 \cdot \gamma_2}\,.
+    \]
+    Here, $\_\cdot\_$ denotes the Pontryagin product.
+    \item Rotation defines a differential of degree $+1$ on $H_*(\HarmRad)$, i.e. $\rot_\gamma^2 = 0$ for $\gamma \in H_1(\mathbb S_1)$.
+   \end{enumerate}
+    \begin{proof}
+       The first statement is obvious since $\psi$ is a group operation and the cross product is an isomorphism in our case.
+       The second claim follows from the first one since the ring $H_*((\mathbb S^1)^k)$ is strictly anticommutative, i.e.,
+       $\gamma^2 = 0$ if the degree of $\gamma$ is odd, which is the case here.
+       Hence,
+       \[
+           \rot_\gamma^2 = \rot_{\gamma^2} = \rot_0 = 0\,. 
+       \]
+       
+    \end{proof}
+\end{prop}
+

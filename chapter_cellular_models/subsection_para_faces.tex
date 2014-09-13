@@ -1,0 +1,96 @@
+\subsection{Vertical and Horizontal Faces [H]}
+\label{cellular_models:parallel:faces}
+
+\begin{defi}
+\label{cellular_models:parallel:dv}
+\index{cell!vertical face of a parallel cell}
+\symbolindex[d]{$d'_j(\Sigma)$}{The $j\Th$ vertical face of a parallel cell $\Sigma$}{Definition \ref{cellular_models:parallel:dv}}
+Let $\Sigma = \homogq$ be an arbitrary cell of bidegree $(p,q)$.
+The $j^{\text{th}}$ {\bf vertical face} of $\Sigma$ is obtained by removing the $j^{\text{th}}$ permutation, where $0 \le j \le q$:
+\[
+    d'_j \homogq = (\sigma_q: \ldots: \widehat{\sigma_j}: \ldots: \sigma_0)
+\]
+and this translates into the inhomogeneous notation as follows.
+\[
+    d'_j(\tau_q \mid \ldots \mid \tau_1) =
+        \begin{cases}
+            (\tau_q \mid \ldots \mid \tau_2) & j = 1 \\
+            (\tau_q \mid \ldots \mid \tau_i \tau_{j-1} \mid \ldots \mid \tau_1) & 1 < j < q \\
+            (\tau_{q-1} \mid \ldots \mid \tau_1) & j = q
+        \end{cases}
+\]
+\end{defi}
+
+Imagining an inner cell as in Figure \ref{cellular_models:parallel:homogeneous_glueing}, we collapse the $j^{\text{th}}$ vertical stripe of the corresponding parallel slit domain.
+Collapsing the $i^{\text{th}}$ horizontal stripe corresponds to a face map in the multisimplex $\Delta^{p_1} \times \ldots \times \Delta^{p_r}$.
+For our techniques, it is convenient to group these face maps using the corresponding partition $[p]$.
+Consequently, we will speak of the $i^{\text{th}}$ horizontal face where $i \in [p]$.
+Before going into the details, one might take a look at Figure \ref{cellular_models:parallel:comparison_face_operators}.
+\begin{figure}[ht]
+\centering
+\incgfx{pictures/cellular_para_comparison_face_operators}
+\caption{\label{cellular_models:parallel:comparison_face_operators}The vertical and horizontal face operators.}
+\end{figure}
+
+\begin{defi}
+\label{cellular_models:parallel:dh}
+\index{cell!horizontal face of a parallel cell}
+\symbolindex[d]{$d''_i(\Sigma)$}{The $i\Th$ horizontal face of a parallel cell $\Sigma$}{Definition \ref{cellular_models:parallel:dh}}
+Let $i \in [p]$.
+The $i^{\text{th}}$ {\bf horizontal face} of $\Sigma$ is
+\[ 
+    d''_i(\Sigma) = (D_i(\sigma_q), \dotsc, D_i(\sigma_0))\,,
+\]
+where $D_i \colon \Symgrp_{[p]} \to \Symgrp_{[p-1]}$ removes the symbol $i$ from its cycle in $\sigma$ (recall Definition \ref{notation:sym_grp:face}).
+\end{defi}
+
+We usually omit the simplicial degeneracy and face maps since they only rename the symbols used.
+Hence we write
+\[
+   D_i(\sigma) = (i\ \sigma(i)) \cdot \sigma \mspc{or}{20} D_i( \sigma) = \sigma \cdot (\sigma^{-1}(i)\ i) \,.
+\]
+From this observation, we can easily derive a formula for the inverse of $D_i(\sigma)$, since
+\[
+    D_i(\sigma)^{-1} = ((i\ \sigma(i)) \cdot \sigma)^{-1} = \sigma^{-1} \cdot (i\ \sigma(i)) = D_i(\sigma^{-1}).
+\]
+
+The next proposition reformulates the definition of the horizontal faces for the inhomogeneous notation.
+Using Figure \ref{cellular_models:parallel:cell_comparison_notations} it is not hard to come up with the right idea.
+
+\begin{prop}
+\label{cellular_models:parallel:prop_dh}
+Let $\Sigma = \inhomq$ be an inner cell with homogeneous representation $\homogq$ and let $0_k < i < p_k$ for some $k$.
+Then the $i^{\text{th}}$ horizontal face is
+\[ 
+    d''_i(\Sigma) = (\tau''_q \mid \ldots \mid \tau''_1)\,, 
+\]
+where
+\[
+    \tau''_k = D_i(\ \tau_k \cdot (i\  \sigma_{k-1}(i))\ )  \mspc{for}{20} 1 \leq k \leq q \,.
+\]
+In particular
+\[
+    \tau_k'' = D_i(\tau_k) \mspc{if}{20} i \notin \supp(\tau_k) \,.
+\]
+\end{prop}
+
+\begin{proof}
+For readibility, write $\rho_k = \tau_k \cdot (i\  \sigma_{k-1}(i))$.
+First note that
+\[ 
+    d''_i(\Sigma) = (D_i(\sigma_q): \dotsc: D_i(\sigma_0)) = (D_i(\sigma_q) \cdot D_i(\sigma_{q-1})^{-1} \mid \ldots \mid D_i(\sigma_1) \cdot D_i(\sigma_0)^{-1})\,.
+\]
+Hence it suffices to show that
+\[
+    D_i(\sigma_k) \cdot D_i(\sigma_{k-1})^{-1} = D_i (\rho_k)
+\]
+holds for each $k = 1, \dotsc, q$. 
+We have
+\begin{align*}
+D_i(\rho_k)
+    &= (i\  \rho_k(i)) \cdot \rho_k \\
+    \intertext{and using $\tau_k = \sigma_k \cdot \sigma_{k-1}^{-1}$ its clear that $\rho_k(i) = \sigma_k(i)$, so we are left with}
+    &= (i\  \sigma_k(i)) \cdot \sigma_k \cdot \sigma_{k-1}^{-1} \cdot (i\  \sigma_{k-1}(i))\\
+    &= D_i(\sigma_k) \cdot D_i(\sigma_{k-1})^{-1}\,.
+\end{align*}
+\end{proof}

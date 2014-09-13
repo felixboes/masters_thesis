@@ -1,0 +1,131 @@
+\subsection{The Type MatrixT [B]}
+\label{program:libhomology:MatrixT}
+\subsubsection{Existing Template Classes [B]}
+Before writing your own \progclass{MatrixT} you may want to have a look at the {\bf ublas library} provided by {\bf boost}.
+They offer several matrix templates for sparse and dense matrices 
+as well as BLAS implementations for numerical computations.
+Moreover, our {\bf libhomology} provides the template class
+\begin{lstlisting}
+template < class CoefficientT >
+class MatrixField;
+\end{lstlisting}
+for exact computations with matrix coefficients in a given field.
+In the following, we present an overview of the requirements any implementation of \progclass{MatrixT} has to fulfill, whereas
+in Subsection \ref{program:libhomology:MatrixT:MatrixField_for_F_2_and_css} we treat more specialized implementations.
+
+\subsubsection{Requirements on MatrixT [B]}
+Your implementation of \progclass{MatrixT} has to meet some requirements.
+These are inspired by the {\bf boost ublas library} as we make heavy use of it to compactify implementation details.
+We denote the coefficients of the matrix by \progclass{CoefficientT}.
+A \progclass{MatrixT} is created as follows:
+\begin{lstlisting}
+MatrixT ( size_t number_rows, size_t number_cols );
+\end{lstlisting}
+The coefficient in the $i\Th$ row and the $j\Th$ column is accessed by calling
+\begin{lstlisting}
+CoefficientT& operator()( size_t i, size_t j );
+\end{lstlisting}
+The number of rows is 
+\begin{lstlisting}
+size_t size1() const;
+\end{lstlisting}
+and the number of columns is
+\begin{lstlisting}
+size_t size2() const;
+\end{lstlisting}
+
+As we intend to save differentials in our project {\bf kappa}, you should provide a method that stores a \progclass{MatrixT} (See Subsection \ref{program:kappa:serialization}).
+
+\subsubsection{Optional Requirements on MatrixT [B]}
+\label{program:libhomology:MatrixT:optionals}
+If you provide your own \progclass{MatrixT} with coefficients in a field, you may want to use our class \progclass{DiagonalizerField} (see Subsection \ref{program:libhomology:DiagonalizerT:DiagonalizerField}) to compute rank and torsion of your matrices.
+In order to do so, you have to provide the member function
+\begin{lstlisting}
+void row_operation( size_t row_1, size_t row_2, size_t col );
+\end{lstlisting}
+that applies a row operation on the matrix, 
+i.e. adds the appropriate multiple of \progname{row\_1} to \progname{row\_2} in order to erase the entry \progname{(row\_2, col)} of the matrix.
+Our implementation makes use of multithreading, therefore you have to be careful with race conditions.
+You have to ensure that row operations for fixed \progname{row\_1} and \progname{col} with varying \progname{row\_2} can be applied concurrently.
+
+\subsection{Special Implementations of MatrixField [B]}
+\label{program:libhomology:MatrixT:MatrixField_for_F_2_and_css}
+\subsubsection{MatrixField for Coefficients in \texorpdfstring{$\mathbb F_2$}{Z/2Z} [B]}
+For coefficients in the field $\mathbb F_2$, our implementation provides siginificant improvements concerning memory and execution duration, see Section \ref{program:runtime}.
+Using well-known techniques, we store multiple entries of a row in a single data entity.
+Note that, since the only invertible element in $\mathbb F_2$ is $1$, a row operation corresponds to the bitwise \progname{XOR}-instruction.
+
+Using these insights, we provide an implementation called \progclass{MatrixBool}.
+It behaves almost like \progclass{MatrixField} but has a few technical limitations (which are unavoidable as these are direct consequences of the enormous performance gain).
+E.g.\ for a matrix of type \progclass{MatrixBool}, it is not possible to access its coefficients by reference.
+\begin{lstlisting}
+bool operator() ( const size_t i, const size_t j );
+bool at         ( const size_t i, const size_t j ) const;
+\end{lstlisting}
+Observe that for our purpose, it suffices to add $1$ to a given entry which is provided by the method
+\begin{lstlisting}
+void add_entry( const size_t i, const size_t j );
+\end{lstlisting}
+It should be easy to equip \progclass{MatrixBool} with more member functions if needed.
+
+\subsubsection{MatrixField for the Cluster Spectral Sequence [B]}
+In order to exploit the cluster spectral squence, we provide the adapted version \progclass{MatrixFieldCSS} of \progclass{MatrixField} and also \progclass{MatrixBoolCSS} of \progclass{MatrixBool}.
+Here, one should think of a spectral sequence that collapses at the second page as a subdivision of the differentials:
+The bases are ordered in a way such that the transposed differential $D$ consists of a diagonal of block matrices $d^0$ which respect the filtration degree and below a single second diagonal of block matrices which decrease the filtration degree by one.
+\[
+    D = 
+        \begin{pmatrix}
+            d^1 & d^0 \\
+                & d^1   & d^0 \\
+                &       & d^1   & d^0 \\
+                &       &       &       & \ddots
+        \end{pmatrix}
+\]
+Such a matrix is diagonalized as follows.
+We construct the first line given by $d^1$ and $d^0$ in the top left corner.
+Then we apply row operations to $d^0$ until its image is determined and then apply row operations to the remaning rows of $d^1$ until the image of the first row is fully understood.
+Afterwards, we may forget the matrix $d^1$ in the top left corner, construct the matrix $d^1$ of the next line and apply the needed row operations that are due to the matrix $d^0$ from above.
+Now we forget the entire first line, construct the next matrix $d^0$ and iterate this process.
+
+During this procedure, we store at most two submatrices of $D$, namely one of type $d^0$ and one of type $d^1$, so our implementation \progclass{MatrixFieldCSS} and \progclass{MatrixBoolCSS} does exactly the same.
+We provide two ways to access the two submatrices $d^0$ and $d^1$.
+To use the first approach, the method
+\begin{lstlisting}
+void define_operations( const OperationType );
+\end{lstlisting}
+defines on which submatrix we are currently working, where \progclass{OperationType} is an enumeration type and set to be \progclass{main\_and\_secondary} to access $d^0$ or \progclass{secondary} to access $d^1$.
+Now one calls member functions of \progclass{MatrixFieldCSS} respectively \progclass{MatrixBoolCSS} which have the same name as the member functions of \progclass{MatrixField} respectively \progclass{MatrixBool}.
+Let us give a simple example by printing $d^0$ and $d^1$ to the screen.
+\begin{lstlisting}
+M.define_operations( main_and_secondary );
+std::cout << M; \\ prints d^0 to screen.
+
+M.define_operations( secondary );
+std::cout << M; \\ prints d^1 to screen.
+\end{lstlisting}
+
+
+In the second approach, one calls a member method corresponding to $d^0$ by adding the prefix \progclass{main\_}, whereas \progclass{sec\_} applies to $d^1$.
+The following listing is an example for the member functions \progname{size1} and \progname{size2}.
+\begin{lstlisting}
+size_t main_size1() const; // Returns the number of rows of d^0.
+size_t main_size2() const; // Returns the number of columns of d^0.
+size_t sec_size1() const;  // Returns the number of rows of d^1.
+size_t sec_size2() const;  // Returns the number of columns of d^1.
+\end{lstlisting}
+
+
+A row operation on $d^0$ clearly affects the submatrix $d^1$ in the same line.
+In the algorithm presented above, we apply only those operations to $d^1$ that leave $d^0$ unchanged.
+Therefore we provide the following member functions.
+\begin{lstlisting}
+void row_operation_main_and_secondary
+    ( const size_t row_1, const size_t row_2, const size_t col );
+void row_operation_secondary
+    ( const size_t row_1, const size_t row_2, const size_t col );
+\end{lstlisting}
+
+
+
+
+

@@ -1,0 +1,70 @@
+\subsection{The Type HomologyT [B]}
+\label{program:libhomology:HomologyT}
+In order to derive the homology of a chain complex, we compute all kernels and images of the differentials, given by transposed transformation matrices.
+In our situation, we start with a \progclass{ChainComplex} (see Subsection \ref{program:libhomology:ChainComplex}) that is essentially a finite series of matrices of the type \progclass{MatrixT} (see Subsection \ref{program:libhomology:MatrixT}).
+The function object \progclass{DiagonalizerT} (see Subsection \ref{program:libhomology:DiagonalizerT}) applies row and column operations until both kernel and image can be read off.
+This data should then be communicated to \progclass{HomologyT}.
+
+\subsubsection{Essential Members [B]}
+The type \progclass{HomologyT} requires the following members.
+You have to provide the types \progclass{HomologyT}\progname{::}\progclass{KernT} respectively \progclass{HomologyT}\progname{::}\progclass{TorsT} that store the kernel respectively the image of a differential.
+This can be achieved by including the following two lines in the \progkeyword{public} section of the class definition.
+\begin{lstlisting}
+class HomologyT{
+public:
+    typedef /* ... */ KernT;
+    typedef /* ... */ TorsT;
+};
+\end{lstlisting}
+You have to define the following two constructors
+\begin{lstlisting}
+HomologyT ();
+HomologyT ( int32_t n, KernT& k, TorsT& t ); // Sets k and t at the spot n.
+\end{lstlisting}
+and member functions for storing kernels and images.
+\begin{lstlisting}
+void set_kern ( int32_t , KernT& );
+void set_tors ( int32_t , TorsT& );
+\end{lstlisting}
+Moreover, we want to print the homology to the screen, thus the class definition has to include the following line.
+\begin{lstlisting}
+friend std::ostream& operator<< ( std::ostream& , const HomologyT& );
+\end{lstlisting}
+
+\subsubsection{The Class HomologyDummy [B]}
+\label{program:libhomology:HomologyT:HomologyDummy}
+As mentioned in Subsection \ref{program:libhomology:DiagonalizerT:DiagonalizerDummy}, there are situations in which one wants to generate a chain complex without computing homological data.
+For this purpose, we offer the class
+\begin{lstlisting}
+class HomologyDummy
+\end{lstlisting}
+that does absolutely nothing, so you can use it together with \progclass{DiagonalizerDummy} (see Subsection \ref{program:libhomology:DiagonalizerT:DiagonalizerDummy})
+as a template parameter for the template class \progclass{ChainComplexT} (see Subsection \ref{program:libhomology:ChainComplex}).
+
+\subsubsection{The Class HomologyField [B]}
+Using field coefficients, the homology modules are all vector spaces.
+For those who are only interested in the Betti numbers, we offer the class \progclass{HomologyField}.
+Here we store only the dimensions of kernel and image.
+The class definition is essentially as follows, where the member functions should be self-explaining.
+\begin{lstlisting}
+class HomologyField{
+public:
+    typedef int64_t KernT;
+    typedef int64_t TorsT;
+    
+    HomologyField ();
+    HomologyField ( int32_t, KernT, TorsT );
+    
+    void  set_kern   ( int32_t, KernT );
+    void  set_tors   ( int32_t, TorsT );
+    KernT get_kern   ( int32_t ) const;
+    TorsT get_tors   ( int32_t ) const;
+    void  erase_kern ( int32_t );
+    void  erase_tors ( int32_t );
+    friend std::ostream& operator<< ( std::ostream&, const HomologyField& );
+private:
+    std::map< int32_t, int64_t > kern_rep;
+    std::map< int32_t, int64_t > tors_rep;
+};
+\end{lstlisting}
+

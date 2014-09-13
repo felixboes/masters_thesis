@@ -1,0 +1,175 @@
+\section{Composition of Radial Slit Pictures [H]}
+\label{radial_composition}
+
+In this section, we will describe a homology operation on the space of radial slit domains 
+that can be expressed via operads (compare also Section \ref{homology_operations:parallel_patching_slit_pics}).
+
+This time, we will first give a description of a new operation in terms of surfaces.
+Let $F$ and $F'$ be two surfaces, where $F$ has $m$ outcoming boundary curves and $n$ marked incoming boundary curves,
+and $F'$ has $l$ outgoing boundary curves and $m$ marked incoming boundary curves.
+We want to define a canonical composition of these surfaces, compare Figure \ref{radial_connected_sum_on_surfaces},
+where the $m$ outgoing boundary curves of $F$ are glued together with the $m$ incoming boundary curves of $F'$.
+Since there is a marked point ${P'}^-_k$ on each incoming boundary ${C'}^-_k$ of $F'$, we additionally have to require that each outgoing boundary ${C}^+_k$ of $F$ also has a marked point ${P}^+_k$.
+
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{.8\columnwidth}
+    \input{pictures/radial_connected_sum_on_surfaces.pdf_tex}
+    \caption{\label{radial_connected_sum_on_surfaces}The composition $F \odot F'$ of two surfaces $F$ and $F'$.}
+\end{figure}
+
+In order to formalize the composition, we therefore give
+
+\begin{defi}
+\label{modspc_both_marked}
+\symbolindex[m]{$\mathfrak{M}^{\bullet \bullet}_{g}(m, n)$}
+  {The moduli space of Riemann surfaces with genus $g$, $m$ outgoing and $n$ incoming boundary curve, where on each outgoing and incoming boundary curve one point is marked.}
+  {Definition \ref{modspc_both_marked}}
+  \symbolindex[r]{$\Radt^{\bullet \bullet}_{g}(m, n)$}
+  {The space of radial slit domains with marked points also on the outgoing boundary curves.}
+  {Definition \ref{modspc_both_marked}}
+   Let $\mathfrak{M}^{\bullet \bullet}_{g}(m, n)$ denote the moduli space parametrizing Riemann surfaces with genus $g$, $n$ incoming and $m$ outgoing boundary curves
+   with one marked point $P^-_i$ on each incoming boundary curve $C^-_i$, but also one marked point $P^+_j$ on each outgoing boundary curve $C^+_j$. 
+   Analogously, the associated space of radial slit pictures is denoted by $\Radt^{\bullet \bullet}_g(m, n)$.
+\end{defi}
+
+Now, we can state
+
+\begin{defi}
+\label{radial_connected_sum_defi}
+\index{radial composition}
+\symbolindex[1]{$\odot$} {The radial composition of surfaces respectively radial slit domains}{Definitions \ref{radial_connected_sum_defi} and \ref{radial_connected_sum_defi_on_cells}}
+   The \textbf{composition} of surfaces is the map
+   \[
+      \odot \colon \mathfrak{M}^{\bullet \bullet}_g(m, n) \times \mathfrak{M}^{\bullet \bullet}_{g'}(l, m) \to \mathfrak{M}^{\bullet \bullet}_{\tilde g}(l, n)\,, (F, F') \mapsto F \odot F'\,,
+   \]
+   which glues the surfaces $F$ and $F'$ along their incoming respectively outgoing boundary curves.
+   Thereby, we have
+   \[
+      \tilde g = g + g' + m - 1\,.
+   \]
+\end{defi}
+
+Note that we actually only need marked points on the outgoing boundary curve of the surface in the second factor,
+and that the formula for $\tilde g$ is due to the observation that each two neighboring glued boundary curves contribute to the genus.
+
+It remains to realize the composition via radial slit pictures, see also Figures \ref{radial_connected_sum_A} up to \ref{radial_connected_sum}. 
+Therefore, consider two radial slit domains $A = \homogq$ and $A' = \homogq[\sigma']$ with $m(A) = n(A') = m$, $n(A) = n$ and $m(A') = l$,
+e.g. those two in Figures \ref{radial_connected_sum_A} and \ref{radial_connected_sum_A_prime}.
+In the pictures, we color the outgoing boundary curves of $A$ and the incoming boundary curves of $A'$ and each of their marked points
+since they have to be glued together.
+We call the annuli upon that the slits of $A$ respectively $A'$ lie $\A_1, \dotsc, \A_n$ respectively $\A'_1, \dotsc, \A'_m$. 
+If $F$ and $F'$ are the surfaces resulting from glueing $A$ and $A'$, 
+we want to construct a radial slit domain $B = A \odot A'$, which results in the surface $F \odot F'$ after glueing.
+Hence, the new slit picture $B$ resides on $n$ annuli $\A^\odot_1, \dotsc, \A^\odot_n$ and fulfills $m(B) = l$.
+
+\begin{figure}[p]
+   \centering
+   \incgfx{pictures/radial_connected_sum_on_cells_A}
+   \caption{\label{radial_connected_sum_A} A radial slit domain $A$ with $m(A) = 3$, $n(A) = 1$, $g(A) = 0$.}
+   \vspace{1cm}
+   \centering
+   \incgfx{pictures/radial_connected_sum_on_cells_A_prime}
+   \caption{\label{radial_connected_sum_A_prime} A radial slit domain $A'$ with $m(A') = 2$, $n(A') = 3$, $g(A') = 0$.}
+   \vspace{1cm}
+   \centering
+   \incgfx{pictures/radial_connected_sum_on_cells_A_prime_put_into_A_sharp}
+   \caption{\label{radial_connected_sum_A_prime_put_into_A_sharp} The slits of $A$ put into the annulus $\A_1^\odot$.}
+   \incgfx{pictures/radial_connected_sum_on_cells}
+   \caption{\label{radial_connected_sum} The slit picture $A \odot A'$ with $m(A \odot A') = 2$, $n(A \odot A') = 1$, $g(A \odot A') = 2$.}
+\end{figure}
+
+For the construction of $B$, at first concentrate on one annulus $\A^\odot_i$.
+We subdivide $\A^\odot_i$ equally into an inner and an outer ring, where the ends of the slits of $A$ and $A'$ will be placed, and imagine these rings to be seperated by a line.
+The outer boundary of $\A_i$ has to correspond to the inner boundary of $\A'_i$.
+Thus, it makes sense to scale down the annulus $\A_i$ and to place it into the inner ring of $\A^\odot_i$, see Figure \ref{radial_connected_sum_A_prime_put_into_A_sharp}.
+The slits of $A$ have to be extended towards the outer boundary of the annulus $\A^\odot_i$.
+
+Now, the seperating lines of the annuli $\A_1^\odot, \dotsc, \A_n^\odot$ are divided into arcs by the slits of $A$.
+Each of these arcs belongs to one of the $m$ outgoing boundary curves of $A$.
+Due to the definition of the composition, we have to glue the $j\Th$ outgoing boundary curve of $A$ to the inner boundary of the annulus ${\A'}_j$.
+We obtain a closed path corresponding to the $j\Th$ outgoing boundary curve of $A$ by starting at the marked point ${P_j}^+$ and wandering along the seperating lines counter-clockwise,
+jumping across slits of $A$ when they are met.
+Reparametrizing the inner boundary of the annulus ${\A'}_j$ such that it can be mapped onto this closed path, especially ${P'}^-_j$ onto ${P_j}^+$,
+we insert all slits of ${A'}_j$ into the outer rings of the annuli ${\A_1}^\odot, \dotsc, {\A_n}^\odot$.
+Thereby, all angles have to be preserved.
+In Figure \ref{radial_connected_sum}, we see how the annuli ${\A'}_1, {\A'}_2, {\A'}_3$ are put into the annulus $\A^\odot$ this way. 
+
+This process to describe a radial slit version of the composition yields 
+
+\begin{defi}
+\label{radial_connected_sum_defi_on_cells}
+\index{radial composition}
+   Let the map
+   \[
+      \odot \colon \Radt^{\bullet \bullet}_g(m, n) \times \Radt^{\bullet \bullet}_{g'}(l, m) \to \Radt^{\bullet \bullet}_{g + g' + m - 1}(l, n)\,, (A, A') \mapsto A \odot A'\,,
+   \]
+   be given by the process defined above. 
+   We call $A \odot A'$ the \textbf{composition} of the two radial slit pictures $A$ and $A'$.
+\end{defi}
+
+The composition map fulfills the following properties.
+
+\begin{prop}
+\label{composition_associative}
+   The composition yields an H-space structure on the disjoint union $\Radt^{\bullet \bullet} = \coprod_{g, m, n} \Radt^{\bullet \bullet}_g(m, n)$ respectively $\mathfrak M^{\bullet \bullet} =\coprod_{g, m, n} \mathfrak M^{\bullet \bullet}_g(m, n)$.
+   \begin{proof}
+      We have to show that composition is assotiative up to homotopy, but this is evident if we consider the composition map on surfaces.
+   \end{proof}
+\end{prop}
+
+Note that if we allow disconnected surfaces, the disjoint union of the appropriate number of cylinders serves as a right / left unit up to homotopy. 
+Using a generalization of this composition map, we can equip $\Radt^{\bullet \bullet}_g(m, n)$ with the structure of an operad.
+
+\begin{defi}
+   Define the composition map 
+   \[
+      \odot_M \colon \mathfrak M^{\bullet \bullet}_g(m, n) \times \left( \mathfrak M^{\bullet \bullet}_{g_1}(l_1, m_1) \dots \mathfrak M^{\bullet \bullet}_{g_s}(l_s, m_s)\right) \to \mathfrak M^{\bullet \bullet}_{g + g' + m - s}(l, n)\,, (A, A') \mapsto A \odot A'\,,
+   \]
+   \[
+       (F, (F_1, \dotsc, F_s)) \to F \odot (F_1, \dotsc, F_s)\,,
+   \]
+   by glueing the incoming boundary curves of $s$ surfaces $F_1, \dotsc, F_s$ to the outgoing boundary curves of a single surface $F$. 
+   Here, $m = m_1 + \dotsb + m_s$ is an ordered partition with all $m_i > 0$, mentioned in the map $\odot_M$ as $M = (m_1, \dotsc, m_s)$.
+   We have $g' = g_1 + \dotsb + g_s$ and $l = l_1 + \dotsb + l_s$.  
+\end{defi}
+
+That $m = m_1 + \dotsb + m_s$ is an ordered partition means that the $m_1$ incoming boundary curves of $F_1$ are glued with the first $m_1$ outgoing boundaries of $F$ and so forth.
+This generalized composition maps equip the family of spaces $\mathfrak M^{\bullet \bullet}_g(m, n)$ with the structure of an operad.
+Due to Proposition \ref{composition_associative}, we immediately see that the associativity conditions (i) and (iii) of Theorem \ref{homology_operations:thm_action_of_the_little_cube_operad} are also fulfilled for the maps $\odot_M$.
+For equivariant associativity, i.e., condition (ii), we need to restrict to $n = 1$ and $m_1 = \dotsb = m_2 = 1$. 
+Then, the symmetric group $\SymGr_m$ acts on $\mathfrak M^{\bullet \bullet}_g(m, n)$ by permuting the outgoing boundary curves
+and it is clear that equivariant associativity is fulfilled.
+This results in
+
+\begin{prop}
+The operations $\odot_M$ equip the family of spaces $\mathfrak M^{\bullet \bullet}_g(m, n)$ with an operad structure.
+We have to restrict to the subfamily of spaces $\mathfrak M^{\bullet \bullet}_g(m, n)$ with $m = 1$ and $n = 1$ in order to guarantee equivariant associativity.
+\end{prop}
+
+Another closely related generalization of the composition map arises as follows.
+Consider again the two surfaces in Figure \ref{radial_connected_sum_on_surfaces}.
+We pair the outer boundary curves of $F$ with the inner boundary curves of $F'$ according to their numeration and glue them together in order to obtain the new surfaces $F \odot F'$.
+Alternatively, we can choose any pairing of the outer boundary curves of $F$ and the inner boundary curves of $F'$, or even any partial pairing.
+We obtain
+
+\begin{defi}
+\label{composition_with_pairing}
+\index{radial composition w.r.t. a partial pairing}
+\symbolindex[1]{$\odot_{\pi_k}$} {The radial composition of surfaces respectively radial slit domains w.r.t. a partial pairing $\pi_k$}{Definitions \ref{radial_connected_sum_defi} and \ref{radial_connected_sum_defi_on_cells}}
+    Consider two moduli spaces $\mathfrak{M}^{\bullet \bullet}_g(m, n)$ and $\mathfrak{M}^{\bullet \bullet}_{g'}({m'}, {n'})$.
+    Define a partial pairing $\pi_k$ of the outgoing boundary curves of $F$ and the incoming boundary curves of $F'$ of cardinality $k$.
+    The \textbf{composition} of surfaces \textbf{with respect to the partial pairing} $\pi_k$ is the map
+   \[
+      \odot_{\pi_k} \colon \mathfrak{M}^{\bullet \bullet}_{g}(m, n) \times \mathfrak{M}^{\bullet \bullet}_{g'}(m', m') \to \mathfrak{M}^{\bullet \bullet}_{\tilde g}(\tilde m, \tilde n)\,, (F, F') \mapsto F \odot_{\pi_k} F'\,,
+   \]
+   which glues the surfaces $F$ and $F'$ along the paired incoming respectively outgoing boundary curves.
+   Thereby, we have
+   \begin{itemize}
+      \item $\tilde g = g + g' + k - 1$,
+      \item $\tilde m = m - k + m'$,
+      \item $\tilde n = n + n' - k$.
+   \end{itemize}
+\end{defi}
+
+Obviously, this generalized composition is still assotiative.

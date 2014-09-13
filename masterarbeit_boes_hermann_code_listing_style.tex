@@ -1,0 +1,47 @@
+\definecolor{col_keywords}{HTML}{000000}        % Dunkelgelb
+\definecolor{col_classes} {HTML}{000000}        % Lila
+\definecolor{col_members} {HTML}{000000}        % Dunkelrot
+
+\definecolor{col_keywords}{HTML}{808000}        % Dunkelgelb
+\definecolor{col_classes} {HTML}{800080}        % Lila
+\definecolor{col_members} {HTML}{800000}        % Dunkelrot
+
+\lstset{
+    language=[GNU]C++,          % Für C++ Listings
+    basicstyle=\footnotesize\ttfamily\color{black},
+    commentstyle=\color{black},
+    frame=single,
+    numbers=none,
+    deletekeywords={bool, int, void},
+    keywords=[2]{
+        access, Archive, atomic_uint,
+        BlockFinder, bool,boost,
+        ChainComplex, chrono, CoefficientT, CycleDecomp,
+        DiagonalizerDummy, DiagonalizerField, DiagonalizerT,
+        HashTuple, HomologyDummy, HomologyField, HomologyT,
+        int, int8_t, int32_t, int64_t,
+        launch,
+        KernT,
+        map, MatrixComplex, MatrixField, MatrixT, MonoBasis, MonoComplex, MonoComplexT, mpq_class,
+        OperationType, ostream,
+        Permutation,
+        Q,
+        serialization,SessionConfig, SignConvention, size_t, std, StorableType, string,
+        this_thread, TorsT, Transposition, Tuple,
+        uint8_t, uint32_t, uint64_t, unordered_set,
+        vector, void,
+        Zm
+    },
+    keywords=[3]{
+        basis, basis_complex,
+        differential,
+        kern_rep,
+        matrix_complex,
+        rep,
+        sgn_conv, sign_conv,
+        tors_rep
+    },
+    keywordstyle=\color{col_keywords},
+    keywordstyle=[2]\color{col_classes},
+    keywordstyle=[3]\color{col_members},
+}

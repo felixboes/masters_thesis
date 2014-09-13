@@ -1,0 +1,199 @@
+\subsection{The Type DiagonalizerT [B,H]}
+\label{program:libhomology:DiagonalizerT}
+{\bf [B]}
+Given a differential $C_n \xr{\del} C_{n-1}$ of a chain complex, one wants to derive its kernel and image in order to compute the homology of the chain complex.
+In our situation, we are given a differential of the type \progclass{MatrixT}, so we want to apply a range of base changes to end up with a matrix where reading off these informations is easy.
+These base changes depend heavily on the coefficient ring.
+For field coefficients, one can apply Gaussian elimination, but for integral coefficients, one has to work much harder.
+Some state of the art algorithms can be found in \cite{Jaeger2003} and \cite{Jaeger2009}.
+We emphasize that this is the most time consuming operation (see Chapter \ref{complexity}) and suggest to carry out an algorithm that makes use of concurrency.
+
+The \progclass{DiagonalizerT} is a function object, so you have to provide the method
+\begin{lstlisting}
+void operator()( MatrixT& matrix );
+\end{lstlisting}
+that diagonalizes the given matrix.
+Afterwards, kernel and torsion of the matrix should be available by the diagonalizer's member functions
+\begin{lstlisting}
+HomologyT::KernT kern();
+HomologyT::TorsT tors();
+\end{lstlisting}
+where \progclass{HomologyT} is the class we use to store the homology of a chain complex (compare Subsection \ref{program:libhomology:HomologyT}).
+
+Moreover, we are interested in the defect and the rank of the matrix, so you have to provide the following two member functions.
+\begin{lstlisting}
+uint32_t dfct();
+uint32_t rank();
+\end{lstlisting}
+
+\label{program:libhomology:DiagonalizerT:DiagonalizerDummy}
+
+There are situations in which one wants to generate a chain complex without computing homological data:
+The size of the differentials of the Ehrenfried complex (see Section \ref{cellular_models:ehrenfried}) is enourmous by Proposition \ref{complexity:number_of_mono_cells},
+so it is impossible to compute the number of non-vanishing entries per column by hand.
+Therefore we offer the template class
+\begin{lstlisting}
+template < class MatrixT >
+class DiagonalizerDummy;
+\end{lstlisting}
+that does absolutely nothing, so you can use it together with \progclass{HomologyDummy} (see Subsubsection \ref{program:libhomology:HomologyT:HomologyDummy})
+as a template parameter for the template class \progclass{ChainComplexT} (see Subsection \ref{program:libhomology:ChainComplex}).
+
+In the following, we shall describe our implementations of the class \progclass{DiagonalizerField}.
+
+\subsection{The Class DiagonalizerField [B,H]}
+\label{program:libhomology:DiagonalizerT:DiagonalizerField}
+
+The \progclass{DiagonalizerField} applies a slightly modified version of the Gaussian elimination to a given matrix.
+Note that for computing the homology of a chain complex with field coefficients,
+it is sufficient to determine the rank and defect of all its differentials.
+Thus, the class \progclass{DiagonalizerField} merely transforms row operations upon the matrix in order to determine its rank,
+but does not exchange columns in order to obtain a triangular matrix.
+Since computing the rank is equivalent to diagonalizing for our purpose, we refer to this process as diagonalizing nevertheless.
+After giving an overview on the usage of this class, we will explain implementation details and runtime results of our parallelized diagonalization algorithm.
+
+\subsubsection{Overview and Usage of DiagonalizerField [H]}
+
+For field coefficients, we offer the following template class.
+\begin{lstlisting}
+template < class CoefficientT >
+class DiagonalizerField;
+\end{lstlisting}
+Here we assume that \progclass{MatrixT} is given by
+\begin{lstlisting}
+typedef MatrixField< CoefficientT > MatrixT;
+\end{lstlisting}
+and it is trivial to alter the class definition in order to allow arbitrary matrices.
+
+The member variable \progname{current\_rank} of the class \progclass{DiagonalizerField} keeps track of the progress of an ongoing computation as
+it stores the number of linearly independent rows the algorithm has already found.
+Operations on variables of the type \progclass{atomic\_uint} are atomic, i.e. reading, writing, incrementing and so forth is free of race conditions.
+We suggest to make use of this feature as follows.
+You start two threads, one computes kernel and torsion and the other monitors the progress.
+\begin{lstlisting}
+ChainComplex< ... > complex;
+// Define the differentials of matrix_complex.
+// ...
+
+atomic_uint& rank = diagonalizer.current_rank;
+measure_duration = Clock(); // Measures duration.
+
+// Set the value of state to 1 if and only if kernel and torsion are computed.
+// This is done to terminate the 'monitoring thread'.
+atomic_uint state(0);
+
+// Diagonalizing thread.
+auto partial_homology_thread = std::async( std::launch::async, [&]()
+{
+    auto ret = complex.compute_current_kernel_and_torsion( p );
+    state = 1;
+    return ret;
+} );
+
+// Monitoring thread.
+auto monitor_thread = std::async( std::launch::async, [&]()
+{
+    while( state != 1 )
+    {
+        std::cout << "Diagonalization " << current_rank << "\r";
+        std::this_thread::sleep_for( std::chrono::milliseconds( 50 ) );
+    }
+} );
+\end{lstlisting}
+The current progress is printed to screen and updated every 50 milliseconds till the computation is done.
+
+\subsubsection{Implementation Details [H]}
+\label{diag_field_implementation}
+Our key algorithm for computing the rank of a matrix via Gaussian elimination is given by
+
+\begin{algorithm}[H]
+\label{rank}
+\DontPrintSemicolon
+\SetKw{KwCont}{continue}
+\KwIn{A matrix $A = (a_{ij})$ with coefficients in a field $\F$}
+\KwOut{The rank $\rk(A)$}
+
+Let $R$ be the set of rows of $A$\;
+Set $R_r := \emptyset$ \tcp*[f]{Let $R_r$ denote the set of rows contributing to the rank}\;
+\ForEach{column $c$}
+{
+	Let $j \in R \backslash R_r$ be a row index with $a_{jc}$ invertible in $\F$\;
+	\If{No such $j$ exists}
+	{
+		\KwCont\;
+	}
+	Let $S \subset R \backslash R_r$ be the subset of rows $s \neq j$ with $a_{sc}$ invertible in $\F$\;
+	\If{$S \neq \emptyset$}
+	{
+		Set $R_r := R_r \cup \{j\}$\;
+	}
+	\ForEach{row $s \in S$}
+	{
+		Perform \progname{A.row\_operation(j, s, c)}\;
+	}
+}
+\KwRet{$|R|$}
+
+\caption{Rank Computation}
+
+\end{algorithm}
+
+Hereby, \progname{row\_operation} is the member function of the class \progclass{MatrixType} described in Subsubsection
+\ref{program:libhomology:MatrixT:optionals}.
+
+A sequential version of this algorithm is implemented as the member function
+\begin{lstlisting}
+uint32_t diag_field( MatrixType& matrix );
+\end{lstlisting}
+of \progclass{DiagonalizerField}.
+For the parallelized version, the method
+\begin{lstlisting}
+uint32_t diag_field_parallelized( MatrixType& matrix );
+\end{lstlisting}
+is used.
+Since -- at least for our matrices of type \progclass{MatrixBool} -- a single row operation is performed very fast,
+we do not use several threads to parallelize row operations, 
+but subdivide the set of row operations such that several row operations are performed simultaneously.
+
+We define two helper classes for parallelizing, which we will explain here roughly,
+using the notation from Algorithm \ref{rank}.
+The class \progclass{JobQueue} keeps track of all significant data used in Algorithm \ref{rank}.
+Obviously, a \progclass{JobQueue} has to know the
+\begin{lstlisting}
+ MatrixType & matrix;
+\end{lstlisting}
+which is supposed to be diagonalized, and the column 
+\begin{lstlisting}
+ size_t col;
+\end{lstlisting}
+and row
+\begin{lstlisting}
+ size_t row_1;
+\end{lstlisting}
+that are currently considered, where, in the notation of Algorithm \ref{rank}, we have \progname{col = $c$} and \progname{row\_1 = $r$}. 
+Furthermore, the \progclass{JobQueue} maintains the 
+\begin{lstlisting}
+ std::vector rows_to_work_at;
+\end{lstlisting}
+which resembles the set $S$, and the
+\begin{lstlisting}
+ std::vector remaining_rows;
+\end{lstlisting}
+consisting of the rows $t$ not yet contributing to the rank for that the entry $a_{tc}$ is not invertible in $\F$, i.e. of $R\backslash (R_r \cup S)$.
+Since the \progclass{JobQueue} contains all the information necessary to perform the required row operations for a given column $c$, only two tasks remain:
+updating these data members when passing over from one column to the next
+and parallelizing the row operations as well as the update.
+
+For each thread used, we create an instantiation of the class \progclass{Worker}, which will not be discussed in this thesis, to perform computations.
+Experiments showed that having two different kinds of \progclass{Workers} is more efficient:
+Firstly, we define a family of \progclass{Workers} that actually perform the diagonalizing work.
+The \progclass{JobQueue} distributes the rows \progname{rows\_to\_work\_at} among these \progclass{Workers} equally.
+Afterwards, each of these \progclass{Workers} considers all its assigned rows $s$, 
+performs the row operation upon $s$ and marks whether $s$ will also be in the set $S$ for the next column.
+This means that the already defined \progclass{Workers} update parts of the arrays \progname{rows\_to\_work\_at} and \progname{remaining\_rows},
+and that it remains to update these arrays with respect to the set of \progname{remaining\_rows}.
+This is the task the other family of \progclass{Workers} execute,
+where the \progname{remaining\_rows} are again distributed equally among the \progclass{Workers} by the \progclass{JobQueue}.
+
+The input parameters \progname{num\_threads} respectively \progname{num\_remaining\_threads} define 
+how many threads are occupied for the first respectively second type of \progclass{Workers}, see also Subsection \ref{chapter_program:kappa:compute_css}.
