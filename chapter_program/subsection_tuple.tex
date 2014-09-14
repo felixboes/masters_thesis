@@ -1,4 +1,4 @@
-\subsection{The Class Tuple [H]}
+\subsection{The Class Tuple}
 \label{chapter_program:kappa:tuple}
 
 Recall that we aim to compute the cohomology of the parallel or radial Ehrenfried complex $\Ehrprog$.
@@ -22,7 +22,7 @@ the functions that represent basic properties of a tuple (Subsubsection \ref{pro
 Afterwards, we explain the class methods computing the orientation sign (Subsubsection \ref{program:kappa:tuple:orientation_sign}), 
 the horizontal differential (Subsubsection \ref{program:kappa:tuple:d_hor}) and the implementation of the maps $f$ and $\Phi$ used to compute the isomorphism $\kappa$ (Subsubsection \ref{program:kappa:tuple:prep_for_kappa}) in detail. 
 
-\subsubsection{Data Members [H]}
+\subsubsection{Data Members}
 \label{program:kappa:tuple:members}
 Since the class \progclass{Tuple} is supposed to represent cells $\Sigma = (\tau_h \mid \ldots \mid \tau_1)$ of the Ehrenfried complex $\Ehrprog$, 
 let us briefly recall what this means. 
@@ -64,7 +64,7 @@ Another convention is that we always write \progclass{Transpositions} like $\tau
 Since it is useful for the computation of the differential, 
 another data member of the class \progclass{Tuple} is an unsigned integer \progname{id} indicating the index of a \progclass{Tuple} in its basis of the Ehrenfried complex.
 
-\subsubsection{Class Methods To Get Started [H]}
+\subsubsection{Class Methods To Get Started}
 \label{program:kappa:tuple:get_started}
 
 We define two constructors for the class \progclass{Tuple}. 
@@ -113,7 +113,7 @@ Furthermore, we define canonical compare operators,
 overload the \progname{operator<<} to print \progname{Tuples} to screen
 and offer the possibility to save and load \progclass{Tuples}.
 
-\subsubsection{Basic Properties of a Tuple [H]}\label{program:kappa:tuple:basics}
+\subsubsection{Basic Properties of a Tuple}\label{program:kappa:tuple:basics}
 
 We provide various class methods for basic calculations with a \progclass{Tuple},
 e.g. to verify whether a \progclass{Tuple} represents an element of the Ehrenfried complex. 
@@ -258,7 +258,7 @@ where an edge between $a$ and $b$ indicates that there is an $i$ such that $\tau
 Then, the number of connected components of this graph equals the number of clusters of $\Sigma$,
 and \textbf{boost} offers a graph data structure and an algorithm to compute this directly.
 
-\subsubsection{The Horizontal Face Operator [H]}
+\subsubsection{The Horizontal Face Operator}
 \label{program:kappa:tuple:d_hor}
 
 In order to construct the Ehrenfried complex $\Ehrprog$, 
@@ -342,7 +342,7 @@ Tuple d_hor( uint8_t j );
 \end{lstlisting}
 computing the $j\Th$ horizontal face of this \progclass{Tuple}.
 
-\subsubsection{The Orientation Sign [H]}\label{program:kappa:tuple:orientation_sign}
+\subsubsection{The Orientation Sign}\label{program:kappa:tuple:orientation_sign}
 
 Recalling the definition of the orientation sign $\eps_j(\Sigma) = \eps_j''(\Sigma)$ introduced by Mehner (see Section \ref{cellular_models:orientation}), 
 we immediately obtain the following
@@ -389,7 +389,7 @@ std::map< uint8_t, int8_t > orientation_sign();
 \end{lstlisting}
 returning a map of all orientation signs $\eps_j(\sigma_h)$, stored with $j \in \{1, \dotsc, p\}$ as a key.
 
-\subsubsection{Preparations for the Map \texorpdfstring{$\kappa$}{kappa} [H]}
+\subsubsection{Preparations for the Map \texorpdfstring{$\kappa$}{kappa}}
 \label{program:kappa:tuple:prep_for_kappa}
 
 Having seen how the differential $\del_\KK$ is implemented, 

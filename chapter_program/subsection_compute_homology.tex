@@ -1,4 +1,4 @@
-\subsection{The Tool \progname{compute\_css} [B,H]}
+\subsection{The Tool \progname{compute\_css}}
 \label{chapter_program:kappa:compute_css}
 
 The tool \progname{compute\_css}, which computes the homology of the moduli spaces $\Modspc[1]$ and $\ModspcRad[1]$
@@ -9,7 +9,7 @@ how one operates this tool,
 while in Subsubsection \ref{chapter_program:kappa:compute_css:implementation},
 we explain its implementation. 
 
-\subsubsection{Usage [H]}
+\subsubsection{Usage}
 \label{chapter_program:kappa:compute_css:usage}
 
 For the computation of the homology of the moduli space $\ModspcRad[1]$, 
@@ -81,10 +81,10 @@ The intermediate results give the oportunity to abort the computation
 and continue it some other time, 
 using the parameters \progname{first\_diff} and \progname{last\_diff} to select certain homology groups.
 
-\subsubsection{Implementation Details [B,H]}
+\subsubsection{Implementation Details}
 \label{chapter_program:kappa:compute_css:implementation}
 
-{\bf [H]} The computation of the cluster spectral sequence and the homology starts in the main function of the file 
+The computation of the cluster spectral sequence and the homology starts in the main function of the file 
 \begin{lstlisting}
 main_compute_css.cpp
 \end{lstlisting}
@@ -112,7 +112,7 @@ At the begin of the computation, the constructor of \progclass{ClusterSpectralSe
 Thereby, the bases (see Subsubsection \ref{chapter_program:kappa:css:gen_bases}) are generated, with basis elements sorted by their cluster number.
 In particular, printing the $E^0$-term to screen is readily done.
 
-{\bf [B]} The main task is determining the first and second page of the cluster spectral sequence.
+The main task is determining the first and second page of the cluster spectral sequence.
 Recall Section \ref{css:section_matrix_version}, which discusses the matrix version of the cluster spectral sequence.
 The $p\Th$ transposed transformation matrix of $\del_\E$ is a block matrix of the form
 \[ 

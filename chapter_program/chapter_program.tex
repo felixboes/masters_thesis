@@ -1,7 +1,7 @@
 \chapter{The Software Project}
 \label{program}
 
-{\bf [H]} Based on the foundations presented in this thesis, 
+Based on the foundations presented in this thesis, 
 we provide a computer program for determining the homology of the moduli spaces $\Modspc[1]$ and $\ModspcRad[1]$.
 Our software project aims at several goals.
 Above all, we put a lot of effort into optimizing the performance of our program
@@ -12,15 +12,15 @@ Therefore, we designed well documented program code with a modularized structure
 that allows to exchange, improve or extend the different aspects of the homology computation smoothly.
 For instance, our program can readily be extended to computing the homology of $\Modspc$ and $\ModspcRad$ for arbitrary $n$.
 
-{\bf [B]} The project is split into two almost independent units.
+The project is split into two almost independent units.
 The library {\bf libhomology} offers an extendible framework for generic homology computations applied to chain complexes and certain types of spectral sequences that collapse at the second page.
 We propose coefficient ring, matrix types and algorithms for diagonalizing matrices.
 
-{\bf [H]} We provide an implementation for rational and finite fields coefficients together with matrices that are diagonalized using parallelized Gaussian elemination.
+We provide an implementation for rational and finite fields coefficients together with matrices that are diagonalized using parallelized Gaussian elemination.
 For coefficients in the field $\mathbb F_2$, we create an own coefficient type based on the observation that they can be stored in a single bit.
 This results in vast improvements concerning memory and runtime, see also Section \ref{program:runtime}.
 
-{\bf [H]} Recall that the homology of $\Modspc[1]$ respectively $\ModspcRad[1]$ equals the cohomology of the parallel respectively radial Ehrenfried complex $\E(h, m;1)$ respectively $\E(h, m, 1)$
+Recall that the homology of $\Modspc[1]$ respectively $\ModspcRad[1]$ equals the cohomology of the parallel respectively radial Ehrenfried complex $\E(h, m;1)$ respectively $\E(h, m, 1)$
 (compare Section \ref{cellular_models:ehrenfried}).
 Since our program can deal with both cases, we shall denote by $\Ehrprog$ the radial or parallel Ehrenfried complex during this chapter.
 Thus, the program {\bf kappa} generates $\Ehrprog$ and computes some of its properties.
@@ -32,15 +32,15 @@ which especially is useful in the case of rational coefficients that consume a l
 The effect upon the running time is also highly positive 
 since diagonalizing has cubic complexity and thus several small matrices are faster to diagonalize than a single huge matrix.
 
-{\bf [B]} In order to get a better feeling for $\Ehrprog$, we also offer the possibility to compute characteristics of its differentials as the number of non-zero entries or the number of blocks.
+In order to get a better feeling for $\Ehrprog$, we also offer the possibility to compute characteristics of its differentials as the number of non-zero entries or the number of blocks.
 
-{\bf [B]} We chose the programming language \cppeleven\ to realize this project since it is one of the prefered programming languages for mathematical projects, and since the new standard together with some additional libraries suits our needs perfectly.
+We chose the programming language \cppeleven\ to realize this project since it is one of the prefered programming languages for mathematical projects, and since the new standard together with some additional libraries suits our needs perfectly.
 The \cppeleven\ standard allows us to parallelize all time consuming steps of our project easily
 such that we can exhaust the full hardware architecture of the computer.
 We make use of the {\bf GNU multiple precision arithmetic library} \cite{GMP} for operations on signed integers, rational numbers, and floating-point numbers and
 of the {\bf boost \cpp\ libraries} \cite{boost}, which is a set of portable libraries that offer high-quality solutions to standard problems as basic linear algebra, graph theory or file compression.
 
-{\bf [H]} We are starting this chapter in Subsection \ref{program:runtime} with an overview on the performance gain of our programming techniques in order to motivate our work.
+We are starting this chapter in Subsection \ref{program:runtime} with an overview on the performance gain of our programming techniques in order to motivate our work.
 Afterwards, we will explain the library {\bf libhomology} (see Section \ref{program:libhomology}) and the program {\bf kappa} (see Section \ref{chapter_program:kappa}) in detail.
 Additionally, we hand out advise about how to compile our computer programs (see Section \ref{program:compiling}).
 Finally, we present our results, i.e., the homology groups and cluster spectral sequences we have computed (compare Section \ref{program:results}).

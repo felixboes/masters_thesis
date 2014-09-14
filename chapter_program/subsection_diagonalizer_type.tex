@@ -1,6 +1,5 @@
-\subsection{The Type DiagonalizerT [B,H]}
+\subsection{The Type DiagonalizerT}
 \label{program:libhomology:DiagonalizerT}
-{\bf [B]}
 Given a differential $C_n \xr{\del} C_{n-1}$ of a chain complex, one wants to derive its kernel and image in order to compute the homology of the chain complex.
 In our situation, we are given a differential of the type \progclass{MatrixT}, so we want to apply a range of base changes to end up with a matrix where reading off these informations is easy.
 These base changes depend heavily on the coefficient ring.
@@ -41,7 +40,7 @@ as a template parameter for the template class \progclass{ChainComplexT} (see Su
 
 In the following, we shall describe our implementations of the class \progclass{DiagonalizerField}.
 
-\subsection{The Class DiagonalizerField [B,H]}
+\subsection{The Class DiagonalizerField}
 \label{program:libhomology:DiagonalizerT:DiagonalizerField}
 
 The \progclass{DiagonalizerField} applies a slightly modified version of the Gaussian elimination to a given matrix.
@@ -52,7 +51,7 @@ but does not exchange columns in order to obtain a triangular matrix.
 Since computing the rank is equivalent to diagonalizing for our purpose, we refer to this process as diagonalizing nevertheless.
 After giving an overview on the usage of this class, we will explain implementation details and runtime results of our parallelized diagonalization algorithm.
 
-\subsubsection{Overview and Usage of DiagonalizerField [H]}
+\subsubsection{Overview and Usage of DiagonalizerField}
 
 For field coefficients, we offer the following template class.
 \begin{lstlisting}
@@ -102,7 +101,7 @@ auto monitor_thread = std::async( std::launch::async, [&]()
 \end{lstlisting}
 The current progress is printed to screen and updated every 50 milliseconds till the computation is done.
 
-\subsubsection{Implementation Details [H]}
+\subsubsection{Implementation Details}
 \label{diag_field_implementation}
 Our key algorithm for computing the rank of a matrix via Gaussian elimination is given by
 

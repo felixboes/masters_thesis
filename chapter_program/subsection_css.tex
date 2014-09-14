@@ -1,4 +1,4 @@
-\subsection{The Class ClusterSpectralSequence [B,H]}
+\subsection{The Class ClusterSpectralSequence}
 \label{chapter_program:kappa:css}
 
 Having described how basis elements of the Ehrenfried complex $\Ehrprog$ are represented by our computer program, 
@@ -18,7 +18,7 @@ Thereafter, we explain how the bases (see Subsubsection \ref{chapter_program:kap
 the differentials (see Subsubsection \ref{chapter_program:kappa:css:gen_diff}) are generated, 
 and what other methods are provided by the class \progclass{ClusterSpectralSequence} (see Subsubsection \ref{chapter_program:kappa:css:more_methods}). 
 
-\subsubsection{CSSBasis [H]}
+\subsubsection{CSSBasis}
 \label{chapter_program:kappa:css:css_basis}
 
 Just like the cluster spectral sequence associated with $\Ehrprog$ consists of a finite number of modules, 
@@ -63,7 +63,7 @@ and sets the \progname{id} of \progname{t} to the current number of basis elemen
 This means that if one builds up a \progclass{MonoBasis} by successively adding basis elements,
 all basis elements can be distinguished by their \progname{ids}.
 
-\subsubsection{Data Members [H]}
+\subsubsection{Data Members}
 \label{chapter_program:kappa:css:data_members}
 
 The class \progclass{ClusterSpectralSequence} represents the cluster spectral sequence assoicated with the Ehrenfried complex.
@@ -95,7 +95,7 @@ size_t num_threads;
 \end{lstlisting}
 determines the number of threads using for the construction of the differentials.
 
-\subsubsection{Generating Bases [H]}
+\subsubsection{Generating Bases}
 \label{chapter_program:kappa:css:gen_bases}
 
 The first step to build up a \progclass{ClusterSpectralSequence} is to call the constructor
@@ -200,7 +200,7 @@ and this case is covered by the above case distinction.
 \end{proof}
 \end{prop}
 
-\subsubsection{Generating Differentials [B]}
+\subsubsection{Generating Differentials}
 \label{chapter_program:kappa:css:gen_diff}
 
 In Subsubsection \ref{chapter_program:kappa:compute_css:implementation}, we explained how both the $E^1$-term and $E^2$-term are computed.
@@ -258,7 +258,7 @@ since the left sum is integral and the right sum vanishes after rounding down.
 Taking the remaining term modulo $r$, we get $t_r$ as a result since all summands but the $r\Th$ are zero modulo $r$.
 \end{proof}
 
-\subsubsection{More Member Functions [H]}
+\subsubsection{More Member Functions}
 \label{chapter_program:kappa:css:more_methods}
 
 We also offer class methods to print the \progmember{basis\_complex} and the \progmember{matrix\_complex}, and a method

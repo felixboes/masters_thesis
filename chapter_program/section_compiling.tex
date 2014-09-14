@@ -1,11 +1,11 @@
-\section{Remarks on Compiling [B]}
+\section{Remarks on Compiling}
 \label{program:compiling}
 
 Our software projects were developed and tested on {\bf Debian 7}, {\bf Ubuntu 12.04 LTS} and {\bf Open SUSE 13.1}.
 If you use a different operating system, your compiler has to support the full \cppeleven\ standard.
 We suggest to use the \cpp\ compiler of the {\bf Gnu Compiler Collection}.
 
-\subsection{Installing the Required Software [B]}
+\subsection{Installing the Required Software}
 Using an operating system based on {\bf Debian}, it should suffice to install the software and libraries from the official repositories.
 \begin{lstlisting}
 sudo apt-get install \
@@ -18,7 +18,7 @@ It is installed as follows.
 sudo apt-get install doxygen doxygen-gui doxygen-latex
 \end{lstlisting}
 
-\subsection{Building the Projects [B]}
+\subsection{Building the Projects}
 Using the provided makefile, the executables are built as follows.
 \begin{lstlisting}
 make compute_cache
@@ -30,7 +30,7 @@ Moreover, you can create your own executables (with a given name say \progname{m
 by creating a corresponding \progname{.cpp} file in the subfolder \progname{./kappa} with the prefix \progname{main\_} (e.g.\ you create \progname{./kappa/main\_my\_program.cpp}).
 Calling \progname{make} with the name of your project will create an executable with this name.
 
-\subsection{More Remarks [B]}
+\subsection{More Remarks}
 Using {\bf doxygen} you can generate a documentation of the source code as follows. 
 \begin{lstlisting}
 make doc

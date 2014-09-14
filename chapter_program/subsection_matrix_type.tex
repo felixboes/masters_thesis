@@ -1,6 +1,6 @@
-\subsection{The Type MatrixT [B]}
+\subsection{The Type MatrixT}
 \label{program:libhomology:MatrixT}
-\subsubsection{Existing Template Classes [B]}
+\subsubsection{Existing Template Classes}
 Before writing your own \progclass{MatrixT} you may want to have a look at the {\bf ublas library} provided by {\bf boost}.
 They offer several matrix templates for sparse and dense matrices 
 as well as BLAS implementations for numerical computations.
@@ -13,7 +13,7 @@ for exact computations with matrix coefficients in a given field.
 In the following, we present an overview of the requirements any implementation of \progclass{MatrixT} has to fulfill, whereas
 in Subsection \ref{program:libhomology:MatrixT:MatrixField_for_F_2_and_css} we treat more specialized implementations.
 
-\subsubsection{Requirements on MatrixT [B]}
+\subsubsection{Requirements on MatrixT}
 Your implementation of \progclass{MatrixT} has to meet some requirements.
 These are inspired by the {\bf boost ublas library} as we make heavy use of it to compactify implementation details.
 We denote the coefficients of the matrix by \progclass{CoefficientT}.
@@ -36,7 +36,7 @@ size_t size2() const;
 
 As we intend to save differentials in our project {\bf kappa}, you should provide a method that stores a \progclass{MatrixT} (See Subsection \ref{program:kappa:serialization}).
 
-\subsubsection{Optional Requirements on MatrixT [B]}
+\subsubsection{Optional Requirements on MatrixT}
 \label{program:libhomology:MatrixT:optionals}
 If you provide your own \progclass{MatrixT} with coefficients in a field, you may want to use our class \progclass{DiagonalizerField} (see Subsection \ref{program:libhomology:DiagonalizerT:DiagonalizerField}) to compute rank and torsion of your matrices.
 In order to do so, you have to provide the member function
@@ -48,9 +48,9 @@ i.e. adds the appropriate multiple of \progname{row\_1} to \progname{row\_2} in 
 Our implementation makes use of multithreading, therefore you have to be careful with race conditions.
 You have to ensure that row operations for fixed \progname{row\_1} and \progname{col} with varying \progname{row\_2} can be applied concurrently.
 
-\subsection{Special Implementations of MatrixField [B]}
+\subsection{Special Implementations of MatrixField}
 \label{program:libhomology:MatrixT:MatrixField_for_F_2_and_css}
-\subsubsection{MatrixField for Coefficients in \texorpdfstring{$\mathbb F_2$}{Z/2Z} [B]}
+\subsubsection{MatrixField for Coefficients in \texorpdfstring{$\mathbb F_2$}{Z/2Z}}
 For coefficients in the field $\mathbb F_2$, our implementation provides siginificant improvements concerning memory and execution duration, see Section \ref{program:runtime}.
 Using well-known techniques, we store multiple entries of a row in a single data entity.
 Note that, since the only invertible element in $\mathbb F_2$ is $1$, a row operation corresponds to the bitwise \progname{XOR}-instruction.
@@ -68,7 +68,7 @@ void add_entry( const size_t i, const size_t j );
 \end{lstlisting}
 It should be easy to equip \progclass{MatrixBool} with more member functions if needed.
 
-\subsubsection{MatrixField for the Cluster Spectral Sequence [B]}
+\subsubsection{MatrixField for the Cluster Spectral Sequence}
 In order to exploit the cluster spectral squence, we provide the adapted version \progclass{MatrixFieldCSS} of \progclass{MatrixField} and also \progclass{MatrixBoolCSS} of \progclass{MatrixBool}.
 Here, one should think of a spectral sequence that collapses at the second page as a subdivision of the differentials:
 The bases are ordered in a way such that the transposed differential $D$ consists of a diagonal of block matrices $d^0$ which respect the filtration degree and below a single second diagonal of block matrices which decrease the filtration degree by one.

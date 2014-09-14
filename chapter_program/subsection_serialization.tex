@@ -1,4 +1,4 @@
-\subsection{Serialization [B]}
+\subsection{Serialization}
 \label{program:kappa:serialization}
 
 The transformation of data and objects of a running computer program into storable information (which can be saved on a hard disk) is called serialization.
@@ -17,7 +17,7 @@ void load_from_file_bz2
 \end{lstlisting}
 Both functions, use the \progname{bzip2} algorithm for fast file compresseion, so we produce much smaller files.
 
-\subsubsection{Storable Types [B]}
+\subsubsection{Storable Types}
 A type can be handled by the above template functions, if
 it is defined by the \cppeleven\ standard (such as \progclass{int} or \progclass{std}::\progclass{vector}\progname{<} \progclass{char} \progname{>}) or the {\bf boost \cpp library}.
 Otherwise your class has to meet the following conditions.

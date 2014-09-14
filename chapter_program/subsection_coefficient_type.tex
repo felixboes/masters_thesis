@@ -1,9 +1,9 @@
-\subsection{The Type CoefficientT [B]}
+\subsection{The Type CoefficientT}
 \label{program:libhomology:CoefficientT}
 
 The coefficient ring must be represented by a class that meets the requirements discussed in Subsubsection \ref{program:libhomology:CoefficientT:obligatory_reqs}.
 
-\subsubsection{Obligatory Operations for CoefficientT [B]}
+\subsubsection{Obligatory Operations for CoefficientT}
 \label{program:libhomology:CoefficientT:obligatory_reqs}
 Clearly, one has to provide the basic ring operations.
 \begin{lstlisting}
@@ -33,7 +33,7 @@ CoefficientT  operator* ( const CoefficientT&, const int ); // Multiplication
 
 In our project {\bf kappa}, we intend to save differentials so you should provide a method that stores a \progclass{CoefficientT} (See Subsection \ref{program:kappa:serialization}).
 
-\subsubsection{Coefficients in the Rationals and the Integers Mod \texorpdfstring{$m$}{m} [B]}
+\subsubsection{Coefficients in the Rationals and the Integers Mod \texorpdfstring{$m$}{m}}
 \label{program:libhomology:CoefficientT:our_implementation}
 We offer the classes \progclass{Q} respectively \progclass{Zm} that represent coefficients in $\mathbb Q$ respectively $\mathbb Z / m \mathbb Z$:
 The class \progclass{Q} is defined via the following \progkeyword{typedef}.
