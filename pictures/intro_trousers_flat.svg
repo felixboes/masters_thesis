@@ -13,7 +13,7 @@
    height="1052.3622047"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.4 r9939"
+   inkscape:version="0.48.3.1 r9886"
    sodipodi:docname="intro_trousers_flat.svg">
   <sodipodi:namedview
      id="base"
@@ -29,10 +29,10 @@
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:snap-global="false"
-     inkscape:window-width="1600"
-     inkscape:window-height="749"
-     inkscape:window-x="-2"
-     inkscape:window-y="-3"
+     inkscape:window-width="1920"
+     inkscape:window-height="1021"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
      inkscape:window-maximized="1"
      showguides="false"
      inkscape:guide-bbox="true">
@@ -736,7 +736,7 @@
        style="opacity:0.98999999000000005;fill:#00ff00;fill-opacity:1;stroke:#00ff00;stroke-width:0.64568239000000005;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        sodipodi:type="arc" />
     <path
-       transform="matrix(1.9367082,0,0,1.9874115,-536.6782,-445.40011)"
+       transform="matrix(1.9367082,0,0,1.9874115,-489.43615,-390.28439)"
        d="m 370.23488,333.77255 a 4.6063437,4.030551 0 1 1 -9.21268,0 4.6063437,4.030551 0 1 1 9.21268,0 z"
        sodipodi:ry="4.030551"
        sodipodi:rx="4.6063437"
@@ -750,14 +750,14 @@
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="142.74081"
-       y="201.84392"
+       x="190.85771"
+       y="256.08478"
        id="text8940"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan8942"
-         x="142.74081"
-         y="201.84392">$P_1$</tspan></text>
+         x="190.85771"
+         y="256.08478">$P_1$</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
