@@ -21,6 +21,8 @@
 \usepackage[backend=biber, style=alphabetic]{biblatex}  % Gute Erweiterung zu bibtex, Wird für Referenzen benutzt.
 \bibliography{masterarbeit_boes_hermann_bibliography}   % Die verwendeten Referenzen (.bib-Datei)
 \usepackage[hypcap]{caption}            % Damit Hyperrefs bei der figure-Umgebung auf die Figure zeigt statt auf die Caption.
+\usepackage{datetime}                   % Um \today einzustellen.
+\newdateformat{mydate}{\THEDAY{}th \monthname{} \THEYEAR{}}
 \usepackage{diagbox}                    % Diagonale in Tabellen.
 \usepackage{enumitem}                   % Zum Ändern der Nummerierungsumgenung 'enumerate'
 \setlist[enumerate,1]{label=(\roman*)}  % Aufzählungen sind vom Typ 'Klammer auf; kleine römische Zahl; Klammer zu'
@@ -158,7 +160,7 @@
 \thesentyp{Master's Thesis  Mathematics}        % Thesentyp.
 \betreuer{Advisor: Prof.\ Dr.\ Carl-Friedrich Bödigheimer}        % Betreuer
 \institut{Mathematisches Institut}      % Institut an dem die Arbeit angefertigt wurde
-\date{12th September 2014}              % Datum der Abgabe der Arbeit.
+\date{12th September 2014\\Last update: \mydate\today}              % Datum der Abgabe der Arbeit.
 \title{Moduli Spaces of Riemann Surfaces -- Homology Computations and Homology Operations}        % Titel der Masterarbeit.
 
 
