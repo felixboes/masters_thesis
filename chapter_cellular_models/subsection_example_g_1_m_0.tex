@@ -1,0 +1,84 @@
+\subsection{The dual Ehrenfried complex of \texorpdfstring{$\mathfrak M_{1,1}^0$}{M\_1,1\^0}.}
+
+The following example is indented to give the reader a better understanding for explicit computations.
+We consider the dual Ehrenfried complex associated with the moduli space $\mathfrak M_{1,1}^0$ of genus one surfaces with one boundary component and no punctures.
+Here, we use the trivial partition $r = (1)$.
+Recall that the orientation coefficients $\mathcal O$ are constant since $m \le 1$, so we drop them in the notation.
+Clearly,
+\[
+    h = 2g - 2 + m + n + r_1 + \ldots + r_n = 2
+\]
+and therefore we have cells in range $2 = h \le p \le 2h = 4$.
+We show that the homology of the moduli space $\mathfrak M_{1,1}^0$ is
+\[
+    H_{\ast}( \mathfrak M_{1,1}^0; \mathbb Z ) \cong H^{4 - \ast}( \E^\ast; \mathcal O ) \cong
+        \begin{cases}
+            \Z & \ast = 0 \\
+            \Z & \ast = 1 \\
+            0  & else
+        \end{cases} \,.
+\]
+
+Recall that a $p$-cell $\Sigma$ in the (dual) Ehrenfried complex is $\Sigma = (\tau_2 \mid \tau_1)$ with $\tau_1, \tau_2 \in \Symgrp_p^\times$
+such that the following two conditions are satisfied.
+Let us write $\tau_i = (a_i\ b_i)$ with $a_i > b_i$.
+We require
+\begin{align}
+    a_2 \ge a_1
+\end{align}
+and
+\begin{align}
+    \tau_2\tau_1(0\ 1\ \ldots\ p) \hspace{2ex} \text{has exactly one cycle} \,.
+\end{align}
+Therefore, we have exactly one $2$-cell
+\[
+    e_1 = \zweizweizelle{2}{1}{2}{1} \,,
+\]
+we have exactly two $3$-cells
+\[
+    f_1 = \dreizweizelle{3}{1}{2}{1} \mspc{and}{20} f_2 = \dreizweizelle{3}{2}{3}{1}
+\]
+and we have exactly one $4$-cell
+\[
+    g_1 = \vierzweizelle{4}{2}{3}{1} \,.
+\]
+
+Let us compute the transformation matrices of the dual Ehrenfried complex.
+\begin{align}
+    \label{cellular_models:dual_ehrenfried:example_ehrenfried_for_g_1_m_0}
+    \Z\langle e_1 \rangle \xr{(\del^\ast_\E)_2} \Z\langle f_1, f_2 \rangle \xr{(\del^\ast_\E)_3} \Z\langle g_1 \rangle
+\end{align}
+The coboundary map $\del_\E^\ast$ is computed as the composition $\del_\E^\ast = \kappa^\ast \del^\ast_\KK \pi^\ast$.
+The map $\pi^\ast$ is the canonical inclusion.
+Using either the geometric idea of the cofaces or listing all coboundary traces we compute
+\[
+    d^\ast_1(\zweizweizelle{2}{1}{2}{1}) = \dreizweizelle{3}{2}{3}{1} + \dreizweizelle{3}{2}{2}{1}
+\]
+and
+\[
+    d^\ast_2(\zweizweizelle{2}{1}{2}{1}) = \dreizweizelle{3}{1}{2}{1} + \dreizweizelle{3}{2}{3}{1} \,.
+\]
+By construction $\del^\ast_\KK = \sum_{i=1}^{p-1} (-1)^i d^\ast_i$ therefore 
+\[
+    \del^\ast_\KK(\zweizweizelle{2}{1}{2}{1}) = - \dreizweizelle{3}{2}{2}{1} + \dreizweizelle{3}{1}{2}{1} \,.
+\]
+The map $\kappa^\ast$ is the sum all $\kappa^\ast$-sequences (compare Lemmata \ref{cellular_models:dual_ehrenfried:formula_for_kappa_dual} and \ref{cellular_models:ehrenfried:formula_for_kappa}).
+Therefore we use Lemma \ref{cellular_models:dual_ehrenfried:f_dual_of_a_cell} to conclude that the transformation matrix of the second coboundary $\del^\ast_\E$ is
+\[
+    (\del^\ast_\E)_2 = \begin{pmatrix} 2 \\ 1 \end{pmatrix} \,.
+\]
+By the same arguments, the transformation matrix of the third coboundary $\del^\ast_\E$ vanishes.
+
+Now, diagram \eqref{cellular_models:dual_ehrenfried:example_ehrenfried_for_g_1_m_0} is seen to be
+\[
+    \Z\langle e_1 \rangle \xr{ \begin{pmatrix} 2 \\ 1 \end{pmatrix} } \Z\langle f_1, f_2 \rangle \xr{\begin{pmatrix} 0 & 0 \end{pmatrix}} \Z\langle g_1 \rangle
+\]
+thus the homology of the moduli space $\mathfrak M_{1,1}^0$ is
+\[
+    H_{\ast}( \mathfrak M_{1,1}^0; \mathbb Z ) \cong H^{4 - \ast}( \E^\ast; \mathcal O ) \cong
+        \begin{cases}
+            \Z & \ast = 0 \\
+            \Z & \ast = 1 \\
+            0  & else
+        \end{cases} \,.
+\]
