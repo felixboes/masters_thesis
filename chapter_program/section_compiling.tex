@@ -1,18 +1,18 @@
 \section{Remarks on Compiling}
 \label{program:compiling}
 
-Our software projects were developed and tested on {\bf Debian 7}, {\bf Ubuntu 12.04 LTS} and {\bf Open SUSE 13.1}.
+Our software projects were developed and tested on {\bfseries Debian 7}, {\bfseries Ubuntu 12.04 LTS} and {\bfseries Open SUSE 13.1}.
 If you use a different operating system, your compiler has to support the full \cppeleven\ standard.
-We suggest to use the \cpp\ compiler of the {\bf Gnu Compiler Collection}.
+We suggest to use the \cpp\ compiler of the {\bfseries Gnu Compiler Collection}.
 
 \subsection{Installing the Required Software}
-Using an operating system based on {\bf Debian}, it should suffice to install the software and libraries from the official repositories.
+Using an operating system based on {\bfseries Debian}, it should suffice to install the software and libraries from the official repositories.
 \begin{lstlisting}
 sudo apt-get install \
     build-essential g++ libboost-all-dev libgmp-dev libbz2-dev
 \end{lstlisting}
-We document the source code with the {\bf Doxygen-syntax}.
-Thus we can generate a documentation using the program {\bf doxygen}.
+We document the source code with the {\bfseries Doxygen-syntax}.
+Thus we can generate a documentation using the program {\bfseries doxygen}.
 It is installed as follows.
 \begin{lstlisting}
 sudo apt-get install doxygen doxygen-gui doxygen-latex
@@ -31,7 +31,7 @@ by creating a corresponding \progname{.cpp} file in the subfolder \progname{./ka
 Calling \progname{make} with the name of your project will create an executable with this name.
 
 \subsection{More Remarks}
-Using {\bf doxygen} you can generate a documentation of the source code as follows. 
+Using {\bfseries doxygen} you can generate a documentation of the source code as follows. 
 \begin{lstlisting}
 make doc
 \end{lstlisting}

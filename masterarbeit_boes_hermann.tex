@@ -38,13 +38,7 @@
 \usepackage{multirow}                   % In Tabellen mehrere Zeilen zu einer machen.
 \usepackage{rotating}                   % Um Figures zu drehen.
 \usepackage{scrhack}                    % Verbessert die Zusammenarbeit von KOMA mit anderen Paketen (z.B, listing).
-\usepackage{scrpage}                    % Zum Einstellen des Komastils.
-% Uncomment if scrpage is not found....
-%\usepackage{scrlayer-scrpage}           % Zum Einstellen des Komastils.
 \usepackage{stackrel}                   % Symbole übereinander stapeln.
-\deftripstyle{pgnumbottomcenter}{}{}{}{}{\pagemark{}}{} % Definiere Seitenstil.
-\pagestyle{pgnumbottomcenter}                           % Setze Seitenstil
-\renewcommand{\chapterpagestyle}{pgnumbottomcenter}     % Setze Seitenstil
 \usepackage[dvipsnames]{xcolor}         % Gefärbter Text und so.
 \usepackage{tikz}                       % Graphen und kommutative Diagramme. Muss nach xcolor eingebunden werden.
 \usepackage{tikz-cd}                    % Kommutative Diagramme.
@@ -112,9 +106,9 @@
         {\large \@date}\\\vspace{15em}                                          % Datum in mittelgroßer Schrift. Anschließend 15 Einheiten Platz.
         {\large \@thesentyp}\\\vspace{1em}                                      % Der Text 'Master's Thesis  Mathematics' in großer Schrift. Anschließend eine Einheit Platz.
         {\large \@betreuer}\\\vspace{1em}                                       % Der Text 'Advisor: Prof. Dr. Carl-Friedrich Bödigheimer' in großer Schrift. Anschließend eine Einheit Platz.
-        {\large\sc \@institut}\\\vspace{9em}                                    % Der Text 'Mathematisches Institut' in großer 'small caps'-Schrift. Anschließend neun Einheit Platz.
-        {\large\sc Mathematisch-Naturwissenschaftliche Fakultät der}\\\vspace{1em}      % Der Text 'Mathematisch-Naturwissenschaftliche Fakultät der' in großer 'small caps'-Schrift. Anschließend eine Einheit Platz.
-        {\large\sc Rheinischen Friedrich-Wilhelms-Universität Bonn}             % Der Text 'Rheinischen Friedrich-Wilhelms-Universität Bonn' in großer 'small caps'-Schrift.
+        {\large\scshape \@institut}\\\vspace{9em}                                    % Der Text 'Mathematisches Institut' in großer 'small caps'-Schrift. Anschließend neun Einheit Platz.
+        {\large\scshape Mathematisch-Naturwissenschaftliche Fakultät der}\\\vspace{1em}      % Der Text 'Mathematisch-Naturwissenschaftliche Fakultät der' in großer 'small caps'-Schrift. Anschließend eine Einheit Platz.
+        {\large\scshape Rheinischen Friedrich-Wilhelms-Universität Bonn}             % Der Text 'Rheinischen Friedrich-Wilhelms-Universität Bonn' in großer 'small caps'-Schrift.
     \end{center}
     \vspace*{\fill}             % Hier endet der Inhalt des Titelblattes.
     \clearpage                  % Beende die Seite.

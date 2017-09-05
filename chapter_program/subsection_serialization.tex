@@ -19,7 +19,7 @@ Both functions, use the \progname{bzip2} algorithm for fast file compresseion, s
 
 \subsubsection{Storable Types}
 A type can be handled by the above template functions, if
-it is defined by the \cppeleven\ standard (such as \progclass{int} or \progclass{std}::\progclass{vector}\progname{<} \progclass{char} \progname{>}) or the {\bf boost \cpp library}.
+it is defined by the \cppeleven\ standard (such as \progclass{int} or \progclass{std}::\progclass{vector}\progname{<} \progclass{char} \progname{>}) or the {\bfseries boost \cpp library}.
 Otherwise your class has to meet the following conditions.
 First of all, it has to be a friend of \progclass{boost}\progname{::}\progclass{serialization}\progname{::}\progclass{access}, i.e.\ its class description includes the following line.
 \begin{lstlisting}
@@ -37,7 +37,7 @@ In this situation one defines the template member function
 template < class Archive >
 void serialize( Archive &ar, const unsigned int version );
 \end{lstlisting}
-whereas the template parameter \progclass{Archive} is filled in by {\bf boost} (and you do not need to know what it is).
+whereas the template parameter \progclass{Archive} is filled in by {\bfseries boost} (and you do not need to know what it is).
 Now saving and loading is achieved via the binary operator \progname{\&} applied to \progname{ar} and every member variable we want to save and load.
 In the example below, we tell the serialization function, to save and load two out of three member variables.
 \begin{lstlisting}
@@ -69,7 +69,7 @@ and its counter part
 template< class Archive >
 void load( Archive & ar, const unsigned int version );
 \end{lstlisting}
-and one has to tell {\bf boost} to use these two functions by calling the macro
+and one has to tell {\bfseries boost} to use these two functions by calling the macro
 \begin{lstlisting}
 BOOST_SERIALIZATION_SPLIT_MEMBER()
 \end{lstlisting}

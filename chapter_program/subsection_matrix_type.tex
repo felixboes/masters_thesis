@@ -1,10 +1,10 @@
 \subsection{The Type MatrixT}
 \label{program:libhomology:MatrixT}
 \subsubsection{Existing Template Classes}
-Before writing your own \progclass{MatrixT} you may want to have a look at the {\bf ublas library} provided by {\bf boost}.
+Before writing your own \progclass{MatrixT} you may want to have a look at the {\bfseries ublas library} provided by {\bfseries boost}.
 They offer several matrix templates for sparse and dense matrices 
 as well as BLAS implementations for numerical computations.
-Moreover, our {\bf libhomology} provides the template class
+Moreover, our {\bfseries libhomology} provides the template class
 \begin{lstlisting}
 template < class CoefficientT >
 class MatrixField;
@@ -15,7 +15,7 @@ in Subsection \ref{program:libhomology:MatrixT:MatrixField_for_F_2_and_css} we t
 
 \subsubsection{Requirements on MatrixT}
 Your implementation of \progclass{MatrixT} has to meet some requirements.
-These are inspired by the {\bf boost ublas library} as we make heavy use of it to compactify implementation details.
+These are inspired by the {\bfseries boost ublas library} as we make heavy use of it to compactify implementation details.
 We denote the coefficients of the matrix by \progclass{CoefficientT}.
 A \progclass{MatrixT} is created as follows:
 \begin{lstlisting}
@@ -34,7 +34,7 @@ and the number of columns is
 size_t size2() const;
 \end{lstlisting}
 
-As we intend to save differentials in our project {\bf kappa}, you should provide a method that stores a \progclass{MatrixT} (See Subsection \ref{program:libhomology:serialization}).
+As we intend to save differentials in our project {\bfseries kappa}, you should provide a method that stores a \progclass{MatrixT} (See Subsection \ref{program:libhomology:serialization}).
 
 \subsubsection{Optional Requirements on MatrixT}
 \label{program:libhomology:MatrixT:optionals}

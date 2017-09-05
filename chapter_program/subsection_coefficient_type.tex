@@ -31,7 +31,7 @@ bool          operator==( const int ) const;                // Comparision
 CoefficientT  operator* ( const CoefficientT&, const int ); // Multiplication
 \end{lstlisting}
 
-In our project {\bf kappa}, we intend to save differentials so you should provide a method that stores a \progclass{CoefficientT} (See Subsection \ref{program:libhomology:serialization}).
+In our project {\bfseries kappa}, we intend to save differentials so you should provide a method that stores a \progclass{CoefficientT} (See Subsection \ref{program:libhomology:serialization}).
 
 \subsubsection{Coefficients in the Rationals and the Integers Mod \texorpdfstring{$m$}{m}}
 \label{program:libhomology:CoefficientT:our_implementation}
@@ -40,7 +40,7 @@ The class \progclass{Q} is defined via the following \progkeyword{typedef}.
 \begin{lstlisting}
 typedef mpq_class Q;
 \end{lstlisting}
-The class \progclass{mpq\_class} itself is the \cpp\ variant of the {\bf GMP} type \progclass{mpq\_t}.
+The class \progclass{mpq\_class} itself is the \cpp\ variant of the {\bfseries GMP} type \progclass{mpq\_t}.
 Before using the class \progclass{Zm}, you have to call the static member function
 \begin{lstlisting}
 static void set_modulus(const uint8_t p, const uint8_t e = 1);
